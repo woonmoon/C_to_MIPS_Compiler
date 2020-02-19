@@ -1,0 +1,4 @@
+19/02/2020 
+        -discussed and plan how to start,
+        -analysed open source lexer and parser
+        -decided to start with AST files
