@@ -5,3 +5,11 @@
 
 Lexer - https://www.lysator.liu.se/c/ANSI-C-grammar-l.html?fbclid=IwAR2ykijRso8oZ4THv0TDa7bhBRn6J2MYqDyxKtt6oOvs-pQ8DO6DtgIQRBI#check-type
 Parser - https://www.lysator.liu.se/c/ANSI-C-grammar-y.html?fbclid=IwAR2f4wvm5d2fgflVE2xP0s8W8rD56x9R28c3wwtkCIYrw2MfCz-I8jxn8qY#assignment-expression
+
+Later on 19/02/2020
+         -started using the open source lexer and parser
+         -created one class for ast (identifier)
+         -decided next thing to do is: 
+                ~ type<...> tokens
+                ~ make new objects for every token
+                ~ 
