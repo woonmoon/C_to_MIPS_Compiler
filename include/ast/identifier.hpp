@@ -6,8 +6,12 @@
 #define LANGPROC_2019_CW_JETSTREAM_IDENTIFIER_HPP
 
 
-class identifier {
-
+class Identifier {
+    public:
+        Identifier(std::string variableName);
+        void pythonGen();
+    private:
+        std::string variableName;
 };
 
 
