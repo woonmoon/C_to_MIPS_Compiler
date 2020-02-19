@@ -1,111 +1,111 @@
 
-%token IDENTIFIER CONSTANT STRING_LITERAL SIZEOF
-%token PTR_OP INC_OP DEC_OP LEFT_OP RIGHT_OP LE_OP GE_OP EQ_OP NE_OP
+%token T_IDENTIFIER CONSTANT STRING_LITERAL SIZEOF
+%token PTR_OP T_PLUS_PLUS T_MINUS_MINUS LEFT_OP RIGHT_OP LE_OP GE_OP EQ_OP NE_OP
 %token AND_OP OR_OP MUL_ASSIGN DIV_ASSIGN MOD_ASSIGN ADD_ASSIGN
 %token SUB_ASSIGN LEFT_ASSIGN RIGHT_ASSIGN AND_ASSIGN
 %token XOR_ASSIGN OR_ASSIGN TYPE_NAME
 
 %token TYPEDEF EXTERN STATIC AUTO REGISTER
 %token CHAR SHORT INT LONG SIGNED UNSIGNED FLOAT DOUBLE CONST VOLATILE VOID
-%token STRUCT UNION ENUM ELLIPSIS
+%token STRUCT UNION T_ENUM ELLIPSIS
 
-%token CASE DEFAULT IF ELSE SWITCH WHILE DO FOR GOTO CONTINUE BREAK RETURN
+%token CASE DEFAULT T_IF T_ELSE SWITCH T_WHILE DO T_FOR GOTO CONTINUE BREAK RETURN
 
 %start translation_unit
 %%
 
 primary_expression
-	: IDENTIFIER {}
-	| CONSTANT
-	| STRING_LITERAL
-	| '(' expression ')'
+	: T_IDENTIFIER {$$ = new Identifier(*$1)}
+	| T_CONST
+	| T_STRING_LITERAL
+	| T_LBRACKET expression T_RBRACKET
 	;
 
 postfix_expression
 	: primary_expression
-	| postfix_expression '[' expression ']'
-	| postfix_expression '(' ')'
-	| postfix_expression '(' argument_expression_list ')'
-	| postfix_expression '.' IDENTIFIER
-	| postfix_expression PTR_OP IDENTIFIER
-	| postfix_expression INC_OP
-	| postfix_expression DEC_OP
+	| postfix_expression T_LSQRBRACKET expression T_RSQRBRACKET
+	| postfix_expression T_LBRACKET T_RBRACKET
+	| postfix_expression T_LBRACKET argument_expression_list T_RBRACKET
+	| postfix_expression T_FULLSTOP T_IDENTIFIER
+	| postfix_expression PTR_OP T_IDENTIFIER
+	| postfix_expression T_PLUS_PLUS
+	| postfix_expression T_MINUS_MINUS
 	;
 
 argument_expression_list
 	: assignment_expression
-	| argument_expression_list ',' assignment_expression
+	| argument_expression_list T_COMMA assignment_expression
 	;
 
 unary_expression
 	: postfix_expression
-	| INC_OP unary_expression
-	| DEC_OP unary_expression
+	| T_PLUS_PLUS unary_expression
+	| T_MINUS_MINUS unary_expression
 	| unary_operator cast_expression
 	| SIZEOF unary_expression
-	| SIZEOF '(' type_name ')'
+	| SIZEOF T_LBRACKET type_name T_RBRACKET
 	;
 
 unary_operator
-	: '&'
-	| '*'
-	| '+'
-	| '-'
-	| '~'
-	| '!'
+	: T_AMPERSAND
+	| T_STAR
+	| T_PLUS
+	| T_MINUS
+	| T_TILDE
+	| T_EXCLAMATION
 	;
 
 cast_expression
 	: unary_expression
-	| '(' type_name ')' cast_expression
+	| T_LBRACKET type_name T_RBRACKET cast_expression
 	;
 
 multiplicative_expression
 	: cast_expression
-	| multiplicative_expression '*' cast_expression
-	| multiplicative_expression '/' cast_expression
-	| multiplicative_expression '%' cast_expression
+	| multiplicative_expression T_STAR cast_expression
+	| multiplicative_expression T_SLASH cast_expression
+	| multiplicative_expression T_PERCENT cast_expression
 	;
 
 additive_expression
 	: multiplicative_expression
-	| additive_expression '+' multiplicative_expression
-	| additive_expression '-' multiplicative_expression
+	| additive_expression T_PLUS multiplicative_expression
+	| additive_expression T_MINUS multiplicative_expression
 	;
 
 shift_expression
 	: additive_expression
-	| shift_expression LEFT_OP additive_expression
-	| shift_expression RIGHT_OP additive_expression
+	| shift_expression T_LEFT_OP additive_expression
+	| shift_expression T_RIGHT_OP additive_expression
 	;
 
 relational_expression
 	: shift_expression
-	| relational_expression '<' shift_expression
-	| relational_expression '>' shift_expression
-	| relational_expression LE_OP shift_expression
-	| relational_expression GE_OP shift_expression
+	| relational_expression T_LESSTHAN shift_expression
+	| relational_expression T_GREATERTHAN shift_expression
+	| relational_expression T_LE_OP shift_expression
+	| relational_expression T_GE_OP shift_expression
 	;
 
 equality_expression
 	: relational_expression
-	| equality_expression EQ_OP relational_expression
-	| equality_expression NE_OP relational_expression
+	| equality_expression T_EQ_OP relational_expression
+	| equality_expression T_NE_OP relational_expression
 	;
 
 and_expression
 	: equality_expression
-	| and_expression '&' equality_expression
+	| and_expression T_AMPERSAND equality_expression
 	;
 
 exclusive_or_expression
 	: and_expression
-	| exclusive_or_expression '^' and_expression
+	| exclusive_or_expression T_CARET and_expression
 	;
 
 inclusive_or_expression
 	: exclusive_or_expression
-	| inclusive_or_expression '|' exclusive_or_expression
+	| inclusive_or_expression T_LINE exclusive_or_expression
 	;
 
 logical_and_expression
@@ -120,7 +120,7 @@ logical_or_expression
 
 conditional_expression
 	: logical_or_expression
-	| logical_or_expression '?' expression ':' conditional_expression
+	| logical_or_expression T_QUESTIONMARK expression T_COLON conditional_expression
 	;
 
 assignment_expression
@@ -129,22 +129,22 @@ assignment_expression
 	;
 
 assignment_operator
-	: '='
-	| MUL_ASSIGN
-	| DIV_ASSIGN
-	| MOD_ASSIGN
-	| ADD_ASSIGN
-	| SUB_ASSIGN
-	| LEFT_ASSIGN
-	| RIGHT_ASSIGN
-	| AND_ASSIGN
-	| XOR_ASSIGN
-	| OR_ASSIGN
+	: T_ASSIGN
+	| T_MUL_ASSIGN
+	| T_DIV_ASSIGN
+	| T_MOD_ASSIGN
+	| T_ADD_ASSIGN
+	| T_SUB_ASSIGN
+	| T_LEFT_ASSIGN
+	| T_RIGHT_ASSIGN
+	| T_AND_ASSIGN
+	| T_XOR_ASSIGN
+	| T_OR_ASSIGN
 	;
 
 expression
 	: assignment_expression
-	| expression ',' assignment_expression
+	| expression T_COMMA assignment_expression
 	;
 
 constant_expression
@@ -152,8 +152,8 @@ constant_expression
 	;
 
 declaration
-	: declaration_specifiers ';'
-	| declaration_specifiers init_declarator_list ';'
+	: declaration_specifiers T_SEMICOLON
+	| declaration_specifiers init_declarator_list T_SEMICOLON
 	;
 
 declaration_specifiers
@@ -167,46 +167,46 @@ declaration_specifiers
 
 init_declarator_list
 	: init_declarator
-	| init_declarator_list ',' init_declarator
+	| init_declarator_list T_COMMA init_declarator
 	;
 
 init_declarator
 	: declarator
-	| declarator '=' initializer
+	| declarator T_ASSIGN initializer
 	;
 
 storage_class_specifier
-	: TYPEDEF
-	| EXTERN
-	| STATIC
-	| AUTO
-	| REGISTER
+	: T_TYPEDEF
+	| T_EXTERN
+	| T_STATIC
+	| T_AUTO
+	| T_REGISTER
 	;
 
 type_specifier
-	: VOID
-	| CHAR
-	| SHORT
-	| INT
-	| LONG
-	| FLOAT
-	| DOUBLE
-	| SIGNED
-	| UNSIGNED
+	: T_VOID
+	| T_CHAR
+	| T_SHORT
+	| T_INT
+	| T_LONG
+	| T_FLOAT
+	| T_DOUBLE
+	| T_SIGNED
+	| T_UNSIGNED
 	| struct_or_union_specifier
 	| enum_specifier
-	| TYPE_NAME
+	| T_TYPE_NAME
 	;
 
 struct_or_union_specifier
-	: struct_or_union IDENTIFIER '{' struct_declaration_list '}'
-	| struct_or_union '{' struct_declaration_list '}'
-	| struct_or_union IDENTIFIER
+	: struct_or_union T_IDENTIFIER T_LCURLY struct_declaration_list T_RCURLY
+	| struct_or_union T_LCURLY struct_declaration_list T_RCURLY
+	| struct_or_union T_IDENTIFIER
 	;
 
 struct_or_union
-	: STRUCT
-	| UNION
+	: T_STRUCT
+	| T_UNION
 	;
 
 struct_declaration_list
@@ -215,7 +215,7 @@ struct_declaration_list
 	;
 
 struct_declaration
-	: specifier_qualifier_list struct_declarator_list ';'
+	: specifier_qualifier_list struct_declarator_list T_SEMICOLON
 	;
 
 specifier_qualifier_list
@@ -227,34 +227,34 @@ specifier_qualifier_list
 
 struct_declarator_list
 	: struct_declarator
-	| struct_declarator_list ',' struct_declarator
+	| struct_declarator_list T_COMMA struct_declarator
 	;
 
 struct_declarator
 	: declarator
-	| ':' constant_expression
-	| declarator ':' constant_expression
+	| T_COLON constant_expression
+	| declarator T_COLON constant_expression
 	;
 
 enum_specifier
-	: ENUM '{' enumerator_list '}'
-	| ENUM IDENTIFIER '{' enumerator_list '}'
-	| ENUM IDENTIFIER
+	: T_ENUM T_LCURLY enumerator_list T_RCURLY
+	| T_ENUM T_IDENTIFIER T_LCURLY enumerator_list T_RCURLY
+	| T_ENUM T_IDENTIFIER
 	;
 
 enumerator_list
 	: enumerator
-	| enumerator_list ',' enumerator
+	| enumerator_list T_COMMA enumerator
 	;
 
 enumerator
-	: IDENTIFIER
-	| IDENTIFIER '=' constant_expression
+	: T_IDENTIFIER
+	| T_IDENTIFIER T_ASSIGN constant_expression
 	;
 
 type_qualifier
-	: CONST
-	| VOLATILE
+	: T_CONST
+	| T_VOLATILE
 	;
 
 declarator
@@ -263,20 +263,20 @@ declarator
 	;
 
 direct_declarator
-	: IDENTIFIER
-	| '(' declarator ')'
-	| direct_declarator '[' constant_expression ']'
-	| direct_declarator '[' ']'
-	| direct_declarator '(' parameter_type_list ')'
-	| direct_declarator '(' identifier_list ')'
-	| direct_declarator '(' ')'
+	: T_IDENTIFIER
+	| T_LBRACKET declarator T_RBRACKET
+	| direct_declarator T_LSQRBRACKET constant_expression T_RSQRBRACKET
+	| direct_declarator T_LSQRBRACKET T_RSQRBRACKET
+	| direct_declarator T_LBRACKET parameter_type_list T_RBRACKET
+	| direct_declarator T_LBRACKET identifier_list T_RBRACKET
+	| direct_declarator T_LBRACKET T_RBRACKET
 	;
 
 pointer
-	: '*'
-	| '*' type_qualifier_list
-	| '*' pointer
-	| '*' type_qualifier_list pointer
+	: T_STAR
+	| T_STAR type_qualifier_list
+	| T_STAR pointer
+	| T_STAR type_qualifier_list pointer
 	;
 
 type_qualifier_list
@@ -287,12 +287,12 @@ type_qualifier_list
 
 parameter_type_list
 	: parameter_list
-	| parameter_list ',' ELLIPSIS
+	| parameter_list T_COMMA ELLIPSIS
 	;
 
 parameter_list
 	: parameter_declaration
-	| parameter_list ',' parameter_declaration
+	| parameter_list T_COMMA parameter_declaration
 	;
 
 parameter_declaration
@@ -302,8 +302,8 @@ parameter_declaration
 	;
 
 identifier_list
-	: IDENTIFIER
-	| identifier_list ',' IDENTIFIER
+	: T_IDENTIFIER
+	| identifier_list T_COMMA T_IDENTIFIER
 	;
 
 type_name
@@ -318,26 +318,26 @@ abstract_declarator
 	;
 
 direct_abstract_declarator
-	: '(' abstract_declarator ')'
-	| '[' ']'
-	| '[' constant_expression ']'
-	| direct_abstract_declarator '[' ']'
-	| direct_abstract_declarator '[' constant_expression ']'
-	| '(' ')'
-	| '(' parameter_type_list ')'
-	| direct_abstract_declarator '(' ')'
-	| direct_abstract_declarator '(' parameter_type_list ')'
+	: T_LBRACKET abstract_declarator T_RBRACKET
+	| T_LSQRBRACKET T_RSQRBRACKET
+	| T_LSQRBRACKET constant_expression T_RSQRBRACKET
+	| direct_abstract_declarator T_LSQRBRACKET T_RSQRBRACKET
+	| direct_abstract_declarator T_LSQRBRACKET constant_expression T_RSQRBRACKET
+	| T_LBRACKET T_RBRACKET
+	| T_LBRACKET parameter_type_list T_RBRACKET
+	| direct_abstract_declarator T_LBRACKET T_RBRACKET
+	| direct_abstract_declarator T_LBRACKET parameter_type_list T_RBRACKET
 	;
 
 initializer
 	: assignment_expression
-	| '{' initializer_list '}'
-	| '{' initializer_list ',' '}'
+	| T_LCURLY initializer_list T_RCURLY
+	| T_LCURLY initializer_list T_COMMA T_RCURLY
 	;
 
 initializer_list
 	: initializer
-	| initializer_list ',' initializer
+	| initializer_list T_COMMA initializer
 	;
 
 statement
@@ -350,16 +350,16 @@ statement
 	;
 
 labeled_statement
-	: IDENTIFIER ':' statement
-	| CASE constant_expression ':' statement
-	| DEFAULT ':' statement
+	: T_IDENTIFIER T_COLON statement
+	| T_CASE constant_expression T_COLON statement
+	| T_DEFAULT T_COLON statement
 	;
 
 compound_statement
-	: '{' '}'
-	| '{' statement_list '}'
-	| '{' declaration_list '}'
-	| '{' declaration_list statement_list '}'
+	: T_LCURLY T_RCURLY
+	| T_LCURLY statement_list T_RCURLY
+	| T_LCURLY declaration_list T_RCURLY
+	| T_LCURLY declaration_list statement_list T_RCURLY
 	;
 
 declaration_list
@@ -373,29 +373,29 @@ statement_list
 	;
 
 expression_statement
-	: ';'
-	| expression ';'
+	: T_SEMICOLON
+	| expression T_SEMICOLON
 	;
 
 selection_statement
-	: IF '(' expression ')' statement
-	| IF '(' expression ')' statement ELSE statement
-	| SWITCH '(' expression ')' statement
+	: T_IF T_LBRACKET expression T_RBRACKET statement
+	| T_IF T_LBRACKET expression T_RBRACKET statement T_ELSE statement
+	| T_SWITCH T_LBRACKET expression T_RBRACKET statement
 	;
 
 iteration_statement
-	: WHILE '(' expression ')' statement
-	| DO statement WHILE '(' expression ')' ';'
-	| FOR '(' expression_statement expression_statement ')' statement
-	| FOR '(' expression_statement expression_statement expression ')' statement
+	: T_WHILE T_LBRACKET expression T_RBRACKET statement
+	| T_DO statement T_WHILE T_LBRACKET expression T_RBRACKET T_SEMICOLON
+	| T_FOR T_LBRACKET expression_statement expression_statement T_RBRACKET statement
+	| T_FOR T_LBRACKET expression_statement expression_statement expression T_RBRACKET statement
 	;
 
 jump_statement
-	: GOTO IDENTIFIER ';'
-	| CONTINUE ';'
-	| BREAK ';'
-	| RETURN ';'
-	| RETURN expression ';'
+	: T_GOTO T_IDENTIFIER T_SEMICOLON
+	| T_CONTINUE T_SEMICOLON
+	| T_BREAK T_SEMICOLON
+	| T_RETURN T_SEMICOLON
+	| T_RETURN expression T_SEMICOLON
 	;
 
 translation_unit
