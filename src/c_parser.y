@@ -1,3 +1,8 @@
+%{
+	ExpressionPtr expr;
+	double number;
+	std::string *string;
+%}
 
 %token T_IDENTIFIER CONSTANT STRING_LITERAL SIZEOF
 %token PTR_OP T_PLUS_PLUS T_MINUS_MINUS LEFT_OP RIGHT_OP LE_OP GE_OP EQ_OP NE_OP
@@ -11,12 +16,24 @@
 
 %token CASE DEFAULT T_IF T_ELSE SWITCH T_WHILE DO T_FOR GOTO CONTINUE BREAK RETURN
 
+%type<expr> expression primary_expression postfix_expression unary_expression cast_expression assignment_expression
+%type<expr> multiplicative_expression additive_expression shift_expression relational_expression equality_expression
+%type<expr> and_expression exclusive_or_expression inclusive_or_expression logical_and_expression logical_or_expression
+%type<expr> conditional_expression constant_expression declaration declarator initializer
+%type<expr> storage_class_specifier type_specifier struct_or_union_specifier enum_specifier struct_or_union struct_declaration_list
+%type<expr> declaration_specifiers struct_declaration specifier_qualifier_list type_qualifier struct_declarator
+%type<expr> enumerator_list enumerator direct_declarator pointer
+%type<expr> parameter_declaration init_declarator
+
+%type<expr> type_name abstract_declarator direct_abstract_declarator statement compound_statement labeled_statement
+%type<expr> expression_statement selection_statement iteration_statement jump_statement external_declaration function_definition
+
 %start translation_unit
 %%
 
 primary_expression
 	: T_IDENTIFIER {$$ = new Identifier(*$1)}
-	| T_CONST
+	| T_CONST {}
 	| T_STRING_LITERAL
 	| T_LBRACKET expression T_RBRACKET
 	;
