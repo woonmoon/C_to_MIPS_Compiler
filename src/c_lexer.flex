@@ -1,19 +1,19 @@
 %option noyywrap
 
+%{
+// Avoid error "error: `fileno' was not declared in this scope"
+extern "C" int fileno(FILE *stream);
+#include <stdio.h>
+#include "c_parser.tab.hpp"
+void count();
+%}
+
 D			[0-9]
 L			[a-zA-Z_]
 H			[a-fA-F0-9]
 E			[Ee][+-]?{D}+
 FS			(f|F|l|L)
 IS			(u|U|l|L)*
-
-%{
-#include <stdio.h>
-#include "c_parser.tab.hpp"
-
-void count();
-
-%}
 
 %%
 

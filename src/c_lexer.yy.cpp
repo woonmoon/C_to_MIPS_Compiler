@@ -618,12 +618,12 @@ int yy_flex_debug = 0;
 #define YY_RESTORE_YY_MORE_OFFSET
 char *yytext;
 #line 1 "src/c_lexer.flex"
-#line 11 "src/c_lexer.flex"
+#line 4 "src/c_lexer.flex"
+// Avoid error "error: `fileno' was not declared in this scope"
+extern "C" int fileno(FILE *stream);
 #include <stdio.h>
 #include "c_parser.tab.hpp"
-
 void count();
-
 #line 628 "src/c_lexer.yy.cpp"
 #line 629 "src/c_lexer.yy.cpp"
 
