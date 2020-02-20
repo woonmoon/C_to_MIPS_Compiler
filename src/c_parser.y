@@ -458,7 +458,9 @@ function_definition
 	;
 
 %%
-/* #include <stdio.h>
+
+/* ExpressionPtr g_root;
+#include <stdio.h>
 
 extern char yytext[];
 extern int column;

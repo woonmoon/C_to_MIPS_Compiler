@@ -1951,7 +1951,9 @@ yyreturn:
 }
 #line 460 "src/c_parser.y" /* yacc.c:1906  */
 
-/* #include <stdio.h>
+
+/* ExpressionPtr g_root;
+#include <stdio.h>
 
 extern char yytext[];
 extern int column;

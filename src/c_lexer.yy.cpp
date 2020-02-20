@@ -2363,10 +2363,10 @@ void yyfree (void * ptr )
 #line 116 "src/c_lexer.flex"
 
 
-yywrap()
+/* yywrap()
 {
 	return(1);
-}
+} */
 
 int column = 0;
 

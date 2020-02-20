@@ -115,10 +115,10 @@ L?\"(\\.|[^\\"])*\"	{ count(); return T_STRING_LITERAL; }
 
 %%
 
-yywrap()
+/* yywrap()
 {
 	return(1);
-}
+} */
 
 int column = 0;
 
