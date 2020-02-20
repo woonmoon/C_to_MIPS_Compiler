@@ -6,10 +6,13 @@
 #define LANGPROC_2019_CW_JETSTREAM_IDENTIFIER_HPP
 
 
-class Identifier{ //:public  expression or whatever we decide to call the expression class
+class Identifier: public Expression {
     public:
         Identifier(std::string variableName);
-        void pythonGen();
+        void pythonGen(std::ostream &dst) const override
+          {
+              dst<<variableName;
+          }
     private:
         std::string variableName;
 };
