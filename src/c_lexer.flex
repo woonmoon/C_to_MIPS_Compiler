@@ -17,13 +17,11 @@ void count();
 
 %%
 
-"/*"			{ comment(); }
-
 "auto"			{ count(); return T_AUTO; }
 "break"			{ count(); return T_BREAK; }
 "case"			{ count(); return T_CASE; }
 "char"			{ count(); return T_CHAR; }
-"const"			{ count(); return T_CONST; }
+"const"			{ count(); return T_CONSTANT; }
 "continue"	{ count(); return T_CONTINUE; }
 "default"		{ count(); return T_DEFAULT; }
 "do"			  { count(); return T_DO; }
@@ -121,26 +119,6 @@ yywrap()
 {
 	return(1);
 }
-
-
-comment()
-{
-	char c, c1;
-
-loop:
-	while ((c = input()) != '*' && c != 0)
-		putchar(c);
-
-	if ((c1 = input()) != '/' && c != 0)
-	{
-		unput(c1);
-		goto loop;
-	}
-
-	if (c != 0)
-		putchar(c1);
-}
-
 
 int column = 0;
 

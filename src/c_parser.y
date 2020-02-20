@@ -13,18 +13,18 @@
 }
 
 %union{
-	ExpressionPtr* expr;
+	ExpressionPtr expr;
 	double number;
 	std::string *string;
 }
 
-%token T_IDENTIFIER CONSTANT STRING_LITERAL SIZEOF T_DO T_LSQRBRACKET
-%token PTR_OP T_PLUS_PLUS T_MINUS_MINUS LEFT_OP RIGHT_OP LE_OP GE_OP EQ_OP NE_OP
-%token AND_OP OR_OP MUL_ASSIGN DIV_ASSIGN MOD_ASSIGN ADD_ASSIGN
+%token T_IDENTIFIER CONSTANT STRING_LITERAL T_SIZEOF T_DO T_LSQRBRACKET
+%token T_PTR_OP T_PLUS_PLUS T_MINUS_MINUS LEFT_OP RIGHT_OP LE_OP GE_OP EQ_OP T_NE_OP
+%token T_AND_OP T_OR_OP MUL_ASSIGN DIV_ASSIGN MOD_ASSIGN ADD_ASSIGN
 %token SUB_ASSIGN LEFT_ASSIGN RIGHT_ASSIGN AND_ASSIGN
 %token XOR_ASSIGN OR_ASSIGN TYPE_NAME
 %token T_ADD_ASSIGN T_AMPERSAND T_AND_ASSIGN T_ASSIGN T_AUTO T_BREAK T_CARET T_CASE T_CHAR T_COLON
-%token T_COMMA T_CONST T_CONTINUE T_DEFAULT T_DIV_ASSIGN T_SEMICOLON T_DOUBLE T_EQ_OP T_EXCLAMATION
+%token T_COMMA T_CONSTANT T_CONTINUE T_DEFAULT T_DIV_ASSIGN T_SEMICOLON T_DOUBLE T_EQ_OP T_EXCLAMATION
 %token T_EXTERN T_FLOAT T_FULLSTOP T_GE_OP T_GOTO T_GREATERTHAN T_LESSTHAN T_INT T_LBRACKET T_LCURLY
 %token T_LEFT_ASSIGN T_LEFT_OP T_LE_OP T_LINE T_LONG T_MINUS T_MOD_ASSIGN T_MUL_ASSIGN T_NE_OP T_OR_ASSIGN
 %token T_PERCENT T_PLUS T_QUESTIONMARK T_RBRACKET T_RCURLY T_REGISTER T_RETURN T_RIGHT_ASSIGN T_RIGHT_OP T_RSQRBRACKET
@@ -33,7 +33,7 @@
 
 %token TYPEDEF EXTERN STATIC AUTO REGISTER
 %token CHAR SHORT INT LONG SIGNED UNSIGNED FLOAT DOUBLE CONST VOLATILE VOID
-%token STRUCT UNION T_ENUM ELLIPSIS
+%token STRUCT UNION T_ENUM T_ELLIPSIS
 
 %token CASE DEFAULT T_IF T_ELSE SWITCH T_WHILE DO T_FOR GOTO CONTINUE BREAK RETURN
 
@@ -57,8 +57,8 @@
 ROOT : primary_expression { g_root = $1; }
 
 primary_expression
-	: T_IDENTIFIER {$$ = new Identifier(*$1)}
-	| T_CONST {}
+	: T_IDENTIFIER {$$ = new Identifier(*$1);}
+	| T_CONSTANT {}
 	| T_STRING_LITERAL
 	| T_LBRACKET expression T_RBRACKET
 	;
@@ -69,7 +69,7 @@ postfix_expression
 	| postfix_expression T_LBRACKET T_RBRACKET
 	| postfix_expression T_LBRACKET argument_expression_list T_RBRACKET
 	| postfix_expression T_FULLSTOP T_IDENTIFIER
-	| postfix_expression PTR_OP T_IDENTIFIER
+	| postfix_expression T_PTR_OP T_IDENTIFIER
 	| postfix_expression T_PLUS_PLUS
 	| postfix_expression T_MINUS_MINUS
 	;
@@ -84,8 +84,8 @@ unary_expression
 	| T_PLUS_PLUS unary_expression
 	| T_MINUS_MINUS unary_expression
 	| unary_operator cast_expression
-	| SIZEOF unary_expression
-	| SIZEOF T_LBRACKET type_name T_RBRACKET
+	| T_SIZEOF unary_expression
+	| T_SIZEOF T_LBRACKET type_name T_RBRACKET
 	;
 
 unary_operator
@@ -152,12 +152,12 @@ inclusive_or_expression
 
 logical_and_expression
 	: inclusive_or_expression
-	| logical_and_expression AND_OP inclusive_or_expression
+	| logical_and_expression T_AND_OP inclusive_or_expression
 	;
 
 logical_or_expression
 	: logical_and_expression
-	| logical_or_expression OR_OP logical_and_expression
+	| logical_or_expression T_OR_OP logical_and_expression
 	;
 
 conditional_expression
@@ -295,7 +295,7 @@ enumerator
 	;
 
 type_qualifier
-	: T_CONST
+	: T_CONSTANT
 	| T_VOLATILE
 	;
 
@@ -329,7 +329,7 @@ type_qualifier_list
 
 parameter_type_list
 	: parameter_list
-	| parameter_list T_COMMA ELLIPSIS
+	| parameter_list T_COMMA T_ELLIPSIS
 	;
 
 parameter_list
@@ -458,7 +458,7 @@ function_definition
 	;
 
 %%
-#include <stdio.h>
+/* #include <stdio.h>
 
 extern char yytext[];
 extern int column;
@@ -468,4 +468,11 @@ char *s;
 {
 	fflush(stdout);
 	printf("\n%*s\n%*s\n", column, "^", column, s);
+} */
+
+ExpressionPtr parseAST()
+{
+  g_root = NULL;
+  yyparse();
+  return g_root;
 }

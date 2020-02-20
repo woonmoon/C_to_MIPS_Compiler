@@ -17,7 +17,7 @@ public:
   std::string toString();
   virtual void pythonGen(std::ostream &dst) const = 0;
 protected:
-  std::vector<ExpressionPtr> branches;
+  //std::vector<ExpressionPtr> branches;
 };
 
 #endif
