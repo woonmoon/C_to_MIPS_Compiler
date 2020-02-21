@@ -136,3 +136,9 @@ void count()
 
 	ECHO;
 }
+
+void yyerror (char const *s)
+{
+  std::cout << "parse error: " << yytext << std::endl;
+  exit(1);
+}

@@ -459,22 +459,15 @@ function_definition
 
 %%
 
-/* ExpressionPtr g_root;
+ExpressionPtr g_root;
 #include <stdio.h>
 
 extern char yytext[];
 extern int column;
 
-yyerror(s)
-char *s;
+const Expression *parseAST()
 {
-	fflush(stdout);
-	printf("\n%*s\n%*s\n", column, "^", column, s);
-} */
-
-ExpressionPtr parseAST()
-{
-  g_root = NULL;
+  g_root = 0;
   yyparse();
   return g_root;
 }
