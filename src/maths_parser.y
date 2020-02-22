@@ -55,235 +55,228 @@
 
 %%
 
-/* The TODO notes a are just a guide, and are non-exhaustive.
-   The expectation is that you do each one, then compile and test.
-   Testing should be done using patterns that target the specific
-   feature; the testbench is there to make sure that you haven't
-   broken anything while you added it.
-*/
-
-ROOT : PRIMARY_EXPRESSION { g_root = $1; }
-
-/* TODO-3 : Add support for (x + 6) and (10 - y). You'll need to add production rules, and create an AddOperator or
-            SubOperator. */
-
 PRIMARY_EXPRESSION : T_IDENTIFIER { $$ = new Identifier(*$1); std::cout << "issa identifier" << std::endl; }
-                   | T_CONSTANT
-                   | T_LBRACKET EXPRESSION T_RBRACKET
-
+                   | T_CONSTANT { std::cout << "issa constant" << std::endl;}
+                   | T_LBRACKET EXPRESSION T_RBRACKET { std::cout << "lbr rbr" << std::endl; }
+                   ;
 POSTFIX_EXPRESSION : PRIMARY_EXPRESSION
                    | POSTFIX_EXPRESSION T_LBRACKET T_RBRACKET
                    | POSTFIX_EXPRESSION T_LBRACKET ARGUMENT_EXPRESSION_LIST T_RBRACKET
-
+                   ;
 ARGUMENT_EXPRESSION_LIST : ASSIGNMENT_EXPRESSION
                          | ARGUMENT_EXPRESSION_LIST T_COMMA ASSIGNMENT_EXPRESSION
-
+                         ;
 UNARY_EXPRESSION : POSTFIX_EXPRESSION
                  | UNARY_OPERATOR CAST_EXPRESSION
-
-UNARY_OPERATOR : T_STAR
-               | T_PLUS
-               | T_MINUS
-
+                 ;
+UNARY_OPERATOR : T_STAR { std::cout << "* found" << std::endl; }
+               | T_PLUS { std::cout << "+ found" << std::endl; }
+               | T_MINUS { std::cout << "- found" << std::endl; }
+               ;
 CAST_EXPRESSION : UNARY_EXPRESSION
                 | T_LBRACKET TYPE_NAME T_RBRACKET CAST_EXPRESSION
-
+                ;
 MULTIPLICATIVE_EXPRESSION : CAST_EXPRESSION
                           | MULTIPLICATIVE_EXPRESSION T_STAR CAST_EXPRESSION
-
+                          ;
 ADDITIVE_EXPRESSION : MULTIPLICATIVE_EXPRESSION
                     | ADDITIVE_EXPRESSION T_PLUS MULTIPLICATIVE_EXPRESSION
-
+                    | ADDITIVE_EXPRESSION T_MINUS MULTIPLICATIVE_EXPRESSION
+                    ;
 SHIFT_EXPRESSION : ADDITIVE_EXPRESSION
-                 | SHIFT_EXPRESSION T_LSHIFT SHIFT_EXPRESSION
-                 | SHIFT_EXPRESSION T_RSHIFT SHIFT_EXPRESSION
-
+                 | SHIFT_EXPRESSION T_LSHIFT ADDITIVE_EXPRESSION
+                 | SHIFT_EXPRESSION T_RSHIFT ADDITIVE_EXPRESSION
+                 ;
 RELATIONAL_EXPRESSION : SHIFT_EXPRESSION
-                      | SHIFT_EXPRESSION T_LESSTHAN SHIFT_EXPRESSION
-                      | SHIFT_EXPRESSION T_GREATERTHAN SHIFT_EXPRESSION
-
+                      | RELATIONAL_EXPRESSION T_LESSTHAN SHIFT_EXPRESSION
+                      | RELATIONAL_EXPRESSION T_GREATERTHAN SHIFT_EXPRESSION
+                      ;
 EQUALITY_EXPRESSION : RELATIONAL_EXPRESSION
-                    | EQUALITY_EXPRESSION T_EQUALS EQUALITY_EXPRESSION
-                    | EQUALITY_EXPRESSION T_NOT_EQUALS EQUALITY_EXPRESSION
-
+                    | EQUALITY_EXPRESSION T_EQUALS RELATIONAL_EXPRESSION
+                    | EQUALITY_EXPRESSION T_NOT_EQUALS RELATIONAL_EXPRESSION
+                    ;
 AND_EXPRESSION : EQUALITY_EXPRESSION
-               | EQUALITY_EXPRESSION T_AND EQUALITY_EXPRESSION
-
+               | AND_EXPRESSION T_AND EQUALITY_EXPRESSION
+               ;
 EXCLUSIVE_OR_EXPRESSION : AND_EXPRESSION
                         | EXCLUSIVE_OR_EXPRESSION T_XOR AND_EXPRESSION
-
+                        ;
 INCLUSIVE_OR_EXPRESSION : EXCLUSIVE_OR_EXPRESSION
                         | INCLUSIVE_OR_EXPRESSION T_OR EXCLUSIVE_OR_EXPRESSION
-
+                        ;
 LOGICAL_AND_EXPRESSION : INCLUSIVE_OR_EXPRESSION
                        | LOGICAL_AND_EXPRESSION T_AND_OP INCLUSIVE_OR_EXPRESSION
-
+                       ;
 LOGICAL_OR_EXPRESSION : LOGICAL_AND_EXPRESSION
                       | LOGICAL_OR_EXPRESSION T_OR_OP LOGICAL_AND_EXPRESSION
-
+                      ;
 CONDITIONAL_EXPRESSION : LOGICAL_OR_EXPRESSION
                        : LOGICAL_OR_EXPRESSION T_QUESTION EXPRESSION T_COLON CONDITIONAL_EXPRESSION
-
+                       ;
 ASSIGNMENT_EXPRESSION : CONDITIONAL_EXPRESSION
                       | UNARY_EXPRESSION ASSIGNMENT_OPERATOR ASSIGNMENT_EXPRESSION
-
+                      ;
 ASSIGNMENT_OPERATOR : T_ASSIGN
-
+                      ;
 EXPRESSION : ASSIGNMENT_EXPRESSION
            | EXPRESSION T_COMMA ASSIGNMENT_EXPRESSION
-
+           ;
 CONSTANT_EXPRESSION : CONDITIONAL_EXPRESSION
-
-DECLARATION : DECLARATION_SPECIFIERS T_SEMICOLON
-            | DECLARATION_SPECIFIERS INIT_DECLARATOR_LIST T_SEMICOLON
-
-DECLARATION_SPECIFIERS : STORAGE_CLASS_SPECIFIER
-                       | STORAGE_CLASS_SPECIFIER DECLARATION_SPECIFIERS
-                       | TYPE_SPECIFIER
-                       | TYPE_SPECIFIER DECLARATION_SPECIFIERS
-                       | TYPE_QUALIFIER
-                       | TYPE_QUALIFIER DECLARATION_SPECIFIERS
-
+                      ;
+DECLARATION : DECLARATION_SPECIFIERS T_SEMICOLON  {std::cout << "declaration speci" << std::endl;}
+            | DECLARATION_SPECIFIERS INIT_DECLARATOR_LIST T_SEMICOLON  {std::cout << "declaration speci 1" << std::endl;}
+            ;
+DECLARATION_SPECIFIERS : STORAGE_CLASS_SPECIFIER {std::cout << "7" << std::endl;}
+                       | STORAGE_CLASS_SPECIFIER DECLARATION_SPECIFIERS {std::cout << "6" << std::endl;}
+                       | TYPE_SPECIFIER  {std::cout << "2" << std::endl;}
+                       | TYPE_SPECIFIER DECLARATION_SPECIFIERS  {std::cout << "3" << std::endl;}
+                       | TYPE_QUALIFIER  {std::cout << "5" << std::endl;}
+                       | TYPE_QUALIFIER DECLARATION_SPECIFIERS  {std::cout << "4" << std::endl;}
+                       ;
 INIT_DECLARATOR_LIST : INIT_DECLARATOR
                      | INIT_DECLARATOR_LIST T_COMMA INIT_DECLARATOR
-
+                     ;
 INIT_DECLARATOR : DECLARATOR
                 | DECLARATOR T_ASSIGN INITIALIZER
-
+                ;
 STORAGE_CLASS_SPECIFIER : T_TYPEDEF
-
-TYPE_SPECIFIER : T_VOID
-               | T_INT
+                        ;
+TYPE_SPECIFIER : T_VOID { std::cout << "got to void" << std::endl; }
+               | T_INT { std::cout << "got to int" << std::endl; }
                | STRUCT_OR_UNION_SPECIFIER
                | ENUM_SPECIFIER
-
+               ;
 STRUCT_OR_UNION_SPECIFIER : STRUCT_OR_UNION T_IDENTIFIER T_LCURLY STRUCT_DECLARATION_LIST T_RCURLY
                           | STRUCT_OR_UNION T_LCURLY STRUCT_DECLARATION_LIST T_RCURLY
                           | STRUCT_OR_UNION T_IDENTIFIER
-
+                          ;
 STRUCT_OR_UNION : T_STRUCT
                 | T_UNION
-
+                ;
 STRUCT_DECLARATION_LIST : STRUCT_DECLARATION
                         | STRUCT_DECLARATION_LIST STRUCT_DECLARATION
-
+                        ;
 STRUCT_DECLARATION : SPECIFIER_QUALIFIER_LIST STRUCT_DECLARATION_LIST T_SEMICOLON
-
+                    ;
 SPECIFIER_QUALIFIER_LIST : TYPE_SPECIFIER SPECIFIER_QUALIFIER_LIST
                          | TYPE_SPECIFIER
                          | TYPE_QUALIFIER SPECIFIER_QUALIFIER_LIST
                          | TYPE_QUALIFIER
-
+                         ;
 STRUCT_DECLARATOR_LIST : STRUCT_DECLARATOR
                        | STRUCT_DECLARATOR_LIST T_COMMA STRUCT_DECLARATOR
-
+                       ;
 STRUCT_DECLARATOR : DECLARATOR
                   | T_COLON CONSTANT_EXPRESSION
                   | DECLARATOR T_COLON CONSTANT_EXPRESSION
-
+                  ;
 ENUM_SPECIFIER : T_ENUM T_LCURLY ENUMERATOR_LIST T_RCURLY
                | T_ENUM T_IDENTIFIER T_LCURLY ENUMERATOR_LIST T_RCURLY
                | T_ENUM T_IDENTIFIER
-
+               ;
 ENUMERATOR_LIST : ENUMERATOR
                 | ENUMERATOR_LIST T_COMMA ENUMERATOR
-
+                ;
 ENUMERATOR : T_IDENTIFIER
            | T_IDENTIFIER T_ASSIGN CONSTANT_EXPRESSION
-
+           ;
 TYPE_QUALIFIER : T_CONST
                | T_VOLATILE
-
+               ;
 DECLARATOR : POINTER DIRECT_DECLARATOR
            | DIRECT_DECLARATOR
-
+           ;
 DIRECT_DECLARATOR : T_IDENTIFIER
                   | T_LBRACKET DECLARATOR T_RBRACKET
                   | DIRECT_DECLARATOR T_LBRACKET PARAMETER_TYPE_LIST T_RBRACKET
                   | DIRECT_DECLARATOR T_LBRACKET IDENTIFIER_LIST T_RBRACKET
                   | DIRECT_DECLARATOR T_LBRACKET T_RBRACKET
-
-POINTER : T_STAR
+                  ;
+POINTER : T_STAR { std::cout << "pointer star" << std::endl; }
         | T_STAR TYPE_QUALIFIER_LIST
         | T_STAR POINTER
         | T_STAR TYPE_QUALIFIER_LIST POINTER
-
+        ;
 TYPE_QUALIFIER_LIST : TYPE_QUALIFIER
                     | TYPE_QUALIFIER_LIST TYPE_QUALIFIER
-
+                    ;
 PARAMETER_TYPE_LIST : PARAMETER_LIST
-
+                    ;
 PARAMETER_LIST : PARAMETER_DECLARATION
                | PARAMETER_LIST T_COMMA PARAMETER_DECLARATION
-
+               ;
 PARAMETER_DECLARATION : DECLARATION_SPECIFIERS DECLARATOR
                       | DECLARATION_SPECIFIERS ABSTRACT_DECLARATOR
                       | DECLARATION_SPECIFIERS
-
+                      ;
 IDENTIFIER_LIST : T_IDENTIFIER
                 | IDENTIFIER_LIST T_COMMA T_IDENTIFIER
-
+                ;
 TYPE_NAME : SPECIFIER_QUALIFIER_LIST
           | SPECIFIER_QUALIFIER_LIST ABSTRACT_DECLARATOR
-
+          ;
 ABSTRACT_DECLARATOR : POINTER
                     | DIRECT_ABSTRACT_DECLARATOR
                     | POINTER DIRECT_ABSTRACT_DECLARATOR
-
+                    ;
 DIRECT_ABSTRACT_DECLARATOR : T_LBRACKET ABSTRACT_DECLARATOR T_RBRACKET
                            | T_LBRACKET T_RBRACKET
                            | T_LBRACKET PARAMETER_TYPE_LIST T_RBRACKET
                            | DIRECT_ABSTRACT_DECLARATOR T_LBRACKET T_RBRACKET
                            | DIRECT_ABSTRACT_DECLARATOR T_LBRACKET PARAMETER_TYPE_LIST T_RBRACKET
-
+                           ;
 INITIALIZER : ASSIGNMENT_EXPRESSION
             | T_LCURLY INITIALIZER_LIST T_RCURLY
             | T_LCURLY INITIALIZER_LIST T_COMMA T_RCURLY
-
+            ;
 INITIALIZER_LIST : INITIALIZER
                  | INITIALIZER_LIST T_COMMA INITIALIZER
-
+                 ;
 STATEMENT : LABELED_STATEMENT
           | COMPOUND_STATEMENT
           | EXPRESSION_STATEMENT
           | SELECTION_STATEMENT
           | ITERATION_STATEMENT
           | JUMP_STATEMENT
-
+          ;
 LABELED_STATEMENT : T_IDENTIFIER T_COLON STATEMENT
-
-COMPOUND_STATEMENT : T_LCURLY T_RCURLY
+                  ;
+COMPOUND_STATEMENT : T_LCURLY T_RCURLY {std::cout << "make a new scope here" << std::endl; }
                    | T_LCURLY STATEMENT_LIST T_RCURLY
                    | T_LCURLY DECLARATION_LIST T_RCURLY
                    | T_LCURLY DECLARATION_LIST STATEMENT_LIST T_RCURLY
-
+                   ;
 DECLARATION_LIST : DECLARATION
                  | DECLARATION_LIST DECLARATION
-
+                 ;
 STATEMENT_LIST : STATEMENT
                | STATEMENT_LIST STATEMENT
-
+               ;
 EXPRESSION_STATEMENT : T_SEMICOLON
                      | EXPRESSION T_SEMICOLON
-
+                     ;
 SELECTION_STATEMENT : T_IF T_LBRACKET EXPRESSION T_RBRACKET STATEMENT
                     | T_IF T_LBRACKET EXPRESSION T_RBRACKET T_ELSE STATEMENT
-
+                    ;
 ITERATION_STATEMENT : T_WHILE T_LBRACKET EXPRESSION T_RBRACKET STATEMENT
-
+                    ;
 JUMP_STATEMENT : T_RETURN T_SEMICOLON
                | T_RETURN EXPRESSION T_SEMICOLON
-
+               ;
 TRANSLATION_UNIT : EXTERNAL_DECLARATION
-                 | TRANSLATION_UNIT EXTERNAL_DECLARATION
-
-EXTERNAL_DECLARATION : FUNCTION_DEFINITION
-                     | DECLARATION
+                | TRANSLATION_UNIT EXTERNAL_DECLARATION {std::cout << "does it enter here?" << std::endl;}
+                ;
+EXTERNAL_DECLARATION : FUNCTION_DEFINITION { std::cout << "goes through fun dec"<<std::endl; }
+                     | DECLARATION {std::cout << "gets past ex decl" << std::endl;}
+                     ;
 
 FUNCTION_DEFINITION : DECLARATION_SPECIFIERS DECLARATOR DECLARATION_LIST COMPOUND_STATEMENT
                     | DECLARATION_SPECIFIERS DECLARATOR COMPOUND_STATEMENT
                     | DECLARATOR DECLARATION_LIST COMPOUND_STATEMENT
                     | DECLARATOR COMPOUND_STATEMENT
+                    ;
+ROOT : TRANSLATION_UNIT { std::cout << "Made the root" << std::endl; g_root = $1;}
+
 %%
 
 const Expression *g_root; // Definition of variable (to match declaration earlier)
