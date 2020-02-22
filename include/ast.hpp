@@ -7,6 +7,7 @@
 #include "ast/ast_unary.hpp"
 #include "ast/ast_functions.hpp"
 #include "ast/identifier.hpp"
+#include "ast/lists/expression_lists.hpp"
 
 
 extern const Expression *parseAST();

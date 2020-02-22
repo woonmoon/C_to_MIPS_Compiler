@@ -16,6 +16,7 @@
 // AST node.
 %union{
   const Expression *expr;
+  const ExpressionList *exprList;
   double number;
   std::string *string;
 }
@@ -42,9 +43,9 @@
 %type <expr> STATEMENT LABELED_STATEMENT COMPOUND_STATEMENT EXPRESSION_STATEMENT SELECTION_STATEMENT ITERATION_STATEMENT JUMP_STATEMENT
 %type <expr> TRANSLATION_UNIT EXTERNAL_DECLARATION FUNCTION_DEFINITION
 
-%type <string> INIT_DECLARATOR ARGUMENT_EXPRESSION_LIST INIT_DECLARATOR_LIST STRUCT_DECLARATOR_LIST
-%type <string> SPECIFIER_QUALIFIER_LIST ENUMERATOR_LIST
-%type <string> PARAMETER_TYPE_LIST IDENTIFIER_LIST TYPE_QUALIFIER_LIST INITIALIZER_LIST
+%type <exprList> INIT_DECLARATOR ARGUMENT_EXPRESSION_LIST INIT_DECLARATOR_LIST STRUCT_DECLARATOR_LIST
+%type <exprList> SPECIFIER_QUALIFIER_LIST ENUMERATOR_LIST
+%type <exprList> PARAMETER_TYPE_LIST IDENTIFIER_LIST TYPE_QUALIFIER_LIST INITIALIZER_LIST
 
 %type <number> T_CONSTANT
 %type <string> T_IF T_ELSE T_WHILE T_RETURN T_MAIN T_INT T_VOID
@@ -61,14 +62,14 @@
    broken anything while you added it.
 */
 
-ROOT : TRANSLATION_UNIT { g_root = $1; }
+ROOT : PRIMARY_EXPRESSION { g_root = $1; }
 
 /* TODO-3 : Add support for (x + 6) and (10 - y). You'll need to add production rules, and create an AddOperator or
             SubOperator. */
 
 PRIMARY_EXPRESSION : T_IDENTIFIER { $$ = new Identifier(*$1); std::cout << "issa identifier" << std::endl; }
-                   | T_CONSTANT { std::cout << "issa constant" << std::endl;}
-                   | T_LBRACKET EXPRESSION T_RBRACKET { std::cout << "lbr rbr" << std::endl; }
+                   | T_CONSTANT
+                   | T_LBRACKET EXPRESSION T_RBRACKET
 
 POSTFIX_EXPRESSION : PRIMARY_EXPRESSION
                    | POSTFIX_EXPRESSION T_LBRACKET T_RBRACKET
@@ -80,9 +81,9 @@ ARGUMENT_EXPRESSION_LIST : ASSIGNMENT_EXPRESSION
 UNARY_EXPRESSION : POSTFIX_EXPRESSION
                  | UNARY_OPERATOR CAST_EXPRESSION
 
-UNARY_OPERATOR : T_STAR { std::cout << "* found" << std::endl; }
-               | T_PLUS { std::cout << "+ found" << std::endl; }
-               | T_MINUS { std::cout << "- found" << std::endl; }
+UNARY_OPERATOR : T_STAR
+               | T_PLUS
+               | T_MINUS
 
 CAST_EXPRESSION : UNARY_EXPRESSION
                 | T_LBRACKET TYPE_NAME T_RBRACKET CAST_EXPRESSION
@@ -151,8 +152,8 @@ INIT_DECLARATOR : DECLARATOR
 
 STORAGE_CLASS_SPECIFIER : T_TYPEDEF
 
-TYPE_SPECIFIER : T_VOID { std::cout << "got to void" << std::endl; }
-               | T_INT { std::cout << "got to int" << std::endl; }
+TYPE_SPECIFIER : T_VOID
+               | T_INT
                | STRUCT_OR_UNION_SPECIFIER
                | ENUM_SPECIFIER
 
@@ -202,7 +203,7 @@ DIRECT_DECLARATOR : T_IDENTIFIER
                   | DIRECT_DECLARATOR T_LBRACKET IDENTIFIER_LIST T_RBRACKET
                   | DIRECT_DECLARATOR T_LBRACKET T_RBRACKET
 
-POINTER : T_STAR { std::cout << "pointer star" << std::endl; }
+POINTER : T_STAR
         | T_STAR TYPE_QUALIFIER_LIST
         | T_STAR POINTER
         | T_STAR TYPE_QUALIFIER_LIST POINTER
