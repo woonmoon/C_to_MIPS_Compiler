@@ -5,7 +5,7 @@
 #ifndef LANGPROC_2019_CW_JETSTREAM_IDENTIFIER_HPP
 #define LANGPROC_2019_CW_JETSTREAM_IDENTIFIER_HPP
 
-#include "expression.hpp"
+#include "ast_expression.hpp"
 
 class Identifier;
 
@@ -14,9 +14,10 @@ typedef const Identifier* IdentifierPtr;
 class Identifier: public Expression {
     public:
         Identifier(std::string v) : variableName(v){};
-        void pythonGen(std::ostream &dst) const override
+        virtual void print(std::ostream &dst) const override
           {
               dst<<variableName;
+              dst<<" = 0";
           }
     private:
         std::string variableName;
