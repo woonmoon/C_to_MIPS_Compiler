@@ -61,14 +61,14 @@
    broken anything while you added it.
 */
 
-ROOT : PRIMARY_EXPRESSION { g_root = $1; }
+ROOT : TRANSLATION_UNIT { g_root = $1; }
 
 /* TODO-3 : Add support for (x + 6) and (10 - y). You'll need to add production rules, and create an AddOperator or
             SubOperator. */
 
 PRIMARY_EXPRESSION : T_IDENTIFIER { $$ = new Identifier(*$1); std::cout << "issa identifier" << std::endl; }
-                   | T_CONSTANT
-                   | T_LBRACKET EXPRESSION T_RBRACKET
+                   | T_CONSTANT { std::cout << "issa constant" << std::endl;}
+                   | T_LBRACKET EXPRESSION T_RBRACKET { std::cout << "lbr rbr" << std::endl; }
 
 POSTFIX_EXPRESSION : PRIMARY_EXPRESSION
                    | POSTFIX_EXPRESSION T_LBRACKET T_RBRACKET
@@ -80,9 +80,9 @@ ARGUMENT_EXPRESSION_LIST : ASSIGNMENT_EXPRESSION
 UNARY_EXPRESSION : POSTFIX_EXPRESSION
                  | UNARY_OPERATOR CAST_EXPRESSION
 
-UNARY_OPERATOR : T_STAR
-               | T_PLUS
-               | T_MINUS
+UNARY_OPERATOR : T_STAR { std::cout << "* found" << std::endl; }
+               | T_PLUS { std::cout << "+ found" << std::endl; }
+               | T_MINUS { std::cout << "- found" << std::endl; }
 
 CAST_EXPRESSION : UNARY_EXPRESSION
                 | T_LBRACKET TYPE_NAME T_RBRACKET CAST_EXPRESSION
@@ -151,8 +151,8 @@ INIT_DECLARATOR : DECLARATOR
 
 STORAGE_CLASS_SPECIFIER : T_TYPEDEF
 
-TYPE_SPECIFIER : T_VOID
-               | T_INT
+TYPE_SPECIFIER : T_VOID { std::cout << "got to void" << std::endl; }
+               | T_INT { std::cout << "got to int" << std::endl; }
                | STRUCT_OR_UNION_SPECIFIER
                | ENUM_SPECIFIER
 
@@ -202,7 +202,7 @@ DIRECT_DECLARATOR : T_IDENTIFIER
                   | DIRECT_DECLARATOR T_LBRACKET IDENTIFIER_LIST T_RBRACKET
                   | DIRECT_DECLARATOR T_LBRACKET T_RBRACKET
 
-POINTER : T_STAR
+POINTER : T_STAR { std::cout << "pointer star" << std::endl; }
         | T_STAR TYPE_QUALIFIER_LIST
         | T_STAR POINTER
         | T_STAR TYPE_QUALIFIER_LIST POINTER

@@ -10,27 +10,10 @@ Nonterminals useless in grammar
    INCLUSIVE_OR_EXPRESSION
    LOGICAL_AND_EXPRESSION
    LOGICAL_OR_EXPRESSION
-   DECLARATION
-   INIT_DECLARATOR_LIST
-   INIT_DECLARATOR
    STRUCT_DECLARATION_LIST
    STRUCT_DECLARATION
    STRUCT_DECLARATOR_LIST
    STRUCT_DECLARATOR
-   INITIALIZER
-   INITIALIZER_LIST
-   STATEMENT
-   LABELED_STATEMENT
-   COMPOUND_STATEMENT
-   DECLARATION_LIST
-   STATEMENT_LIST
-   EXPRESSION_STATEMENT
-   SELECTION_STATEMENT
-   ITERATION_STATEMENT
-   JUMP_STATEMENT
-   TRANSLATION_UNIT
-   EXTERNAL_DECLARATION
-   FUNCTION_DEFINITION
    EXPR
    FACTOR
    FUNCTION_NAME
@@ -54,136 +37,82 @@ Terminals unused in grammar
    T_AND_OP
    T_OR_OP
    T_QUESTION
-   T_SEMICOLON
-   T_COLON
    T_LOG
    T_EXP
    T_SQRT
-   T_IF
-   T_ELSE
-   T_WHILE
-   T_RETURN
    T_MAIN
 
 
 Rules useless in grammar
 
-   82 MULTIPLICATIVE_EXPRESSION: CAST_EXPRESSION
-   83                          | MULTIPLICATIVE_EXPRESSION T_STAR CAST_EXPRESSION
+  123 MULTIPLICATIVE_EXPRESSION: CAST_EXPRESSION
+  124                          | MULTIPLICATIVE_EXPRESSION T_STAR CAST_EXPRESSION
 
-   84 ADDITIVE_EXPRESSION: MULTIPLICATIVE_EXPRESSION
-   85                    | ADDITIVE_EXPRESSION T_PLUS MULTIPLICATIVE_EXPRESSION
+  125 ADDITIVE_EXPRESSION: MULTIPLICATIVE_EXPRESSION
+  126                    | ADDITIVE_EXPRESSION T_PLUS MULTIPLICATIVE_EXPRESSION
 
-   86 SHIFT_EXPRESSION: ADDITIVE_EXPRESSION
-   87                 | SHIFT_EXPRESSION T_LSHIFT SHIFT_EXPRESSION
-   88                 | SHIFT_EXPRESSION T_RSHIFT SHIFT_EXPRESSION
+  127 SHIFT_EXPRESSION: ADDITIVE_EXPRESSION
+  128                 | SHIFT_EXPRESSION T_LSHIFT SHIFT_EXPRESSION
+  129                 | SHIFT_EXPRESSION T_RSHIFT SHIFT_EXPRESSION
 
-   89 RELATIONAL_EXPRESSION: SHIFT_EXPRESSION
-   90                      | SHIFT_EXPRESSION T_LESSTHAN SHIFT_EXPRESSION
-   91                      | SHIFT_EXPRESSION T_GREATERTHAN SHIFT_EXPRESSION
+  130 RELATIONAL_EXPRESSION: SHIFT_EXPRESSION
+  131                      | SHIFT_EXPRESSION T_LESSTHAN SHIFT_EXPRESSION
+  132                      | SHIFT_EXPRESSION T_GREATERTHAN SHIFT_EXPRESSION
 
-   92 EQUALITY_EXPRESSION: RELATIONAL_EXPRESSION
-   93                    | EQUALITY_EXPRESSION T_EQUALS EQUALITY_EXPRESSION
-   94                    | EQUALITY_EXPRESSION T_NOT_EQUALS EQUALITY_EXPRESSION
+  133 EQUALITY_EXPRESSION: RELATIONAL_EXPRESSION
+  134                    | EQUALITY_EXPRESSION T_EQUALS EQUALITY_EXPRESSION
+  135                    | EQUALITY_EXPRESSION T_NOT_EQUALS EQUALITY_EXPRESSION
 
-   95 AND_EXPRESSION: EQUALITY_EXPRESSION
-   96               | EQUALITY_EXPRESSION T_AND EQUALITY_EXPRESSION
+  136 AND_EXPRESSION: EQUALITY_EXPRESSION
+  137               | EQUALITY_EXPRESSION T_AND EQUALITY_EXPRESSION
 
-   97 EXCLUSIVE_OR_EXPRESSION: AND_EXPRESSION
-   98                        | EXCLUSIVE_OR_EXPRESSION T_XOR AND_EXPRESSION
+  138 EXCLUSIVE_OR_EXPRESSION: AND_EXPRESSION
+  139                        | EXCLUSIVE_OR_EXPRESSION T_XOR AND_EXPRESSION
 
-   99 INCLUSIVE_OR_EXPRESSION: EXCLUSIVE_OR_EXPRESSION
-  100                        | INCLUSIVE_OR_EXPRESSION T_OR EXCLUSIVE_OR_EXPRESSION
+  140 INCLUSIVE_OR_EXPRESSION: EXCLUSIVE_OR_EXPRESSION
+  141                        | INCLUSIVE_OR_EXPRESSION T_OR EXCLUSIVE_OR_EXPRESSION
 
-  101 LOGICAL_AND_EXPRESSION: INCLUSIVE_OR_EXPRESSION
-  102                       | LOGICAL_AND_EXPRESSION T_AND_OP INCLUSIVE_OR_EXPRESSION
+  142 LOGICAL_AND_EXPRESSION: INCLUSIVE_OR_EXPRESSION
+  143                       | LOGICAL_AND_EXPRESSION T_AND_OP INCLUSIVE_OR_EXPRESSION
 
-  103 LOGICAL_OR_EXPRESSION: LOGICAL_AND_EXPRESSION
-  104                      | LOGICAL_OR_EXPRESSION T_OR_OP LOGICAL_AND_EXPRESSION
-  105                      | LOGICAL_OR_EXPRESSION T_QUESTION EXPRESSION T_COLON CONDITIONAL_EXPRESSION
+  144 LOGICAL_OR_EXPRESSION: LOGICAL_AND_EXPRESSION
+  145                      | LOGICAL_OR_EXPRESSION T_OR_OP LOGICAL_AND_EXPRESSION
+  146                      | LOGICAL_OR_EXPRESSION T_QUESTION EXPRESSION T_COLON CONDITIONAL_EXPRESSION
 
-  106 DECLARATION: DECLARATION_SPECIFIERS T_SEMICOLON
-  107            | DECLARATION_SPECIFIERS INIT_DECLARATOR_LIST T_SEMICOLON
+  147 STRUCT_OR_UNION_SPECIFIER: STRUCT_OR_UNION T_IDENTIFIER T_LCURLY STRUCT_DECLARATION_LIST T_RCURLY
+  148                          | STRUCT_OR_UNION T_LCURLY STRUCT_DECLARATION_LIST T_RCURLY
 
-  108 INIT_DECLARATOR_LIST: INIT_DECLARATOR
-  109                     | INIT_DECLARATOR_LIST T_COMMA INIT_DECLARATOR
+  149 STRUCT_DECLARATION_LIST: STRUCT_DECLARATION
+  150                        | STRUCT_DECLARATION_LIST STRUCT_DECLARATION
 
-  110 INIT_DECLARATOR: DECLARATOR
-  111                | DECLARATOR T_ASSIGN INITIALIZER
+  151 STRUCT_DECLARATION: SPECIFIER_QUALIFIER_LIST STRUCT_DECLARATION_LIST T_SEMICOLON
 
-  112 STRUCT_OR_UNION_SPECIFIER: STRUCT_OR_UNION T_IDENTIFIER T_LCURLY STRUCT_DECLARATION_LIST T_RCURLY
-  113                          | STRUCT_OR_UNION T_LCURLY STRUCT_DECLARATION_LIST T_RCURLY
+  152 STRUCT_DECLARATOR_LIST: STRUCT_DECLARATOR
+  153                       | STRUCT_DECLARATOR_LIST T_COMMA STRUCT_DECLARATOR
 
-  114 STRUCT_DECLARATION_LIST: STRUCT_DECLARATION
-  115                        | STRUCT_DECLARATION_LIST STRUCT_DECLARATION
-
-  116 STRUCT_DECLARATION: SPECIFIER_QUALIFIER_LIST STRUCT_DECLARATION_LIST T_SEMICOLON
-
-  117 STRUCT_DECLARATOR_LIST: STRUCT_DECLARATOR
-  118                       | STRUCT_DECLARATOR_LIST T_COMMA STRUCT_DECLARATOR
-
-  119 STRUCT_DECLARATOR: DECLARATOR
-  120                  | T_COLON CONSTANT_EXPRESSION
-  121                  | DECLARATOR T_COLON CONSTANT_EXPRESSION
-
-  122 INITIALIZER: ASSIGNMENT_EXPRESSION
-  123            | T_LCURLY INITIALIZER_LIST T_RCURLY
-  124            | T_LCURLY INITIALIZER_LIST T_COMMA T_RCURLY
-
-  125 INITIALIZER_LIST: INITIALIZER
-  126                 | INITIALIZER_LIST T_COMMA INITIALIZER
-
-  127 STATEMENT: LABELED_STATEMENT
-  128          | COMPOUND_STATEMENT
-  129          | EXPRESSION_STATEMENT
-  130          | SELECTION_STATEMENT
-  131          | ITERATION_STATEMENT
-  132          | JUMP_STATEMENT
-
-  133 LABELED_STATEMENT: T_IDENTIFIER T_COLON STATEMENT
-
-  134 COMPOUND_STATEMENT: T_LCURLY T_RCURLY
-  135                   | T_LCURLY STATEMENT_LIST T_RCURLY
-  136                   | T_LCURLY DECLARATION_LIST T_RCURLY
-  137                   | T_LCURLY DECLARATION_LIST STATEMENT_LIST T_RCURLY
-
-  138 DECLARATION_LIST: DECLARATION
-  139                 | DECLARATION_LIST DECLARATION
-
-  140 STATEMENT_LIST: STATEMENT
-  141               | STATEMENT_LIST STATEMENT
-
-  142 EXPRESSION_STATEMENT: T_SEMICOLON
-  143                     | EXPRESSION T_SEMICOLON
-
-  144 SELECTION_STATEMENT: T_IF T_LBRACKET EXPRESSION T_RBRACKET STATEMENT
-  145                    | T_IF T_LBRACKET EXPRESSION T_RBRACKET T_ELSE STATEMENT
-
-  146 ITERATION_STATEMENT: T_WHILE T_LBRACKET EXPRESSION T_RBRACKET STATEMENT
-
-  147 JUMP_STATEMENT: T_RETURN T_SEMICOLON
-  148               | T_RETURN EXPRESSION T_SEMICOLON
-
-  149 TRANSLATION_UNIT: EXTERNAL_DECLARATION
-  150                 | TRANSLATION_UNIT EXTERNAL_DECLARATION
-
-  151 EXTERNAL_DECLARATION: FUNCTION_DEFINITION
-  152                     | DECLARATION
-
-  153 FUNCTION_DEFINITION: DECLARATION_SPECIFIERS DECLARATOR DECLARATION_LIST COMPOUND_STATEMENT
-  154                    | DECLARATION_SPECIFIERS DECLARATOR COMPOUND_STATEMENT
-  155                    | DECLARATOR DECLARATION_LIST COMPOUND_STATEMENT
-  156                    | DECLARATOR COMPOUND_STATEMENT
+  154 STRUCT_DECLARATOR: DECLARATOR
+  155                  | T_COLON CONSTANT_EXPRESSION
+  156                  | DECLARATOR T_COLON CONSTANT_EXPRESSION
 
 
-State 17 conflicts: 1 shift/reduce
+State 42 conflicts: 1 shift/reduce
+State 70 conflicts: 1 shift/reduce
+State 83 conflicts: 1 shift/reduce
+State 84 conflicts: 1 shift/reduce
+State 114 conflicts: 1 shift/reduce
+State 115 conflicts: 1 shift/reduce
+State 124 conflicts: 1 shift/reduce
+State 164 conflicts: 1 shift/reduce
+State 166 conflicts: 1 shift/reduce
+State 167 conflicts: 1 shift/reduce
+State 182 conflicts: 1 shift/reduce
 
 
 Grammar
 
     0 $accept: ROOT $end
 
-    1 ROOT: PRIMARY_EXPRESSION
+    1 ROOT: TRANSLATION_UNIT
 
     2 PRIMARY_EXPRESSION: T_IDENTIFIER
     3                   | T_CONSTANT
@@ -218,96 +147,154 @@ Grammar
 
    23 CONSTANT_EXPRESSION: CONDITIONAL_EXPRESSION
 
-   24 DECLARATION_SPECIFIERS: STORAGE_CLASS_SPECIFIER
-   25                       | STORAGE_CLASS_SPECIFIER DECLARATION_SPECIFIERS
-   26                       | TYPE_SPECIFIER
-   27                       | TYPE_SPECIFIER DECLARATION_SPECIFIERS
-   28                       | TYPE_QUALIFIER
-   29                       | TYPE_QUALIFIER DECLARATION_SPECIFIERS
+   24 DECLARATION: DECLARATION_SPECIFIERS T_SEMICOLON
+   25            | DECLARATION_SPECIFIERS INIT_DECLARATOR_LIST T_SEMICOLON
 
-   30 STORAGE_CLASS_SPECIFIER: T_TYPEDEF
+   26 DECLARATION_SPECIFIERS: STORAGE_CLASS_SPECIFIER
+   27                       | STORAGE_CLASS_SPECIFIER DECLARATION_SPECIFIERS
+   28                       | TYPE_SPECIFIER
+   29                       | TYPE_SPECIFIER DECLARATION_SPECIFIERS
+   30                       | TYPE_QUALIFIER
+   31                       | TYPE_QUALIFIER DECLARATION_SPECIFIERS
 
-   31 TYPE_SPECIFIER: T_VOID
-   32               | T_INT
-   33               | STRUCT_OR_UNION_SPECIFIER
-   34               | ENUM_SPECIFIER
+   32 INIT_DECLARATOR_LIST: INIT_DECLARATOR
+   33                     | INIT_DECLARATOR_LIST T_COMMA INIT_DECLARATOR
 
-   35 STRUCT_OR_UNION_SPECIFIER: STRUCT_OR_UNION T_IDENTIFIER
+   34 INIT_DECLARATOR: DECLARATOR
+   35                | DECLARATOR T_ASSIGN INITIALIZER
 
-   36 STRUCT_OR_UNION: T_STRUCT
-   37                | T_UNION
+   36 STORAGE_CLASS_SPECIFIER: T_TYPEDEF
 
-   38 SPECIFIER_QUALIFIER_LIST: TYPE_SPECIFIER SPECIFIER_QUALIFIER_LIST
-   39                         | TYPE_SPECIFIER
-   40                         | TYPE_QUALIFIER SPECIFIER_QUALIFIER_LIST
-   41                         | TYPE_QUALIFIER
+   37 TYPE_SPECIFIER: T_VOID
+   38               | T_INT
+   39               | STRUCT_OR_UNION_SPECIFIER
+   40               | ENUM_SPECIFIER
 
-   42 ENUM_SPECIFIER: T_ENUM T_LCURLY ENUMERATOR_LIST T_RCURLY
-   43               | T_ENUM T_IDENTIFIER T_LCURLY ENUMERATOR_LIST T_RCURLY
-   44               | T_ENUM T_IDENTIFIER
+   41 STRUCT_OR_UNION_SPECIFIER: STRUCT_OR_UNION T_IDENTIFIER
 
-   45 ENUMERATOR_LIST: ENUMERATOR
-   46                | ENUMERATOR_LIST T_COMMA ENUMERATOR
+   42 STRUCT_OR_UNION: T_STRUCT
+   43                | T_UNION
 
-   47 ENUMERATOR: T_IDENTIFIER
-   48           | T_IDENTIFIER T_ASSIGN CONSTANT_EXPRESSION
+   44 SPECIFIER_QUALIFIER_LIST: TYPE_SPECIFIER SPECIFIER_QUALIFIER_LIST
+   45                         | TYPE_SPECIFIER
+   46                         | TYPE_QUALIFIER SPECIFIER_QUALIFIER_LIST
+   47                         | TYPE_QUALIFIER
 
-   49 TYPE_QUALIFIER: T_CONST
-   50               | T_VOLATILE
+   48 ENUM_SPECIFIER: T_ENUM T_LCURLY ENUMERATOR_LIST T_RCURLY
+   49               | T_ENUM T_IDENTIFIER T_LCURLY ENUMERATOR_LIST T_RCURLY
+   50               | T_ENUM T_IDENTIFIER
 
-   51 DECLARATOR: POINTER DIRECT_DECLARATOR
-   52           | DIRECT_DECLARATOR
+   51 ENUMERATOR_LIST: ENUMERATOR
+   52                | ENUMERATOR_LIST T_COMMA ENUMERATOR
 
-   53 DIRECT_DECLARATOR: T_IDENTIFIER
-   54                  | T_LBRACKET DECLARATOR T_RBRACKET
-   55                  | DIRECT_DECLARATOR T_LBRACKET PARAMETER_TYPE_LIST T_RBRACKET
-   56                  | DIRECT_DECLARATOR T_LBRACKET IDENTIFIER_LIST T_RBRACKET
-   57                  | DIRECT_DECLARATOR T_LBRACKET T_RBRACKET
+   53 ENUMERATOR: T_IDENTIFIER
+   54           | T_IDENTIFIER T_ASSIGN CONSTANT_EXPRESSION
 
-   58 POINTER: T_STAR
-   59        | T_STAR TYPE_QUALIFIER_LIST
-   60        | T_STAR POINTER
-   61        | T_STAR TYPE_QUALIFIER_LIST POINTER
+   55 TYPE_QUALIFIER: T_CONST
+   56               | T_VOLATILE
 
-   62 TYPE_QUALIFIER_LIST: TYPE_QUALIFIER
-   63                    | TYPE_QUALIFIER_LIST TYPE_QUALIFIER
+   57 DECLARATOR: POINTER DIRECT_DECLARATOR
+   58           | DIRECT_DECLARATOR
 
-   64 PARAMETER_TYPE_LIST: PARAMETER_LIST
+   59 DIRECT_DECLARATOR: T_IDENTIFIER
+   60                  | T_LBRACKET DECLARATOR T_RBRACKET
+   61                  | DIRECT_DECLARATOR T_LBRACKET PARAMETER_TYPE_LIST T_RBRACKET
+   62                  | DIRECT_DECLARATOR T_LBRACKET IDENTIFIER_LIST T_RBRACKET
+   63                  | DIRECT_DECLARATOR T_LBRACKET T_RBRACKET
 
-   65 PARAMETER_LIST: PARAMETER_DECLARATION
-   66               | PARAMETER_LIST T_COMMA PARAMETER_DECLARATION
+   64 POINTER: T_STAR
+   65        | T_STAR TYPE_QUALIFIER_LIST
+   66        | T_STAR POINTER
+   67        | T_STAR TYPE_QUALIFIER_LIST POINTER
 
-   67 PARAMETER_DECLARATION: DECLARATION_SPECIFIERS DECLARATOR
-   68                      | DECLARATION_SPECIFIERS ABSTRACT_DECLARATOR
-   69                      | DECLARATION_SPECIFIERS
+   68 TYPE_QUALIFIER_LIST: TYPE_QUALIFIER
+   69                    | TYPE_QUALIFIER_LIST TYPE_QUALIFIER
 
-   70 IDENTIFIER_LIST: T_IDENTIFIER
-   71                | IDENTIFIER_LIST T_COMMA T_IDENTIFIER
+   70 PARAMETER_TYPE_LIST: PARAMETER_LIST
 
-   72 TYPE_NAME: SPECIFIER_QUALIFIER_LIST
-   73          | SPECIFIER_QUALIFIER_LIST ABSTRACT_DECLARATOR
+   71 PARAMETER_LIST: PARAMETER_DECLARATION
+   72               | PARAMETER_LIST T_COMMA PARAMETER_DECLARATION
 
-   74 ABSTRACT_DECLARATOR: POINTER
-   75                    | DIRECT_ABSTRACT_DECLARATOR
-   76                    | POINTER DIRECT_ABSTRACT_DECLARATOR
+   73 PARAMETER_DECLARATION: DECLARATION_SPECIFIERS DECLARATOR
+   74                      | DECLARATION_SPECIFIERS ABSTRACT_DECLARATOR
+   75                      | DECLARATION_SPECIFIERS
 
-   77 DIRECT_ABSTRACT_DECLARATOR: T_LBRACKET ABSTRACT_DECLARATOR T_RBRACKET
-   78                           | T_LBRACKET T_RBRACKET
-   79                           | T_LBRACKET PARAMETER_TYPE_LIST T_RBRACKET
-   80                           | DIRECT_ABSTRACT_DECLARATOR T_LBRACKET T_RBRACKET
-   81                           | DIRECT_ABSTRACT_DECLARATOR T_LBRACKET PARAMETER_TYPE_LIST T_RBRACKET
+   76 IDENTIFIER_LIST: T_IDENTIFIER
+   77                | IDENTIFIER_LIST T_COMMA T_IDENTIFIER
+
+   78 TYPE_NAME: SPECIFIER_QUALIFIER_LIST
+   79          | SPECIFIER_QUALIFIER_LIST ABSTRACT_DECLARATOR
+
+   80 ABSTRACT_DECLARATOR: POINTER
+   81                    | DIRECT_ABSTRACT_DECLARATOR
+   82                    | POINTER DIRECT_ABSTRACT_DECLARATOR
+
+   83 DIRECT_ABSTRACT_DECLARATOR: T_LBRACKET ABSTRACT_DECLARATOR T_RBRACKET
+   84                           | T_LBRACKET T_RBRACKET
+   85                           | T_LBRACKET PARAMETER_TYPE_LIST T_RBRACKET
+   86                           | DIRECT_ABSTRACT_DECLARATOR T_LBRACKET T_RBRACKET
+   87                           | DIRECT_ABSTRACT_DECLARATOR T_LBRACKET PARAMETER_TYPE_LIST T_RBRACKET
+
+   88 INITIALIZER: ASSIGNMENT_EXPRESSION
+   89            | T_LCURLY INITIALIZER_LIST T_RCURLY
+   90            | T_LCURLY INITIALIZER_LIST T_COMMA T_RCURLY
+
+   91 INITIALIZER_LIST: INITIALIZER
+   92                 | INITIALIZER_LIST T_COMMA INITIALIZER
+
+   93 STATEMENT: LABELED_STATEMENT
+   94          | COMPOUND_STATEMENT
+   95          | EXPRESSION_STATEMENT
+   96          | SELECTION_STATEMENT
+   97          | ITERATION_STATEMENT
+   98          | JUMP_STATEMENT
+
+   99 LABELED_STATEMENT: T_IDENTIFIER T_COLON STATEMENT
+
+  100 COMPOUND_STATEMENT: T_LCURLY T_RCURLY
+  101                   | T_LCURLY STATEMENT_LIST T_RCURLY
+  102                   | T_LCURLY DECLARATION_LIST T_RCURLY
+  103                   | T_LCURLY DECLARATION_LIST STATEMENT_LIST T_RCURLY
+
+  104 DECLARATION_LIST: DECLARATION
+  105                 | DECLARATION_LIST DECLARATION
+
+  106 STATEMENT_LIST: STATEMENT
+  107               | STATEMENT_LIST STATEMENT
+
+  108 EXPRESSION_STATEMENT: T_SEMICOLON
+  109                     | EXPRESSION T_SEMICOLON
+
+  110 SELECTION_STATEMENT: T_IF T_LBRACKET EXPRESSION T_RBRACKET STATEMENT
+  111                    | T_IF T_LBRACKET EXPRESSION T_RBRACKET T_ELSE STATEMENT
+
+  112 ITERATION_STATEMENT: T_WHILE T_LBRACKET EXPRESSION T_RBRACKET STATEMENT
+
+  113 JUMP_STATEMENT: T_RETURN T_SEMICOLON
+  114               | T_RETURN EXPRESSION T_SEMICOLON
+
+  115 TRANSLATION_UNIT: EXTERNAL_DECLARATION
+  116                 | TRANSLATION_UNIT EXTERNAL_DECLARATION
+
+  117 EXTERNAL_DECLARATION: FUNCTION_DEFINITION
+  118                     | DECLARATION
+
+  119 FUNCTION_DEFINITION: DECLARATION_SPECIFIERS DECLARATOR DECLARATION_LIST COMPOUND_STATEMENT
+  120                    | DECLARATION_SPECIFIERS DECLARATOR COMPOUND_STATEMENT
+  121                    | DECLARATOR DECLARATION_LIST COMPOUND_STATEMENT
+  122                    | DECLARATOR COMPOUND_STATEMENT
 
 
 Terminals, with rules where they appear
 
 $end (0) 0
 error (256)
-T_STAR (258) 12 58 59 60 61
+T_STAR (258) 12 64 65 66 67
 T_DIVIDE (259)
 T_PLUS (260) 13
 T_MINUS (261) 14
 T_EXPONENT (262)
-T_COMMA (263) 9 22 46 66 71
+T_COMMA (263) 9 22 33 52 72 77 90 92
 T_LSHIFT (264)
 T_RSHIFT (265)
 T_LESSTHAN (266)
@@ -320,31 +307,31 @@ T_OR (272)
 T_AND_OP (273)
 T_OR_OP (274)
 T_QUESTION (275)
-T_LBRACKET (276) 4 6 7 16 54 55 56 57 77 78 79 80 81
-T_RBRACKET (277) 4 6 7 16 54 55 56 57 77 78 79 80 81
-T_LCURLY (278) 42 43
-T_RCURLY (279) 42 43
-T_SEMICOLON (280)
-T_COLON (281)
+T_LBRACKET (276) 4 6 7 16 60 61 62 63 83 84 85 86 87 110 111 112
+T_RBRACKET (277) 4 6 7 16 60 61 62 63 83 84 85 86 87 110 111 112
+T_LCURLY (278) 48 49 89 90 100 101 102 103
+T_RCURLY (279) 48 49 89 90 100 101 102 103
+T_SEMICOLON (280) 24 25 108 109 113 114
+T_COLON (281) 99
 T_LOG (282)
 T_EXP (283)
 T_SQRT (284)
-T_IF (285)
-T_ELSE (286)
-T_WHILE (287)
-T_RETURN (288)
+T_IF (285) 110 111
+T_ELSE (286) 111
+T_WHILE (287) 112
+T_RETURN (288) 113 114
 T_MAIN (289)
-T_INT (290) 32
-T_VOID (291) 31
-T_STRUCT (292) 36
-T_UNION (293) 37
-T_ENUM (294) 42 43 44
-T_ASSIGN (295) 20 48
+T_INT (290) 38
+T_VOID (291) 37
+T_STRUCT (292) 42
+T_UNION (293) 43
+T_ENUM (294) 48 49 50
+T_ASSIGN (295) 20 35 54
 T_CONSTANT (296) 3
-T_IDENTIFIER (297) 2 35 43 44 47 48 53 70 71
-T_TYPEDEF (298) 30
-T_CONST (299) 49
-T_VOLATILE (300) 50
+T_IDENTIFIER (297) 2 41 49 50 53 54 59 76 77 99
+T_TYPEDEF (298) 36
+T_CONST (299) 55
+T_VOLATILE (300) 56
 
 
 Nonterminals, with rules where they appear
@@ -354,7 +341,7 @@ $accept (46)
 ROOT (47)
     on left: 1, on right: 0
 PRIMARY_EXPRESSION (48)
-    on left: 2 3 4, on right: 1 5
+    on left: 2 3 4, on right: 5
 POSTFIX_EXPRESSION (49)
     on left: 5 6 7, on right: 6 7 10
 ARGUMENT_EXPRESSION_LIST (50)
@@ -368,1307 +355,2417 @@ CAST_EXPRESSION (53)
 CONDITIONAL_EXPRESSION (54)
     on left: 17, on right: 18 23
 ASSIGNMENT_EXPRESSION (55)
-    on left: 18 19, on right: 8 9 19 21 22
+    on left: 18 19, on right: 8 9 19 21 22 88
 ASSIGNMENT_OPERATOR (56)
     on left: 20, on right: 19
 EXPRESSION (57)
-    on left: 21 22, on right: 4 22
+    on left: 21 22, on right: 4 22 109 110 111 112 114
 CONSTANT_EXPRESSION (58)
-    on left: 23, on right: 48
-DECLARATION_SPECIFIERS (59)
-    on left: 24 25 26 27 28 29, on right: 25 27 29 67 68 69
-STORAGE_CLASS_SPECIFIER (60)
-    on left: 30, on right: 24 25
-TYPE_SPECIFIER (61)
-    on left: 31 32 33 34, on right: 26 27 38 39
-STRUCT_OR_UNION_SPECIFIER (62)
-    on left: 35, on right: 33
-STRUCT_OR_UNION (63)
-    on left: 36 37, on right: 35
-SPECIFIER_QUALIFIER_LIST (64)
-    on left: 38 39 40 41, on right: 38 40 72 73
-ENUM_SPECIFIER (65)
-    on left: 42 43 44, on right: 34
-ENUMERATOR_LIST (66)
-    on left: 45 46, on right: 42 43 46
-ENUMERATOR (67)
-    on left: 47 48, on right: 45 46
-TYPE_QUALIFIER (68)
-    on left: 49 50, on right: 28 29 40 41 62 63
-DECLARATOR (69)
-    on left: 51 52, on right: 54 67
-DIRECT_DECLARATOR (70)
-    on left: 53 54 55 56 57, on right: 51 52 55 56 57
-POINTER (71)
-    on left: 58 59 60 61, on right: 51 60 61 74 76
-TYPE_QUALIFIER_LIST (72)
-    on left: 62 63, on right: 59 61 63
-PARAMETER_TYPE_LIST (73)
-    on left: 64, on right: 55 79 81
-PARAMETER_LIST (74)
-    on left: 65 66, on right: 64 66
-PARAMETER_DECLARATION (75)
-    on left: 67 68 69, on right: 65 66
-IDENTIFIER_LIST (76)
-    on left: 70 71, on right: 56 71
-TYPE_NAME (77)
-    on left: 72 73, on right: 16
-ABSTRACT_DECLARATOR (78)
-    on left: 74 75 76, on right: 68 73 77
-DIRECT_ABSTRACT_DECLARATOR (79)
-    on left: 77 78 79 80 81, on right: 75 76 80 81
+    on left: 23, on right: 54
+DECLARATION (59)
+    on left: 24 25, on right: 104 105 118
+DECLARATION_SPECIFIERS (60)
+    on left: 26 27 28 29 30 31, on right: 24 25 27 29 31 73 74 75 119
+    120
+INIT_DECLARATOR_LIST (61)
+    on left: 32 33, on right: 25 33
+INIT_DECLARATOR (62)
+    on left: 34 35, on right: 32 33
+STORAGE_CLASS_SPECIFIER (63)
+    on left: 36, on right: 26 27
+TYPE_SPECIFIER (64)
+    on left: 37 38 39 40, on right: 28 29 44 45
+STRUCT_OR_UNION_SPECIFIER (65)
+    on left: 41, on right: 39
+STRUCT_OR_UNION (66)
+    on left: 42 43, on right: 41
+SPECIFIER_QUALIFIER_LIST (67)
+    on left: 44 45 46 47, on right: 44 46 78 79
+ENUM_SPECIFIER (68)
+    on left: 48 49 50, on right: 40
+ENUMERATOR_LIST (69)
+    on left: 51 52, on right: 48 49 52
+ENUMERATOR (70)
+    on left: 53 54, on right: 51 52
+TYPE_QUALIFIER (71)
+    on left: 55 56, on right: 30 31 46 47 68 69
+DECLARATOR (72)
+    on left: 57 58, on right: 34 35 60 73 119 120 121 122
+DIRECT_DECLARATOR (73)
+    on left: 59 60 61 62 63, on right: 57 58 61 62 63
+POINTER (74)
+    on left: 64 65 66 67, on right: 57 66 67 80 82
+TYPE_QUALIFIER_LIST (75)
+    on left: 68 69, on right: 65 67 69
+PARAMETER_TYPE_LIST (76)
+    on left: 70, on right: 61 85 87
+PARAMETER_LIST (77)
+    on left: 71 72, on right: 70 72
+PARAMETER_DECLARATION (78)
+    on left: 73 74 75, on right: 71 72
+IDENTIFIER_LIST (79)
+    on left: 76 77, on right: 62 77
+TYPE_NAME (80)
+    on left: 78 79, on right: 16
+ABSTRACT_DECLARATOR (81)
+    on left: 80 81 82, on right: 74 79 83
+DIRECT_ABSTRACT_DECLARATOR (82)
+    on left: 83 84 85 86 87, on right: 81 82 86 87
+INITIALIZER (83)
+    on left: 88 89 90, on right: 35 91 92
+INITIALIZER_LIST (84)
+    on left: 91 92, on right: 89 90 92
+STATEMENT (85)
+    on left: 93 94 95 96 97 98, on right: 99 106 107 110 111 112
+LABELED_STATEMENT (86)
+    on left: 99, on right: 93
+COMPOUND_STATEMENT (87)
+    on left: 100 101 102 103, on right: 94 119 120 121 122
+DECLARATION_LIST (88)
+    on left: 104 105, on right: 102 103 105 119 121
+STATEMENT_LIST (89)
+    on left: 106 107, on right: 101 103 107
+EXPRESSION_STATEMENT (90)
+    on left: 108 109, on right: 95
+SELECTION_STATEMENT (91)
+    on left: 110 111, on right: 96
+ITERATION_STATEMENT (92)
+    on left: 112, on right: 97
+JUMP_STATEMENT (93)
+    on left: 113 114, on right: 98
+TRANSLATION_UNIT (94)
+    on left: 115 116, on right: 1 116
+EXTERNAL_DECLARATION (95)
+    on left: 117 118, on right: 115 116
+FUNCTION_DEFINITION (96)
+    on left: 119 120 121 122, on right: 117
 
 
 State 0
 
     0 $accept: . ROOT $end
 
-    T_LBRACKET    shift, and go to state 1
-    T_CONSTANT    shift, and go to state 2
-    T_IDENTIFIER  shift, and go to state 3
+    T_STAR        shift, and go to state 1
+    T_LBRACKET    shift, and go to state 2
+    T_INT         shift, and go to state 3
+    T_VOID        shift, and go to state 4
+    T_STRUCT      shift, and go to state 5
+    T_UNION       shift, and go to state 6
+    T_ENUM        shift, and go to state 7
+    T_IDENTIFIER  shift, and go to state 8
+    T_TYPEDEF     shift, and go to state 9
+    T_CONST       shift, and go to state 10
+    T_VOLATILE    shift, and go to state 11
 
-    ROOT                go to state 4
-    PRIMARY_EXPRESSION  go to state 5
+    ROOT                       go to state 12
+    DECLARATION                go to state 13
+    DECLARATION_SPECIFIERS     go to state 14
+    STORAGE_CLASS_SPECIFIER    go to state 15
+    TYPE_SPECIFIER             go to state 16
+    STRUCT_OR_UNION_SPECIFIER  go to state 17
+    STRUCT_OR_UNION            go to state 18
+    ENUM_SPECIFIER             go to state 19
+    TYPE_QUALIFIER             go to state 20
+    DECLARATOR                 go to state 21
+    DIRECT_DECLARATOR          go to state 22
+    POINTER                    go to state 23
+    TRANSLATION_UNIT           go to state 24
+    EXTERNAL_DECLARATION       go to state 25
+    FUNCTION_DEFINITION        go to state 26
 
 
 State 1
 
-    4 PRIMARY_EXPRESSION: T_LBRACKET . EXPRESSION T_RBRACKET
+   64 POINTER: T_STAR .
+   65        | T_STAR . TYPE_QUALIFIER_LIST
+   66        | T_STAR . POINTER
+   67        | T_STAR . TYPE_QUALIFIER_LIST POINTER
 
-    T_STAR        shift, and go to state 6
-    T_PLUS        shift, and go to state 7
-    T_MINUS       shift, and go to state 8
-    T_LBRACKET    shift, and go to state 1
-    T_CONSTANT    shift, and go to state 2
-    T_IDENTIFIER  shift, and go to state 3
+    T_STAR      shift, and go to state 1
+    T_CONST     shift, and go to state 10
+    T_VOLATILE  shift, and go to state 11
 
-    $default  reduce using rule 17 (CONDITIONAL_EXPRESSION)
+    $default  reduce using rule 64 (POINTER)
 
-    PRIMARY_EXPRESSION      go to state 9
-    POSTFIX_EXPRESSION      go to state 10
-    UNARY_EXPRESSION        go to state 11
-    UNARY_OPERATOR          go to state 12
-    CONDITIONAL_EXPRESSION  go to state 13
-    ASSIGNMENT_EXPRESSION   go to state 14
-    EXPRESSION              go to state 15
+    TYPE_QUALIFIER       go to state 27
+    POINTER              go to state 28
+    TYPE_QUALIFIER_LIST  go to state 29
 
 
 State 2
 
-    3 PRIMARY_EXPRESSION: T_CONSTANT .
+   60 DIRECT_DECLARATOR: T_LBRACKET . DECLARATOR T_RBRACKET
 
-    $default  reduce using rule 3 (PRIMARY_EXPRESSION)
+    T_STAR        shift, and go to state 1
+    T_LBRACKET    shift, and go to state 2
+    T_IDENTIFIER  shift, and go to state 8
+
+    DECLARATOR         go to state 30
+    DIRECT_DECLARATOR  go to state 22
+    POINTER            go to state 23
 
 
 State 3
 
-    2 PRIMARY_EXPRESSION: T_IDENTIFIER .
+   38 TYPE_SPECIFIER: T_INT .
 
-    $default  reduce using rule 2 (PRIMARY_EXPRESSION)
+    $default  reduce using rule 38 (TYPE_SPECIFIER)
 
 
 State 4
 
-    0 $accept: ROOT . $end
+   37 TYPE_SPECIFIER: T_VOID .
 
-    $end  shift, and go to state 16
+    $default  reduce using rule 37 (TYPE_SPECIFIER)
 
 
 State 5
 
-    1 ROOT: PRIMARY_EXPRESSION .
+   42 STRUCT_OR_UNION: T_STRUCT .
 
-    $default  reduce using rule 1 (ROOT)
+    $default  reduce using rule 42 (STRUCT_OR_UNION)
 
 
 State 6
 
-   12 UNARY_OPERATOR: T_STAR .
+   43 STRUCT_OR_UNION: T_UNION .
 
-    $default  reduce using rule 12 (UNARY_OPERATOR)
+    $default  reduce using rule 43 (STRUCT_OR_UNION)
 
 
 State 7
 
-   13 UNARY_OPERATOR: T_PLUS .
+   48 ENUM_SPECIFIER: T_ENUM . T_LCURLY ENUMERATOR_LIST T_RCURLY
+   49               | T_ENUM . T_IDENTIFIER T_LCURLY ENUMERATOR_LIST T_RCURLY
+   50               | T_ENUM . T_IDENTIFIER
 
-    $default  reduce using rule 13 (UNARY_OPERATOR)
+    T_LCURLY      shift, and go to state 31
+    T_IDENTIFIER  shift, and go to state 32
 
 
 State 8
 
-   14 UNARY_OPERATOR: T_MINUS .
+   59 DIRECT_DECLARATOR: T_IDENTIFIER .
 
-    $default  reduce using rule 14 (UNARY_OPERATOR)
+    $default  reduce using rule 59 (DIRECT_DECLARATOR)
 
 
 State 9
 
-    5 POSTFIX_EXPRESSION: PRIMARY_EXPRESSION .
+   36 STORAGE_CLASS_SPECIFIER: T_TYPEDEF .
 
-    $default  reduce using rule 5 (POSTFIX_EXPRESSION)
+    $default  reduce using rule 36 (STORAGE_CLASS_SPECIFIER)
 
 
 State 10
 
-    6 POSTFIX_EXPRESSION: POSTFIX_EXPRESSION . T_LBRACKET T_RBRACKET
-    7                   | POSTFIX_EXPRESSION . T_LBRACKET ARGUMENT_EXPRESSION_LIST T_RBRACKET
-   10 UNARY_EXPRESSION: POSTFIX_EXPRESSION .
+   55 TYPE_QUALIFIER: T_CONST .
 
-    T_LBRACKET  shift, and go to state 17
-
-    $default  reduce using rule 10 (UNARY_EXPRESSION)
+    $default  reduce using rule 55 (TYPE_QUALIFIER)
 
 
 State 11
 
-   19 ASSIGNMENT_EXPRESSION: UNARY_EXPRESSION . ASSIGNMENT_OPERATOR ASSIGNMENT_EXPRESSION
+   56 TYPE_QUALIFIER: T_VOLATILE .
 
-    T_ASSIGN  shift, and go to state 18
-
-    ASSIGNMENT_OPERATOR  go to state 19
+    $default  reduce using rule 56 (TYPE_QUALIFIER)
 
 
 State 12
 
-   11 UNARY_EXPRESSION: UNARY_OPERATOR . CAST_EXPRESSION
+    0 $accept: ROOT . $end
 
-    T_STAR        shift, and go to state 6
-    T_PLUS        shift, and go to state 7
-    T_MINUS       shift, and go to state 8
-    T_LBRACKET    shift, and go to state 20
-    T_CONSTANT    shift, and go to state 2
-    T_IDENTIFIER  shift, and go to state 3
-
-    PRIMARY_EXPRESSION  go to state 9
-    POSTFIX_EXPRESSION  go to state 10
-    UNARY_EXPRESSION    go to state 21
-    UNARY_OPERATOR      go to state 12
-    CAST_EXPRESSION     go to state 22
+    $end  shift, and go to state 33
 
 
 State 13
 
-   18 ASSIGNMENT_EXPRESSION: CONDITIONAL_EXPRESSION .
+  118 EXTERNAL_DECLARATION: DECLARATION .
 
-    $default  reduce using rule 18 (ASSIGNMENT_EXPRESSION)
+    $default  reduce using rule 118 (EXTERNAL_DECLARATION)
 
 
 State 14
 
-   21 EXPRESSION: ASSIGNMENT_EXPRESSION .
+   24 DECLARATION: DECLARATION_SPECIFIERS . T_SEMICOLON
+   25            | DECLARATION_SPECIFIERS . INIT_DECLARATOR_LIST T_SEMICOLON
+  119 FUNCTION_DEFINITION: DECLARATION_SPECIFIERS . DECLARATOR DECLARATION_LIST COMPOUND_STATEMENT
+  120                    | DECLARATION_SPECIFIERS . DECLARATOR COMPOUND_STATEMENT
 
-    $default  reduce using rule 21 (EXPRESSION)
+    T_STAR        shift, and go to state 1
+    T_LBRACKET    shift, and go to state 2
+    T_SEMICOLON   shift, and go to state 34
+    T_IDENTIFIER  shift, and go to state 8
+
+    INIT_DECLARATOR_LIST  go to state 35
+    INIT_DECLARATOR       go to state 36
+    DECLARATOR            go to state 37
+    DIRECT_DECLARATOR     go to state 22
+    POINTER               go to state 23
 
 
 State 15
 
-    4 PRIMARY_EXPRESSION: T_LBRACKET EXPRESSION . T_RBRACKET
-   22 EXPRESSION: EXPRESSION . T_COMMA ASSIGNMENT_EXPRESSION
+   26 DECLARATION_SPECIFIERS: STORAGE_CLASS_SPECIFIER .
+   27                       | STORAGE_CLASS_SPECIFIER . DECLARATION_SPECIFIERS
 
-    T_COMMA     shift, and go to state 23
-    T_RBRACKET  shift, and go to state 24
+    T_INT       shift, and go to state 3
+    T_VOID      shift, and go to state 4
+    T_STRUCT    shift, and go to state 5
+    T_UNION     shift, and go to state 6
+    T_ENUM      shift, and go to state 7
+    T_TYPEDEF   shift, and go to state 9
+    T_CONST     shift, and go to state 10
+    T_VOLATILE  shift, and go to state 11
+
+    $default  reduce using rule 26 (DECLARATION_SPECIFIERS)
+
+    DECLARATION_SPECIFIERS     go to state 38
+    STORAGE_CLASS_SPECIFIER    go to state 15
+    TYPE_SPECIFIER             go to state 16
+    STRUCT_OR_UNION_SPECIFIER  go to state 17
+    STRUCT_OR_UNION            go to state 18
+    ENUM_SPECIFIER             go to state 19
+    TYPE_QUALIFIER             go to state 20
 
 
 State 16
+
+   28 DECLARATION_SPECIFIERS: TYPE_SPECIFIER .
+   29                       | TYPE_SPECIFIER . DECLARATION_SPECIFIERS
+
+    T_INT       shift, and go to state 3
+    T_VOID      shift, and go to state 4
+    T_STRUCT    shift, and go to state 5
+    T_UNION     shift, and go to state 6
+    T_ENUM      shift, and go to state 7
+    T_TYPEDEF   shift, and go to state 9
+    T_CONST     shift, and go to state 10
+    T_VOLATILE  shift, and go to state 11
+
+    $default  reduce using rule 28 (DECLARATION_SPECIFIERS)
+
+    DECLARATION_SPECIFIERS     go to state 39
+    STORAGE_CLASS_SPECIFIER    go to state 15
+    TYPE_SPECIFIER             go to state 16
+    STRUCT_OR_UNION_SPECIFIER  go to state 17
+    STRUCT_OR_UNION            go to state 18
+    ENUM_SPECIFIER             go to state 19
+    TYPE_QUALIFIER             go to state 20
+
+
+State 17
+
+   39 TYPE_SPECIFIER: STRUCT_OR_UNION_SPECIFIER .
+
+    $default  reduce using rule 39 (TYPE_SPECIFIER)
+
+
+State 18
+
+   41 STRUCT_OR_UNION_SPECIFIER: STRUCT_OR_UNION . T_IDENTIFIER
+
+    T_IDENTIFIER  shift, and go to state 40
+
+
+State 19
+
+   40 TYPE_SPECIFIER: ENUM_SPECIFIER .
+
+    $default  reduce using rule 40 (TYPE_SPECIFIER)
+
+
+State 20
+
+   30 DECLARATION_SPECIFIERS: TYPE_QUALIFIER .
+   31                       | TYPE_QUALIFIER . DECLARATION_SPECIFIERS
+
+    T_INT       shift, and go to state 3
+    T_VOID      shift, and go to state 4
+    T_STRUCT    shift, and go to state 5
+    T_UNION     shift, and go to state 6
+    T_ENUM      shift, and go to state 7
+    T_TYPEDEF   shift, and go to state 9
+    T_CONST     shift, and go to state 10
+    T_VOLATILE  shift, and go to state 11
+
+    $default  reduce using rule 30 (DECLARATION_SPECIFIERS)
+
+    DECLARATION_SPECIFIERS     go to state 41
+    STORAGE_CLASS_SPECIFIER    go to state 15
+    TYPE_SPECIFIER             go to state 16
+    STRUCT_OR_UNION_SPECIFIER  go to state 17
+    STRUCT_OR_UNION            go to state 18
+    ENUM_SPECIFIER             go to state 19
+    TYPE_QUALIFIER             go to state 20
+
+
+State 21
+
+  121 FUNCTION_DEFINITION: DECLARATOR . DECLARATION_LIST COMPOUND_STATEMENT
+  122                    | DECLARATOR . COMPOUND_STATEMENT
+
+    T_LCURLY    shift, and go to state 42
+    T_INT       shift, and go to state 3
+    T_VOID      shift, and go to state 4
+    T_STRUCT    shift, and go to state 5
+    T_UNION     shift, and go to state 6
+    T_ENUM      shift, and go to state 7
+    T_TYPEDEF   shift, and go to state 9
+    T_CONST     shift, and go to state 10
+    T_VOLATILE  shift, and go to state 11
+
+    DECLARATION                go to state 43
+    DECLARATION_SPECIFIERS     go to state 44
+    STORAGE_CLASS_SPECIFIER    go to state 15
+    TYPE_SPECIFIER             go to state 16
+    STRUCT_OR_UNION_SPECIFIER  go to state 17
+    STRUCT_OR_UNION            go to state 18
+    ENUM_SPECIFIER             go to state 19
+    TYPE_QUALIFIER             go to state 20
+    COMPOUND_STATEMENT         go to state 45
+    DECLARATION_LIST           go to state 46
+
+
+State 22
+
+   58 DECLARATOR: DIRECT_DECLARATOR .
+   61 DIRECT_DECLARATOR: DIRECT_DECLARATOR . T_LBRACKET PARAMETER_TYPE_LIST T_RBRACKET
+   62                  | DIRECT_DECLARATOR . T_LBRACKET IDENTIFIER_LIST T_RBRACKET
+   63                  | DIRECT_DECLARATOR . T_LBRACKET T_RBRACKET
+
+    T_LBRACKET  shift, and go to state 47
+
+    $default  reduce using rule 58 (DECLARATOR)
+
+
+State 23
+
+   57 DECLARATOR: POINTER . DIRECT_DECLARATOR
+
+    T_LBRACKET    shift, and go to state 2
+    T_IDENTIFIER  shift, and go to state 8
+
+    DIRECT_DECLARATOR  go to state 48
+
+
+State 24
+
+    1 ROOT: TRANSLATION_UNIT .
+  116 TRANSLATION_UNIT: TRANSLATION_UNIT . EXTERNAL_DECLARATION
+
+    T_STAR        shift, and go to state 1
+    T_LBRACKET    shift, and go to state 2
+    T_INT         shift, and go to state 3
+    T_VOID        shift, and go to state 4
+    T_STRUCT      shift, and go to state 5
+    T_UNION       shift, and go to state 6
+    T_ENUM        shift, and go to state 7
+    T_IDENTIFIER  shift, and go to state 8
+    T_TYPEDEF     shift, and go to state 9
+    T_CONST       shift, and go to state 10
+    T_VOLATILE    shift, and go to state 11
+
+    $default  reduce using rule 1 (ROOT)
+
+    DECLARATION                go to state 13
+    DECLARATION_SPECIFIERS     go to state 14
+    STORAGE_CLASS_SPECIFIER    go to state 15
+    TYPE_SPECIFIER             go to state 16
+    STRUCT_OR_UNION_SPECIFIER  go to state 17
+    STRUCT_OR_UNION            go to state 18
+    ENUM_SPECIFIER             go to state 19
+    TYPE_QUALIFIER             go to state 20
+    DECLARATOR                 go to state 21
+    DIRECT_DECLARATOR          go to state 22
+    POINTER                    go to state 23
+    EXTERNAL_DECLARATION       go to state 49
+    FUNCTION_DEFINITION        go to state 26
+
+
+State 25
+
+  115 TRANSLATION_UNIT: EXTERNAL_DECLARATION .
+
+    $default  reduce using rule 115 (TRANSLATION_UNIT)
+
+
+State 26
+
+  117 EXTERNAL_DECLARATION: FUNCTION_DEFINITION .
+
+    $default  reduce using rule 117 (EXTERNAL_DECLARATION)
+
+
+State 27
+
+   68 TYPE_QUALIFIER_LIST: TYPE_QUALIFIER .
+
+    $default  reduce using rule 68 (TYPE_QUALIFIER_LIST)
+
+
+State 28
+
+   66 POINTER: T_STAR POINTER .
+
+    $default  reduce using rule 66 (POINTER)
+
+
+State 29
+
+   65 POINTER: T_STAR TYPE_QUALIFIER_LIST .
+   67        | T_STAR TYPE_QUALIFIER_LIST . POINTER
+   69 TYPE_QUALIFIER_LIST: TYPE_QUALIFIER_LIST . TYPE_QUALIFIER
+
+    T_STAR      shift, and go to state 1
+    T_CONST     shift, and go to state 10
+    T_VOLATILE  shift, and go to state 11
+
+    $default  reduce using rule 65 (POINTER)
+
+    TYPE_QUALIFIER  go to state 50
+    POINTER         go to state 51
+
+
+State 30
+
+   60 DIRECT_DECLARATOR: T_LBRACKET DECLARATOR . T_RBRACKET
+
+    T_RBRACKET  shift, and go to state 52
+
+
+State 31
+
+   48 ENUM_SPECIFIER: T_ENUM T_LCURLY . ENUMERATOR_LIST T_RCURLY
+
+    T_IDENTIFIER  shift, and go to state 53
+
+    ENUMERATOR_LIST  go to state 54
+    ENUMERATOR       go to state 55
+
+
+State 32
+
+   49 ENUM_SPECIFIER: T_ENUM T_IDENTIFIER . T_LCURLY ENUMERATOR_LIST T_RCURLY
+   50               | T_ENUM T_IDENTIFIER .
+
+    T_LCURLY  shift, and go to state 56
+
+    $default  reduce using rule 50 (ENUM_SPECIFIER)
+
+
+State 33
 
     0 $accept: ROOT $end .
 
     $default  accept
 
 
-State 17
+State 34
+
+   24 DECLARATION: DECLARATION_SPECIFIERS T_SEMICOLON .
+
+    $default  reduce using rule 24 (DECLARATION)
+
+
+State 35
+
+   25 DECLARATION: DECLARATION_SPECIFIERS INIT_DECLARATOR_LIST . T_SEMICOLON
+   33 INIT_DECLARATOR_LIST: INIT_DECLARATOR_LIST . T_COMMA INIT_DECLARATOR
+
+    T_COMMA      shift, and go to state 57
+    T_SEMICOLON  shift, and go to state 58
+
+
+State 36
+
+   32 INIT_DECLARATOR_LIST: INIT_DECLARATOR .
+
+    $default  reduce using rule 32 (INIT_DECLARATOR_LIST)
+
+
+State 37
+
+   34 INIT_DECLARATOR: DECLARATOR .
+   35                | DECLARATOR . T_ASSIGN INITIALIZER
+  119 FUNCTION_DEFINITION: DECLARATION_SPECIFIERS DECLARATOR . DECLARATION_LIST COMPOUND_STATEMENT
+  120                    | DECLARATION_SPECIFIERS DECLARATOR . COMPOUND_STATEMENT
+
+    T_LCURLY    shift, and go to state 42
+    T_INT       shift, and go to state 3
+    T_VOID      shift, and go to state 4
+    T_STRUCT    shift, and go to state 5
+    T_UNION     shift, and go to state 6
+    T_ENUM      shift, and go to state 7
+    T_ASSIGN    shift, and go to state 59
+    T_TYPEDEF   shift, and go to state 9
+    T_CONST     shift, and go to state 10
+    T_VOLATILE  shift, and go to state 11
+
+    $default  reduce using rule 34 (INIT_DECLARATOR)
+
+    DECLARATION                go to state 43
+    DECLARATION_SPECIFIERS     go to state 44
+    STORAGE_CLASS_SPECIFIER    go to state 15
+    TYPE_SPECIFIER             go to state 16
+    STRUCT_OR_UNION_SPECIFIER  go to state 17
+    STRUCT_OR_UNION            go to state 18
+    ENUM_SPECIFIER             go to state 19
+    TYPE_QUALIFIER             go to state 20
+    COMPOUND_STATEMENT         go to state 60
+    DECLARATION_LIST           go to state 61
+
+
+State 38
+
+   27 DECLARATION_SPECIFIERS: STORAGE_CLASS_SPECIFIER DECLARATION_SPECIFIERS .
+
+    $default  reduce using rule 27 (DECLARATION_SPECIFIERS)
+
+
+State 39
+
+   29 DECLARATION_SPECIFIERS: TYPE_SPECIFIER DECLARATION_SPECIFIERS .
+
+    $default  reduce using rule 29 (DECLARATION_SPECIFIERS)
+
+
+State 40
+
+   41 STRUCT_OR_UNION_SPECIFIER: STRUCT_OR_UNION T_IDENTIFIER .
+
+    $default  reduce using rule 41 (STRUCT_OR_UNION_SPECIFIER)
+
+
+State 41
+
+   31 DECLARATION_SPECIFIERS: TYPE_QUALIFIER DECLARATION_SPECIFIERS .
+
+    $default  reduce using rule 31 (DECLARATION_SPECIFIERS)
+
+
+State 42
+
+  100 COMPOUND_STATEMENT: T_LCURLY . T_RCURLY
+  101                   | T_LCURLY . STATEMENT_LIST T_RCURLY
+  102                   | T_LCURLY . DECLARATION_LIST T_RCURLY
+  103                   | T_LCURLY . DECLARATION_LIST STATEMENT_LIST T_RCURLY
+
+    T_STAR        shift, and go to state 62
+    T_PLUS        shift, and go to state 63
+    T_MINUS       shift, and go to state 64
+    T_LBRACKET    shift, and go to state 65
+    T_LCURLY      shift, and go to state 42
+    T_RCURLY      shift, and go to state 66
+    T_SEMICOLON   shift, and go to state 67
+    T_IF          shift, and go to state 68
+    T_WHILE       shift, and go to state 69
+    T_RETURN      shift, and go to state 70
+    T_INT         shift, and go to state 3
+    T_VOID        shift, and go to state 4
+    T_STRUCT      shift, and go to state 5
+    T_UNION       shift, and go to state 6
+    T_ENUM        shift, and go to state 7
+    T_CONSTANT    shift, and go to state 71
+    T_IDENTIFIER  shift, and go to state 72
+    T_TYPEDEF     shift, and go to state 9
+    T_CONST       shift, and go to state 10
+    T_VOLATILE    shift, and go to state 11
+
+    T_SEMICOLON  [reduce using rule 17 (CONDITIONAL_EXPRESSION)]
+    $default     reduce using rule 17 (CONDITIONAL_EXPRESSION)
+
+    PRIMARY_EXPRESSION         go to state 73
+    POSTFIX_EXPRESSION         go to state 74
+    UNARY_EXPRESSION           go to state 75
+    UNARY_OPERATOR             go to state 76
+    CONDITIONAL_EXPRESSION     go to state 77
+    ASSIGNMENT_EXPRESSION      go to state 78
+    EXPRESSION                 go to state 79
+    DECLARATION                go to state 43
+    DECLARATION_SPECIFIERS     go to state 44
+    STORAGE_CLASS_SPECIFIER    go to state 15
+    TYPE_SPECIFIER             go to state 16
+    STRUCT_OR_UNION_SPECIFIER  go to state 17
+    STRUCT_OR_UNION            go to state 18
+    ENUM_SPECIFIER             go to state 19
+    TYPE_QUALIFIER             go to state 20
+    STATEMENT                  go to state 80
+    LABELED_STATEMENT          go to state 81
+    COMPOUND_STATEMENT         go to state 82
+    DECLARATION_LIST           go to state 83
+    STATEMENT_LIST             go to state 84
+    EXPRESSION_STATEMENT       go to state 85
+    SELECTION_STATEMENT        go to state 86
+    ITERATION_STATEMENT        go to state 87
+    JUMP_STATEMENT             go to state 88
+
+
+State 43
+
+  104 DECLARATION_LIST: DECLARATION .
+
+    $default  reduce using rule 104 (DECLARATION_LIST)
+
+
+State 44
+
+   24 DECLARATION: DECLARATION_SPECIFIERS . T_SEMICOLON
+   25            | DECLARATION_SPECIFIERS . INIT_DECLARATOR_LIST T_SEMICOLON
+
+    T_STAR        shift, and go to state 1
+    T_LBRACKET    shift, and go to state 2
+    T_SEMICOLON   shift, and go to state 34
+    T_IDENTIFIER  shift, and go to state 8
+
+    INIT_DECLARATOR_LIST  go to state 35
+    INIT_DECLARATOR       go to state 36
+    DECLARATOR            go to state 89
+    DIRECT_DECLARATOR     go to state 22
+    POINTER               go to state 23
+
+
+State 45
+
+  122 FUNCTION_DEFINITION: DECLARATOR COMPOUND_STATEMENT .
+
+    $default  reduce using rule 122 (FUNCTION_DEFINITION)
+
+
+State 46
+
+  105 DECLARATION_LIST: DECLARATION_LIST . DECLARATION
+  121 FUNCTION_DEFINITION: DECLARATOR DECLARATION_LIST . COMPOUND_STATEMENT
+
+    T_LCURLY    shift, and go to state 42
+    T_INT       shift, and go to state 3
+    T_VOID      shift, and go to state 4
+    T_STRUCT    shift, and go to state 5
+    T_UNION     shift, and go to state 6
+    T_ENUM      shift, and go to state 7
+    T_TYPEDEF   shift, and go to state 9
+    T_CONST     shift, and go to state 10
+    T_VOLATILE  shift, and go to state 11
+
+    DECLARATION                go to state 90
+    DECLARATION_SPECIFIERS     go to state 44
+    STORAGE_CLASS_SPECIFIER    go to state 15
+    TYPE_SPECIFIER             go to state 16
+    STRUCT_OR_UNION_SPECIFIER  go to state 17
+    STRUCT_OR_UNION            go to state 18
+    ENUM_SPECIFIER             go to state 19
+    TYPE_QUALIFIER             go to state 20
+    COMPOUND_STATEMENT         go to state 91
+
+
+State 47
+
+   61 DIRECT_DECLARATOR: DIRECT_DECLARATOR T_LBRACKET . PARAMETER_TYPE_LIST T_RBRACKET
+   62                  | DIRECT_DECLARATOR T_LBRACKET . IDENTIFIER_LIST T_RBRACKET
+   63                  | DIRECT_DECLARATOR T_LBRACKET . T_RBRACKET
+
+    T_RBRACKET    shift, and go to state 92
+    T_INT         shift, and go to state 3
+    T_VOID        shift, and go to state 4
+    T_STRUCT      shift, and go to state 5
+    T_UNION       shift, and go to state 6
+    T_ENUM        shift, and go to state 7
+    T_IDENTIFIER  shift, and go to state 93
+    T_TYPEDEF     shift, and go to state 9
+    T_CONST       shift, and go to state 10
+    T_VOLATILE    shift, and go to state 11
+
+    DECLARATION_SPECIFIERS     go to state 94
+    STORAGE_CLASS_SPECIFIER    go to state 15
+    TYPE_SPECIFIER             go to state 16
+    STRUCT_OR_UNION_SPECIFIER  go to state 17
+    STRUCT_OR_UNION            go to state 18
+    ENUM_SPECIFIER             go to state 19
+    TYPE_QUALIFIER             go to state 20
+    PARAMETER_TYPE_LIST        go to state 95
+    PARAMETER_LIST             go to state 96
+    PARAMETER_DECLARATION      go to state 97
+    IDENTIFIER_LIST            go to state 98
+
+
+State 48
+
+   57 DECLARATOR: POINTER DIRECT_DECLARATOR .
+   61 DIRECT_DECLARATOR: DIRECT_DECLARATOR . T_LBRACKET PARAMETER_TYPE_LIST T_RBRACKET
+   62                  | DIRECT_DECLARATOR . T_LBRACKET IDENTIFIER_LIST T_RBRACKET
+   63                  | DIRECT_DECLARATOR . T_LBRACKET T_RBRACKET
+
+    T_LBRACKET  shift, and go to state 47
+
+    $default  reduce using rule 57 (DECLARATOR)
+
+
+State 49
+
+  116 TRANSLATION_UNIT: TRANSLATION_UNIT EXTERNAL_DECLARATION .
+
+    $default  reduce using rule 116 (TRANSLATION_UNIT)
+
+
+State 50
+
+   69 TYPE_QUALIFIER_LIST: TYPE_QUALIFIER_LIST TYPE_QUALIFIER .
+
+    $default  reduce using rule 69 (TYPE_QUALIFIER_LIST)
+
+
+State 51
+
+   67 POINTER: T_STAR TYPE_QUALIFIER_LIST POINTER .
+
+    $default  reduce using rule 67 (POINTER)
+
+
+State 52
+
+   60 DIRECT_DECLARATOR: T_LBRACKET DECLARATOR T_RBRACKET .
+
+    $default  reduce using rule 60 (DIRECT_DECLARATOR)
+
+
+State 53
+
+   53 ENUMERATOR: T_IDENTIFIER .
+   54           | T_IDENTIFIER . T_ASSIGN CONSTANT_EXPRESSION
+
+    T_ASSIGN  shift, and go to state 99
+
+    $default  reduce using rule 53 (ENUMERATOR)
+
+
+State 54
+
+   48 ENUM_SPECIFIER: T_ENUM T_LCURLY ENUMERATOR_LIST . T_RCURLY
+   52 ENUMERATOR_LIST: ENUMERATOR_LIST . T_COMMA ENUMERATOR
+
+    T_COMMA   shift, and go to state 100
+    T_RCURLY  shift, and go to state 101
+
+
+State 55
+
+   51 ENUMERATOR_LIST: ENUMERATOR .
+
+    $default  reduce using rule 51 (ENUMERATOR_LIST)
+
+
+State 56
+
+   49 ENUM_SPECIFIER: T_ENUM T_IDENTIFIER T_LCURLY . ENUMERATOR_LIST T_RCURLY
+
+    T_IDENTIFIER  shift, and go to state 53
+
+    ENUMERATOR_LIST  go to state 102
+    ENUMERATOR       go to state 55
+
+
+State 57
+
+   33 INIT_DECLARATOR_LIST: INIT_DECLARATOR_LIST T_COMMA . INIT_DECLARATOR
+
+    T_STAR        shift, and go to state 1
+    T_LBRACKET    shift, and go to state 2
+    T_IDENTIFIER  shift, and go to state 8
+
+    INIT_DECLARATOR    go to state 103
+    DECLARATOR         go to state 89
+    DIRECT_DECLARATOR  go to state 22
+    POINTER            go to state 23
+
+
+State 58
+
+   25 DECLARATION: DECLARATION_SPECIFIERS INIT_DECLARATOR_LIST T_SEMICOLON .
+
+    $default  reduce using rule 25 (DECLARATION)
+
+
+State 59
+
+   35 INIT_DECLARATOR: DECLARATOR T_ASSIGN . INITIALIZER
+
+    T_STAR        shift, and go to state 62
+    T_PLUS        shift, and go to state 63
+    T_MINUS       shift, and go to state 64
+    T_LBRACKET    shift, and go to state 65
+    T_LCURLY      shift, and go to state 104
+    T_CONSTANT    shift, and go to state 71
+    T_IDENTIFIER  shift, and go to state 105
+
+    $default  reduce using rule 17 (CONDITIONAL_EXPRESSION)
+
+    PRIMARY_EXPRESSION      go to state 73
+    POSTFIX_EXPRESSION      go to state 74
+    UNARY_EXPRESSION        go to state 75
+    UNARY_OPERATOR          go to state 76
+    CONDITIONAL_EXPRESSION  go to state 77
+    ASSIGNMENT_EXPRESSION   go to state 106
+    INITIALIZER             go to state 107
+
+
+State 60
+
+  120 FUNCTION_DEFINITION: DECLARATION_SPECIFIERS DECLARATOR COMPOUND_STATEMENT .
+
+    $default  reduce using rule 120 (FUNCTION_DEFINITION)
+
+
+State 61
+
+  105 DECLARATION_LIST: DECLARATION_LIST . DECLARATION
+  119 FUNCTION_DEFINITION: DECLARATION_SPECIFIERS DECLARATOR DECLARATION_LIST . COMPOUND_STATEMENT
+
+    T_LCURLY    shift, and go to state 42
+    T_INT       shift, and go to state 3
+    T_VOID      shift, and go to state 4
+    T_STRUCT    shift, and go to state 5
+    T_UNION     shift, and go to state 6
+    T_ENUM      shift, and go to state 7
+    T_TYPEDEF   shift, and go to state 9
+    T_CONST     shift, and go to state 10
+    T_VOLATILE  shift, and go to state 11
+
+    DECLARATION                go to state 90
+    DECLARATION_SPECIFIERS     go to state 44
+    STORAGE_CLASS_SPECIFIER    go to state 15
+    TYPE_SPECIFIER             go to state 16
+    STRUCT_OR_UNION_SPECIFIER  go to state 17
+    STRUCT_OR_UNION            go to state 18
+    ENUM_SPECIFIER             go to state 19
+    TYPE_QUALIFIER             go to state 20
+    COMPOUND_STATEMENT         go to state 108
+
+
+State 62
+
+   12 UNARY_OPERATOR: T_STAR .
+
+    $default  reduce using rule 12 (UNARY_OPERATOR)
+
+
+State 63
+
+   13 UNARY_OPERATOR: T_PLUS .
+
+    $default  reduce using rule 13 (UNARY_OPERATOR)
+
+
+State 64
+
+   14 UNARY_OPERATOR: T_MINUS .
+
+    $default  reduce using rule 14 (UNARY_OPERATOR)
+
+
+State 65
+
+    4 PRIMARY_EXPRESSION: T_LBRACKET . EXPRESSION T_RBRACKET
+
+    T_STAR        shift, and go to state 62
+    T_PLUS        shift, and go to state 63
+    T_MINUS       shift, and go to state 64
+    T_LBRACKET    shift, and go to state 65
+    T_CONSTANT    shift, and go to state 71
+    T_IDENTIFIER  shift, and go to state 105
+
+    $default  reduce using rule 17 (CONDITIONAL_EXPRESSION)
+
+    PRIMARY_EXPRESSION      go to state 73
+    POSTFIX_EXPRESSION      go to state 74
+    UNARY_EXPRESSION        go to state 75
+    UNARY_OPERATOR          go to state 76
+    CONDITIONAL_EXPRESSION  go to state 77
+    ASSIGNMENT_EXPRESSION   go to state 78
+    EXPRESSION              go to state 109
+
+
+State 66
+
+  100 COMPOUND_STATEMENT: T_LCURLY T_RCURLY .
+
+    $default  reduce using rule 100 (COMPOUND_STATEMENT)
+
+
+State 67
+
+  108 EXPRESSION_STATEMENT: T_SEMICOLON .
+
+    $default  reduce using rule 108 (EXPRESSION_STATEMENT)
+
+
+State 68
+
+  110 SELECTION_STATEMENT: T_IF . T_LBRACKET EXPRESSION T_RBRACKET STATEMENT
+  111                    | T_IF . T_LBRACKET EXPRESSION T_RBRACKET T_ELSE STATEMENT
+
+    T_LBRACKET  shift, and go to state 110
+
+
+State 69
+
+  112 ITERATION_STATEMENT: T_WHILE . T_LBRACKET EXPRESSION T_RBRACKET STATEMENT
+
+    T_LBRACKET  shift, and go to state 111
+
+
+State 70
+
+  113 JUMP_STATEMENT: T_RETURN . T_SEMICOLON
+  114               | T_RETURN . EXPRESSION T_SEMICOLON
+
+    T_STAR        shift, and go to state 62
+    T_PLUS        shift, and go to state 63
+    T_MINUS       shift, and go to state 64
+    T_LBRACKET    shift, and go to state 65
+    T_SEMICOLON   shift, and go to state 112
+    T_CONSTANT    shift, and go to state 71
+    T_IDENTIFIER  shift, and go to state 105
+
+    T_SEMICOLON  [reduce using rule 17 (CONDITIONAL_EXPRESSION)]
+    $default     reduce using rule 17 (CONDITIONAL_EXPRESSION)
+
+    PRIMARY_EXPRESSION      go to state 73
+    POSTFIX_EXPRESSION      go to state 74
+    UNARY_EXPRESSION        go to state 75
+    UNARY_OPERATOR          go to state 76
+    CONDITIONAL_EXPRESSION  go to state 77
+    ASSIGNMENT_EXPRESSION   go to state 78
+    EXPRESSION              go to state 113
+
+
+State 71
+
+    3 PRIMARY_EXPRESSION: T_CONSTANT .
+
+    $default  reduce using rule 3 (PRIMARY_EXPRESSION)
+
+
+State 72
+
+    2 PRIMARY_EXPRESSION: T_IDENTIFIER .
+   99 LABELED_STATEMENT: T_IDENTIFIER . T_COLON STATEMENT
+
+    T_COLON  shift, and go to state 114
+
+    $default  reduce using rule 2 (PRIMARY_EXPRESSION)
+
+
+State 73
+
+    5 POSTFIX_EXPRESSION: PRIMARY_EXPRESSION .
+
+    $default  reduce using rule 5 (POSTFIX_EXPRESSION)
+
+
+State 74
+
+    6 POSTFIX_EXPRESSION: POSTFIX_EXPRESSION . T_LBRACKET T_RBRACKET
+    7                   | POSTFIX_EXPRESSION . T_LBRACKET ARGUMENT_EXPRESSION_LIST T_RBRACKET
+   10 UNARY_EXPRESSION: POSTFIX_EXPRESSION .
+
+    T_LBRACKET  shift, and go to state 115
+
+    $default  reduce using rule 10 (UNARY_EXPRESSION)
+
+
+State 75
+
+   19 ASSIGNMENT_EXPRESSION: UNARY_EXPRESSION . ASSIGNMENT_OPERATOR ASSIGNMENT_EXPRESSION
+
+    T_ASSIGN  shift, and go to state 116
+
+    ASSIGNMENT_OPERATOR  go to state 117
+
+
+State 76
+
+   11 UNARY_EXPRESSION: UNARY_OPERATOR . CAST_EXPRESSION
+
+    T_STAR        shift, and go to state 62
+    T_PLUS        shift, and go to state 63
+    T_MINUS       shift, and go to state 64
+    T_LBRACKET    shift, and go to state 118
+    T_CONSTANT    shift, and go to state 71
+    T_IDENTIFIER  shift, and go to state 105
+
+    PRIMARY_EXPRESSION  go to state 73
+    POSTFIX_EXPRESSION  go to state 74
+    UNARY_EXPRESSION    go to state 119
+    UNARY_OPERATOR      go to state 76
+    CAST_EXPRESSION     go to state 120
+
+
+State 77
+
+   18 ASSIGNMENT_EXPRESSION: CONDITIONAL_EXPRESSION .
+
+    $default  reduce using rule 18 (ASSIGNMENT_EXPRESSION)
+
+
+State 78
+
+   21 EXPRESSION: ASSIGNMENT_EXPRESSION .
+
+    $default  reduce using rule 21 (EXPRESSION)
+
+
+State 79
+
+   22 EXPRESSION: EXPRESSION . T_COMMA ASSIGNMENT_EXPRESSION
+  109 EXPRESSION_STATEMENT: EXPRESSION . T_SEMICOLON
+
+    T_COMMA      shift, and go to state 121
+    T_SEMICOLON  shift, and go to state 122
+
+
+State 80
+
+  106 STATEMENT_LIST: STATEMENT .
+
+    $default  reduce using rule 106 (STATEMENT_LIST)
+
+
+State 81
+
+   93 STATEMENT: LABELED_STATEMENT .
+
+    $default  reduce using rule 93 (STATEMENT)
+
+
+State 82
+
+   94 STATEMENT: COMPOUND_STATEMENT .
+
+    $default  reduce using rule 94 (STATEMENT)
+
+
+State 83
+
+  102 COMPOUND_STATEMENT: T_LCURLY DECLARATION_LIST . T_RCURLY
+  103                   | T_LCURLY DECLARATION_LIST . STATEMENT_LIST T_RCURLY
+  105 DECLARATION_LIST: DECLARATION_LIST . DECLARATION
+
+    T_STAR        shift, and go to state 62
+    T_PLUS        shift, and go to state 63
+    T_MINUS       shift, and go to state 64
+    T_LBRACKET    shift, and go to state 65
+    T_LCURLY      shift, and go to state 42
+    T_RCURLY      shift, and go to state 123
+    T_SEMICOLON   shift, and go to state 67
+    T_IF          shift, and go to state 68
+    T_WHILE       shift, and go to state 69
+    T_RETURN      shift, and go to state 70
+    T_INT         shift, and go to state 3
+    T_VOID        shift, and go to state 4
+    T_STRUCT      shift, and go to state 5
+    T_UNION       shift, and go to state 6
+    T_ENUM        shift, and go to state 7
+    T_CONSTANT    shift, and go to state 71
+    T_IDENTIFIER  shift, and go to state 72
+    T_TYPEDEF     shift, and go to state 9
+    T_CONST       shift, and go to state 10
+    T_VOLATILE    shift, and go to state 11
+
+    T_SEMICOLON  [reduce using rule 17 (CONDITIONAL_EXPRESSION)]
+    $default     reduce using rule 17 (CONDITIONAL_EXPRESSION)
+
+    PRIMARY_EXPRESSION         go to state 73
+    POSTFIX_EXPRESSION         go to state 74
+    UNARY_EXPRESSION           go to state 75
+    UNARY_OPERATOR             go to state 76
+    CONDITIONAL_EXPRESSION     go to state 77
+    ASSIGNMENT_EXPRESSION      go to state 78
+    EXPRESSION                 go to state 79
+    DECLARATION                go to state 90
+    DECLARATION_SPECIFIERS     go to state 44
+    STORAGE_CLASS_SPECIFIER    go to state 15
+    TYPE_SPECIFIER             go to state 16
+    STRUCT_OR_UNION_SPECIFIER  go to state 17
+    STRUCT_OR_UNION            go to state 18
+    ENUM_SPECIFIER             go to state 19
+    TYPE_QUALIFIER             go to state 20
+    STATEMENT                  go to state 80
+    LABELED_STATEMENT          go to state 81
+    COMPOUND_STATEMENT         go to state 82
+    STATEMENT_LIST             go to state 124
+    EXPRESSION_STATEMENT       go to state 85
+    SELECTION_STATEMENT        go to state 86
+    ITERATION_STATEMENT        go to state 87
+    JUMP_STATEMENT             go to state 88
+
+
+State 84
+
+  101 COMPOUND_STATEMENT: T_LCURLY STATEMENT_LIST . T_RCURLY
+  107 STATEMENT_LIST: STATEMENT_LIST . STATEMENT
+
+    T_STAR        shift, and go to state 62
+    T_PLUS        shift, and go to state 63
+    T_MINUS       shift, and go to state 64
+    T_LBRACKET    shift, and go to state 65
+    T_LCURLY      shift, and go to state 42
+    T_RCURLY      shift, and go to state 125
+    T_SEMICOLON   shift, and go to state 67
+    T_IF          shift, and go to state 68
+    T_WHILE       shift, and go to state 69
+    T_RETURN      shift, and go to state 70
+    T_CONSTANT    shift, and go to state 71
+    T_IDENTIFIER  shift, and go to state 72
+
+    T_SEMICOLON  [reduce using rule 17 (CONDITIONAL_EXPRESSION)]
+    $default     reduce using rule 17 (CONDITIONAL_EXPRESSION)
+
+    PRIMARY_EXPRESSION      go to state 73
+    POSTFIX_EXPRESSION      go to state 74
+    UNARY_EXPRESSION        go to state 75
+    UNARY_OPERATOR          go to state 76
+    CONDITIONAL_EXPRESSION  go to state 77
+    ASSIGNMENT_EXPRESSION   go to state 78
+    EXPRESSION              go to state 79
+    STATEMENT               go to state 126
+    LABELED_STATEMENT       go to state 81
+    COMPOUND_STATEMENT      go to state 82
+    EXPRESSION_STATEMENT    go to state 85
+    SELECTION_STATEMENT     go to state 86
+    ITERATION_STATEMENT     go to state 87
+    JUMP_STATEMENT          go to state 88
+
+
+State 85
+
+   95 STATEMENT: EXPRESSION_STATEMENT .
+
+    $default  reduce using rule 95 (STATEMENT)
+
+
+State 86
+
+   96 STATEMENT: SELECTION_STATEMENT .
+
+    $default  reduce using rule 96 (STATEMENT)
+
+
+State 87
+
+   97 STATEMENT: ITERATION_STATEMENT .
+
+    $default  reduce using rule 97 (STATEMENT)
+
+
+State 88
+
+   98 STATEMENT: JUMP_STATEMENT .
+
+    $default  reduce using rule 98 (STATEMENT)
+
+
+State 89
+
+   34 INIT_DECLARATOR: DECLARATOR .
+   35                | DECLARATOR . T_ASSIGN INITIALIZER
+
+    T_ASSIGN  shift, and go to state 59
+
+    $default  reduce using rule 34 (INIT_DECLARATOR)
+
+
+State 90
+
+  105 DECLARATION_LIST: DECLARATION_LIST DECLARATION .
+
+    $default  reduce using rule 105 (DECLARATION_LIST)
+
+
+State 91
+
+  121 FUNCTION_DEFINITION: DECLARATOR DECLARATION_LIST COMPOUND_STATEMENT .
+
+    $default  reduce using rule 121 (FUNCTION_DEFINITION)
+
+
+State 92
+
+   63 DIRECT_DECLARATOR: DIRECT_DECLARATOR T_LBRACKET T_RBRACKET .
+
+    $default  reduce using rule 63 (DIRECT_DECLARATOR)
+
+
+State 93
+
+   76 IDENTIFIER_LIST: T_IDENTIFIER .
+
+    $default  reduce using rule 76 (IDENTIFIER_LIST)
+
+
+State 94
+
+   73 PARAMETER_DECLARATION: DECLARATION_SPECIFIERS . DECLARATOR
+   74                      | DECLARATION_SPECIFIERS . ABSTRACT_DECLARATOR
+   75                      | DECLARATION_SPECIFIERS .
+
+    T_STAR        shift, and go to state 1
+    T_LBRACKET    shift, and go to state 127
+    T_IDENTIFIER  shift, and go to state 8
+
+    $default  reduce using rule 75 (PARAMETER_DECLARATION)
+
+    DECLARATOR                  go to state 128
+    DIRECT_DECLARATOR           go to state 22
+    POINTER                     go to state 129
+    ABSTRACT_DECLARATOR         go to state 130
+    DIRECT_ABSTRACT_DECLARATOR  go to state 131
+
+
+State 95
+
+   61 DIRECT_DECLARATOR: DIRECT_DECLARATOR T_LBRACKET PARAMETER_TYPE_LIST . T_RBRACKET
+
+    T_RBRACKET  shift, and go to state 132
+
+
+State 96
+
+   70 PARAMETER_TYPE_LIST: PARAMETER_LIST .
+   72 PARAMETER_LIST: PARAMETER_LIST . T_COMMA PARAMETER_DECLARATION
+
+    T_COMMA  shift, and go to state 133
+
+    $default  reduce using rule 70 (PARAMETER_TYPE_LIST)
+
+
+State 97
+
+   71 PARAMETER_LIST: PARAMETER_DECLARATION .
+
+    $default  reduce using rule 71 (PARAMETER_LIST)
+
+
+State 98
+
+   62 DIRECT_DECLARATOR: DIRECT_DECLARATOR T_LBRACKET IDENTIFIER_LIST . T_RBRACKET
+   77 IDENTIFIER_LIST: IDENTIFIER_LIST . T_COMMA T_IDENTIFIER
+
+    T_COMMA     shift, and go to state 134
+    T_RBRACKET  shift, and go to state 135
+
+
+State 99
+
+   54 ENUMERATOR: T_IDENTIFIER T_ASSIGN . CONSTANT_EXPRESSION
+
+    $default  reduce using rule 17 (CONDITIONAL_EXPRESSION)
+
+    CONDITIONAL_EXPRESSION  go to state 136
+    CONSTANT_EXPRESSION     go to state 137
+
+
+State 100
+
+   52 ENUMERATOR_LIST: ENUMERATOR_LIST T_COMMA . ENUMERATOR
+
+    T_IDENTIFIER  shift, and go to state 53
+
+    ENUMERATOR  go to state 138
+
+
+State 101
+
+   48 ENUM_SPECIFIER: T_ENUM T_LCURLY ENUMERATOR_LIST T_RCURLY .
+
+    $default  reduce using rule 48 (ENUM_SPECIFIER)
+
+
+State 102
+
+   49 ENUM_SPECIFIER: T_ENUM T_IDENTIFIER T_LCURLY ENUMERATOR_LIST . T_RCURLY
+   52 ENUMERATOR_LIST: ENUMERATOR_LIST . T_COMMA ENUMERATOR
+
+    T_COMMA   shift, and go to state 100
+    T_RCURLY  shift, and go to state 139
+
+
+State 103
+
+   33 INIT_DECLARATOR_LIST: INIT_DECLARATOR_LIST T_COMMA INIT_DECLARATOR .
+
+    $default  reduce using rule 33 (INIT_DECLARATOR_LIST)
+
+
+State 104
+
+   89 INITIALIZER: T_LCURLY . INITIALIZER_LIST T_RCURLY
+   90            | T_LCURLY . INITIALIZER_LIST T_COMMA T_RCURLY
+
+    T_STAR        shift, and go to state 62
+    T_PLUS        shift, and go to state 63
+    T_MINUS       shift, and go to state 64
+    T_LBRACKET    shift, and go to state 65
+    T_LCURLY      shift, and go to state 104
+    T_CONSTANT    shift, and go to state 71
+    T_IDENTIFIER  shift, and go to state 105
+
+    $default  reduce using rule 17 (CONDITIONAL_EXPRESSION)
+
+    PRIMARY_EXPRESSION      go to state 73
+    POSTFIX_EXPRESSION      go to state 74
+    UNARY_EXPRESSION        go to state 75
+    UNARY_OPERATOR          go to state 76
+    CONDITIONAL_EXPRESSION  go to state 77
+    ASSIGNMENT_EXPRESSION   go to state 106
+    INITIALIZER             go to state 140
+    INITIALIZER_LIST        go to state 141
+
+
+State 105
+
+    2 PRIMARY_EXPRESSION: T_IDENTIFIER .
+
+    $default  reduce using rule 2 (PRIMARY_EXPRESSION)
+
+
+State 106
+
+   88 INITIALIZER: ASSIGNMENT_EXPRESSION .
+
+    $default  reduce using rule 88 (INITIALIZER)
+
+
+State 107
+
+   35 INIT_DECLARATOR: DECLARATOR T_ASSIGN INITIALIZER .
+
+    $default  reduce using rule 35 (INIT_DECLARATOR)
+
+
+State 108
+
+  119 FUNCTION_DEFINITION: DECLARATION_SPECIFIERS DECLARATOR DECLARATION_LIST COMPOUND_STATEMENT .
+
+    $default  reduce using rule 119 (FUNCTION_DEFINITION)
+
+
+State 109
+
+    4 PRIMARY_EXPRESSION: T_LBRACKET EXPRESSION . T_RBRACKET
+   22 EXPRESSION: EXPRESSION . T_COMMA ASSIGNMENT_EXPRESSION
+
+    T_COMMA     shift, and go to state 121
+    T_RBRACKET  shift, and go to state 142
+
+
+State 110
+
+  110 SELECTION_STATEMENT: T_IF T_LBRACKET . EXPRESSION T_RBRACKET STATEMENT
+  111                    | T_IF T_LBRACKET . EXPRESSION T_RBRACKET T_ELSE STATEMENT
+
+    T_STAR        shift, and go to state 62
+    T_PLUS        shift, and go to state 63
+    T_MINUS       shift, and go to state 64
+    T_LBRACKET    shift, and go to state 65
+    T_CONSTANT    shift, and go to state 71
+    T_IDENTIFIER  shift, and go to state 105
+
+    $default  reduce using rule 17 (CONDITIONAL_EXPRESSION)
+
+    PRIMARY_EXPRESSION      go to state 73
+    POSTFIX_EXPRESSION      go to state 74
+    UNARY_EXPRESSION        go to state 75
+    UNARY_OPERATOR          go to state 76
+    CONDITIONAL_EXPRESSION  go to state 77
+    ASSIGNMENT_EXPRESSION   go to state 78
+    EXPRESSION              go to state 143
+
+
+State 111
+
+  112 ITERATION_STATEMENT: T_WHILE T_LBRACKET . EXPRESSION T_RBRACKET STATEMENT
+
+    T_STAR        shift, and go to state 62
+    T_PLUS        shift, and go to state 63
+    T_MINUS       shift, and go to state 64
+    T_LBRACKET    shift, and go to state 65
+    T_CONSTANT    shift, and go to state 71
+    T_IDENTIFIER  shift, and go to state 105
+
+    $default  reduce using rule 17 (CONDITIONAL_EXPRESSION)
+
+    PRIMARY_EXPRESSION      go to state 73
+    POSTFIX_EXPRESSION      go to state 74
+    UNARY_EXPRESSION        go to state 75
+    UNARY_OPERATOR          go to state 76
+    CONDITIONAL_EXPRESSION  go to state 77
+    ASSIGNMENT_EXPRESSION   go to state 78
+    EXPRESSION              go to state 144
+
+
+State 112
+
+  113 JUMP_STATEMENT: T_RETURN T_SEMICOLON .
+
+    $default  reduce using rule 113 (JUMP_STATEMENT)
+
+
+State 113
+
+   22 EXPRESSION: EXPRESSION . T_COMMA ASSIGNMENT_EXPRESSION
+  114 JUMP_STATEMENT: T_RETURN EXPRESSION . T_SEMICOLON
+
+    T_COMMA      shift, and go to state 121
+    T_SEMICOLON  shift, and go to state 145
+
+
+State 114
+
+   99 LABELED_STATEMENT: T_IDENTIFIER T_COLON . STATEMENT
+
+    T_STAR        shift, and go to state 62
+    T_PLUS        shift, and go to state 63
+    T_MINUS       shift, and go to state 64
+    T_LBRACKET    shift, and go to state 65
+    T_LCURLY      shift, and go to state 42
+    T_SEMICOLON   shift, and go to state 67
+    T_IF          shift, and go to state 68
+    T_WHILE       shift, and go to state 69
+    T_RETURN      shift, and go to state 70
+    T_CONSTANT    shift, and go to state 71
+    T_IDENTIFIER  shift, and go to state 72
+
+    T_SEMICOLON  [reduce using rule 17 (CONDITIONAL_EXPRESSION)]
+    $default     reduce using rule 17 (CONDITIONAL_EXPRESSION)
+
+    PRIMARY_EXPRESSION      go to state 73
+    POSTFIX_EXPRESSION      go to state 74
+    UNARY_EXPRESSION        go to state 75
+    UNARY_OPERATOR          go to state 76
+    CONDITIONAL_EXPRESSION  go to state 77
+    ASSIGNMENT_EXPRESSION   go to state 78
+    EXPRESSION              go to state 79
+    STATEMENT               go to state 146
+    LABELED_STATEMENT       go to state 81
+    COMPOUND_STATEMENT      go to state 82
+    EXPRESSION_STATEMENT    go to state 85
+    SELECTION_STATEMENT     go to state 86
+    ITERATION_STATEMENT     go to state 87
+    JUMP_STATEMENT          go to state 88
+
+
+State 115
 
     6 POSTFIX_EXPRESSION: POSTFIX_EXPRESSION T_LBRACKET . T_RBRACKET
     7                   | POSTFIX_EXPRESSION T_LBRACKET . ARGUMENT_EXPRESSION_LIST T_RBRACKET
 
-    T_STAR        shift, and go to state 6
-    T_PLUS        shift, and go to state 7
-    T_MINUS       shift, and go to state 8
-    T_LBRACKET    shift, and go to state 1
-    T_RBRACKET    shift, and go to state 25
-    T_CONSTANT    shift, and go to state 2
-    T_IDENTIFIER  shift, and go to state 3
+    T_STAR        shift, and go to state 62
+    T_PLUS        shift, and go to state 63
+    T_MINUS       shift, and go to state 64
+    T_LBRACKET    shift, and go to state 65
+    T_RBRACKET    shift, and go to state 147
+    T_CONSTANT    shift, and go to state 71
+    T_IDENTIFIER  shift, and go to state 105
 
     T_RBRACKET  [reduce using rule 17 (CONDITIONAL_EXPRESSION)]
     $default    reduce using rule 17 (CONDITIONAL_EXPRESSION)
 
-    PRIMARY_EXPRESSION        go to state 9
-    POSTFIX_EXPRESSION        go to state 10
-    ARGUMENT_EXPRESSION_LIST  go to state 26
-    UNARY_EXPRESSION          go to state 11
-    UNARY_OPERATOR            go to state 12
-    CONDITIONAL_EXPRESSION    go to state 13
-    ASSIGNMENT_EXPRESSION     go to state 27
+    PRIMARY_EXPRESSION        go to state 73
+    POSTFIX_EXPRESSION        go to state 74
+    ARGUMENT_EXPRESSION_LIST  go to state 148
+    UNARY_EXPRESSION          go to state 75
+    UNARY_OPERATOR            go to state 76
+    CONDITIONAL_EXPRESSION    go to state 77
+    ASSIGNMENT_EXPRESSION     go to state 149
 
 
-State 18
+State 116
 
    20 ASSIGNMENT_OPERATOR: T_ASSIGN .
 
     $default  reduce using rule 20 (ASSIGNMENT_OPERATOR)
 
 
-State 19
+State 117
 
    19 ASSIGNMENT_EXPRESSION: UNARY_EXPRESSION ASSIGNMENT_OPERATOR . ASSIGNMENT_EXPRESSION
 
-    T_STAR        shift, and go to state 6
-    T_PLUS        shift, and go to state 7
-    T_MINUS       shift, and go to state 8
-    T_LBRACKET    shift, and go to state 1
-    T_CONSTANT    shift, and go to state 2
-    T_IDENTIFIER  shift, and go to state 3
+    T_STAR        shift, and go to state 62
+    T_PLUS        shift, and go to state 63
+    T_MINUS       shift, and go to state 64
+    T_LBRACKET    shift, and go to state 65
+    T_CONSTANT    shift, and go to state 71
+    T_IDENTIFIER  shift, and go to state 105
 
     $default  reduce using rule 17 (CONDITIONAL_EXPRESSION)
 
-    PRIMARY_EXPRESSION      go to state 9
-    POSTFIX_EXPRESSION      go to state 10
-    UNARY_EXPRESSION        go to state 11
-    UNARY_OPERATOR          go to state 12
-    CONDITIONAL_EXPRESSION  go to state 13
-    ASSIGNMENT_EXPRESSION   go to state 28
+    PRIMARY_EXPRESSION      go to state 73
+    POSTFIX_EXPRESSION      go to state 74
+    UNARY_EXPRESSION        go to state 75
+    UNARY_OPERATOR          go to state 76
+    CONDITIONAL_EXPRESSION  go to state 77
+    ASSIGNMENT_EXPRESSION   go to state 150
 
 
-State 20
+State 118
 
     4 PRIMARY_EXPRESSION: T_LBRACKET . EXPRESSION T_RBRACKET
    16 CAST_EXPRESSION: T_LBRACKET . TYPE_NAME T_RBRACKET CAST_EXPRESSION
 
-    T_STAR        shift, and go to state 6
-    T_PLUS        shift, and go to state 7
-    T_MINUS       shift, and go to state 8
-    T_LBRACKET    shift, and go to state 1
-    T_INT         shift, and go to state 29
-    T_VOID        shift, and go to state 30
-    T_STRUCT      shift, and go to state 31
-    T_UNION       shift, and go to state 32
-    T_ENUM        shift, and go to state 33
-    T_CONSTANT    shift, and go to state 2
-    T_IDENTIFIER  shift, and go to state 3
-    T_CONST       shift, and go to state 34
-    T_VOLATILE    shift, and go to state 35
+    T_STAR        shift, and go to state 62
+    T_PLUS        shift, and go to state 63
+    T_MINUS       shift, and go to state 64
+    T_LBRACKET    shift, and go to state 65
+    T_INT         shift, and go to state 3
+    T_VOID        shift, and go to state 4
+    T_STRUCT      shift, and go to state 5
+    T_UNION       shift, and go to state 6
+    T_ENUM        shift, and go to state 7
+    T_CONSTANT    shift, and go to state 71
+    T_IDENTIFIER  shift, and go to state 105
+    T_CONST       shift, and go to state 10
+    T_VOLATILE    shift, and go to state 11
 
     $default  reduce using rule 17 (CONDITIONAL_EXPRESSION)
 
-    PRIMARY_EXPRESSION         go to state 9
-    POSTFIX_EXPRESSION         go to state 10
-    UNARY_EXPRESSION           go to state 11
-    UNARY_OPERATOR             go to state 12
-    CONDITIONAL_EXPRESSION     go to state 13
-    ASSIGNMENT_EXPRESSION      go to state 14
-    EXPRESSION                 go to state 15
-    TYPE_SPECIFIER             go to state 36
-    STRUCT_OR_UNION_SPECIFIER  go to state 37
-    STRUCT_OR_UNION            go to state 38
-    SPECIFIER_QUALIFIER_LIST   go to state 39
-    ENUM_SPECIFIER             go to state 40
-    TYPE_QUALIFIER             go to state 41
-    TYPE_NAME                  go to state 42
+    PRIMARY_EXPRESSION         go to state 73
+    POSTFIX_EXPRESSION         go to state 74
+    UNARY_EXPRESSION           go to state 75
+    UNARY_OPERATOR             go to state 76
+    CONDITIONAL_EXPRESSION     go to state 77
+    ASSIGNMENT_EXPRESSION      go to state 78
+    EXPRESSION                 go to state 109
+    TYPE_SPECIFIER             go to state 151
+    STRUCT_OR_UNION_SPECIFIER  go to state 17
+    STRUCT_OR_UNION            go to state 18
+    SPECIFIER_QUALIFIER_LIST   go to state 152
+    ENUM_SPECIFIER             go to state 19
+    TYPE_QUALIFIER             go to state 153
+    TYPE_NAME                  go to state 154
 
 
-State 21
+State 119
 
    15 CAST_EXPRESSION: UNARY_EXPRESSION .
 
     $default  reduce using rule 15 (CAST_EXPRESSION)
 
 
-State 22
+State 120
 
    11 UNARY_EXPRESSION: UNARY_OPERATOR CAST_EXPRESSION .
 
     $default  reduce using rule 11 (UNARY_EXPRESSION)
 
 
-State 23
+State 121
 
    22 EXPRESSION: EXPRESSION T_COMMA . ASSIGNMENT_EXPRESSION
 
-    T_STAR        shift, and go to state 6
-    T_PLUS        shift, and go to state 7
-    T_MINUS       shift, and go to state 8
-    T_LBRACKET    shift, and go to state 1
-    T_CONSTANT    shift, and go to state 2
-    T_IDENTIFIER  shift, and go to state 3
+    T_STAR        shift, and go to state 62
+    T_PLUS        shift, and go to state 63
+    T_MINUS       shift, and go to state 64
+    T_LBRACKET    shift, and go to state 65
+    T_CONSTANT    shift, and go to state 71
+    T_IDENTIFIER  shift, and go to state 105
 
     $default  reduce using rule 17 (CONDITIONAL_EXPRESSION)
 
-    PRIMARY_EXPRESSION      go to state 9
-    POSTFIX_EXPRESSION      go to state 10
-    UNARY_EXPRESSION        go to state 11
-    UNARY_OPERATOR          go to state 12
-    CONDITIONAL_EXPRESSION  go to state 13
-    ASSIGNMENT_EXPRESSION   go to state 43
+    PRIMARY_EXPRESSION      go to state 73
+    POSTFIX_EXPRESSION      go to state 74
+    UNARY_EXPRESSION        go to state 75
+    UNARY_OPERATOR          go to state 76
+    CONDITIONAL_EXPRESSION  go to state 77
+    ASSIGNMENT_EXPRESSION   go to state 155
 
 
-State 24
+State 122
 
-    4 PRIMARY_EXPRESSION: T_LBRACKET EXPRESSION T_RBRACKET .
+  109 EXPRESSION_STATEMENT: EXPRESSION T_SEMICOLON .
 
-    $default  reduce using rule 4 (PRIMARY_EXPRESSION)
+    $default  reduce using rule 109 (EXPRESSION_STATEMENT)
 
 
-State 25
+State 123
 
-    6 POSTFIX_EXPRESSION: POSTFIX_EXPRESSION T_LBRACKET T_RBRACKET .
+  102 COMPOUND_STATEMENT: T_LCURLY DECLARATION_LIST T_RCURLY .
 
-    $default  reduce using rule 6 (POSTFIX_EXPRESSION)
+    $default  reduce using rule 102 (COMPOUND_STATEMENT)
 
 
-State 26
+State 124
 
-    7 POSTFIX_EXPRESSION: POSTFIX_EXPRESSION T_LBRACKET ARGUMENT_EXPRESSION_LIST . T_RBRACKET
-    9 ARGUMENT_EXPRESSION_LIST: ARGUMENT_EXPRESSION_LIST . T_COMMA ASSIGNMENT_EXPRESSION
+  103 COMPOUND_STATEMENT: T_LCURLY DECLARATION_LIST STATEMENT_LIST . T_RCURLY
+  107 STATEMENT_LIST: STATEMENT_LIST . STATEMENT
 
-    T_COMMA     shift, and go to state 44
-    T_RBRACKET  shift, and go to state 45
+    T_STAR        shift, and go to state 62
+    T_PLUS        shift, and go to state 63
+    T_MINUS       shift, and go to state 64
+    T_LBRACKET    shift, and go to state 65
+    T_LCURLY      shift, and go to state 42
+    T_RCURLY      shift, and go to state 156
+    T_SEMICOLON   shift, and go to state 67
+    T_IF          shift, and go to state 68
+    T_WHILE       shift, and go to state 69
+    T_RETURN      shift, and go to state 70
+    T_CONSTANT    shift, and go to state 71
+    T_IDENTIFIER  shift, and go to state 72
 
+    T_SEMICOLON  [reduce using rule 17 (CONDITIONAL_EXPRESSION)]
+    $default     reduce using rule 17 (CONDITIONAL_EXPRESSION)
 
-State 27
+    PRIMARY_EXPRESSION      go to state 73
+    POSTFIX_EXPRESSION      go to state 74
+    UNARY_EXPRESSION        go to state 75
+    UNARY_OPERATOR          go to state 76
+    CONDITIONAL_EXPRESSION  go to state 77
+    ASSIGNMENT_EXPRESSION   go to state 78
+    EXPRESSION              go to state 79
+    STATEMENT               go to state 126
+    LABELED_STATEMENT       go to state 81
+    COMPOUND_STATEMENT      go to state 82
+    EXPRESSION_STATEMENT    go to state 85
+    SELECTION_STATEMENT     go to state 86
+    ITERATION_STATEMENT     go to state 87
+    JUMP_STATEMENT          go to state 88
 
-    8 ARGUMENT_EXPRESSION_LIST: ASSIGNMENT_EXPRESSION .
 
-    $default  reduce using rule 8 (ARGUMENT_EXPRESSION_LIST)
+State 125
 
+  101 COMPOUND_STATEMENT: T_LCURLY STATEMENT_LIST T_RCURLY .
 
-State 28
+    $default  reduce using rule 101 (COMPOUND_STATEMENT)
 
-   19 ASSIGNMENT_EXPRESSION: UNARY_EXPRESSION ASSIGNMENT_OPERATOR ASSIGNMENT_EXPRESSION .
 
-    $default  reduce using rule 19 (ASSIGNMENT_EXPRESSION)
+State 126
 
+  107 STATEMENT_LIST: STATEMENT_LIST STATEMENT .
 
-State 29
+    $default  reduce using rule 107 (STATEMENT_LIST)
 
-   32 TYPE_SPECIFIER: T_INT .
 
-    $default  reduce using rule 32 (TYPE_SPECIFIER)
+State 127
 
+   60 DIRECT_DECLARATOR: T_LBRACKET . DECLARATOR T_RBRACKET
+   83 DIRECT_ABSTRACT_DECLARATOR: T_LBRACKET . ABSTRACT_DECLARATOR T_RBRACKET
+   84                           | T_LBRACKET . T_RBRACKET
+   85                           | T_LBRACKET . PARAMETER_TYPE_LIST T_RBRACKET
 
-State 30
+    T_STAR        shift, and go to state 1
+    T_LBRACKET    shift, and go to state 127
+    T_RBRACKET    shift, and go to state 157
+    T_INT         shift, and go to state 3
+    T_VOID        shift, and go to state 4
+    T_STRUCT      shift, and go to state 5
+    T_UNION       shift, and go to state 6
+    T_ENUM        shift, and go to state 7
+    T_IDENTIFIER  shift, and go to state 8
+    T_TYPEDEF     shift, and go to state 9
+    T_CONST       shift, and go to state 10
+    T_VOLATILE    shift, and go to state 11
 
-   31 TYPE_SPECIFIER: T_VOID .
+    DECLARATION_SPECIFIERS      go to state 94
+    STORAGE_CLASS_SPECIFIER     go to state 15
+    TYPE_SPECIFIER              go to state 16
+    STRUCT_OR_UNION_SPECIFIER   go to state 17
+    STRUCT_OR_UNION             go to state 18
+    ENUM_SPECIFIER              go to state 19
+    TYPE_QUALIFIER              go to state 20
+    DECLARATOR                  go to state 30
+    DIRECT_DECLARATOR           go to state 22
+    POINTER                     go to state 129
+    PARAMETER_TYPE_LIST         go to state 158
+    PARAMETER_LIST              go to state 96
+    PARAMETER_DECLARATION       go to state 97
+    ABSTRACT_DECLARATOR         go to state 159
+    DIRECT_ABSTRACT_DECLARATOR  go to state 131
 
-    $default  reduce using rule 31 (TYPE_SPECIFIER)
 
+State 128
 
-State 31
+   73 PARAMETER_DECLARATION: DECLARATION_SPECIFIERS DECLARATOR .
 
-   36 STRUCT_OR_UNION: T_STRUCT .
+    $default  reduce using rule 73 (PARAMETER_DECLARATION)
 
-    $default  reduce using rule 36 (STRUCT_OR_UNION)
 
+State 129
 
-State 32
+   57 DECLARATOR: POINTER . DIRECT_DECLARATOR
+   80 ABSTRACT_DECLARATOR: POINTER .
+   82                    | POINTER . DIRECT_ABSTRACT_DECLARATOR
 
-   37 STRUCT_OR_UNION: T_UNION .
+    T_LBRACKET    shift, and go to state 127
+    T_IDENTIFIER  shift, and go to state 8
 
-    $default  reduce using rule 37 (STRUCT_OR_UNION)
+    $default  reduce using rule 80 (ABSTRACT_DECLARATOR)
 
+    DIRECT_DECLARATOR           go to state 48
+    DIRECT_ABSTRACT_DECLARATOR  go to state 160
 
-State 33
 
-   42 ENUM_SPECIFIER: T_ENUM . T_LCURLY ENUMERATOR_LIST T_RCURLY
-   43               | T_ENUM . T_IDENTIFIER T_LCURLY ENUMERATOR_LIST T_RCURLY
-   44               | T_ENUM . T_IDENTIFIER
+State 130
 
-    T_LCURLY      shift, and go to state 46
-    T_IDENTIFIER  shift, and go to state 47
+   74 PARAMETER_DECLARATION: DECLARATION_SPECIFIERS ABSTRACT_DECLARATOR .
 
+    $default  reduce using rule 74 (PARAMETER_DECLARATION)
 
-State 34
 
-   49 TYPE_QUALIFIER: T_CONST .
+State 131
 
-    $default  reduce using rule 49 (TYPE_QUALIFIER)
+   81 ABSTRACT_DECLARATOR: DIRECT_ABSTRACT_DECLARATOR .
+   86 DIRECT_ABSTRACT_DECLARATOR: DIRECT_ABSTRACT_DECLARATOR . T_LBRACKET T_RBRACKET
+   87                           | DIRECT_ABSTRACT_DECLARATOR . T_LBRACKET PARAMETER_TYPE_LIST T_RBRACKET
 
+    T_LBRACKET  shift, and go to state 161
 
-State 35
+    $default  reduce using rule 81 (ABSTRACT_DECLARATOR)
 
-   50 TYPE_QUALIFIER: T_VOLATILE .
 
-    $default  reduce using rule 50 (TYPE_QUALIFIER)
+State 132
 
+   61 DIRECT_DECLARATOR: DIRECT_DECLARATOR T_LBRACKET PARAMETER_TYPE_LIST T_RBRACKET .
 
-State 36
+    $default  reduce using rule 61 (DIRECT_DECLARATOR)
 
-   38 SPECIFIER_QUALIFIER_LIST: TYPE_SPECIFIER . SPECIFIER_QUALIFIER_LIST
-   39                         | TYPE_SPECIFIER .
 
-    T_INT       shift, and go to state 29
-    T_VOID      shift, and go to state 30
-    T_STRUCT    shift, and go to state 31
-    T_UNION     shift, and go to state 32
-    T_ENUM      shift, and go to state 33
-    T_CONST     shift, and go to state 34
-    T_VOLATILE  shift, and go to state 35
+State 133
 
-    $default  reduce using rule 39 (SPECIFIER_QUALIFIER_LIST)
+   72 PARAMETER_LIST: PARAMETER_LIST T_COMMA . PARAMETER_DECLARATION
 
-    TYPE_SPECIFIER             go to state 36
-    STRUCT_OR_UNION_SPECIFIER  go to state 37
-    STRUCT_OR_UNION            go to state 38
-    SPECIFIER_QUALIFIER_LIST   go to state 48
-    ENUM_SPECIFIER             go to state 40
-    TYPE_QUALIFIER             go to state 41
+    T_INT       shift, and go to state 3
+    T_VOID      shift, and go to state 4
+    T_STRUCT    shift, and go to state 5
+    T_UNION     shift, and go to state 6
+    T_ENUM      shift, and go to state 7
+    T_TYPEDEF   shift, and go to state 9
+    T_CONST     shift, and go to state 10
+    T_VOLATILE  shift, and go to state 11
 
+    DECLARATION_SPECIFIERS     go to state 94
+    STORAGE_CLASS_SPECIFIER    go to state 15
+    TYPE_SPECIFIER             go to state 16
+    STRUCT_OR_UNION_SPECIFIER  go to state 17
+    STRUCT_OR_UNION            go to state 18
+    ENUM_SPECIFIER             go to state 19
+    TYPE_QUALIFIER             go to state 20
+    PARAMETER_DECLARATION      go to state 162
 
-State 37
 
-   33 TYPE_SPECIFIER: STRUCT_OR_UNION_SPECIFIER .
+State 134
 
-    $default  reduce using rule 33 (TYPE_SPECIFIER)
+   77 IDENTIFIER_LIST: IDENTIFIER_LIST T_COMMA . T_IDENTIFIER
 
+    T_IDENTIFIER  shift, and go to state 163
 
-State 38
 
-   35 STRUCT_OR_UNION_SPECIFIER: STRUCT_OR_UNION . T_IDENTIFIER
+State 135
 
-    T_IDENTIFIER  shift, and go to state 49
+   62 DIRECT_DECLARATOR: DIRECT_DECLARATOR T_LBRACKET IDENTIFIER_LIST T_RBRACKET .
 
+    $default  reduce using rule 62 (DIRECT_DECLARATOR)
 
-State 39
 
-   72 TYPE_NAME: SPECIFIER_QUALIFIER_LIST .
-   73          | SPECIFIER_QUALIFIER_LIST . ABSTRACT_DECLARATOR
-
-    T_STAR      shift, and go to state 50
-    T_LBRACKET  shift, and go to state 51
-
-    $default  reduce using rule 72 (TYPE_NAME)
-
-    POINTER                     go to state 52
-    ABSTRACT_DECLARATOR         go to state 53
-    DIRECT_ABSTRACT_DECLARATOR  go to state 54
-
-
-State 40
-
-   34 TYPE_SPECIFIER: ENUM_SPECIFIER .
-
-    $default  reduce using rule 34 (TYPE_SPECIFIER)
-
-
-State 41
-
-   40 SPECIFIER_QUALIFIER_LIST: TYPE_QUALIFIER . SPECIFIER_QUALIFIER_LIST
-   41                         | TYPE_QUALIFIER .
-
-    T_INT       shift, and go to state 29
-    T_VOID      shift, and go to state 30
-    T_STRUCT    shift, and go to state 31
-    T_UNION     shift, and go to state 32
-    T_ENUM      shift, and go to state 33
-    T_CONST     shift, and go to state 34
-    T_VOLATILE  shift, and go to state 35
-
-    $default  reduce using rule 41 (SPECIFIER_QUALIFIER_LIST)
-
-    TYPE_SPECIFIER             go to state 36
-    STRUCT_OR_UNION_SPECIFIER  go to state 37
-    STRUCT_OR_UNION            go to state 38
-    SPECIFIER_QUALIFIER_LIST   go to state 55
-    ENUM_SPECIFIER             go to state 40
-    TYPE_QUALIFIER             go to state 41
-
-
-State 42
-
-   16 CAST_EXPRESSION: T_LBRACKET TYPE_NAME . T_RBRACKET CAST_EXPRESSION
-
-    T_RBRACKET  shift, and go to state 56
-
-
-State 43
-
-   22 EXPRESSION: EXPRESSION T_COMMA ASSIGNMENT_EXPRESSION .
-
-    $default  reduce using rule 22 (EXPRESSION)
-
-
-State 44
-
-    9 ARGUMENT_EXPRESSION_LIST: ARGUMENT_EXPRESSION_LIST T_COMMA . ASSIGNMENT_EXPRESSION
-
-    T_STAR        shift, and go to state 6
-    T_PLUS        shift, and go to state 7
-    T_MINUS       shift, and go to state 8
-    T_LBRACKET    shift, and go to state 1
-    T_CONSTANT    shift, and go to state 2
-    T_IDENTIFIER  shift, and go to state 3
-
-    $default  reduce using rule 17 (CONDITIONAL_EXPRESSION)
-
-    PRIMARY_EXPRESSION      go to state 9
-    POSTFIX_EXPRESSION      go to state 10
-    UNARY_EXPRESSION        go to state 11
-    UNARY_OPERATOR          go to state 12
-    CONDITIONAL_EXPRESSION  go to state 13
-    ASSIGNMENT_EXPRESSION   go to state 57
-
-
-State 45
-
-    7 POSTFIX_EXPRESSION: POSTFIX_EXPRESSION T_LBRACKET ARGUMENT_EXPRESSION_LIST T_RBRACKET .
-
-    $default  reduce using rule 7 (POSTFIX_EXPRESSION)
-
-
-State 46
-
-   42 ENUM_SPECIFIER: T_ENUM T_LCURLY . ENUMERATOR_LIST T_RCURLY
-
-    T_IDENTIFIER  shift, and go to state 58
-
-    ENUMERATOR_LIST  go to state 59
-    ENUMERATOR       go to state 60
-
-
-State 47
-
-   43 ENUM_SPECIFIER: T_ENUM T_IDENTIFIER . T_LCURLY ENUMERATOR_LIST T_RCURLY
-   44               | T_ENUM T_IDENTIFIER .
-
-    T_LCURLY  shift, and go to state 61
-
-    $default  reduce using rule 44 (ENUM_SPECIFIER)
-
-
-State 48
-
-   38 SPECIFIER_QUALIFIER_LIST: TYPE_SPECIFIER SPECIFIER_QUALIFIER_LIST .
-
-    $default  reduce using rule 38 (SPECIFIER_QUALIFIER_LIST)
-
-
-State 49
-
-   35 STRUCT_OR_UNION_SPECIFIER: STRUCT_OR_UNION T_IDENTIFIER .
-
-    $default  reduce using rule 35 (STRUCT_OR_UNION_SPECIFIER)
-
-
-State 50
-
-   58 POINTER: T_STAR .
-   59        | T_STAR . TYPE_QUALIFIER_LIST
-   60        | T_STAR . POINTER
-   61        | T_STAR . TYPE_QUALIFIER_LIST POINTER
-
-    T_STAR      shift, and go to state 50
-    T_CONST     shift, and go to state 34
-    T_VOLATILE  shift, and go to state 35
-
-    $default  reduce using rule 58 (POINTER)
-
-    TYPE_QUALIFIER       go to state 62
-    POINTER              go to state 63
-    TYPE_QUALIFIER_LIST  go to state 64
-
-
-State 51
-
-   77 DIRECT_ABSTRACT_DECLARATOR: T_LBRACKET . ABSTRACT_DECLARATOR T_RBRACKET
-   78                           | T_LBRACKET . T_RBRACKET
-   79                           | T_LBRACKET . PARAMETER_TYPE_LIST T_RBRACKET
-
-    T_STAR      shift, and go to state 50
-    T_LBRACKET  shift, and go to state 51
-    T_RBRACKET  shift, and go to state 65
-    T_INT       shift, and go to state 29
-    T_VOID      shift, and go to state 30
-    T_STRUCT    shift, and go to state 31
-    T_UNION     shift, and go to state 32
-    T_ENUM      shift, and go to state 33
-    T_TYPEDEF   shift, and go to state 66
-    T_CONST     shift, and go to state 34
-    T_VOLATILE  shift, and go to state 35
-
-    DECLARATION_SPECIFIERS      go to state 67
-    STORAGE_CLASS_SPECIFIER     go to state 68
-    TYPE_SPECIFIER              go to state 69
-    STRUCT_OR_UNION_SPECIFIER   go to state 37
-    STRUCT_OR_UNION             go to state 38
-    ENUM_SPECIFIER              go to state 40
-    TYPE_QUALIFIER              go to state 70
-    POINTER                     go to state 52
-    PARAMETER_TYPE_LIST         go to state 71
-    PARAMETER_LIST              go to state 72
-    PARAMETER_DECLARATION       go to state 73
-    ABSTRACT_DECLARATOR         go to state 74
-    DIRECT_ABSTRACT_DECLARATOR  go to state 54
-
-
-State 52
-
-   74 ABSTRACT_DECLARATOR: POINTER .
-   76                    | POINTER . DIRECT_ABSTRACT_DECLARATOR
-
-    T_LBRACKET  shift, and go to state 51
-
-    $default  reduce using rule 74 (ABSTRACT_DECLARATOR)
-
-    DIRECT_ABSTRACT_DECLARATOR  go to state 75
-
-
-State 53
-
-   73 TYPE_NAME: SPECIFIER_QUALIFIER_LIST ABSTRACT_DECLARATOR .
-
-    $default  reduce using rule 73 (TYPE_NAME)
-
-
-State 54
-
-   75 ABSTRACT_DECLARATOR: DIRECT_ABSTRACT_DECLARATOR .
-   80 DIRECT_ABSTRACT_DECLARATOR: DIRECT_ABSTRACT_DECLARATOR . T_LBRACKET T_RBRACKET
-   81                           | DIRECT_ABSTRACT_DECLARATOR . T_LBRACKET PARAMETER_TYPE_LIST T_RBRACKET
-
-    T_LBRACKET  shift, and go to state 76
-
-    $default  reduce using rule 75 (ABSTRACT_DECLARATOR)
-
-
-State 55
-
-   40 SPECIFIER_QUALIFIER_LIST: TYPE_QUALIFIER SPECIFIER_QUALIFIER_LIST .
-
-    $default  reduce using rule 40 (SPECIFIER_QUALIFIER_LIST)
-
-
-State 56
-
-   16 CAST_EXPRESSION: T_LBRACKET TYPE_NAME T_RBRACKET . CAST_EXPRESSION
-
-    T_STAR        shift, and go to state 6
-    T_PLUS        shift, and go to state 7
-    T_MINUS       shift, and go to state 8
-    T_LBRACKET    shift, and go to state 20
-    T_CONSTANT    shift, and go to state 2
-    T_IDENTIFIER  shift, and go to state 3
-
-    PRIMARY_EXPRESSION  go to state 9
-    POSTFIX_EXPRESSION  go to state 10
-    UNARY_EXPRESSION    go to state 21
-    UNARY_OPERATOR      go to state 12
-    CAST_EXPRESSION     go to state 77
-
-
-State 57
-
-    9 ARGUMENT_EXPRESSION_LIST: ARGUMENT_EXPRESSION_LIST T_COMMA ASSIGNMENT_EXPRESSION .
-
-    $default  reduce using rule 9 (ARGUMENT_EXPRESSION_LIST)
-
-
-State 58
-
-   47 ENUMERATOR: T_IDENTIFIER .
-   48           | T_IDENTIFIER . T_ASSIGN CONSTANT_EXPRESSION
-
-    T_ASSIGN  shift, and go to state 78
-
-    $default  reduce using rule 47 (ENUMERATOR)
-
-
-State 59
-
-   42 ENUM_SPECIFIER: T_ENUM T_LCURLY ENUMERATOR_LIST . T_RCURLY
-   46 ENUMERATOR_LIST: ENUMERATOR_LIST . T_COMMA ENUMERATOR
-
-    T_COMMA   shift, and go to state 79
-    T_RCURLY  shift, and go to state 80
-
-
-State 60
-
-   45 ENUMERATOR_LIST: ENUMERATOR .
-
-    $default  reduce using rule 45 (ENUMERATOR_LIST)
-
-
-State 61
-
-   43 ENUM_SPECIFIER: T_ENUM T_IDENTIFIER T_LCURLY . ENUMERATOR_LIST T_RCURLY
-
-    T_IDENTIFIER  shift, and go to state 58
-
-    ENUMERATOR_LIST  go to state 81
-    ENUMERATOR       go to state 60
-
-
-State 62
-
-   62 TYPE_QUALIFIER_LIST: TYPE_QUALIFIER .
-
-    $default  reduce using rule 62 (TYPE_QUALIFIER_LIST)
-
-
-State 63
-
-   60 POINTER: T_STAR POINTER .
-
-    $default  reduce using rule 60 (POINTER)
-
-
-State 64
-
-   59 POINTER: T_STAR TYPE_QUALIFIER_LIST .
-   61        | T_STAR TYPE_QUALIFIER_LIST . POINTER
-   63 TYPE_QUALIFIER_LIST: TYPE_QUALIFIER_LIST . TYPE_QUALIFIER
-
-    T_STAR      shift, and go to state 50
-    T_CONST     shift, and go to state 34
-    T_VOLATILE  shift, and go to state 35
-
-    $default  reduce using rule 59 (POINTER)
-
-    TYPE_QUALIFIER  go to state 82
-    POINTER         go to state 83
-
-
-State 65
-
-   78 DIRECT_ABSTRACT_DECLARATOR: T_LBRACKET T_RBRACKET .
-
-    $default  reduce using rule 78 (DIRECT_ABSTRACT_DECLARATOR)
-
-
-State 66
-
-   30 STORAGE_CLASS_SPECIFIER: T_TYPEDEF .
-
-    $default  reduce using rule 30 (STORAGE_CLASS_SPECIFIER)
-
-
-State 67
-
-   67 PARAMETER_DECLARATION: DECLARATION_SPECIFIERS . DECLARATOR
-   68                      | DECLARATION_SPECIFIERS . ABSTRACT_DECLARATOR
-   69                      | DECLARATION_SPECIFIERS .
-
-    T_STAR        shift, and go to state 50
-    T_LBRACKET    shift, and go to state 84
-    T_IDENTIFIER  shift, and go to state 85
-
-    $default  reduce using rule 69 (PARAMETER_DECLARATION)
-
-    DECLARATOR                  go to state 86
-    DIRECT_DECLARATOR           go to state 87
-    POINTER                     go to state 88
-    ABSTRACT_DECLARATOR         go to state 89
-    DIRECT_ABSTRACT_DECLARATOR  go to state 54
-
-
-State 68
-
-   24 DECLARATION_SPECIFIERS: STORAGE_CLASS_SPECIFIER .
-   25                       | STORAGE_CLASS_SPECIFIER . DECLARATION_SPECIFIERS
-
-    T_INT       shift, and go to state 29
-    T_VOID      shift, and go to state 30
-    T_STRUCT    shift, and go to state 31
-    T_UNION     shift, and go to state 32
-    T_ENUM      shift, and go to state 33
-    T_TYPEDEF   shift, and go to state 66
-    T_CONST     shift, and go to state 34
-    T_VOLATILE  shift, and go to state 35
-
-    $default  reduce using rule 24 (DECLARATION_SPECIFIERS)
-
-    DECLARATION_SPECIFIERS     go to state 90
-    STORAGE_CLASS_SPECIFIER    go to state 68
-    TYPE_SPECIFIER             go to state 69
-    STRUCT_OR_UNION_SPECIFIER  go to state 37
-    STRUCT_OR_UNION            go to state 38
-    ENUM_SPECIFIER             go to state 40
-    TYPE_QUALIFIER             go to state 70
-
-
-State 69
-
-   26 DECLARATION_SPECIFIERS: TYPE_SPECIFIER .
-   27                       | TYPE_SPECIFIER . DECLARATION_SPECIFIERS
-
-    T_INT       shift, and go to state 29
-    T_VOID      shift, and go to state 30
-    T_STRUCT    shift, and go to state 31
-    T_UNION     shift, and go to state 32
-    T_ENUM      shift, and go to state 33
-    T_TYPEDEF   shift, and go to state 66
-    T_CONST     shift, and go to state 34
-    T_VOLATILE  shift, and go to state 35
-
-    $default  reduce using rule 26 (DECLARATION_SPECIFIERS)
-
-    DECLARATION_SPECIFIERS     go to state 91
-    STORAGE_CLASS_SPECIFIER    go to state 68
-    TYPE_SPECIFIER             go to state 69
-    STRUCT_OR_UNION_SPECIFIER  go to state 37
-    STRUCT_OR_UNION            go to state 38
-    ENUM_SPECIFIER             go to state 40
-    TYPE_QUALIFIER             go to state 70
-
-
-State 70
-
-   28 DECLARATION_SPECIFIERS: TYPE_QUALIFIER .
-   29                       | TYPE_QUALIFIER . DECLARATION_SPECIFIERS
-
-    T_INT       shift, and go to state 29
-    T_VOID      shift, and go to state 30
-    T_STRUCT    shift, and go to state 31
-    T_UNION     shift, and go to state 32
-    T_ENUM      shift, and go to state 33
-    T_TYPEDEF   shift, and go to state 66
-    T_CONST     shift, and go to state 34
-    T_VOLATILE  shift, and go to state 35
-
-    $default  reduce using rule 28 (DECLARATION_SPECIFIERS)
-
-    DECLARATION_SPECIFIERS     go to state 92
-    STORAGE_CLASS_SPECIFIER    go to state 68
-    TYPE_SPECIFIER             go to state 69
-    STRUCT_OR_UNION_SPECIFIER  go to state 37
-    STRUCT_OR_UNION            go to state 38
-    ENUM_SPECIFIER             go to state 40
-    TYPE_QUALIFIER             go to state 70
-
-
-State 71
-
-   79 DIRECT_ABSTRACT_DECLARATOR: T_LBRACKET PARAMETER_TYPE_LIST . T_RBRACKET
-
-    T_RBRACKET  shift, and go to state 93
-
-
-State 72
-
-   64 PARAMETER_TYPE_LIST: PARAMETER_LIST .
-   66 PARAMETER_LIST: PARAMETER_LIST . T_COMMA PARAMETER_DECLARATION
-
-    T_COMMA  shift, and go to state 94
-
-    $default  reduce using rule 64 (PARAMETER_TYPE_LIST)
-
-
-State 73
-
-   65 PARAMETER_LIST: PARAMETER_DECLARATION .
-
-    $default  reduce using rule 65 (PARAMETER_LIST)
-
-
-State 74
-
-   77 DIRECT_ABSTRACT_DECLARATOR: T_LBRACKET ABSTRACT_DECLARATOR . T_RBRACKET
-
-    T_RBRACKET  shift, and go to state 95
-
-
-State 75
-
-   76 ABSTRACT_DECLARATOR: POINTER DIRECT_ABSTRACT_DECLARATOR .
-   80 DIRECT_ABSTRACT_DECLARATOR: DIRECT_ABSTRACT_DECLARATOR . T_LBRACKET T_RBRACKET
-   81                           | DIRECT_ABSTRACT_DECLARATOR . T_LBRACKET PARAMETER_TYPE_LIST T_RBRACKET
-
-    T_LBRACKET  shift, and go to state 76
-
-    $default  reduce using rule 76 (ABSTRACT_DECLARATOR)
-
-
-State 76
-
-   80 DIRECT_ABSTRACT_DECLARATOR: DIRECT_ABSTRACT_DECLARATOR T_LBRACKET . T_RBRACKET
-   81                           | DIRECT_ABSTRACT_DECLARATOR T_LBRACKET . PARAMETER_TYPE_LIST T_RBRACKET
-
-    T_RBRACKET  shift, and go to state 96
-    T_INT       shift, and go to state 29
-    T_VOID      shift, and go to state 30
-    T_STRUCT    shift, and go to state 31
-    T_UNION     shift, and go to state 32
-    T_ENUM      shift, and go to state 33
-    T_TYPEDEF   shift, and go to state 66
-    T_CONST     shift, and go to state 34
-    T_VOLATILE  shift, and go to state 35
-
-    DECLARATION_SPECIFIERS     go to state 67
-    STORAGE_CLASS_SPECIFIER    go to state 68
-    TYPE_SPECIFIER             go to state 69
-    STRUCT_OR_UNION_SPECIFIER  go to state 37
-    STRUCT_OR_UNION            go to state 38
-    ENUM_SPECIFIER             go to state 40
-    TYPE_QUALIFIER             go to state 70
-    PARAMETER_TYPE_LIST        go to state 97
-    PARAMETER_LIST             go to state 72
-    PARAMETER_DECLARATION      go to state 73
-
-
-State 77
-
-   16 CAST_EXPRESSION: T_LBRACKET TYPE_NAME T_RBRACKET CAST_EXPRESSION .
-
-    $default  reduce using rule 16 (CAST_EXPRESSION)
-
-
-State 78
-
-   48 ENUMERATOR: T_IDENTIFIER T_ASSIGN . CONSTANT_EXPRESSION
-
-    $default  reduce using rule 17 (CONDITIONAL_EXPRESSION)
-
-    CONDITIONAL_EXPRESSION  go to state 98
-    CONSTANT_EXPRESSION     go to state 99
-
-
-State 79
-
-   46 ENUMERATOR_LIST: ENUMERATOR_LIST T_COMMA . ENUMERATOR
-
-    T_IDENTIFIER  shift, and go to state 58
-
-    ENUMERATOR  go to state 100
-
-
-State 80
-
-   42 ENUM_SPECIFIER: T_ENUM T_LCURLY ENUMERATOR_LIST T_RCURLY .
-
-    $default  reduce using rule 42 (ENUM_SPECIFIER)
-
-
-State 81
-
-   43 ENUM_SPECIFIER: T_ENUM T_IDENTIFIER T_LCURLY ENUMERATOR_LIST . T_RCURLY
-   46 ENUMERATOR_LIST: ENUMERATOR_LIST . T_COMMA ENUMERATOR
-
-    T_COMMA   shift, and go to state 79
-    T_RCURLY  shift, and go to state 101
-
-
-State 82
-
-   63 TYPE_QUALIFIER_LIST: TYPE_QUALIFIER_LIST TYPE_QUALIFIER .
-
-    $default  reduce using rule 63 (TYPE_QUALIFIER_LIST)
-
-
-State 83
-
-   61 POINTER: T_STAR TYPE_QUALIFIER_LIST POINTER .
-
-    $default  reduce using rule 61 (POINTER)
-
-
-State 84
-
-   54 DIRECT_DECLARATOR: T_LBRACKET . DECLARATOR T_RBRACKET
-   77 DIRECT_ABSTRACT_DECLARATOR: T_LBRACKET . ABSTRACT_DECLARATOR T_RBRACKET
-   78                           | T_LBRACKET . T_RBRACKET
-   79                           | T_LBRACKET . PARAMETER_TYPE_LIST T_RBRACKET
-
-    T_STAR        shift, and go to state 50
-    T_LBRACKET    shift, and go to state 84
-    T_RBRACKET    shift, and go to state 65
-    T_INT         shift, and go to state 29
-    T_VOID        shift, and go to state 30
-    T_STRUCT      shift, and go to state 31
-    T_UNION       shift, and go to state 32
-    T_ENUM        shift, and go to state 33
-    T_IDENTIFIER  shift, and go to state 85
-    T_TYPEDEF     shift, and go to state 66
-    T_CONST       shift, and go to state 34
-    T_VOLATILE    shift, and go to state 35
-
-    DECLARATION_SPECIFIERS      go to state 67
-    STORAGE_CLASS_SPECIFIER     go to state 68
-    TYPE_SPECIFIER              go to state 69
-    STRUCT_OR_UNION_SPECIFIER   go to state 37
-    STRUCT_OR_UNION             go to state 38
-    ENUM_SPECIFIER              go to state 40
-    TYPE_QUALIFIER              go to state 70
-    DECLARATOR                  go to state 102
-    DIRECT_DECLARATOR           go to state 87
-    POINTER                     go to state 88
-    PARAMETER_TYPE_LIST         go to state 71
-    PARAMETER_LIST              go to state 72
-    PARAMETER_DECLARATION       go to state 73
-    ABSTRACT_DECLARATOR         go to state 74
-    DIRECT_ABSTRACT_DECLARATOR  go to state 54
-
-
-State 85
-
-   53 DIRECT_DECLARATOR: T_IDENTIFIER .
-
-    $default  reduce using rule 53 (DIRECT_DECLARATOR)
-
-
-State 86
-
-   67 PARAMETER_DECLARATION: DECLARATION_SPECIFIERS DECLARATOR .
-
-    $default  reduce using rule 67 (PARAMETER_DECLARATION)
-
-
-State 87
-
-   52 DECLARATOR: DIRECT_DECLARATOR .
-   55 DIRECT_DECLARATOR: DIRECT_DECLARATOR . T_LBRACKET PARAMETER_TYPE_LIST T_RBRACKET
-   56                  | DIRECT_DECLARATOR . T_LBRACKET IDENTIFIER_LIST T_RBRACKET
-   57                  | DIRECT_DECLARATOR . T_LBRACKET T_RBRACKET
-
-    T_LBRACKET  shift, and go to state 103
-
-    $default  reduce using rule 52 (DECLARATOR)
-
-
-State 88
-
-   51 DECLARATOR: POINTER . DIRECT_DECLARATOR
-   74 ABSTRACT_DECLARATOR: POINTER .
-   76                    | POINTER . DIRECT_ABSTRACT_DECLARATOR
-
-    T_LBRACKET    shift, and go to state 84
-    T_IDENTIFIER  shift, and go to state 85
-
-    $default  reduce using rule 74 (ABSTRACT_DECLARATOR)
-
-    DIRECT_DECLARATOR           go to state 104
-    DIRECT_ABSTRACT_DECLARATOR  go to state 75
-
-
-State 89
-
-   68 PARAMETER_DECLARATION: DECLARATION_SPECIFIERS ABSTRACT_DECLARATOR .
-
-    $default  reduce using rule 68 (PARAMETER_DECLARATION)
-
-
-State 90
-
-   25 DECLARATION_SPECIFIERS: STORAGE_CLASS_SPECIFIER DECLARATION_SPECIFIERS .
-
-    $default  reduce using rule 25 (DECLARATION_SPECIFIERS)
-
-
-State 91
-
-   27 DECLARATION_SPECIFIERS: TYPE_SPECIFIER DECLARATION_SPECIFIERS .
-
-    $default  reduce using rule 27 (DECLARATION_SPECIFIERS)
-
-
-State 92
-
-   29 DECLARATION_SPECIFIERS: TYPE_QUALIFIER DECLARATION_SPECIFIERS .
-
-    $default  reduce using rule 29 (DECLARATION_SPECIFIERS)
-
-
-State 93
-
-   79 DIRECT_ABSTRACT_DECLARATOR: T_LBRACKET PARAMETER_TYPE_LIST T_RBRACKET .
-
-    $default  reduce using rule 79 (DIRECT_ABSTRACT_DECLARATOR)
-
-
-State 94
-
-   66 PARAMETER_LIST: PARAMETER_LIST T_COMMA . PARAMETER_DECLARATION
-
-    T_INT       shift, and go to state 29
-    T_VOID      shift, and go to state 30
-    T_STRUCT    shift, and go to state 31
-    T_UNION     shift, and go to state 32
-    T_ENUM      shift, and go to state 33
-    T_TYPEDEF   shift, and go to state 66
-    T_CONST     shift, and go to state 34
-    T_VOLATILE  shift, and go to state 35
-
-    DECLARATION_SPECIFIERS     go to state 67
-    STORAGE_CLASS_SPECIFIER    go to state 68
-    TYPE_SPECIFIER             go to state 69
-    STRUCT_OR_UNION_SPECIFIER  go to state 37
-    STRUCT_OR_UNION            go to state 38
-    ENUM_SPECIFIER             go to state 40
-    TYPE_QUALIFIER             go to state 70
-    PARAMETER_DECLARATION      go to state 105
-
-
-State 95
-
-   77 DIRECT_ABSTRACT_DECLARATOR: T_LBRACKET ABSTRACT_DECLARATOR T_RBRACKET .
-
-    $default  reduce using rule 77 (DIRECT_ABSTRACT_DECLARATOR)
-
-
-State 96
-
-   80 DIRECT_ABSTRACT_DECLARATOR: DIRECT_ABSTRACT_DECLARATOR T_LBRACKET T_RBRACKET .
-
-    $default  reduce using rule 80 (DIRECT_ABSTRACT_DECLARATOR)
-
-
-State 97
-
-   81 DIRECT_ABSTRACT_DECLARATOR: DIRECT_ABSTRACT_DECLARATOR T_LBRACKET PARAMETER_TYPE_LIST . T_RBRACKET
-
-    T_RBRACKET  shift, and go to state 106
-
-
-State 98
+State 136
 
    23 CONSTANT_EXPRESSION: CONDITIONAL_EXPRESSION .
 
     $default  reduce using rule 23 (CONSTANT_EXPRESSION)
 
 
-State 99
+State 137
 
-   48 ENUMERATOR: T_IDENTIFIER T_ASSIGN CONSTANT_EXPRESSION .
+   54 ENUMERATOR: T_IDENTIFIER T_ASSIGN CONSTANT_EXPRESSION .
 
-    $default  reduce using rule 48 (ENUMERATOR)
+    $default  reduce using rule 54 (ENUMERATOR)
 
 
-State 100
+State 138
 
-   46 ENUMERATOR_LIST: ENUMERATOR_LIST T_COMMA ENUMERATOR .
+   52 ENUMERATOR_LIST: ENUMERATOR_LIST T_COMMA ENUMERATOR .
 
-    $default  reduce using rule 46 (ENUMERATOR_LIST)
+    $default  reduce using rule 52 (ENUMERATOR_LIST)
 
 
-State 101
+State 139
 
-   43 ENUM_SPECIFIER: T_ENUM T_IDENTIFIER T_LCURLY ENUMERATOR_LIST T_RCURLY .
+   49 ENUM_SPECIFIER: T_ENUM T_IDENTIFIER T_LCURLY ENUMERATOR_LIST T_RCURLY .
 
-    $default  reduce using rule 43 (ENUM_SPECIFIER)
+    $default  reduce using rule 49 (ENUM_SPECIFIER)
 
 
-State 102
+State 140
 
-   54 DIRECT_DECLARATOR: T_LBRACKET DECLARATOR . T_RBRACKET
+   91 INITIALIZER_LIST: INITIALIZER .
 
-    T_RBRACKET  shift, and go to state 107
+    $default  reduce using rule 91 (INITIALIZER_LIST)
 
 
-State 103
+State 141
 
-   55 DIRECT_DECLARATOR: DIRECT_DECLARATOR T_LBRACKET . PARAMETER_TYPE_LIST T_RBRACKET
-   56                  | DIRECT_DECLARATOR T_LBRACKET . IDENTIFIER_LIST T_RBRACKET
-   57                  | DIRECT_DECLARATOR T_LBRACKET . T_RBRACKET
+   89 INITIALIZER: T_LCURLY INITIALIZER_LIST . T_RCURLY
+   90            | T_LCURLY INITIALIZER_LIST . T_COMMA T_RCURLY
+   92 INITIALIZER_LIST: INITIALIZER_LIST . T_COMMA INITIALIZER
 
-    T_RBRACKET    shift, and go to state 108
-    T_INT         shift, and go to state 29
-    T_VOID        shift, and go to state 30
-    T_STRUCT      shift, and go to state 31
-    T_UNION       shift, and go to state 32
-    T_ENUM        shift, and go to state 33
-    T_IDENTIFIER  shift, and go to state 109
-    T_TYPEDEF     shift, and go to state 66
-    T_CONST       shift, and go to state 34
-    T_VOLATILE    shift, and go to state 35
+    T_COMMA   shift, and go to state 164
+    T_RCURLY  shift, and go to state 165
 
-    DECLARATION_SPECIFIERS     go to state 67
-    STORAGE_CLASS_SPECIFIER    go to state 68
-    TYPE_SPECIFIER             go to state 69
-    STRUCT_OR_UNION_SPECIFIER  go to state 37
-    STRUCT_OR_UNION            go to state 38
-    ENUM_SPECIFIER             go to state 40
-    TYPE_QUALIFIER             go to state 70
-    PARAMETER_TYPE_LIST        go to state 110
-    PARAMETER_LIST             go to state 72
-    PARAMETER_DECLARATION      go to state 73
-    IDENTIFIER_LIST            go to state 111
 
+State 142
 
-State 104
+    4 PRIMARY_EXPRESSION: T_LBRACKET EXPRESSION T_RBRACKET .
 
-   51 DECLARATOR: POINTER DIRECT_DECLARATOR .
-   55 DIRECT_DECLARATOR: DIRECT_DECLARATOR . T_LBRACKET PARAMETER_TYPE_LIST T_RBRACKET
-   56                  | DIRECT_DECLARATOR . T_LBRACKET IDENTIFIER_LIST T_RBRACKET
-   57                  | DIRECT_DECLARATOR . T_LBRACKET T_RBRACKET
+    $default  reduce using rule 4 (PRIMARY_EXPRESSION)
 
-    T_LBRACKET  shift, and go to state 103
 
-    $default  reduce using rule 51 (DECLARATOR)
+State 143
 
+   22 EXPRESSION: EXPRESSION . T_COMMA ASSIGNMENT_EXPRESSION
+  110 SELECTION_STATEMENT: T_IF T_LBRACKET EXPRESSION . T_RBRACKET STATEMENT
+  111                    | T_IF T_LBRACKET EXPRESSION . T_RBRACKET T_ELSE STATEMENT
 
-State 105
+    T_COMMA     shift, and go to state 121
+    T_RBRACKET  shift, and go to state 166
 
-   66 PARAMETER_LIST: PARAMETER_LIST T_COMMA PARAMETER_DECLARATION .
 
-    $default  reduce using rule 66 (PARAMETER_LIST)
+State 144
 
+   22 EXPRESSION: EXPRESSION . T_COMMA ASSIGNMENT_EXPRESSION
+  112 ITERATION_STATEMENT: T_WHILE T_LBRACKET EXPRESSION . T_RBRACKET STATEMENT
 
-State 106
+    T_COMMA     shift, and go to state 121
+    T_RBRACKET  shift, and go to state 167
 
-   81 DIRECT_ABSTRACT_DECLARATOR: DIRECT_ABSTRACT_DECLARATOR T_LBRACKET PARAMETER_TYPE_LIST T_RBRACKET .
 
-    $default  reduce using rule 81 (DIRECT_ABSTRACT_DECLARATOR)
+State 145
 
+  114 JUMP_STATEMENT: T_RETURN EXPRESSION T_SEMICOLON .
 
-State 107
+    $default  reduce using rule 114 (JUMP_STATEMENT)
 
-   54 DIRECT_DECLARATOR: T_LBRACKET DECLARATOR T_RBRACKET .
 
-    $default  reduce using rule 54 (DIRECT_DECLARATOR)
+State 146
 
+   99 LABELED_STATEMENT: T_IDENTIFIER T_COLON STATEMENT .
 
-State 108
+    $default  reduce using rule 99 (LABELED_STATEMENT)
 
-   57 DIRECT_DECLARATOR: DIRECT_DECLARATOR T_LBRACKET T_RBRACKET .
 
-    $default  reduce using rule 57 (DIRECT_DECLARATOR)
+State 147
 
+    6 POSTFIX_EXPRESSION: POSTFIX_EXPRESSION T_LBRACKET T_RBRACKET .
 
-State 109
+    $default  reduce using rule 6 (POSTFIX_EXPRESSION)
 
-   70 IDENTIFIER_LIST: T_IDENTIFIER .
 
-    $default  reduce using rule 70 (IDENTIFIER_LIST)
+State 148
 
+    7 POSTFIX_EXPRESSION: POSTFIX_EXPRESSION T_LBRACKET ARGUMENT_EXPRESSION_LIST . T_RBRACKET
+    9 ARGUMENT_EXPRESSION_LIST: ARGUMENT_EXPRESSION_LIST . T_COMMA ASSIGNMENT_EXPRESSION
 
-State 110
+    T_COMMA     shift, and go to state 168
+    T_RBRACKET  shift, and go to state 169
 
-   55 DIRECT_DECLARATOR: DIRECT_DECLARATOR T_LBRACKET PARAMETER_TYPE_LIST . T_RBRACKET
 
-    T_RBRACKET  shift, and go to state 112
+State 149
 
+    8 ARGUMENT_EXPRESSION_LIST: ASSIGNMENT_EXPRESSION .
 
-State 111
+    $default  reduce using rule 8 (ARGUMENT_EXPRESSION_LIST)
 
-   56 DIRECT_DECLARATOR: DIRECT_DECLARATOR T_LBRACKET IDENTIFIER_LIST . T_RBRACKET
-   71 IDENTIFIER_LIST: IDENTIFIER_LIST . T_COMMA T_IDENTIFIER
 
-    T_COMMA     shift, and go to state 113
-    T_RBRACKET  shift, and go to state 114
+State 150
 
+   19 ASSIGNMENT_EXPRESSION: UNARY_EXPRESSION ASSIGNMENT_OPERATOR ASSIGNMENT_EXPRESSION .
 
-State 112
+    $default  reduce using rule 19 (ASSIGNMENT_EXPRESSION)
 
-   55 DIRECT_DECLARATOR: DIRECT_DECLARATOR T_LBRACKET PARAMETER_TYPE_LIST T_RBRACKET .
 
-    $default  reduce using rule 55 (DIRECT_DECLARATOR)
+State 151
 
+   44 SPECIFIER_QUALIFIER_LIST: TYPE_SPECIFIER . SPECIFIER_QUALIFIER_LIST
+   45                         | TYPE_SPECIFIER .
 
-State 113
+    T_INT       shift, and go to state 3
+    T_VOID      shift, and go to state 4
+    T_STRUCT    shift, and go to state 5
+    T_UNION     shift, and go to state 6
+    T_ENUM      shift, and go to state 7
+    T_CONST     shift, and go to state 10
+    T_VOLATILE  shift, and go to state 11
 
-   71 IDENTIFIER_LIST: IDENTIFIER_LIST T_COMMA . T_IDENTIFIER
+    $default  reduce using rule 45 (SPECIFIER_QUALIFIER_LIST)
 
-    T_IDENTIFIER  shift, and go to state 115
+    TYPE_SPECIFIER             go to state 151
+    STRUCT_OR_UNION_SPECIFIER  go to state 17
+    STRUCT_OR_UNION            go to state 18
+    SPECIFIER_QUALIFIER_LIST   go to state 170
+    ENUM_SPECIFIER             go to state 19
+    TYPE_QUALIFIER             go to state 153
 
 
-State 114
+State 152
 
-   56 DIRECT_DECLARATOR: DIRECT_DECLARATOR T_LBRACKET IDENTIFIER_LIST T_RBRACKET .
+   78 TYPE_NAME: SPECIFIER_QUALIFIER_LIST .
+   79          | SPECIFIER_QUALIFIER_LIST . ABSTRACT_DECLARATOR
 
-    $default  reduce using rule 56 (DIRECT_DECLARATOR)
+    T_STAR      shift, and go to state 1
+    T_LBRACKET  shift, and go to state 171
 
+    $default  reduce using rule 78 (TYPE_NAME)
 
-State 115
+    POINTER                     go to state 172
+    ABSTRACT_DECLARATOR         go to state 173
+    DIRECT_ABSTRACT_DECLARATOR  go to state 131
 
-   71 IDENTIFIER_LIST: IDENTIFIER_LIST T_COMMA T_IDENTIFIER .
 
-    $default  reduce using rule 71 (IDENTIFIER_LIST)
+State 153
+
+   46 SPECIFIER_QUALIFIER_LIST: TYPE_QUALIFIER . SPECIFIER_QUALIFIER_LIST
+   47                         | TYPE_QUALIFIER .
+
+    T_INT       shift, and go to state 3
+    T_VOID      shift, and go to state 4
+    T_STRUCT    shift, and go to state 5
+    T_UNION     shift, and go to state 6
+    T_ENUM      shift, and go to state 7
+    T_CONST     shift, and go to state 10
+    T_VOLATILE  shift, and go to state 11
+
+    $default  reduce using rule 47 (SPECIFIER_QUALIFIER_LIST)
+
+    TYPE_SPECIFIER             go to state 151
+    STRUCT_OR_UNION_SPECIFIER  go to state 17
+    STRUCT_OR_UNION            go to state 18
+    SPECIFIER_QUALIFIER_LIST   go to state 174
+    ENUM_SPECIFIER             go to state 19
+    TYPE_QUALIFIER             go to state 153
+
+
+State 154
+
+   16 CAST_EXPRESSION: T_LBRACKET TYPE_NAME . T_RBRACKET CAST_EXPRESSION
+
+    T_RBRACKET  shift, and go to state 175
+
+
+State 155
+
+   22 EXPRESSION: EXPRESSION T_COMMA ASSIGNMENT_EXPRESSION .
+
+    $default  reduce using rule 22 (EXPRESSION)
+
+
+State 156
+
+  103 COMPOUND_STATEMENT: T_LCURLY DECLARATION_LIST STATEMENT_LIST T_RCURLY .
+
+    $default  reduce using rule 103 (COMPOUND_STATEMENT)
+
+
+State 157
+
+   84 DIRECT_ABSTRACT_DECLARATOR: T_LBRACKET T_RBRACKET .
+
+    $default  reduce using rule 84 (DIRECT_ABSTRACT_DECLARATOR)
+
+
+State 158
+
+   85 DIRECT_ABSTRACT_DECLARATOR: T_LBRACKET PARAMETER_TYPE_LIST . T_RBRACKET
+
+    T_RBRACKET  shift, and go to state 176
+
+
+State 159
+
+   83 DIRECT_ABSTRACT_DECLARATOR: T_LBRACKET ABSTRACT_DECLARATOR . T_RBRACKET
+
+    T_RBRACKET  shift, and go to state 177
+
+
+State 160
+
+   82 ABSTRACT_DECLARATOR: POINTER DIRECT_ABSTRACT_DECLARATOR .
+   86 DIRECT_ABSTRACT_DECLARATOR: DIRECT_ABSTRACT_DECLARATOR . T_LBRACKET T_RBRACKET
+   87                           | DIRECT_ABSTRACT_DECLARATOR . T_LBRACKET PARAMETER_TYPE_LIST T_RBRACKET
+
+    T_LBRACKET  shift, and go to state 161
+
+    $default  reduce using rule 82 (ABSTRACT_DECLARATOR)
+
+
+State 161
+
+   86 DIRECT_ABSTRACT_DECLARATOR: DIRECT_ABSTRACT_DECLARATOR T_LBRACKET . T_RBRACKET
+   87                           | DIRECT_ABSTRACT_DECLARATOR T_LBRACKET . PARAMETER_TYPE_LIST T_RBRACKET
+
+    T_RBRACKET  shift, and go to state 178
+    T_INT       shift, and go to state 3
+    T_VOID      shift, and go to state 4
+    T_STRUCT    shift, and go to state 5
+    T_UNION     shift, and go to state 6
+    T_ENUM      shift, and go to state 7
+    T_TYPEDEF   shift, and go to state 9
+    T_CONST     shift, and go to state 10
+    T_VOLATILE  shift, and go to state 11
+
+    DECLARATION_SPECIFIERS     go to state 94
+    STORAGE_CLASS_SPECIFIER    go to state 15
+    TYPE_SPECIFIER             go to state 16
+    STRUCT_OR_UNION_SPECIFIER  go to state 17
+    STRUCT_OR_UNION            go to state 18
+    ENUM_SPECIFIER             go to state 19
+    TYPE_QUALIFIER             go to state 20
+    PARAMETER_TYPE_LIST        go to state 179
+    PARAMETER_LIST             go to state 96
+    PARAMETER_DECLARATION      go to state 97
+
+
+State 162
+
+   72 PARAMETER_LIST: PARAMETER_LIST T_COMMA PARAMETER_DECLARATION .
+
+    $default  reduce using rule 72 (PARAMETER_LIST)
+
+
+State 163
+
+   77 IDENTIFIER_LIST: IDENTIFIER_LIST T_COMMA T_IDENTIFIER .
+
+    $default  reduce using rule 77 (IDENTIFIER_LIST)
+
+
+State 164
+
+   90 INITIALIZER: T_LCURLY INITIALIZER_LIST T_COMMA . T_RCURLY
+   92 INITIALIZER_LIST: INITIALIZER_LIST T_COMMA . INITIALIZER
+
+    T_STAR        shift, and go to state 62
+    T_PLUS        shift, and go to state 63
+    T_MINUS       shift, and go to state 64
+    T_LBRACKET    shift, and go to state 65
+    T_LCURLY      shift, and go to state 104
+    T_RCURLY      shift, and go to state 180
+    T_CONSTANT    shift, and go to state 71
+    T_IDENTIFIER  shift, and go to state 105
+
+    T_RCURLY  [reduce using rule 17 (CONDITIONAL_EXPRESSION)]
+    $default  reduce using rule 17 (CONDITIONAL_EXPRESSION)
+
+    PRIMARY_EXPRESSION      go to state 73
+    POSTFIX_EXPRESSION      go to state 74
+    UNARY_EXPRESSION        go to state 75
+    UNARY_OPERATOR          go to state 76
+    CONDITIONAL_EXPRESSION  go to state 77
+    ASSIGNMENT_EXPRESSION   go to state 106
+    INITIALIZER             go to state 181
+
+
+State 165
+
+   89 INITIALIZER: T_LCURLY INITIALIZER_LIST T_RCURLY .
+
+    $default  reduce using rule 89 (INITIALIZER)
+
+
+State 166
+
+  110 SELECTION_STATEMENT: T_IF T_LBRACKET EXPRESSION T_RBRACKET . STATEMENT
+  111                    | T_IF T_LBRACKET EXPRESSION T_RBRACKET . T_ELSE STATEMENT
+
+    T_STAR        shift, and go to state 62
+    T_PLUS        shift, and go to state 63
+    T_MINUS       shift, and go to state 64
+    T_LBRACKET    shift, and go to state 65
+    T_LCURLY      shift, and go to state 42
+    T_SEMICOLON   shift, and go to state 67
+    T_IF          shift, and go to state 68
+    T_ELSE        shift, and go to state 182
+    T_WHILE       shift, and go to state 69
+    T_RETURN      shift, and go to state 70
+    T_CONSTANT    shift, and go to state 71
+    T_IDENTIFIER  shift, and go to state 72
+
+    T_SEMICOLON  [reduce using rule 17 (CONDITIONAL_EXPRESSION)]
+    $default     reduce using rule 17 (CONDITIONAL_EXPRESSION)
+
+    PRIMARY_EXPRESSION      go to state 73
+    POSTFIX_EXPRESSION      go to state 74
+    UNARY_EXPRESSION        go to state 75
+    UNARY_OPERATOR          go to state 76
+    CONDITIONAL_EXPRESSION  go to state 77
+    ASSIGNMENT_EXPRESSION   go to state 78
+    EXPRESSION              go to state 79
+    STATEMENT               go to state 183
+    LABELED_STATEMENT       go to state 81
+    COMPOUND_STATEMENT      go to state 82
+    EXPRESSION_STATEMENT    go to state 85
+    SELECTION_STATEMENT     go to state 86
+    ITERATION_STATEMENT     go to state 87
+    JUMP_STATEMENT          go to state 88
+
+
+State 167
+
+  112 ITERATION_STATEMENT: T_WHILE T_LBRACKET EXPRESSION T_RBRACKET . STATEMENT
+
+    T_STAR        shift, and go to state 62
+    T_PLUS        shift, and go to state 63
+    T_MINUS       shift, and go to state 64
+    T_LBRACKET    shift, and go to state 65
+    T_LCURLY      shift, and go to state 42
+    T_SEMICOLON   shift, and go to state 67
+    T_IF          shift, and go to state 68
+    T_WHILE       shift, and go to state 69
+    T_RETURN      shift, and go to state 70
+    T_CONSTANT    shift, and go to state 71
+    T_IDENTIFIER  shift, and go to state 72
+
+    T_SEMICOLON  [reduce using rule 17 (CONDITIONAL_EXPRESSION)]
+    $default     reduce using rule 17 (CONDITIONAL_EXPRESSION)
+
+    PRIMARY_EXPRESSION      go to state 73
+    POSTFIX_EXPRESSION      go to state 74
+    UNARY_EXPRESSION        go to state 75
+    UNARY_OPERATOR          go to state 76
+    CONDITIONAL_EXPRESSION  go to state 77
+    ASSIGNMENT_EXPRESSION   go to state 78
+    EXPRESSION              go to state 79
+    STATEMENT               go to state 184
+    LABELED_STATEMENT       go to state 81
+    COMPOUND_STATEMENT      go to state 82
+    EXPRESSION_STATEMENT    go to state 85
+    SELECTION_STATEMENT     go to state 86
+    ITERATION_STATEMENT     go to state 87
+    JUMP_STATEMENT          go to state 88
+
+
+State 168
+
+    9 ARGUMENT_EXPRESSION_LIST: ARGUMENT_EXPRESSION_LIST T_COMMA . ASSIGNMENT_EXPRESSION
+
+    T_STAR        shift, and go to state 62
+    T_PLUS        shift, and go to state 63
+    T_MINUS       shift, and go to state 64
+    T_LBRACKET    shift, and go to state 65
+    T_CONSTANT    shift, and go to state 71
+    T_IDENTIFIER  shift, and go to state 105
+
+    $default  reduce using rule 17 (CONDITIONAL_EXPRESSION)
+
+    PRIMARY_EXPRESSION      go to state 73
+    POSTFIX_EXPRESSION      go to state 74
+    UNARY_EXPRESSION        go to state 75
+    UNARY_OPERATOR          go to state 76
+    CONDITIONAL_EXPRESSION  go to state 77
+    ASSIGNMENT_EXPRESSION   go to state 185
+
+
+State 169
+
+    7 POSTFIX_EXPRESSION: POSTFIX_EXPRESSION T_LBRACKET ARGUMENT_EXPRESSION_LIST T_RBRACKET .
+
+    $default  reduce using rule 7 (POSTFIX_EXPRESSION)
+
+
+State 170
+
+   44 SPECIFIER_QUALIFIER_LIST: TYPE_SPECIFIER SPECIFIER_QUALIFIER_LIST .
+
+    $default  reduce using rule 44 (SPECIFIER_QUALIFIER_LIST)
+
+
+State 171
+
+   83 DIRECT_ABSTRACT_DECLARATOR: T_LBRACKET . ABSTRACT_DECLARATOR T_RBRACKET
+   84                           | T_LBRACKET . T_RBRACKET
+   85                           | T_LBRACKET . PARAMETER_TYPE_LIST T_RBRACKET
+
+    T_STAR      shift, and go to state 1
+    T_LBRACKET  shift, and go to state 171
+    T_RBRACKET  shift, and go to state 157
+    T_INT       shift, and go to state 3
+    T_VOID      shift, and go to state 4
+    T_STRUCT    shift, and go to state 5
+    T_UNION     shift, and go to state 6
+    T_ENUM      shift, and go to state 7
+    T_TYPEDEF   shift, and go to state 9
+    T_CONST     shift, and go to state 10
+    T_VOLATILE  shift, and go to state 11
+
+    DECLARATION_SPECIFIERS      go to state 94
+    STORAGE_CLASS_SPECIFIER     go to state 15
+    TYPE_SPECIFIER              go to state 16
+    STRUCT_OR_UNION_SPECIFIER   go to state 17
+    STRUCT_OR_UNION             go to state 18
+    ENUM_SPECIFIER              go to state 19
+    TYPE_QUALIFIER              go to state 20
+    POINTER                     go to state 172
+    PARAMETER_TYPE_LIST         go to state 158
+    PARAMETER_LIST              go to state 96
+    PARAMETER_DECLARATION       go to state 97
+    ABSTRACT_DECLARATOR         go to state 159
+    DIRECT_ABSTRACT_DECLARATOR  go to state 131
+
+
+State 172
+
+   80 ABSTRACT_DECLARATOR: POINTER .
+   82                    | POINTER . DIRECT_ABSTRACT_DECLARATOR
+
+    T_LBRACKET  shift, and go to state 171
+
+    $default  reduce using rule 80 (ABSTRACT_DECLARATOR)
+
+    DIRECT_ABSTRACT_DECLARATOR  go to state 160
+
+
+State 173
+
+   79 TYPE_NAME: SPECIFIER_QUALIFIER_LIST ABSTRACT_DECLARATOR .
+
+    $default  reduce using rule 79 (TYPE_NAME)
+
+
+State 174
+
+   46 SPECIFIER_QUALIFIER_LIST: TYPE_QUALIFIER SPECIFIER_QUALIFIER_LIST .
+
+    $default  reduce using rule 46 (SPECIFIER_QUALIFIER_LIST)
+
+
+State 175
+
+   16 CAST_EXPRESSION: T_LBRACKET TYPE_NAME T_RBRACKET . CAST_EXPRESSION
+
+    T_STAR        shift, and go to state 62
+    T_PLUS        shift, and go to state 63
+    T_MINUS       shift, and go to state 64
+    T_LBRACKET    shift, and go to state 118
+    T_CONSTANT    shift, and go to state 71
+    T_IDENTIFIER  shift, and go to state 105
+
+    PRIMARY_EXPRESSION  go to state 73
+    POSTFIX_EXPRESSION  go to state 74
+    UNARY_EXPRESSION    go to state 119
+    UNARY_OPERATOR      go to state 76
+    CAST_EXPRESSION     go to state 186
+
+
+State 176
+
+   85 DIRECT_ABSTRACT_DECLARATOR: T_LBRACKET PARAMETER_TYPE_LIST T_RBRACKET .
+
+    $default  reduce using rule 85 (DIRECT_ABSTRACT_DECLARATOR)
+
+
+State 177
+
+   83 DIRECT_ABSTRACT_DECLARATOR: T_LBRACKET ABSTRACT_DECLARATOR T_RBRACKET .
+
+    $default  reduce using rule 83 (DIRECT_ABSTRACT_DECLARATOR)
+
+
+State 178
+
+   86 DIRECT_ABSTRACT_DECLARATOR: DIRECT_ABSTRACT_DECLARATOR T_LBRACKET T_RBRACKET .
+
+    $default  reduce using rule 86 (DIRECT_ABSTRACT_DECLARATOR)
+
+
+State 179
+
+   87 DIRECT_ABSTRACT_DECLARATOR: DIRECT_ABSTRACT_DECLARATOR T_LBRACKET PARAMETER_TYPE_LIST . T_RBRACKET
+
+    T_RBRACKET  shift, and go to state 187
+
+
+State 180
+
+   90 INITIALIZER: T_LCURLY INITIALIZER_LIST T_COMMA T_RCURLY .
+
+    $default  reduce using rule 90 (INITIALIZER)
+
+
+State 181
+
+   92 INITIALIZER_LIST: INITIALIZER_LIST T_COMMA INITIALIZER .
+
+    $default  reduce using rule 92 (INITIALIZER_LIST)
+
+
+State 182
+
+  111 SELECTION_STATEMENT: T_IF T_LBRACKET EXPRESSION T_RBRACKET T_ELSE . STATEMENT
+
+    T_STAR        shift, and go to state 62
+    T_PLUS        shift, and go to state 63
+    T_MINUS       shift, and go to state 64
+    T_LBRACKET    shift, and go to state 65
+    T_LCURLY      shift, and go to state 42
+    T_SEMICOLON   shift, and go to state 67
+    T_IF          shift, and go to state 68
+    T_WHILE       shift, and go to state 69
+    T_RETURN      shift, and go to state 70
+    T_CONSTANT    shift, and go to state 71
+    T_IDENTIFIER  shift, and go to state 72
+
+    T_SEMICOLON  [reduce using rule 17 (CONDITIONAL_EXPRESSION)]
+    $default     reduce using rule 17 (CONDITIONAL_EXPRESSION)
+
+    PRIMARY_EXPRESSION      go to state 73
+    POSTFIX_EXPRESSION      go to state 74
+    UNARY_EXPRESSION        go to state 75
+    UNARY_OPERATOR          go to state 76
+    CONDITIONAL_EXPRESSION  go to state 77
+    ASSIGNMENT_EXPRESSION   go to state 78
+    EXPRESSION              go to state 79
+    STATEMENT               go to state 188
+    LABELED_STATEMENT       go to state 81
+    COMPOUND_STATEMENT      go to state 82
+    EXPRESSION_STATEMENT    go to state 85
+    SELECTION_STATEMENT     go to state 86
+    ITERATION_STATEMENT     go to state 87
+    JUMP_STATEMENT          go to state 88
+
+
+State 183
+
+  110 SELECTION_STATEMENT: T_IF T_LBRACKET EXPRESSION T_RBRACKET STATEMENT .
+
+    $default  reduce using rule 110 (SELECTION_STATEMENT)
+
+
+State 184
+
+  112 ITERATION_STATEMENT: T_WHILE T_LBRACKET EXPRESSION T_RBRACKET STATEMENT .
+
+    $default  reduce using rule 112 (ITERATION_STATEMENT)
+
+
+State 185
+
+    9 ARGUMENT_EXPRESSION_LIST: ARGUMENT_EXPRESSION_LIST T_COMMA ASSIGNMENT_EXPRESSION .
+
+    $default  reduce using rule 9 (ARGUMENT_EXPRESSION_LIST)
+
+
+State 186
+
+   16 CAST_EXPRESSION: T_LBRACKET TYPE_NAME T_RBRACKET CAST_EXPRESSION .
+
+    $default  reduce using rule 16 (CAST_EXPRESSION)
+
+
+State 187
+
+   87 DIRECT_ABSTRACT_DECLARATOR: DIRECT_ABSTRACT_DECLARATOR T_LBRACKET PARAMETER_TYPE_LIST T_RBRACKET .
+
+    $default  reduce using rule 87 (DIRECT_ABSTRACT_DECLARATOR)
+
+
+State 188
+
+  111 SELECTION_STATEMENT: T_IF T_LBRACKET EXPRESSION T_RBRACKET T_ELSE STATEMENT .
+
+    $default  reduce using rule 111 (SELECTION_STATEMENT)
