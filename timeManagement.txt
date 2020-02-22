@@ -16,3 +16,6 @@ Later on 19/02/2020
 
 20/02/2020
         -testing out parser, made identifier and trying to parse, as well as gen the python
+
+22/02/2020
+	-started again, redid our parser based on the lab 2
