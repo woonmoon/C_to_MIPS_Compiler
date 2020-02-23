@@ -13,12 +13,19 @@ typedef const Identifier* IdentifierPtr;
 
 class Identifier: public Expression {
     public:
-        Identifier(std::string v) : variableName(v){};
-        virtual void print(std::ostream &dst) const override
-          {
-              dst<<variableName;
-              dst<<" = 0";
-          }
+        //Identifier(std::string v) : variableName(v) { };
+        Identifier(std::string v) {
+          std::cout << "Identifier constructed" << std::endl;
+          variableName=v;
+        }
+
+        void print(std::ostream& os) const{
+          os << "constructed identifier in print ";
+        }
+
+        void gen_python(std::ostream &os) const{
+          os << "constructed identifier ";
+        }
     private:
         std::string variableName;
 };

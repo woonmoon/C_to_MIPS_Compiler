@@ -11,34 +11,33 @@ digit           [0-9]
 letter          [a-zA-Z]
 
 %%
-[*]             { return T_STAR; }
-[+]             { return T_PLUS; }
-[\^]            { return T_XOR; }
-[\/]            { return T_DIVIDE; }
-[-]             { return T_MINUS; }
-[,]             { return T_COMMA; }
+"*"             { return T_STAR; }
+"+"             { fprintf(stderr, "returning + "); return T_PLUS; }
+"^"            { return T_XOR; }
+"/"            { return T_DIVIDE; }
+"-"             { return T_MINUS; }
+","             { return T_COMMA; }
+"="             { return T_ASSIGN; }
 
-[<<]            { return T_LSHIFT; }
-[>>]            { return T_RSHIFT; }
-[<]             { return T_LESSTHAN; }
-[>]             { return T_GREATERTHAN; }
-[==]            { return T_EQUALS; }
-[!=]            { return T_NOT_EQUALS; }
+">>"            { return T_LSHIFT; }
+"<<"            { return T_RSHIFT; }
+"<"             { return T_LESSTHAN; }
+">"             { return T_GREATERTHAN; }
+"=="            { return T_EQUALS; }
+"!="            { return T_NOT_EQUALS; }
 
-[(]             { return T_LBRACKET; }
-[)]             { return T_RBRACKET; }
-[{]             { return T_LCURLY; }
-[}]             { return T_RCURLY; }
-[;]             { return T_SEMICOLON; }
-[:]             { return T_COLON; }
+"("             { return T_LBRACKET; }
+")"             { return T_RBRACKET; }
+"{"             { return T_LCURLY; }
+"}"             { return T_RCURLY; }
+";"             { return T_SEMICOLON; }
+":"             { return T_COLON; }
 
-[&]             { return T_AND; }
-[|]             { return T_OR; }
-[&&]            { return T_AND_OP; }
-[||]            { return T_OR_OP; }
-[?]             { return T_QUESTION; }
-
-[=]             { return T_ASSIGN; }
+"&"             { return T_AND; }
+"|"             { return T_OR; }
+"&&"            { return T_AND_OP; }
+"||"            { return T_OR_OP; }
+"?"             { return T_QUESTION; }
 
 log             { return T_LOG; }
 exp             { return T_EXP; }

@@ -26,6 +26,8 @@ public:
         const std::map<std::string,double> &bindings
     ) const
     { throw std::runtime_error("Not implemented."); }
+
+    virtual void gen_python(std::ostream& os) const =0;
 };
 
 
