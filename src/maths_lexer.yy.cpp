@@ -2032,7 +2032,7 @@ void yyfree (void * ptr )
 
 void yyerror (char const *s)
 {
-  std::cout << "parse error: " << yytext << std::endl;
+  std::cout << "Parse Error: " << s << std::endl;
   exit(1);
 }
 

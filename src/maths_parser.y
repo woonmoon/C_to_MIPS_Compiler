@@ -21,6 +21,7 @@
   std::string *string;
 }
 
+%define parse.error verbose
 %token T_STAR T_DIVIDE T_PLUS T_MINUS T_EXPONENT T_COMMA
 %token T_LSHIFT T_RSHIFT T_LESSTHAN T_GREATERTHAN T_EQUALS T_NOT_EQUALS
 %token T_AND T_XOR T_OR T_AND_OP T_OR_OP T_QUESTION
