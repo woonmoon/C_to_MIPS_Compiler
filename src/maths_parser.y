@@ -127,7 +127,7 @@ CONDITIONAL_EXPRESSION : LOGICAL_OR_EXPRESSION { std::cout << "conditional expre
                        ;
 
 ASSIGNMENT_EXPRESSION : CONDITIONAL_EXPRESSION { std::cout << "assignment expression: conditional expression" << std::endl; }
-                      | UNARY_EXPRESSION ASSIGNMENT_OPERATOR ASSIGNMENT_EXPRESSION { std::cout << "assignment expression: unary expression = assignment expression" << std::endl; }
+                      | UNARY_EXPRESSION T_ASSIGN ASSIGNMENT_EXPRESSION { std::cout << "assignment expression: unary expression = assignment expression" << std::endl; }
                       ;
 
 ASSIGNMENT_OPERATOR : T_ASSIGN { std::cout << "assignment operator: =" << std::endl; }
@@ -221,8 +221,8 @@ DECLARATOR : POINTER DIRECT_DECLARATOR { std::cout << "declarator: pointer direc
            | DIRECT_DECLARATOR { std::cout << "declarator: direct declarator" << std::endl; }
            ;
 
-DIRECT_DECLARATOR : T_IDENTIFIER { $$ = new Identifier(*$1); std::cout << "direct declarator: identifier" << std::endl; delete $1;  }
-                  | T_LBRACKET DECLARATOR T_RBRACKET { std::cout << "direct declarator: ( declarator )" << std::endl; }
+DIRECT_DECLARATOR : T_IDENTIFIER { std::cout << "direct declarator: identifier" << std::endl; delete $1;  }
+                  | T_LBRACKET DECLARATOR T_RBRACKET { $$ = $2; std::cout << "direct declarator: ( declarator )" << std::endl; }
                   | DIRECT_DECLARATOR T_LBRACKET PARAMETER_TYPE_LIST T_RBRACKET { std::cout << "direct declarator: direct declarator ( parameter type list )" << std::endl; }
                   | DIRECT_DECLARATOR T_LBRACKET IDENTIFIER_LIST T_RBRACKET { std::cout << "direct declarator: direct declarator ( identifier list )" << std::endl; }
                   | DIRECT_DECLARATOR T_LBRACKET T_RBRACKET { std::cout << "direct declarator: direct declarator( )" << std::endl; }
@@ -271,8 +271,7 @@ DIRECT_ABSTRACT_DECLARATOR : T_LBRACKET ABSTRACT_DECLARATOR T_RBRACKET { std::co
                            ;
 
 INITIALIZER : ASSIGNMENT_EXPRESSION { std::cout << "initializer: assignment expression" << std::endl; }
-            | T_LCURLY INITIALIZER_LIST T_RCURLY { std::cout << "initializer: { initializer list }" << std::endl; }
-            | T_LCURLY INITIALIZER_LIST T_COMMA T_RCURLY { std::cout << "initializer: { initializer list, }" << std::endl; }
+            //removed other 2 because we aren't doing 2D arrays
             ;
 
 INITIALIZER_LIST : INITIALIZER { std::cout << "initializer list: initializer" << std::endl; }

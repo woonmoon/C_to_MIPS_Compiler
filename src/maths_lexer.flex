@@ -12,7 +12,7 @@ letter          [a-zA-Z]
 
 %%
 "*"             { return T_STAR; }
-"+"             { fprintf(stderr, "returning + "); return T_PLUS; }
+"+"             { return T_PLUS; }
 "^"            { return T_XOR; }
 "/"            { return T_DIVIDE; }
 "-"             { return T_MINUS; }
@@ -68,6 +68,6 @@ volatile        { return T_VOLATILE; }
 
 void yyerror (char const *s)
 {
-  fprintf (stderr, "Parse error : %s\n", s);
+  std::cout << "parse error: " << yytext << std::endl;
   exit(1);
 }

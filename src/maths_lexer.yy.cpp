@@ -804,7 +804,7 @@ YY_RULE_SETUP
 case 2:
 YY_RULE_SETUP
 #line 15 "src/maths_lexer.flex"
-{ fprintf(stderr, "returning + "); return T_PLUS; }
+{ return T_PLUS; }
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
@@ -2032,7 +2032,7 @@ void yyfree (void * ptr )
 
 void yyerror (char const *s)
 {
-  fprintf (stderr, "Parse error : %s\n", s);
+  std::cout << "parse error: " << yytext << std::endl;
   exit(1);
 }
 
