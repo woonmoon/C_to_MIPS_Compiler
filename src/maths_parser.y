@@ -142,18 +142,6 @@ EXPRESSION : ASSIGNMENT_EXPRESSION { std::cout << "expression: assignment expres
 CONSTANT_EXPRESSION : CONDITIONAL_EXPRESSION { std::cout << "constant expression: condiitional expression" << std::endl; }
                       ;
 
-DECLARATION : DECLARATION_SPECIFIERS T_SEMICOLON  { $$ = $1; std::cout << "declaration: declaration specifiers;" << std::endl;}
-            | DECLARATION_SPECIFIERS INIT_DECLARATOR_LIST T_SEMICOLON  { $$ = $1; std::cout << "declaration: declaration specifiers init declarator list;" << std::endl;}
-            ;
-
-DECLARATION_SPECIFIERS : STORAGE_CLASS_SPECIFIER { std::cout << "declaration specifier: storage class specifier" << std::endl; }
-                       | STORAGE_CLASS_SPECIFIER DECLARATION_SPECIFIERS { std::cout << "declaration specifier: storage class specifier declaration specifier" << std::endl; }
-                       | TYPE_SPECIFIER  { std::cout << "declaration specifier: type specifier" << std::endl; }
-                       | TYPE_SPECIFIER DECLARATION_SPECIFIERS  { std::cout << "declaration specifier: type specifier declaration specifiers" << std::endl; }
-                       | TYPE_QUALIFIER  { std::cout << "declaration specifier: type qualifier" << std::endl; }
-                       | TYPE_QUALIFIER DECLARATION_SPECIFIERS  { std::cout << "declaration specifier: type qualifier declaration specifiers" << std::endl; }
-                       ;
-
 INIT_DECLARATOR_LIST : INIT_DECLARATOR { std::cout << "init declarator list: init declarator" << std::endl; }
                      | INIT_DECLARATOR_LIST T_COMMA INIT_DECLARATOR { std::cout << "init declarator list: init declarator list, init declarator" << std::endl; }
                      ;
@@ -219,9 +207,7 @@ TYPE_QUALIFIER : T_CONST { std::cout << "type qualifier: const" << std::endl; }
                | T_VOLATILE { std::cout << "type qualifier: volatile" << std::endl; }
                ;
 
-DECLARATOR : POINTER DIRECT_DECLARATOR { std::cout << "declarator: pointer direct declarator" << std::endl; }
-           | DIRECT_DECLARATOR { std::cout << "declarator: direct declarator" << std::endl; }
-           ;
+
 
 DIRECT_DECLARATOR : T_IDENTIFIER  { $$ = new Identifier(*$1); std::cout << "direct declarator: identifier" << std::endl;}
                   | T_LBRACKET DECLARATOR T_RBRACKET { $$ = $2; std::cout << "direct declarator: ( declarator )" << std::endl; }
@@ -296,9 +282,7 @@ COMPOUND_STATEMENT : T_LCURLY T_RCURLY { std::cout << "compound statement: { }" 
                    | T_LCURLY DECLARATION_LIST T_RCURLY { std::cout << "compound statement: { declaration list }" << std::endl; }
                    | T_LCURLY DECLARATION_LIST STATEMENT_LIST T_RCURLY { std::cout << "compound statement: { declaration list }" << std::endl; }
                    ;
-DECLARATION_LIST : DECLARATION { std::cout << "declaration list: declaration" << std::endl; }
-                 | DECLARATION_LIST DECLARATION { std::cout << "declaration list: declaration list declaration" << std::endl; }
-                 ;
+
 
 STATEMENT_LIST : STATEMENT { std::cout << "statement list: statement" << std::endl; }
                | STATEMENT_LIST STATEMENT { std::cout << "statement list: statement list statement" << std::endl; }
@@ -318,12 +302,21 @@ ITERATION_STATEMENT : T_WHILE T_LBRACKET EXPRESSION T_RBRACKET STATEMENT { std::
 JUMP_STATEMENT : T_RETURN T_SEMICOLON { std::cout << "jump statement: return" << std::endl; }
                | T_RETURN EXPRESSION T_SEMICOLON { std::cout << "jump statement: return expression" << std::endl; }
                ;
-TRANSLATION_UNIT : EXTERNAL_DECLARATION { $$ = $1; std::cout << "translational unit: external declaration" << std::endl; }
-                | TRANSLATION_UNIT EXTERNAL_DECLARATION {std::cout << "translational unit: translational unit external declaration" << std::endl;}
-                ;
-EXTERNAL_DECLARATION : FUNCTION_DEFINITION { std::cout << "external declaration: funct declaration"<<std::endl; }
-                     | DECLARATION {$$ = $1; std::cout << "external declaration: declaration" << std::endl;}
-                     ;
+
+DECLARATION_SPECIFIERS : STORAGE_CLASS_SPECIFIER { std::cout << "declaration specifier: storage class specifier" << std::endl; }
+                       | STORAGE_CLASS_SPECIFIER DECLARATION_SPECIFIERS { std::cout << "declaration specifier: storage class specifier declaration specifier" << std::endl; }
+                       | TYPE_SPECIFIER  { std::cout << "declaration specifier: type specifier" << std::endl; }
+                       | TYPE_SPECIFIER DECLARATION_SPECIFIERS  { std::cout << "declaration specifier: type specifier declaration specifiers" << std::endl; }
+                       | TYPE_QUALIFIER  { std::cout << "declaration specifier: type qualifier" << std::endl; }
+                       | TYPE_QUALIFIER DECLARATION_SPECIFIERS  { std::cout << "declaration specifier: type qualifier declaration specifiers" << std::endl; }
+                       ;
+DECLARATOR : POINTER DIRECT_DECLARATOR { std::cout << "declarator: pointer direct declarator" << std::endl; }
+           | DIRECT_DECLARATOR { std::cout << "declarator: direct declarator" << std::endl; }
+           ;
+           
+DECLARATION_LIST : DECLARATION { std::cout << "declaration list: declaration" << std::endl; }
+                 | DECLARATION_LIST DECLARATION { std::cout << "declaration list: declaration list declaration" << std::endl; }
+                 ;
 
 FUNCTION_DEFINITION : DECLARATION_SPECIFIERS DECLARATOR DECLARATION_LIST COMPOUND_STATEMENT
                     | DECLARATION_SPECIFIERS DECLARATOR COMPOUND_STATEMENT
@@ -331,10 +324,18 @@ FUNCTION_DEFINITION : DECLARATION_SPECIFIERS DECLARATOR DECLARATION_LIST COMPOUN
                     | DECLARATOR COMPOUND_STATEMENT
                     ;
 
+DECLARATION : DECLARATION_SPECIFIERS T_SEMICOLON  { $$ = $1; std::cout << "declaration: declaration specifiers;" << std::endl;}
+            | DECLARATION_SPECIFIERS INIT_DECLARATOR_LIST T_SEMICOLON  { $$ = $1; std::cout << "declaration: declaration specifiers init declarator list;" << std::endl;}
+            ;
+
+EXTERNAL_DECLARATION : FUNCTION_DEFINITION { std::cout << "external declaration: funct declaration"<<std::endl; }
+                     | DECLARATION {$$ = $1; std::cout << "external declaration: declaration" << std::endl;}
+                     ;
+
 TRANSLATION_UNIT : EXTERNAL_DECLARATION { $$ = $1; std::cout << "translational unit: external declaration" << std::endl; }
-                    | TRANSLATION_UNIT EXTERNAL_DECLARATION {std::cout << "translational unit: translational unit external declaration" << std::endl;}
-                    ;
-                    
+                 | TRANSLATION_UNIT EXTERNAL_DECLARATION {std::cout << "translational unit: translational unit external declaration" << std::endl;}
+                 ;
+
 ROOT : TRANSLATION_UNIT { g_root = $1; std::cout << "Made the root" << std::endl;}
 
 %%
