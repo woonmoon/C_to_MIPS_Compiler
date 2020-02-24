@@ -5,6 +5,7 @@
 
   extern const Expression *g_root; // A way of getting the AST out
 
+
   //! This is to fix problems when generating C++
   // We are declaring the functions provided by Flex, so
   // that Bison generated code can call them.
@@ -38,7 +39,7 @@
 %type <expr> AND_EXPRESSION EXCLUSIVE_OR_EXPRESSION INCLUSIVE_OR_EXPRESSION LOGICAL_OR_EXPRESSION LOGICAL_AND_EXPRESSION
 %type <expr> CONDITIONAL_EXPRESSION CONSTANT_EXPRESSION
 %type <expr> DECLARATION DECLARATION_SPECIFIERS STORAGE_CLASS_SPECIFIER
-%type <expr> TYPE_QUALIFIER TYPE_SPECIFIER DECLARATOR INITIALIZER
+%type <expr> TYPE_QUALIFIER DECLARATOR INITIALIZER
 %type <expr> STRUCT_OR_UNION_SPECIFIER ENUM_SPECIFIER STRUCT_DECLARATOR ENUMERATOR
 %type <expr> DIRECT_DECLARATOR POINTER PARAMETER_DECLARATION ABSTRACT_DECLARATOR DIRECT_ABSTRACT_DECLARATOR
 %type <expr> STATEMENT LABELED_STATEMENT COMPOUND_STATEMENT EXPRESSION_STATEMENT SELECTION_STATEMENT ITERATION_STATEMENT JUMP_STATEMENT
@@ -49,25 +50,25 @@
 %type <exprList> PARAMETER_TYPE_LIST IDENTIFIER_LIST TYPE_QUALIFIER_LIST INITIALIZER_LIST
 
 %type <number> T_CONSTANT
-%type <string> T_IF T_ELSE T_WHILE T_RETURN T_MAIN T_INT T_VOID
+%type <string> T_IF T_ELSE T_WHILE T_RETURN T_MAIN T_INT T_VOID TYPE_SPECIFIER
 %type <string> T_IDENTIFIER T_LOG T_EXP T_SQRT FUNCTION_NAME
 
 %start ROOT
 %%
 
 
-PRIMARY_EXPRESSION : T_IDENTIFIER { $$ = new Identifier(*$1); std::cout << "issa identifier" << std::endl; }
+PRIMARY_EXPRESSION : T_IDENTIFIER {$$ = new Identifier(*$1); }
                    | T_CONSTANT { std::cout << "issa constant" << std::endl;}
                    | T_LBRACKET EXPRESSION T_RBRACKET { std::cout << "lbr rbr" << std::endl; }
                    ;
-POSTFIX_EXPRESSION : PRIMARY_EXPRESSION
+POSTFIX_EXPRESSION : PRIMARY_EXPRESSION {$$ = $1;}
                    | POSTFIX_EXPRESSION T_LBRACKET T_RBRACKET
                    | POSTFIX_EXPRESSION T_LBRACKET ARGUMENT_EXPRESSION_LIST T_RBRACKET
                    ;
-ARGUMENT_EXPRESSION_LIST : ASSIGNMENT_EXPRESSION
+ARGUMENT_EXPRESSION_LIST : ASSIGNMENT_EXPRESSION {$$ = $1;}
                          | ARGUMENT_EXPRESSION_LIST T_COMMA ASSIGNMENT_EXPRESSION
                          ;
-UNARY_EXPRESSION : POSTFIX_EXPRESSION
+UNARY_EXPRESSION : POSTFIX_EXPRESSION {$$ = $1;}
                  | UNARY_OPERATOR CAST_EXPRESSION
                  ;
 UNARY_OPERATOR : T_STAR { std::cout << "* found" << std::endl; }
@@ -141,8 +142,8 @@ EXPRESSION : ASSIGNMENT_EXPRESSION { std::cout << "expression: assignment expres
 CONSTANT_EXPRESSION : CONDITIONAL_EXPRESSION { std::cout << "constant expression: condiitional expression" << std::endl; }
                       ;
 
-DECLARATION : DECLARATION_SPECIFIERS T_SEMICOLON  {std::cout << "declaration: declaration specifiers;" << std::endl;}
-            | DECLARATION_SPECIFIERS INIT_DECLARATOR_LIST T_SEMICOLON  {std::cout << "declaration: declaration specifiers init declarator list;" << std::endl;}
+DECLARATION : DECLARATION_SPECIFIERS T_SEMICOLON  { $$ = $1; std::cout << "declaration: declaration specifiers;" << std::endl;}
+            | DECLARATION_SPECIFIERS INIT_DECLARATOR_LIST T_SEMICOLON  { $$ = $1; std::cout << "declaration: declaration specifiers init declarator list;" << std::endl;}
             ;
 
 DECLARATION_SPECIFIERS : STORAGE_CLASS_SPECIFIER { std::cout << "declaration specifier: storage class specifier" << std::endl; }
@@ -165,7 +166,7 @@ STORAGE_CLASS_SPECIFIER : T_TYPEDEF { std::cout << "storage class specifier: typ
                         ;
 
 TYPE_SPECIFIER : T_VOID { std::cout << "type specifier: void" << std::endl; }
-               | T_INT { std::cout << "type specifier: int" << std::endl; }
+               | T_INT {std::cout << "type specifier: int" << std::endl; $$ = $1; }
                | STRUCT_OR_UNION_SPECIFIER { std::cout << "type specifier: struct or union specifier" << std::endl; }
                | ENUM_SPECIFIER { std::cout << "type specifier: enum specifier" << std::endl; }
                ;
@@ -222,7 +223,7 @@ DECLARATOR : POINTER DIRECT_DECLARATOR { std::cout << "declarator: pointer direc
            | DIRECT_DECLARATOR { std::cout << "declarator: direct declarator" << std::endl; }
            ;
 
-DIRECT_DECLARATOR : T_IDENTIFIER { std::cout << "direct declarator: identifier" << std::endl; delete $1;  }
+DIRECT_DECLARATOR : T_IDENTIFIER  { $$ = new Identifier(*$1); std::cout << "direct declarator: identifier" << std::endl;}
                   | T_LBRACKET DECLARATOR T_RBRACKET { $$ = $2; std::cout << "direct declarator: ( declarator )" << std::endl; }
                   | DIRECT_DECLARATOR T_LBRACKET PARAMETER_TYPE_LIST T_RBRACKET { std::cout << "direct declarator: direct declarator ( parameter type list )" << std::endl; }
                   | DIRECT_DECLARATOR T_LBRACKET IDENTIFIER_LIST T_RBRACKET { std::cout << "direct declarator: direct declarator ( identifier list )" << std::endl; }
@@ -317,11 +318,11 @@ ITERATION_STATEMENT : T_WHILE T_LBRACKET EXPRESSION T_RBRACKET STATEMENT { std::
 JUMP_STATEMENT : T_RETURN T_SEMICOLON { std::cout << "jump statement: return" << std::endl; }
                | T_RETURN EXPRESSION T_SEMICOLON { std::cout << "jump statement: return expression" << std::endl; }
                ;
-TRANSLATION_UNIT : EXTERNAL_DECLARATION { std::cout << "translational unit: external declaration" << std::endl; }
+TRANSLATION_UNIT : EXTERNAL_DECLARATION { $$ = $1; std::cout << "translational unit: external declaration" << std::endl; }
                 | TRANSLATION_UNIT EXTERNAL_DECLARATION {std::cout << "translational unit: translational unit external declaration" << std::endl;}
                 ;
 EXTERNAL_DECLARATION : FUNCTION_DEFINITION { std::cout << "external declaration: funct declaration"<<std::endl; }
-                     | DECLARATION {std::cout << "external declaration: declaration" << std::endl;}
+                     | DECLARATION {$$ = $1; std::cout << "external declaration: declaration" << std::endl;}
                      ;
 
 FUNCTION_DEFINITION : DECLARATION_SPECIFIERS DECLARATOR DECLARATION_LIST COMPOUND_STATEMENT
@@ -330,7 +331,11 @@ FUNCTION_DEFINITION : DECLARATION_SPECIFIERS DECLARATOR DECLARATION_LIST COMPOUN
                     | DECLARATOR COMPOUND_STATEMENT
                     ;
 
-ROOT : TRANSLATION_UNIT { std::cout << "Made the root" << std::endl; g_root = $1;}
+TRANSLATION_UNIT : EXTERNAL_DECLARATION { $$ = $1; std::cout << "translational unit: external declaration" << std::endl; }
+                    | TRANSLATION_UNIT EXTERNAL_DECLARATION {std::cout << "translational unit: translational unit external declaration" << std::endl;}
+                    ;
+                    
+ROOT : TRANSLATION_UNIT { g_root = $1; std::cout << "Made the root" << std::endl;}
 
 %%
 
