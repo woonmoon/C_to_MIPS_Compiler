@@ -12,7 +12,8 @@ public:
   List(std::vector<NodePtr> b);
   List(): branches(std::vector<NodePtr>{}) { }
   ~List();
-  void print(std::ostream& os) const
+  virtual void print(std::ostream &dst) {}
+  virtual void pythonGen(std::ostream& os) {}
   std::vector<NodePtr> getBranches();
 private:
   std::vector<NodePtr> branches;
