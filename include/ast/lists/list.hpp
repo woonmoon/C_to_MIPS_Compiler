@@ -9,7 +9,7 @@ typedef const List* ListPtr;
 
 class List {
 public:
-  List(std::vector<NodePtr> _branches);
+  List(std::vector<NodePtr> b);
   List(): branches(std::vector<NodePtr>{}) { }
   ~List();
   void print(std::ostream& os) const

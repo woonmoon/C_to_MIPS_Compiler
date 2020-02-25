@@ -1,7 +1,7 @@
 #include "lists.hpp"
 
-List::List(std::vector<NodePtr> _branches) {
-  branches=_branches;
+List::List(std::vector<NodePtr> b) {
+  branches=b;
 }
 
 ~List::List() {
