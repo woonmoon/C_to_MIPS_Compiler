@@ -8,6 +8,8 @@
 #include "ast/ast_functions.hpp"
 #include "ast/identifier.hpp"
 #include "ast/lists/expression_lists.hpp"
+#include "ast/type/type.hpp"
+#include "ast/type/PrimitiveType.hpp"
 
 
 extern const Expression *parseAST();
