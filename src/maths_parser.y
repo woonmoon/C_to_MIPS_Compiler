@@ -40,7 +40,7 @@
 %type <expr> CONDITIONAL_EXPRESSION CONSTANT_EXPRESSION
 %type <expr> DECLARATION DECLARATION_SPECIFIERS STORAGE_CLASS_SPECIFIER
 %type <expr> TYPE_QUALIFIER DECLARATOR INITIALIZER
-%type <expr> STRUCT_OR_UNION_SPECIFIER ENUM_SPECIFIER STRUCT_DECLARATOR ENUMERATOR
+%type <expr> STRUCT_OR_UNION_SPECIFIER ENUM_SPECIFIER STRUCT_DECLARATOR ENUMERATOR TYPE_SPECIFIER
 %type <expr> DIRECT_DECLARATOR POINTER PARAMETER_DECLARATION ABSTRACT_DECLARATOR DIRECT_ABSTRACT_DECLARATOR
 %type <expr> STATEMENT LABELED_STATEMENT COMPOUND_STATEMENT EXPRESSION_STATEMENT SELECTION_STATEMENT ITERATION_STATEMENT JUMP_STATEMENT
 %type <expr> TRANSLATION_UNIT EXTERNAL_DECLARATION FUNCTION_DEFINITION
@@ -51,7 +51,7 @@
 
 %type <token> ASSIGNMENT_OPERATOR
 %type <number> T_CONSTANT
-%type <string> T_IF T_ELSE T_WHILE T_RETURN T_MAIN T_INT T_VOID TYPE_SPECIFIER
+%type <string> T_IF T_ELSE T_WHILE T_RETURN T_MAIN T_INT T_VOID
 %type <string> T_IDENTIFIER T_LOG T_EXP T_SQRT FUNCTION_NAME
 
 %start ROOT
@@ -154,8 +154,8 @@ INIT_DECLARATOR : DECLARATOR { std::cout << "init declarator: declarator" << std
 STORAGE_CLASS_SPECIFIER : T_TYPEDEF { std::cout << "storage class specifier: typedef" << std::endl; }
                         ;
 
-TYPE_SPECIFIER : T_VOID { std::cout << "type specifier: void" << std::endl; }
-               | T_INT {std::cout << "type specifier: int" << std::endl; $$ = $1; }
+TYPE_SPECIFIER : T_VOID { $$ = new PrimitiveType("void"); std::cout << "type specifier: void" << std::endl; }
+               | T_INT {$$ = new PrimitiveType("int"); std::cout << "type specifier: int" << std::endl;}
                | STRUCT_OR_UNION_SPECIFIER { std::cout << "type specifier: struct or union specifier" << std::endl; }
                | ENUM_SPECIFIER { std::cout << "type specifier: enum specifier" << std::endl; }
                ;
