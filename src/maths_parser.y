@@ -330,7 +330,7 @@ DECLARATION : DECLARATION_SPECIFIERS T_SEMICOLON  { $$ = $1; std::cout << "decla
             | DECLARATION_SPECIFIERS INIT_DECLARATOR_LIST T_SEMICOLON  { std::cout << "declaration: declaration specifiers init declarator list;" << std::endl;}
             ;
 
-EXTERNAL_DECLARATION : FUNCTION_DEFINITION { std::cout << "external declaration: funct declaration"<<std::endl; }
+EXTERNAL_DECLARATION : FUNCTION_DEFINITION { $$ = $1; std::cout << "external declaration: funct declaration"<<std::endl; }
                      | DECLARATION {$$ = $1; std::cout << "external declaration: declaration" << std::endl;}
                      ;
 
