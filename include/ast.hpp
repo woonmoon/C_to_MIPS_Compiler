@@ -7,11 +7,11 @@
 #include "ast/ast_unary.hpp"
 #include "ast/ast_functions.hpp"
 #include "ast/identifier.hpp"
-#include "ast/lists/expression_lists.hpp"
+#include "ast/lists/list.hpp"
 #include "ast/type/type.hpp"
 #include "ast/type/PrimitiveType.hpp"
 
 
-extern const Expression *parseAST();
+extern const Node *parseAST();
 
 #endif

@@ -46,7 +46,7 @@ extern int yydebug;
 
   #include <cassert>
 
-  extern const Expression *g_root; // A way of getting the AST out
+  extern const Node *g_root; // A way of getting the AST out
 
 
   //! This is to fix problems when generating C++
@@ -115,8 +115,8 @@ union YYSTYPE
 {
 #line 18 "src/maths_parser.y" /* yacc.c:1909  */
 
-  const Expression *expr;
-  const ExpressionList *exprList;
+  const Node *expr;
+  const List *exprList;
   double number;
   std::string *string;
 

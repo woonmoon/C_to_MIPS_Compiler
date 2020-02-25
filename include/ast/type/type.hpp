@@ -1,7 +1,7 @@
 #ifndef type_hpp
 #define type_hpp
 
-#include "../ast/node.hpp"
+#include "../node.hpp"
 
 class Type;
 typedef const Type *TypePtr;

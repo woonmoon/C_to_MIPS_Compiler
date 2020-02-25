@@ -2,9 +2,9 @@
 
 int main()
 {
-    const Expression *ast=parseAST();
+    const Node *ast=parseAST();
     std::cout << "parsed AST" << std::endl;
-    ast->gen_python(std::cout);
+    ast->pythonGen(std::cout);
     std::cout<<std::endl;
 
     return 0;

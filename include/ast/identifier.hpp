@@ -5,7 +5,7 @@
 #ifndef LANGPROC_2019_CW_JETSTREAM_IDENTIFIER_HPP
 #define LANGPROC_2019_CW_JETSTREAM_IDENTIFIER_HPP
 
-#include "ast_expression.hpp"
+#include "node.hpp"
 
 class Identifier;
 
@@ -21,7 +21,7 @@ class Identifier: public Node {
         void pythonGen(std::ostream &os) const{
           os << identifierName;
         }
-        
+
     private:
         std::string identifierName;
 };

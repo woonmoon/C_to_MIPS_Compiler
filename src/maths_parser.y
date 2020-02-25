@@ -3,7 +3,7 @@
 
   #include <cassert>
 
-  extern const Expression *g_root; // A way of getting the AST out
+  extern const Node *g_root; // A way of getting the AST out
 
 
   //! This is to fix problems when generating C++
@@ -16,8 +16,8 @@
 // Represents the value associated with any kind of
 // AST node.
 %union{
-  const Expression *expr;
-  const ExpressionList *exprList;
+  const Node *expr;
+  const List *exprList;
   double number;
   std::string *string;
 }
@@ -342,9 +342,9 @@ ROOT : TRANSLATION_UNIT { g_root = $1; std::cout << "Made the root" << std::endl
 
 %%
 
-const Expression *g_root; // Definition of variable (to match declaration earlier)
+const Node *g_root; // Definition of variable (to match declaration earlier)
 
-const Expression *parseAST()
+const Node *parseAST()
 {
   g_root=0;
   yyparse();
