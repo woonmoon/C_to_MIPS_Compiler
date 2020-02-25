@@ -49,6 +49,7 @@
 %type <exprList> SPECIFIER_QUALIFIER_LIST ENUMERATOR_LIST
 %type <exprList> PARAMETER_TYPE_LIST IDENTIFIER_LIST TYPE_QUALIFIER_LIST INITIALIZER_LIST
 
+%type <token> ASSIGNMENT_OPERATOR
 %type <number> T_CONSTANT
 %type <string> T_IF T_ELSE T_WHILE T_RETURN T_MAIN T_INT T_VOID TYPE_SPECIFIER
 %type <string> T_IDENTIFIER T_LOG T_EXP T_SQRT FUNCTION_NAME
@@ -65,7 +66,7 @@ POSTFIX_EXPRESSION : PRIMARY_EXPRESSION {$$ = $1;}
                    | POSTFIX_EXPRESSION T_LBRACKET T_RBRACKET
                    | POSTFIX_EXPRESSION T_LBRACKET ARGUMENT_EXPRESSION_LIST T_RBRACKET
                    ;
-ARGUMENT_EXPRESSION_LIST : ASSIGNMENT_EXPRESSION {$$ = $1;}
+ARGUMENT_EXPRESSION_LIST : ASSIGNMENT_EXPRESSION
                          | ARGUMENT_EXPRESSION_LIST T_COMMA ASSIGNMENT_EXPRESSION
                          ;
 UNARY_EXPRESSION : POSTFIX_EXPRESSION {$$ = $1;}
@@ -310,10 +311,11 @@ DECLARATION_SPECIFIERS : STORAGE_CLASS_SPECIFIER { std::cout << "declaration spe
                        | TYPE_QUALIFIER  { std::cout << "declaration specifier: type qualifier" << std::endl; }
                        | TYPE_QUALIFIER DECLARATION_SPECIFIERS  { std::cout << "declaration specifier: type qualifier declaration specifiers" << std::endl; }
                        ;
+
 DECLARATOR : POINTER DIRECT_DECLARATOR { std::cout << "declarator: pointer direct declarator" << std::endl; }
            | DIRECT_DECLARATOR { std::cout << "declarator: direct declarator" << std::endl; }
            ;
-           
+
 DECLARATION_LIST : DECLARATION { std::cout << "declaration list: declaration" << std::endl; }
                  | DECLARATION_LIST DECLARATION { std::cout << "declaration list: declaration list declaration" << std::endl; }
                  ;
@@ -325,7 +327,7 @@ FUNCTION_DEFINITION : DECLARATION_SPECIFIERS DECLARATOR DECLARATION_LIST COMPOUN
                     ;
 
 DECLARATION : DECLARATION_SPECIFIERS T_SEMICOLON  { $$ = $1; std::cout << "declaration: declaration specifiers;" << std::endl;}
-            | DECLARATION_SPECIFIERS INIT_DECLARATOR_LIST T_SEMICOLON  { $$ = $1; std::cout << "declaration: declaration specifiers init declarator list;" << std::endl;}
+            | DECLARATION_SPECIFIERS INIT_DECLARATOR_LIST T_SEMICOLON  { std::cout << "declaration: declaration specifiers init declarator list;" << std::endl;}
             ;
 
 EXTERNAL_DECLARATION : FUNCTION_DEFINITION { std::cout << "external declaration: funct declaration"<<std::endl; }
