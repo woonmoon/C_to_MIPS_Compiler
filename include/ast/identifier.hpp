@@ -11,22 +11,19 @@ class Identifier;
 
 typedef const Identifier* IdentifierPtr;
 
-class Identifier: public Expression {
+class Identifier: public Node {
     public:
-        Identifier(std::string v) : variableName(v) { };
-        // Identifier(std::string v) {
-        //   std::cout << "Identifier constructed" << std::endl;
-        //   variableName=v;
-        // }
+        Identifier(std::string v) : identifierName(v) {};
         void print(std::ostream& os) const{
-          os << "constructed identifier in print ";
+          os << "printed Identifier: " << identifierName;
         }
 
-        void gen_python(std::ostream &os) const{
-          os << "constructed identifier ";
+        void pythonGen(std::ostream &os) const{
+          os << identifierName;
         }
+        
     private:
-        std::string variableName;
+        std::string identifierName;
 };
 
 
