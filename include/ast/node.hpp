@@ -15,7 +15,7 @@ typedef const Node *NodePtr;
 class Node
 {
 public:
-    virtual ~Node()
+     ~Node()
     {}
 
     virtual void print(std::ostream &dst) const = 0;

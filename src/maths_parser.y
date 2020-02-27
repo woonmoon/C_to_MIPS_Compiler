@@ -154,8 +154,8 @@ INIT_DECLARATOR : DECLARATOR { std::cout << "init declarator: declarator" << std
 STORAGE_CLASS_SPECIFIER : T_TYPEDEF { std::cout << "storage class specifier: typedef" << std::endl; }
                         ;
 
-TYPE_SPECIFIER : T_VOID { $$ = new PrimitiveType("void"); std::cout << "type specifier: void" << std::endl; }
-               | T_INT {$$ = new PrimitiveType("int"); std::cout << "type specifier: int" << std::endl;}
+TYPE_SPECIFIER : T_VOID { $$ = new PrimitiveType(PrimitiveType::Specifier::_void); std::cout << "type specifier: void" << std::endl; }
+               | T_INT {$$ = new PrimitiveType(PrimitiveType::Specifier::_int); std::cout << "type specifier: int" << std::endl;}
                | STRUCT_OR_UNION_SPECIFIER { std::cout << "type specifier: struct or union specifier" << std::endl; }
                | ENUM_SPECIFIER { std::cout << "type specifier: enum specifier" << std::endl; }
                ;
