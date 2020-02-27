@@ -16,8 +16,8 @@
 // Represents the value associated with any kind of
 // AST node.
 %union{
-  const Node *expr;
-  const List *exprList;
+   Node *expr;
+   List *exprList;
   double number;
   std::string *string;
 }
@@ -43,9 +43,9 @@
 %type <expr> STRUCT_OR_UNION_SPECIFIER ENUM_SPECIFIER STRUCT_DECLARATOR ENUMERATOR TYPE_SPECIFIER
 %type <expr> DIRECT_DECLARATOR POINTER PARAMETER_DECLARATION ABSTRACT_DECLARATOR DIRECT_ABSTRACT_DECLARATOR
 %type <expr> STATEMENT LABELED_STATEMENT COMPOUND_STATEMENT EXPRESSION_STATEMENT SELECTION_STATEMENT ITERATION_STATEMENT JUMP_STATEMENT
-%type <expr> TRANSLATION_UNIT EXTERNAL_DECLARATION FUNCTION_DEFINITION
+%type <expr> TRANSLATION_UNIT EXTERNAL_DECLARATION FUNCTION_DEFINITION INIT_DECLARATOR_LIST INIT_DECLARATOR
 
-%type <exprList> INIT_DECLARATOR ARGUMENT_EXPRESSION_LIST INIT_DECLARATOR_LIST STRUCT_DECLARATOR_LIST
+%type <exprList> ARGUMENT_EXPRESSION_LIST STRUCT_DECLARATOR_LIST
 %type <exprList> SPECIFIER_QUALIFIER_LIST ENUMERATOR_LIST
 %type <exprList> PARAMETER_TYPE_LIST IDENTIFIER_LIST TYPE_QUALIFIER_LIST INITIALIZER_LIST
 
@@ -59,7 +59,7 @@
 
 
 PRIMARY_EXPRESSION : T_IDENTIFIER {$$ = new Identifier(*$1); }
-                   | T_CONSTANT { std::cout << "issa constant" << std::endl;}
+                   | T_CONSTANT { $$ = new Constant($1); std::cout << "issa constant" << std::endl;}
                    | T_LBRACKET EXPRESSION T_RBRACKET { std::cout << "lbr rbr" << std::endl; }
                    ;
 POSTFIX_EXPRESSION : PRIMARY_EXPRESSION {$$ = $1;}
@@ -77,59 +77,59 @@ UNARY_OPERATOR : T_STAR { std::cout << "* found" << std::endl; }
                | T_MINUS { std::cout << "- found" << std::endl; }
                ;
 
-CAST_EXPRESSION : UNARY_EXPRESSION { std::cout << "cast expression: unary expression" << std::endl; }
+CAST_EXPRESSION : UNARY_EXPRESSION { $$ = $1; std::cout << "cast expression: unary expression" << std::endl; }
                 | T_LBRACKET TYPE_NAME T_RBRACKET CAST_EXPRESSION { std::cout << "cast expression: ( type name ) cast expression" << std::endl; }
                 ;
 
-MULTIPLICATIVE_EXPRESSION : CAST_EXPRESSION { std::cout << "multiplicative expression: cast expression" << std::endl; }
+MULTIPLICATIVE_EXPRESSION : CAST_EXPRESSION { $$ = $1; std::cout << "multiplicative expression: cast expression" << std::endl; }
                           | MULTIPLICATIVE_EXPRESSION T_STAR CAST_EXPRESSION { std::cout << "multiplicative expression: multiplicative expression * cast expression" << std::endl; }
                           ;
 
-ADDITIVE_EXPRESSION : MULTIPLICATIVE_EXPRESSION { std::cout << "additive expression: multiplicative expression" << std::endl; }
+ADDITIVE_EXPRESSION : MULTIPLICATIVE_EXPRESSION { $$ = $1; std::cout << "additive expression: multiplicative expression" << std::endl; }
                     | ADDITIVE_EXPRESSION T_PLUS MULTIPLICATIVE_EXPRESSION { std::cout << "additive expression: additive expression + multiplicative expression" << std::endl; }
                     | ADDITIVE_EXPRESSION T_MINUS MULTIPLICATIVE_EXPRESSION { std::cout << "additive expression: additive expression - multiplicative expression" << std::endl; }
                     ;
 
-SHIFT_EXPRESSION : ADDITIVE_EXPRESSION { std::cout << "shift expression: additive expression" << std::endl; }
+SHIFT_EXPRESSION : ADDITIVE_EXPRESSION { $$ = $1; std::cout << "shift expression: additive expression" << std::endl; }
                  | SHIFT_EXPRESSION T_LSHIFT ADDITIVE_EXPRESSION { std::cout << "shift expression: shift expression << additive expression" << std::endl; }
                  | SHIFT_EXPRESSION T_RSHIFT ADDITIVE_EXPRESSION { std::cout << "shift expression: shift expression >> additive expression" << std::endl; }
                  ;
 
-RELATIONAL_EXPRESSION : SHIFT_EXPRESSION { std::cout << "relational expression: shift expression" << std::endl; }
+RELATIONAL_EXPRESSION : SHIFT_EXPRESSION { $$ = $1; std::cout << "relational expression: shift expression" << std::endl; }
                       | RELATIONAL_EXPRESSION T_LESSTHAN SHIFT_EXPRESSION { std::cout << "relational expression: relational expression < shift expression" << std::endl; }
                       | RELATIONAL_EXPRESSION T_GREATERTHAN SHIFT_EXPRESSION { std::cout << "relational expression: relational expression > shift expression" << std::endl; }
                       ;
 
-EQUALITY_EXPRESSION : RELATIONAL_EXPRESSION { std::cout << "equality expression: relational expression" << std::endl; }
+EQUALITY_EXPRESSION : RELATIONAL_EXPRESSION { $$ = $1; std::cout << "equality expression: relational expression" << std::endl; }
                     | EQUALITY_EXPRESSION T_EQUALS RELATIONAL_EXPRESSION { std::cout << "equality expression: equality expression = relational expression" << std::endl; }
                     | EQUALITY_EXPRESSION T_NOT_EQUALS RELATIONAL_EXPRESSION { std::cout << "equality expression: equality expression != relational expression" << std::endl; }
                     ;
 
-AND_EXPRESSION : EQUALITY_EXPRESSION { std::cout << "and expression: equality expression" << std::endl; }
+AND_EXPRESSION : EQUALITY_EXPRESSION { $$ = $1; std::cout << "and expression: equality expression" << std::endl; }
                | AND_EXPRESSION T_AND EQUALITY_EXPRESSION { std::cout << "and expression: and expression & equality expression" << std::endl; }
                ;
 
-EXCLUSIVE_OR_EXPRESSION : AND_EXPRESSION { std::cout << "exclusive or expression: and expression" << std::endl; }
+EXCLUSIVE_OR_EXPRESSION : AND_EXPRESSION { $$ = $1; std::cout << "exclusive or expression: and expression" << std::endl; }
                         | EXCLUSIVE_OR_EXPRESSION T_XOR AND_EXPRESSION { std::cout << "exclusive or expression: exclusive or expression ^ and expression" << std::endl; }
                         ;
 
-INCLUSIVE_OR_EXPRESSION : EXCLUSIVE_OR_EXPRESSION { std::cout << "inclusive or expression: exclusive or expression" << std::endl; }
+INCLUSIVE_OR_EXPRESSION : EXCLUSIVE_OR_EXPRESSION { $$ = $1; std::cout << "inclusive or expression: exclusive or expression" << std::endl; }
                         | INCLUSIVE_OR_EXPRESSION T_OR EXCLUSIVE_OR_EXPRESSION { std::cout << "inclusive or expression: inclusive or expression | exclusive or expression" << std::endl; }
                         ;
 
-LOGICAL_AND_EXPRESSION : INCLUSIVE_OR_EXPRESSION { std::cout << "logical and expression: inclusive or expression" << std::endl; }
+LOGICAL_AND_EXPRESSION : INCLUSIVE_OR_EXPRESSION {$$ = $1;  std::cout << "logical and expression: inclusive or expression" << std::endl; }
                        | LOGICAL_AND_EXPRESSION T_AND_OP INCLUSIVE_OR_EXPRESSION { std::cout << "logical and expression: logical and expression & inclusive or expression" << std::endl; }
                        ;
 
-LOGICAL_OR_EXPRESSION : LOGICAL_AND_EXPRESSION { std::cout << "logical or expression: logical and expression" << std::endl; }
+LOGICAL_OR_EXPRESSION : LOGICAL_AND_EXPRESSION {$$ = $1;  std::cout << "logical or expression: logical and expression" << std::endl; }
                       | LOGICAL_OR_EXPRESSION T_OR_OP LOGICAL_AND_EXPRESSION { std::cout << "logical or expression: logical or expression | logical and expression" << std::endl; }
                       ;
 
-CONDITIONAL_EXPRESSION : LOGICAL_OR_EXPRESSION { std::cout << "conditional expression: logical or expression" << std::endl; }
+CONDITIONAL_EXPRESSION : LOGICAL_OR_EXPRESSION { $$ = $1; std::cout << "conditional expression: logical or expression" << std::endl; }
                        | LOGICAL_OR_EXPRESSION T_QUESTION EXPRESSION T_COLON CONDITIONAL_EXPRESSION { std::cout << "conditional expression: logical or expression? conditional expression" << std::endl; }
                        ;
 
-ASSIGNMENT_EXPRESSION : CONDITIONAL_EXPRESSION { std::cout << "assignment expression: conditional expression" << std::endl; }
+ASSIGNMENT_EXPRESSION : CONDITIONAL_EXPRESSION { $$ = $1; std::cout << "assignment expression: conditional expression" << std::endl; }
                       | UNARY_EXPRESSION T_ASSIGN ASSIGNMENT_EXPRESSION { std::cout << "assignment expression: unary expression = assignment expression" << std::endl; }
                       ;
 
@@ -147,8 +147,8 @@ INIT_DECLARATOR_LIST : INIT_DECLARATOR { std::cout << "init declarator list: ini
                      | INIT_DECLARATOR_LIST T_COMMA INIT_DECLARATOR { std::cout << "init declarator list: init declarator list, init declarator" << std::endl; }
                      ;
 
-INIT_DECLARATOR : DECLARATOR { std::cout << "init declarator: declarator" << std::endl; }
-                | DECLARATOR T_ASSIGN INITIALIZER { std::cout << "init declarator: declarator = initializer" << std::endl; }
+INIT_DECLARATOR : DECLARATOR {$$ = $1; std::cout << "init declarator: declarator" << std::endl; }
+                | DECLARATOR T_ASSIGN INITIALIZER { std::cout << "init declarator: declarator = initializer" << std::endl; } //IMPLEMENT THIS BIG BOI
                 ;
 
 STORAGE_CLASS_SPECIFIER : T_TYPEDEF { std::cout << "storage class specifier: typedef" << std::endl; }
@@ -259,7 +259,7 @@ DIRECT_ABSTRACT_DECLARATOR : T_LBRACKET ABSTRACT_DECLARATOR T_RBRACKET { std::co
                            | DIRECT_ABSTRACT_DECLARATOR T_LBRACKET PARAMETER_TYPE_LIST T_RBRACKET { std::cout << "direct abstract declator: ( parameter type list)" << std::endl; }
                            ;
 
-INITIALIZER : ASSIGNMENT_EXPRESSION { std::cout << "initializer: assignment expression" << std::endl; }
+INITIALIZER : ASSIGNMENT_EXPRESSION { $$ = $1; std::cout << "initializer: assignment expression" << std::endl; }
             //removed other 2 because we aren't doing 2D arrays
             ;
 
@@ -306,14 +306,14 @@ JUMP_STATEMENT : T_RETURN T_SEMICOLON { std::cout << "jump statement: return" <<
 
 DECLARATION_SPECIFIERS : STORAGE_CLASS_SPECIFIER { std::cout << "declaration specifier: storage class specifier" << std::endl; }
                        | STORAGE_CLASS_SPECIFIER DECLARATION_SPECIFIERS { std::cout << "declaration specifier: storage class specifier declaration specifier" << std::endl; }
-                       | TYPE_SPECIFIER  { std::cout << "declaration specifier: type specifier" << std::endl; }
+                       | TYPE_SPECIFIER  {$$ = $1; std::cout << "declaration specifier: type specifier" << std::endl; }
                        | TYPE_SPECIFIER DECLARATION_SPECIFIERS  { std::cout << "declaration specifier: type specifier declaration specifiers" << std::endl; }
                        | TYPE_QUALIFIER  { std::cout << "declaration specifier: type qualifier" << std::endl; }
                        | TYPE_QUALIFIER DECLARATION_SPECIFIERS  { std::cout << "declaration specifier: type qualifier declaration specifiers" << std::endl; }
                        ;
 
 DECLARATOR : POINTER DIRECT_DECLARATOR { std::cout << "declarator: pointer direct declarator" << std::endl; }
-           | DIRECT_DECLARATOR { std::cout << "declarator: direct declarator" << std::endl; }
+           | DIRECT_DECLARATOR { $$ = $1; std::cout << "declarator: direct declarator" << std::endl; }
            ;
 
 DECLARATION_LIST : DECLARATION { std::cout << "declaration list: declaration" << std::endl; }
@@ -326,7 +326,7 @@ FUNCTION_DEFINITION : DECLARATION_SPECIFIERS DECLARATOR DECLARATION_LIST COMPOUN
                     | DECLARATOR COMPOUND_STATEMENT
                     ;
 
-DECLARATION : DECLARATION_SPECIFIERS T_SEMICOLON  { $$ = $1; std::cout << "declaration: declaration specifiers;" << std::endl;}
+DECLARATION : DECLARATION_SPECIFIERS T_SEMICOLON  { std::cout << "declaration: declaration specifiers;" << std::endl;}
             | DECLARATION_SPECIFIERS INIT_DECLARATOR_LIST T_SEMICOLON  { std::cout << "declaration: declaration specifiers init declarator list;" << std::endl;}
             ;
 

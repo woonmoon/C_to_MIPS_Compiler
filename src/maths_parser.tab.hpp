@@ -115,8 +115,8 @@ union YYSTYPE
 {
 #line 18 "src/maths_parser.y" /* yacc.c:1909  */
 
-  const Node *expr;
-  const List *exprList;
+   Node *expr;
+   List *exprList;
   double number;
   std::string *string;
 

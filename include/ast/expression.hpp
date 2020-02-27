@@ -1,5 +1,5 @@
-#ifndef node_hpp
-#define node_hpp
+#ifndef expression_hpp
+#define expression_hpp
 
 #include <string>
 #include <iostream>
@@ -7,7 +7,7 @@
 #include <map>
 #include <vector>
 #include <memory>
-#include "../ast/node.hpp"
+#include "node.hpp"
 
 class Expression;
 
@@ -18,11 +18,11 @@ class Expression  : public Node
 public:
     virtual ~Expression() {}
 
-    virtual void print(std::ostream &dst) {}
-    virtual void pythonGen(std::ostream& os) {}
-
+    virtual void print(std::ostream &dst) const { }
+    virtual void pythonGen(std::ostream& os) const { }
+        std::vector<NodePtr> branches;
 protected:
-    std::vector<NodePtr> branches;
+
 };
 
 
