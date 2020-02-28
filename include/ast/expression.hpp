@@ -20,7 +20,7 @@ public:
 
     virtual void print(std::ostream &dst) const { }
     virtual void pythonGen(std::ostream& os) const { }
-        std::vector<NodePtr> branches;
+    std::vector<NodePtr> branches;
 protected:
 
 };

@@ -15,7 +15,7 @@ class Constant: public Node {
     public:
         Constant(int v) : val(v) {};
         void print(std::ostream& os) const{
-          os << "printed Identifier: " << val;
+          os << val;
         }
 
         void pythonGen(std::ostream &os) const{

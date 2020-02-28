@@ -15,7 +15,7 @@ class Identifier: public Node {
     public:
         Identifier(std::string v) : identifierName(v) {};
         void print(std::ostream& os) const{
-          os << "printed Identifier: " << identifierName;
+          os << identifierName;
         }
 
         void pythonGen(std::ostream &os) const{

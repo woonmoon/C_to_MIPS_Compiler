@@ -17,7 +17,8 @@ public:
       branches.push_back(name);
     }
     virtual void print(std::ostream &dst) const{
-      dst << branches[0] << " = " << branches[1];
+      branches[0]->print(dst);
+      branches[1]->print(dst);
     }
     virtual void pythonGen(std::ostream& os) const { }
 private:

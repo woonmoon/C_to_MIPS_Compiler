@@ -141,9 +141,9 @@ EXPRESSION : ASSIGNMENT_EXPRESSION { std::cout << "expression: assignment expres
            ;
 
 CONSTANT_EXPRESSION : CONDITIONAL_EXPRESSION { std::cout << "constant expression: condiitional expression" << std::endl; }
-                      ;
+                    ;
 
-INIT_DECLARATOR_LIST : INIT_DECLARATOR { $$ = $1; std::cout << "init declarator list: init declarator" << std::endl; }
+INIT_DECLARATOR_LIST : INIT_DECLARATOR { $$ = new List($1); std::cout << "init declarator list: init declarator" << std::endl; }
                      | INIT_DECLARATOR_LIST T_COMMA INIT_DECLARATOR { std::cout << "init declarator list: init declarator list, init declarator" << std::endl; }
                      ;
 
@@ -327,7 +327,7 @@ FUNCTION_DEFINITION : DECLARATION_SPECIFIERS DECLARATOR DECLARATION_LIST COMPOUN
                     ;
 
 DECLARATION : DECLARATION_SPECIFIERS T_SEMICOLON  { std::cout << "declaration: declaration specifiers;" << std::endl;}
-            | DECLARATION_SPECIFIERS INIT_DECLARATOR_LIST T_SEMICOLON  { std::cout << "declaration: declaration specifiers init declarator list;" << std::endl;}
+            | DECLARATION_SPECIFIERS INIT_DECLARATOR_LIST T_SEMICOLON  { $$  = new Declaration($1, $2); std::cout << "declaration: declaration specifiers init declarator list;" << std::endl;}
             ;
 
 EXTERNAL_DECLARATION : FUNCTION_DEFINITION { $$ = $1; std::cout << "external declaration: funct declaration"<<std::endl; }
