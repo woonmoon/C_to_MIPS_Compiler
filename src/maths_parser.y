@@ -320,10 +320,10 @@ DECLARATION_LIST : DECLARATION { std::cout << "declaration list: declaration" <<
                  | DECLARATION_LIST DECLARATION { std::cout << "declaration list: declaration list declaration" << std::endl; }
                  ;
 
-FUNCTION_DEFINITION : DECLARATION_SPECIFIERS DECLARATOR DECLARATION_LIST COMPOUND_STATEMENT
-                    | DECLARATION_SPECIFIERS DECLARATOR COMPOUND_STATEMENT
-                    | DECLARATOR DECLARATION_LIST COMPOUND_STATEMENT
-                    | DECLARATOR COMPOUND_STATEMENT
+FUNCTION_DEFINITION : DECLARATION_SPECIFIERS DECLARATOR DECLARATION_LIST COMPOUND_STATEMENT {std::cout << "declaration_specifiers, declarator, declaration list, compound_statement" << std::endl;}
+                    | DECLARATION_SPECIFIERS DECLARATOR COMPOUND_STATEMENT {std::cout << "declaration_specifiers, declarator, compound_statement" << std::endl;}
+                    | DECLARATOR DECLARATION_LIST COMPOUND_STATEMENT {std::cout << "declarator declaration_list, compound_statement" << std::endl;}
+                    | DECLARATOR COMPOUND_STATEMENT { std::cout << "declarator, compound_statement" << std::endl;}
                     ;
 
 DECLARATION : DECLARATION_SPECIFIERS T_SEMICOLON  { std::cout << "declaration: declaration specifiers;" << std::endl;}
