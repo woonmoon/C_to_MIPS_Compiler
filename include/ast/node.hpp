@@ -15,8 +15,7 @@ typedef const Node *NodePtr;
 class Node
 {
 public:
-     ~Node()
-    {}
+     ~Node(){}
 
     virtual void print(std::ostream &dst) const = 0;
     virtual void pythonGen(std::ostream& os) const = 0;

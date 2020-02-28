@@ -5,24 +5,26 @@
 
 
 class List;
-typedef const List* ListPtr;
+typedef List* ListPtr;
 
-class List : public Node{
+class List : public Node {
 public:
   List(NodePtr b) {
     listOfExpressions.push_back(b);
     std::cout << "constructed a list" << std::endl;
   };
-  ~List(){
+  ~List() {
     for(int i=0; i<listOfExpressions.size(); i++) {
       delete listOfExpressions[i];
+    }
   }
-  };
   virtual void print(std::ostream &dst) const {
       listOfExpressions[0]->print(dst);
   }
   virtual void pythonGen(std::ostream& os) const { }
-  std::vector<NodePtr> getlistOfExpressions();
+  std::vector<NodePtr> getlistOfExpressions() {
+    return listOfExpressions;
+  }
 private:
   std::vector<NodePtr> listOfExpressions;
 };

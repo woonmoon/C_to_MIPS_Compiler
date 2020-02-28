@@ -278,7 +278,7 @@ STATEMENT : LABELED_STATEMENT { std::cout << "statement: labeled statement" << s
 LABELED_STATEMENT : T_IDENTIFIER T_COLON STATEMENT { std::cout << "labelled statement: identifier: statement" << std::endl; }
                   ;
 
-COMPOUND_STATEMENT : T_LCURLY T_RCURLY { std::cout << "compound statement: { }" << std::endl; }
+COMPOUND_STATEMENT : T_LCURLY T_RCURLY { $$ = new localScope(); std::cout << "compound statement: { }" << std::endl; }
                    | T_LCURLY STATEMENT_LIST T_RCURLY { std::cout << "compound statement: { statement list }" << std::endl; }
                    | T_LCURLY DECLARATION_LIST T_RCURLY { std::cout << "compound statement: { declaration list }" << std::endl; }
                    | T_LCURLY DECLARATION_LIST STATEMENT_LIST T_RCURLY { std::cout << "compound statement: { declaration list }" << std::endl; }
@@ -293,7 +293,7 @@ EXPRESSION_STATEMENT : T_SEMICOLON { std::cout << "expression statement: ; " << 
                      | EXPRESSION T_SEMICOLON { std::cout << "expression statement: expression;" << std::endl; }
                      ;
 
-SELECTION_STATEMENT : T_IF T_LBRACKET EXPRESSION T_RBRACKET STATEMENT { std::cout << "if statement" << std::endl; }
+SELECTION_STATEMENT : T_IF T_LBRACKET EXPRESSION T_RBRACKET STATEMENT { $$ = new ifStatement($3, $5); std::cout << "if statement" << std::endl; }
                     | T_IF T_LBRACKET EXPRESSION T_RBRACKET T_ELSE STATEMENT { std::cout << "if else statement" << std::endl; }
                     ;
 
