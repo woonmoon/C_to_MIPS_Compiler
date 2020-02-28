@@ -143,12 +143,12 @@ EXPRESSION : ASSIGNMENT_EXPRESSION { std::cout << "expression: assignment expres
 CONSTANT_EXPRESSION : CONDITIONAL_EXPRESSION { std::cout << "constant expression: condiitional expression" << std::endl; }
                       ;
 
-INIT_DECLARATOR_LIST : INIT_DECLARATOR { std::cout << "init declarator list: init declarator" << std::endl; }
+INIT_DECLARATOR_LIST : INIT_DECLARATOR { $$ = $1; std::cout << "init declarator list: init declarator" << std::endl; }
                      | INIT_DECLARATOR_LIST T_COMMA INIT_DECLARATOR { std::cout << "init declarator list: init declarator list, init declarator" << std::endl; }
                      ;
 
-INIT_DECLARATOR : DECLARATOR {$$ = $1; std::cout << "init declarator: declarator" << std::endl; }
-                | DECLARATOR T_ASSIGN INITIALIZER { std::cout << "init declarator: declarator = initializer" << std::endl; } //IMPLEMENT THIS BIG BOI
+INIT_DECLARATOR : DECLARATOR {$$ = new initDeclarator($1); std::cout << "init declarator: declarator" << std::endl; }
+                | DECLARATOR T_ASSIGN INITIALIZER { $$ = new initDeclarator($1, $3); std::cout << "init declarator: declarator = initializer" << std::endl; } //IMPLEMENT THIS BIG BOI
                 ;
 
 STORAGE_CLASS_SPECIFIER : T_TYPEDEF { std::cout << "storage class specifier: typedef" << std::endl; }

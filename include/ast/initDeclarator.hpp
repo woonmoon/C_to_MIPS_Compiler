@@ -1,18 +1,18 @@
-#ifndef declaration_hpp
-#define declaration_hpp
+#ifndef init_declarator_hpp
+#define init_declarator_hpp
 
 #include "expression.hpp"
 
-class Declaration;
+class initDeclarator;
 
-class Declaration : public Expression {
+class initDeclarator : public Expression {
 public:
-    ~Declaration(){}
-    Declaration(Node* type){
+    ~initDeclarator(){}
+    initDeclarator(Node* type){
       branches.push_back(type);
       branches.push_back(0);
     }
-    Declaration(NodePtr type, NodePtr name){
+    initDeclarator(NodePtr type, NodePtr name){
       branches.push_back(type);
       branches.push_back(name);
     }

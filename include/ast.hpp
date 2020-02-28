@@ -8,6 +8,7 @@
 #include "ast/type/PrimitiveType.hpp"
 #include "ast/declaration.hpp"
 #include "ast/constant.hpp"
+#include "ast/initDeclarator.hpp"
 
 
 extern const Node *parseAST();
