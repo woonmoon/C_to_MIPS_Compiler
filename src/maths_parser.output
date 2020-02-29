@@ -439,7 +439,7 @@ Nonterminals, with rules where they appear
     COMPOUND_STATEMENT <expr> (91)
         on left: 109 110 111 112
         on right: 103 132 133 134 135
-    STATEMENT_LIST (92)
+    STATEMENT_LIST <exprList> (92)
         on left: 113 114
         on right: 110 112 114
     EXPRESSION_STATEMENT <expr> (93)

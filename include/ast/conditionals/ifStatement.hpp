@@ -6,7 +6,7 @@ typedef const ifStatement* ifStatementPtr;
 
 class ifStatement: public Node{
 public:
-     ifStatement(NodePtr exp, NodePtr nod): condition(exp), executeBlock(nod) { std::cout << "hello mate im an if" << std::endl;}
+    ifStatement(NodePtr exp, NodePtr nod): condition(exp), executeBlock(nod) { std::cout << "hello mate im an if" << std::endl;}
     NodePtr getCondition() {
         return condition;
     }

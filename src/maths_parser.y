@@ -30,7 +30,7 @@
 %token T_LOG T_EXP T_SQRT
 %token T_IF T_ELSE T_WHILE T_RETURN T_MAIN T_INT T_VOID T_STRUCT T_UNION T_ENUM
 %token T_ASSIGN
-%token T_CONSTANT T_IDENTIFIER T_TYPEDEF T_CONST T_VOLATILE
+%token T_CONSTANT T_IDENTIFIER T_TYPEDEF T_CONST T_VOLATILE 
 
 %type <expr> EXPR TERM UNARY FACTOR
 %type <expr> POSTFIX_EXPRESSION PRIMARY_EXPRESSION EXPRESSION ASSIGNMENT_EXPRESSION CAST_EXPRESSION
@@ -43,11 +43,11 @@
 %type <expr> STRUCT_OR_UNION_SPECIFIER ENUM_SPECIFIER STRUCT_DECLARATOR ENUMERATOR TYPE_SPECIFIER
 %type <expr> DIRECT_DECLARATOR POINTER PARAMETER_DECLARATION ABSTRACT_DECLARATOR DIRECT_ABSTRACT_DECLARATOR
 %type <expr> STATEMENT LABELED_STATEMENT COMPOUND_STATEMENT EXPRESSION_STATEMENT SELECTION_STATEMENT ITERATION_STATEMENT JUMP_STATEMENT
-%type <expr> TRANSLATION_UNIT EXTERNAL_DECLARATION FUNCTION_DEFINITION INIT_DECLARATOR_LIST INIT_DECLARATOR
+%type <expr> TRANSLATION_UNIT EXTERNAL_DECLARATION FUNCTION_DEFINITION INIT_DECLARATOR_LIST INIT_DECLARATOR 
 
 %type <exprList> ARGUMENT_EXPRESSION_LIST STRUCT_DECLARATOR_LIST
 %type <exprList> SPECIFIER_QUALIFIER_LIST ENUMERATOR_LIST
-%type <exprList> PARAMETER_TYPE_LIST IDENTIFIER_LIST TYPE_QUALIFIER_LIST INITIALIZER_LIST
+%type <exprList> PARAMETER_TYPE_LIST IDENTIFIER_LIST TYPE_QUALIFIER_LIST INITIALIZER_LIST STATEMENT_LIST
 
 %type <token> ASSIGNMENT_OPERATOR
 %type <number> T_CONSTANT
@@ -267,25 +267,25 @@ INITIALIZER_LIST : INITIALIZER { std::cout << "initializer list: initializer" <<
                  | INITIALIZER_LIST T_COMMA INITIALIZER { std::cout << "initializer list: init list, initializer" << std::endl; }
                  ;
 
-STATEMENT : LABELED_STATEMENT { std::cout << "statement: labeled statement" << std::endl; }
-          | COMPOUND_STATEMENT { std::cout << "statement: compound statement" << std::endl; }
-          | EXPRESSION_STATEMENT { std::cout << "statement: expression statement" << std::endl; }
-          | SELECTION_STATEMENT { std::cout << "statement: selection statement" << std::endl; }
-          | ITERATION_STATEMENT { std::cout << "statement: iteration statement" << std::endl; }
-          | JUMP_STATEMENT { std::cout << "statement: jump statement" << std::endl; }
+STATEMENT : LABELED_STATEMENT { $$ = $1; std::cout << "statement: labeled statement" << std::endl; }
+          | COMPOUND_STATEMENT { $$ = $1; std::cout << "statement: compound statement" << std::endl; }
+          | EXPRESSION_STATEMENT { $$ = $1; std::cout << "statement: expression statement" << std::endl; }
+          | SELECTION_STATEMENT { $$ = $1; std::cout << "statement: selection statement" << std::endl; }
+          | ITERATION_STATEMENT { $$ = $1; std::cout << "statement: iteration statement" << std::endl; }
+          | JUMP_STATEMENT { $$ = $1;  std::cout << "statement: jump statement" << std::endl; }
           ;
 
 LABELED_STATEMENT : T_IDENTIFIER T_COLON STATEMENT { std::cout << "labelled statement: identifier: statement" << std::endl; }
                   ;
 
 COMPOUND_STATEMENT : T_LCURLY T_RCURLY { $$ = new localScope(); std::cout << "compound statement: { }" << std::endl; }
-                   | T_LCURLY STATEMENT_LIST T_RCURLY { std::cout << "compound statement: { statement list }" << std::endl; }
+                   | T_LCURLY STATEMENT_LIST T_RCURLY { $$ = new localScope($2); std::cout << "compound statement: { statement list }" << std::endl; }
                    | T_LCURLY DECLARATION_LIST T_RCURLY { std::cout << "compound statement: { declaration list }" << std::endl; }
                    | T_LCURLY DECLARATION_LIST STATEMENT_LIST T_RCURLY { std::cout << "compound statement: { declaration list }" << std::endl; }
                    ;
 
 
-STATEMENT_LIST : STATEMENT { std::cout << "statement list: statement" << std::endl; }
+STATEMENT_LIST : STATEMENT { $$ = new List($1); std::cout << "statement list: statement" << std::endl; }
                | STATEMENT_LIST STATEMENT { std::cout << "statement list: statement list statement" << std::endl; }
                ;
 
@@ -321,7 +321,7 @@ DECLARATION_LIST : DECLARATION { std::cout << "declaration list: declaration" <<
                  ;
 
 FUNCTION_DEFINITION : DECLARATION_SPECIFIERS DECLARATOR DECLARATION_LIST COMPOUND_STATEMENT {std::cout << "declaration_specifiers, declarator, declaration list, compound_statement" << std::endl;}
-                    | DECLARATION_SPECIFIERS DECLARATOR COMPOUND_STATEMENT {std::cout << "declaration_specifiers, declarator, compound_statement" << std::endl;}
+                    | DECLARATION_SPECIFIERS DECLARATOR COMPOUND_STATEMENT { $$ = new functionDef($1, $2, $3); std::cout << "declaration_specifiers, declarator, compound_statement" << std::endl;}
                     | DECLARATOR DECLARATION_LIST COMPOUND_STATEMENT {std::cout << "declarator declaration_list, compound_statement" << std::endl;}
                     | DECLARATOR COMPOUND_STATEMENT { std::cout << "declarator, compound_statement" << std::endl;}
                     ;
