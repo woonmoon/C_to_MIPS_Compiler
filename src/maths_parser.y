@@ -1,6 +1,7 @@
 %code requires{
   #include "ast.hpp"
-
+  #define RED     "\033[31m"      /* Red */
+  #define RESET   "\033[0m"
   #include <cassert>
 
   extern const Node *g_root; // A way of getting the AST out
@@ -43,10 +44,10 @@
 %type <expr> STRUCT_OR_UNION_SPECIFIER ENUM_SPECIFIER STRUCT_DECLARATOR ENUMERATOR TYPE_SPECIFIER
 %type <expr> DIRECT_DECLARATOR POINTER PARAMETER_DECLARATION ABSTRACT_DECLARATOR DIRECT_ABSTRACT_DECLARATOR
 %type <expr> STATEMENT LABELED_STATEMENT COMPOUND_STATEMENT EXPRESSION_STATEMENT SELECTION_STATEMENT ITERATION_STATEMENT JUMP_STATEMENT
-%type <expr> TRANSLATION_UNIT EXTERNAL_DECLARATION FUNCTION_DEFINITION INIT_DECLARATOR_LIST INIT_DECLARATOR 
+%type <expr> TRANSLATION_UNIT EXTERNAL_DECLARATION FUNCTION_DEFINITION INIT_DECLARATOR 
 
 %type <exprList> ARGUMENT_EXPRESSION_LIST STRUCT_DECLARATOR_LIST
-%type <exprList> SPECIFIER_QUALIFIER_LIST ENUMERATOR_LIST
+%type <exprList> SPECIFIER_QUALIFIER_LIST ENUMERATOR_LIST INIT_DECLARATOR_LIST PARAMETER_LIST DECLARATION_LIST
 %type <exprList> PARAMETER_TYPE_LIST IDENTIFIER_LIST TYPE_QUALIFIER_LIST INITIALIZER_LIST STATEMENT_LIST
 
 %type <token> ASSIGNMENT_OPERATOR
@@ -66,8 +67,8 @@ POSTFIX_EXPRESSION : PRIMARY_EXPRESSION {$$ = $1;}
                    | POSTFIX_EXPRESSION T_LBRACKET T_RBRACKET
                    | POSTFIX_EXPRESSION T_LBRACKET ARGUMENT_EXPRESSION_LIST T_RBRACKET
                    ;
-ARGUMENT_EXPRESSION_LIST : ASSIGNMENT_EXPRESSION
-                         | ARGUMENT_EXPRESSION_LIST T_COMMA ASSIGNMENT_EXPRESSION
+ARGUMENT_EXPRESSION_LIST : ASSIGNMENT_EXPRESSION {$$ = new List($1); std::cout << "argument axpression lsit: argument expression" << std::endl;}
+                         | ARGUMENT_EXPRESSION_LIST T_COMMA ASSIGNMENT_EXPRESSION {$$ = new List($1); ($$)->addtoList($3); std::cout << "argument expression list: arg expr list comma assignment expr" << std::endl;}
                          ;
 UNARY_EXPRESSION : POSTFIX_EXPRESSION {$$ = $1;}
                  | UNARY_OPERATOR CAST_EXPRESSION
@@ -144,7 +145,7 @@ CONSTANT_EXPRESSION : CONDITIONAL_EXPRESSION { std::cout << "constant expression
                     ;
 
 INIT_DECLARATOR_LIST : INIT_DECLARATOR { $$ = new List($1); std::cout << "init declarator list: init declarator" << std::endl; }
-                     | INIT_DECLARATOR_LIST T_COMMA INIT_DECLARATOR { std::cout << "init declarator list: init declarator list, init declarator" << std::endl; }
+                     | INIT_DECLARATOR_LIST T_COMMA INIT_DECLARATOR { $$ = new List($1); ($$)->addtoList($3); std::cout << "init declarator list: init declarator list, init declarator" << std::endl; }
                      ;
 
 INIT_DECLARATOR : DECLARATOR {$$ = new initDeclarator($1); std::cout << "init declarator: declarator" << std::endl; }
@@ -212,8 +213,8 @@ TYPE_QUALIFIER : T_CONST { std::cout << "type qualifier: const" << std::endl; }
 
 DIRECT_DECLARATOR : T_IDENTIFIER  { $$ = new Identifier(*$1); std::cout << "direct declarator: identifier" << std::endl;}
                   | T_LBRACKET DECLARATOR T_RBRACKET { $$ = $2; std::cout << "direct declarator: ( declarator )" << std::endl; }
-                  | DIRECT_DECLARATOR T_LBRACKET PARAMETER_TYPE_LIST T_RBRACKET { std::cout << "direct declarator: direct declarator ( parameter type list )" << std::endl; }
-                  | DIRECT_DECLARATOR T_LBRACKET IDENTIFIER_LIST T_RBRACKET { std::cout << "direct declarator: direct declarator ( identifier list )" << std::endl; }
+                  | DIRECT_DECLARATOR T_LBRACKET PARAMETER_TYPE_LIST T_RBRACKET { $$ = new functionDef($1, $3); std::cout << "direct declarator: direct declarator ( parameter type list )" << std::endl; }
+                  | DIRECT_DECLARATOR T_LBRACKET IDENTIFIER_LIST T_RBRACKET { $$ = new functionDef($1, $3); std::cout << "direct declarator: direct declarator ( identifier list )" << std::endl; }
                   | DIRECT_DECLARATOR T_LBRACKET T_RBRACKET { std::cout << "direct declarator: direct declarator( )" << std::endl; }
                   ;
 
@@ -223,24 +224,24 @@ POINTER : T_STAR { std::cout << "pointer: *" << std::endl; }
         | T_STAR TYPE_QUALIFIER_LIST POINTER { std::cout << "pointer: * type qualifier list pointer" << std::endl; }
         ;
 
-TYPE_QUALIFIER_LIST : TYPE_QUALIFIER { std::cout << "type qualifier list: type qualifier" << std::endl; }
-                    | TYPE_QUALIFIER_LIST TYPE_QUALIFIER { std::cout << "type qualifier list: type qualifier list type qualifier" << std::endl; }
+TYPE_QUALIFIER_LIST : TYPE_QUALIFIER {$$ = new List($1); std::cout << "type qualifier list: type qualifier" << std::endl; }
+                    | TYPE_QUALIFIER_LIST TYPE_QUALIFIER { $$ = new List($1); ($$)->addtoList($2); std::cout << "type qualifier list: type qualifier list type qualifier" << std::endl; }
                     ;
 
 PARAMETER_TYPE_LIST : PARAMETER_LIST { std::cout << "parameter type list: parameter list" << std::endl; }
                     ;
 
-PARAMETER_LIST : PARAMETER_DECLARATION { std::cout << "parameter list: parameter declaration" << std::endl; }
-               | PARAMETER_LIST T_COMMA PARAMETER_DECLARATION { std::cout << "parameter list: parameter list, parameter declaration" << std::endl; }
+PARAMETER_LIST : PARAMETER_DECLARATION { $$ = new List($1); std::cout << "parameter list: parameter declaration" << std::endl; }
+               | PARAMETER_LIST T_COMMA PARAMETER_DECLARATION { $$ = new List($1); ($$)->addtoList($3); std::cout << "parameter list: parameter list, parameter declaration" << std::endl; }
                ;
 
-PARAMETER_DECLARATION : DECLARATION_SPECIFIERS DECLARATOR { std::cout << "parameter declaration: declaration specifiers declarator" << std::endl; }
+PARAMETER_DECLARATION : DECLARATION_SPECIFIERS DECLARATOR { $$ = new Declaration($1, $2); std::cout << "parameter declaration: declaration specifiers declarator" << std::endl; }
                       | DECLARATION_SPECIFIERS ABSTRACT_DECLARATOR { std::cout << "parameter declaration: declaration specifiers abstract declarator" << std::endl; }
-                      | DECLARATION_SPECIFIERS { std::cout << "parameter declaration: declaration specifiers" << std::endl; }
+                      | DECLARATION_SPECIFIERS { $$ = new Declaration($1); std::cout << "parameter declaration: declaration specifiers" << std::endl; }
                       ;
 
-IDENTIFIER_LIST : T_IDENTIFIER { std::cout << "identifier list: identifier" << std::endl; }
-                | IDENTIFIER_LIST T_COMMA T_IDENTIFIER { std::cout << "identifier list: identifier list, identifier" << std::endl; }
+IDENTIFIER_LIST : T_IDENTIFIER { $$ = new List(new Identifier(*$1)); std::cout << "identifier list: identifier" << std::endl; }
+                | IDENTIFIER_LIST T_COMMA T_IDENTIFIER { $$ = new List($1); ($$)->addtoList(new Identifier(*$3)); std::cout << "identifier list: identifier list, identifier" << std::endl; }
                 ;
 
 TYPE_NAME : SPECIFIER_QUALIFIER_LIST { std::cout << "type name: specifier qualifier list" << std::endl; }
@@ -263,8 +264,8 @@ INITIALIZER : ASSIGNMENT_EXPRESSION { $$ = $1; std::cout << "initializer: assign
             //removed other 2 because we aren't doing 2D arrays
             ;
 
-INITIALIZER_LIST : INITIALIZER { std::cout << "initializer list: initializer" << std::endl; }
-                 | INITIALIZER_LIST T_COMMA INITIALIZER { std::cout << "initializer list: init list, initializer" << std::endl; }
+INITIALIZER_LIST : INITIALIZER { $$ = new List($1); std::cout << "initializer list: initializer" << std::endl; }
+                 | INITIALIZER_LIST T_COMMA INITIALIZER { $$ = new List($1); ($$)->addtoList($3); std::cout << "initializer list: init list, initializer" << std::endl; }
                  ;
 
 STATEMENT : LABELED_STATEMENT { $$ = $1; std::cout << "statement: labeled statement" << std::endl; }
@@ -286,7 +287,7 @@ COMPOUND_STATEMENT : T_LCURLY T_RCURLY { $$ = new localScope(); std::cout << "co
 
 
 STATEMENT_LIST : STATEMENT { $$ = new List($1); std::cout << "statement list: statement" << std::endl; }
-               | STATEMENT_LIST STATEMENT { std::cout << "statement list: statement list statement" << std::endl; }
+               | STATEMENT_LIST STATEMENT { $$ = new List($1); ($$)->addtoList($2); std::cout << "statement list: statement list statement" << std::endl; }
                ;
 
 EXPRESSION_STATEMENT : T_SEMICOLON { std::cout << "expression statement: ; " << std::endl; }
@@ -294,10 +295,10 @@ EXPRESSION_STATEMENT : T_SEMICOLON { std::cout << "expression statement: ; " << 
                      ;
 
 SELECTION_STATEMENT : T_IF T_LBRACKET EXPRESSION T_RBRACKET STATEMENT { $$ = new ifStatement($3, $5); std::cout << "if statement" << std::endl; }
-                    | T_IF T_LBRACKET EXPRESSION T_RBRACKET T_ELSE STATEMENT { std::cout << "if else statement" << std::endl; }
+                    | T_IF T_LBRACKET EXPRESSION T_RBRACKET STATEMENT T_ELSE STATEMENT { $$ = new ifElseStatement($3, $5, $7); std::cout << "if else statement" << std::endl; }
                     ;
 
-ITERATION_STATEMENT : T_WHILE T_LBRACKET EXPRESSION T_RBRACKET STATEMENT { std::cout << "while loop" << std::endl; }
+ITERATION_STATEMENT : T_WHILE T_LBRACKET EXPRESSION T_RBRACKET STATEMENT { $$ = new whileLoop($3, $5); std::cout << "while loop" << std::endl; }
                     ;
 
 JUMP_STATEMENT : T_RETURN T_SEMICOLON { std::cout << "jump statement: return" << std::endl; }
@@ -316,18 +317,18 @@ DECLARATOR : POINTER DIRECT_DECLARATOR { std::cout << "declarator: pointer direc
            | DIRECT_DECLARATOR { $$ = $1; std::cout << "declarator: direct declarator" << std::endl; }
            ;
 
-DECLARATION_LIST : DECLARATION { std::cout << "declaration list: declaration" << std::endl; }
-                 | DECLARATION_LIST DECLARATION { std::cout << "declaration list: declaration list declaration" << std::endl; }
+DECLARATION_LIST : DECLARATION { $$ = new List($1); std::cout << "declaration list: declaration" << std::endl; std::cout << RED << "new list with DECLARATION " << RESET << std::endl; }
+                 | DECLARATION_LIST DECLARATION { $$ = new List($1); ($$)->addtoList($2); std::cout << "declaration list: declaration list declaration" << std::endl; std::cout << RED << "new List made with DECLARATION_LIST DECLARATION but secnod is added" << RESET << std::endl; }
                  ;
 
 FUNCTION_DEFINITION : DECLARATION_SPECIFIERS DECLARATOR DECLARATION_LIST COMPOUND_STATEMENT {std::cout << "declaration_specifiers, declarator, declaration list, compound_statement" << std::endl;}
-                    | DECLARATION_SPECIFIERS DECLARATOR COMPOUND_STATEMENT { $$ = new functionDef($1, $2, $3); std::cout << "declaration_specifiers, declarator, compound_statement" << std::endl;}
+                    | DECLARATION_SPECIFIERS DECLARATOR COMPOUND_STATEMENT { $$ = new functionDef($1, $2, $3); std::cout << "declaration_specifiers, declarator, compound_statement" << std::endl; std::cout << RED << "functionDef made with DECLARATION_SPECIFIERS DECLARATOR COMPOUND_STATEMENT" << RESET << std::endl;}
                     | DECLARATOR DECLARATION_LIST COMPOUND_STATEMENT {std::cout << "declarator declaration_list, compound_statement" << std::endl;}
                     | DECLARATOR COMPOUND_STATEMENT { std::cout << "declarator, compound_statement" << std::endl;}
                     ;
 
 DECLARATION : DECLARATION_SPECIFIERS T_SEMICOLON  { std::cout << "declaration: declaration specifiers;" << std::endl;}
-            | DECLARATION_SPECIFIERS INIT_DECLARATOR_LIST T_SEMICOLON  { $$  = new Declaration($1, $2); std::cout << "declaration: declaration specifiers init declarator list;" << std::endl;}
+            | DECLARATION_SPECIFIERS INIT_DECLARATOR_LIST T_SEMICOLON  { $$  = new Declaration($1, $2); std::cout << "declaration: declaration specifiers init declarator list;" << std::endl; std::cout << RED << "made declaration class with dec_specifiers and init_declarator list" << RESET << std::endl;}
             ;
 
 EXTERNAL_DECLARATION : FUNCTION_DEFINITION { $$ = $1; std::cout << "external declaration: funct declaration"<<std::endl; }
@@ -335,7 +336,7 @@ EXTERNAL_DECLARATION : FUNCTION_DEFINITION { $$ = $1; std::cout << "external dec
                      ;
 
 TRANSLATION_UNIT : EXTERNAL_DECLARATION { $$ = $1; std::cout << "translational unit: external declaration" << std::endl; }
-                 | TRANSLATION_UNIT EXTERNAL_DECLARATION {std::cout << "translational unit: translational unit external declaration" << std::endl;}
+                 | TRANSLATION_UNIT EXTERNAL_DECLARATION {$$ = $1; std::cout << "translational unit: translational unit external declaration" << std::endl;}
                  ;
 
 ROOT : TRANSLATION_UNIT { g_root = $1; std::cout << "Made the root" << std::endl;}

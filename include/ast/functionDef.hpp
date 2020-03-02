@@ -10,14 +10,20 @@ public:
         branches.push_back(deckedBoi);
         branches.push_back(n3);
      }
+     functionDef(NodePtr n1, ListPtr n2){
+         branches.push_back(n1);
+         branches.push_back(n2);
+     }
+
      virtual void print(std::ostream &dst) const{
+      dst << "def ";
       branches[0]->print(dst);
+      dst << " : ";
       branches[1]->print(dst);
     }
     virtual void pythonGen(std::ostream& os) const { }
 protected:
-     NodePtr deckedBoi;
-     
+     DeclarationPtr deckedBoi;
 };
 
 #endif

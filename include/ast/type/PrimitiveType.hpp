@@ -18,18 +18,19 @@ public:
   ~PrimitiveType();
 
   void print(std::ostream& dst) const{
-  switch(type) {
-    case _int:
-      dst << "int ";
-      break;
-    case _void:
-      dst << "void ";
-      break;
-    default:
-      dst << "unknown type ";
+  // switch(type) {    DO NOT NEED TO PRINT FOR PYTHON
+  //   case _int:
+  //     dst << "int lolm ";
+  //     break;
+  //   case _void:
+  //     dst << "void ";
+  //     break;
+  //   default:
+  //     dst << "unknown type ";
   }
-};
-  void pythonGen(std::ostream& os) const{  os<<"stuff"; };
+  void pythonGen(std::ostream& os) const{
+      os<<"identifier"; 
+      }
 
 private:
   Specifier type;

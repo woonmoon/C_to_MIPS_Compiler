@@ -1,7 +1,7 @@
 #ifndef pycon_hpp
 #define pycon_hpp
 
-class pycon{
+class pycon {
 public:
   
 private:

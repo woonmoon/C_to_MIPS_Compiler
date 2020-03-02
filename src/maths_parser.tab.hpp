@@ -47,7 +47,8 @@ extern int yydebug;
 #line 1 "src/maths_parser.y"
 
   #include "ast.hpp"
-
+  #define RED     "\033[31m"      /* Red */
+  #define RESET   "\033[0m"
   #include <cassert>
 
   extern const Node *g_root; // A way of getting the AST out
@@ -59,7 +60,7 @@ extern int yydebug;
   int yylex(void);
   void yyerror(const char *);
 
-#line 63 "src/maths_parser.tab.hpp"
+#line 64 "src/maths_parser.tab.hpp"
 
 /* Token type.  */
 #ifndef YYTOKENTYPE
@@ -116,14 +117,14 @@ extern int yydebug;
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 union YYSTYPE
 {
-#line 18 "src/maths_parser.y"
+#line 19 "src/maths_parser.y"
 
    Node *expr;
    List *exprList;
   double number;
   std::string *string;
 
-#line 127 "src/maths_parser.tab.hpp"
+#line 128 "src/maths_parser.tab.hpp"
 
 };
 typedef union YYSTYPE YYSTYPE;

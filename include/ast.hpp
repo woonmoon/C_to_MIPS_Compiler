@@ -13,7 +13,9 @@
 #include "ast/scope/globalScope.hpp"
 #include "ast/scope/localScope.hpp"
 #include "ast/conditionals/ifStatement.hpp"
+#include "ast/conditionals/ifElseStatement.hpp"
 #include "ast/functionDef.hpp"
+#include "ast/loop/while.hpp"
 
 extern const Node *parseAST();
 

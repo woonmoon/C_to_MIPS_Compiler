@@ -4,6 +4,7 @@
 #include "expression.hpp"
 
 class Declaration;
+typedef const Declaration* DeclarationPtr;
 
 class Declaration : public Expression {
 public:
@@ -20,9 +21,7 @@ public:
       branches[0]->print(dst);
       branches[1]->print(dst);
     }
-    virtual void pythonGen(std::ostream& os) const { }
-private:
-
+    virtual void pythonGen(std::ostream& os) const { };
 };
 
 

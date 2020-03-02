@@ -46,6 +46,9 @@ Rules useless in grammar
   155                 | INITIALIZER_LIST T_COMMA INITIALIZER
 
 
+State 217 conflicts: 1 shift/reduce
+
+
 Grammar
 
     0 $accept: ROOT $end
@@ -214,7 +217,7 @@ Grammar
   116                     | EXPRESSION T_SEMICOLON
 
   117 SELECTION_STATEMENT: T_IF T_LBRACKET EXPRESSION T_RBRACKET STATEMENT
-  118                    | T_IF T_LBRACKET EXPRESSION T_RBRACKET T_ELSE STATEMENT
+  118                    | T_IF T_LBRACKET EXPRESSION T_RBRACKET STATEMENT T_ELSE STATEMENT
 
   119 ITERATION_STATEMENT: T_WHILE T_LBRACKET EXPRESSION T_RBRACKET STATEMENT
 
@@ -364,7 +367,7 @@ Nonterminals, with rules where they appear
     CONSTANT_EXPRESSION <expr> (66)
         on left: 46
         on right: 69
-    INIT_DECLARATOR_LIST <expr> (67)
+    INIT_DECLARATOR_LIST <exprList> (67)
         on left: 47 48
         on right: 48 137
     INIT_DECLARATOR <expr> (68)
@@ -409,7 +412,7 @@ Nonterminals, with rules where they appear
     PARAMETER_TYPE_LIST <exprList> (81)
         on left: 83
         on right: 74 98 100
-    PARAMETER_LIST (82)
+    PARAMETER_LIST <exprList> (82)
         on left: 84 85
         on right: 83 85
     PARAMETER_DECLARATION <expr> (83)
@@ -460,7 +463,7 @@ Nonterminals, with rules where they appear
     DECLARATOR <expr> (98)
         on left: 128 129
         on right: 49 50 73 86 132 133 134 135
-    DECLARATION_LIST (99)
+    DECLARATION_LIST <exprList> (99)
         on left: 130 131
         on right: 111 112 131 132 134
     FUNCTION_DEFINITION <expr> (100)
@@ -1446,7 +1449,7 @@ State 74
 State 75
 
   117 SELECTION_STATEMENT: T_IF . T_LBRACKET EXPRESSION T_RBRACKET STATEMENT
-  118                    | T_IF . T_LBRACKET EXPRESSION T_RBRACKET T_ELSE STATEMENT
+  118                    | T_IF . T_LBRACKET EXPRESSION T_RBRACKET STATEMENT T_ELSE STATEMENT
 
     T_LBRACKET  shift, and go to state 133
 
@@ -2166,7 +2169,7 @@ State 132
 State 133
 
   117 SELECTION_STATEMENT: T_IF T_LBRACKET . EXPRESSION T_RBRACKET STATEMENT
-  118                    | T_IF T_LBRACKET . EXPRESSION T_RBRACKET T_ELSE STATEMENT
+  118                    | T_IF T_LBRACKET . EXPRESSION T_RBRACKET STATEMENT T_ELSE STATEMENT
 
     T_STAR        shift, and go to state 69
     T_PLUS        shift, and go to state 70
@@ -2999,7 +3002,7 @@ State 181
 
    45 EXPRESSION: EXPRESSION . T_COMMA ASSIGNMENT_EXPRESSION
   117 SELECTION_STATEMENT: T_IF T_LBRACKET EXPRESSION . T_RBRACKET STATEMENT
-  118                    | T_IF T_LBRACKET EXPRESSION . T_RBRACKET T_ELSE STATEMENT
+  118                    | T_IF T_LBRACKET EXPRESSION . T_RBRACKET STATEMENT T_ELSE STATEMENT
 
     T_COMMA     shift, and go to state 157
     T_RBRACKET  shift, and go to state 211
@@ -3270,7 +3273,7 @@ State 210
 State 211
 
   117 SELECTION_STATEMENT: T_IF T_LBRACKET EXPRESSION T_RBRACKET . STATEMENT
-  118                    | T_IF T_LBRACKET EXPRESSION T_RBRACKET . T_ELSE STATEMENT
+  118                    | T_IF T_LBRACKET EXPRESSION T_RBRACKET . STATEMENT T_ELSE STATEMENT
 
     T_STAR        shift, and go to state 69
     T_PLUS        shift, and go to state 70
@@ -3279,7 +3282,6 @@ State 211
     T_LCURLY      shift, and go to state 43
     T_SEMICOLON   shift, and go to state 74
     T_IF          shift, and go to state 75
-    T_ELSE        shift, and go to state 217
     T_WHILE       shift, and go to state 76
     T_RETURN      shift, and go to state 77
     T_CONSTANT    shift, and go to state 78
@@ -3303,7 +3305,7 @@ State 211
     CONDITIONAL_EXPRESSION     go to state 95
     ASSIGNMENT_EXPRESSION      go to state 96
     EXPRESSION                 go to state 97
-    STATEMENT                  go to state 218
+    STATEMENT                  go to state 217
     LABELED_STATEMENT          go to state 99
     COMPOUND_STATEMENT         go to state 100
     EXPRESSION_STATEMENT       go to state 102
@@ -3346,7 +3348,7 @@ State 212
     CONDITIONAL_EXPRESSION     go to state 95
     ASSIGNMENT_EXPRESSION      go to state 96
     EXPRESSION                 go to state 97
-    STATEMENT                  go to state 219
+    STATEMENT                  go to state 218
     LABELED_STATEMENT          go to state 99
     COMPOUND_STATEMENT         go to state 100
     EXPRESSION_STATEMENT       go to state 102
@@ -3382,7 +3384,7 @@ State 213
     LOGICAL_AND_EXPRESSION     go to state 93
     LOGICAL_OR_EXPRESSION      go to state 94
     CONDITIONAL_EXPRESSION     go to state 95
-    ASSIGNMENT_EXPRESSION      go to state 220
+    ASSIGNMENT_EXPRESSION      go to state 219
 
 
 State 214
@@ -3418,7 +3420,7 @@ State 215
     INCLUSIVE_OR_EXPRESSION    go to state 92
     LOGICAL_AND_EXPRESSION     go to state 93
     LOGICAL_OR_EXPRESSION      go to state 94
-    CONDITIONAL_EXPRESSION     go to state 221
+    CONDITIONAL_EXPRESSION     go to state 220
 
 
 State 216
@@ -3430,7 +3432,39 @@ State 216
 
 State 217
 
-  118 SELECTION_STATEMENT: T_IF T_LBRACKET EXPRESSION T_RBRACKET T_ELSE . STATEMENT
+  117 SELECTION_STATEMENT: T_IF T_LBRACKET EXPRESSION T_RBRACKET STATEMENT .
+  118                    | T_IF T_LBRACKET EXPRESSION T_RBRACKET STATEMENT . T_ELSE STATEMENT
+
+    T_ELSE  shift, and go to state 221
+
+    T_ELSE    [reduce using rule 117 (SELECTION_STATEMENT)]
+    $default  reduce using rule 117 (SELECTION_STATEMENT)
+
+
+State 218
+
+  119 ITERATION_STATEMENT: T_WHILE T_LBRACKET EXPRESSION T_RBRACKET STATEMENT .
+
+    $default  reduce using rule 119 (ITERATION_STATEMENT)
+
+
+State 219
+
+    8 ARGUMENT_EXPRESSION_LIST: ARGUMENT_EXPRESSION_LIST T_COMMA ASSIGNMENT_EXPRESSION .
+
+    $default  reduce using rule 8 (ARGUMENT_EXPRESSION_LIST)
+
+
+State 220
+
+   41 CONDITIONAL_EXPRESSION: LOGICAL_OR_EXPRESSION T_QUESTION EXPRESSION T_COLON CONDITIONAL_EXPRESSION .
+
+    $default  reduce using rule 41 (CONDITIONAL_EXPRESSION)
+
+
+State 221
+
+  118 SELECTION_STATEMENT: T_IF T_LBRACKET EXPRESSION T_RBRACKET STATEMENT T_ELSE . STATEMENT
 
     T_STAR        shift, and go to state 69
     T_PLUS        shift, and go to state 70
@@ -3471,36 +3505,8 @@ State 217
     JUMP_STATEMENT             go to state 105
 
 
-State 218
-
-  117 SELECTION_STATEMENT: T_IF T_LBRACKET EXPRESSION T_RBRACKET STATEMENT .
-
-    $default  reduce using rule 117 (SELECTION_STATEMENT)
-
-
-State 219
-
-  119 ITERATION_STATEMENT: T_WHILE T_LBRACKET EXPRESSION T_RBRACKET STATEMENT .
-
-    $default  reduce using rule 119 (ITERATION_STATEMENT)
-
-
-State 220
-
-    8 ARGUMENT_EXPRESSION_LIST: ARGUMENT_EXPRESSION_LIST T_COMMA ASSIGNMENT_EXPRESSION .
-
-    $default  reduce using rule 8 (ARGUMENT_EXPRESSION_LIST)
-
-
-State 221
-
-   41 CONDITIONAL_EXPRESSION: LOGICAL_OR_EXPRESSION T_QUESTION EXPRESSION T_COLON CONDITIONAL_EXPRESSION .
-
-    $default  reduce using rule 41 (CONDITIONAL_EXPRESSION)
-
-
 State 222
 
-  118 SELECTION_STATEMENT: T_IF T_LBRACKET EXPRESSION T_RBRACKET T_ELSE STATEMENT .
+  118 SELECTION_STATEMENT: T_IF T_LBRACKET EXPRESSION T_RBRACKET STATEMENT T_ELSE STATEMENT .
 
     $default  reduce using rule 118 (SELECTION_STATEMENT)
