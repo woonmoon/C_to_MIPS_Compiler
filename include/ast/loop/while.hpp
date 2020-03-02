@@ -8,7 +8,7 @@ typedef const whileLoop* whileLoopPtr;
 
 class whileLoop : public Node {
 public:
-    whileLoop(NodePtr cond, NodePtr block): condition(cond), loopBlock(block) { std::cout << "While loop made!" << std::endl; };
+    whileLoop(NodePtr cond, NodePtr block): condition(cond), loopBlock(block) { };
     void print(std::ostream &dst) const {
         dst << "while (";
         condition->print(dst);

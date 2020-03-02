@@ -281,7 +281,7 @@ LABELED_STATEMENT : T_IDENTIFIER T_COLON STATEMENT { std::cout << "labelled stat
 
 COMPOUND_STATEMENT : T_LCURLY T_RCURLY { $$ = new localScope(); std::cout << "compound statement: { }" << std::endl; std::cout << RED << "NEW localScope empty" << RESET << std::endl;}
                    | T_LCURLY STATEMENT_LIST T_RCURLY { $$ = new localScope($2); std::cout << "compound statement: { statement list }" << std::endl; std::cout << RED << "NEW LOCALsCOPE WITHH satement list" << RESET << std::endl; }
-                   | T_LCURLY DECLARATION_LIST T_RCURLY { std::cout << "compound statement: { declaration list }" << std::endl; }
+                   | T_LCURLY DECLARATION_LIST T_RCURLY { $$ = new localScope($2); std::cout << "compound statement: { declaration list }" << std::endl; }
                    | T_LCURLY DECLARATION_LIST STATEMENT_LIST T_RCURLY { std::cout << "compound statement: { declaration list }" << std::endl; }
                    ;
 
