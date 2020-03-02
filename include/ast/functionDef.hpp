@@ -18,8 +18,10 @@ public:
      virtual void print(std::ostream &dst) const{
       dst << "def ";
       branches[0]->print(dst);
-      dst << " : ";
+      dst << "(";
       branches[1]->print(dst);
+      dst << ")";
+      dst << " : ";
     }
     virtual void pythonGen(std::ostream& os) const { }
 protected:

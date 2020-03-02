@@ -59,16 +59,16 @@
 %%
 
 
-PRIMARY_EXPRESSION : T_IDENTIFIER {$$ = new Identifier(*$1); }
-                   | T_CONSTANT { $$ = new Constant($1); std::cout << "issa constant" << std::endl;}
+PRIMARY_EXPRESSION : T_IDENTIFIER {$$ = new Identifier(*$1);std::cout << RED << "new identifier" << RESET << std::endl; }
+                   | T_CONSTANT { $$ = new Constant($1); std::cout << "issa constant" << std::endl;  std::cout << RED << "new constant" << RESET << std::endl;}
                    | T_LBRACKET EXPRESSION T_RBRACKET { std::cout << "lbr rbr" << std::endl; }
                    ;
 POSTFIX_EXPRESSION : PRIMARY_EXPRESSION {$$ = $1;}
                    | POSTFIX_EXPRESSION T_LBRACKET T_RBRACKET
                    | POSTFIX_EXPRESSION T_LBRACKET ARGUMENT_EXPRESSION_LIST T_RBRACKET
                    ;
-ARGUMENT_EXPRESSION_LIST : ASSIGNMENT_EXPRESSION {$$ = new List($1); std::cout << "argument axpression lsit: argument expression" << std::endl;}
-                         | ARGUMENT_EXPRESSION_LIST T_COMMA ASSIGNMENT_EXPRESSION {$$ = new List($1); ($$)->addtoList($3); std::cout << "argument expression list: arg expr list comma assignment expr" << std::endl;}
+ARGUMENT_EXPRESSION_LIST : ASSIGNMENT_EXPRESSION {$$ = new List($1); std::cout << "argument axpression lsit: argument expression" << std::endl;std::cout << RED << "new list with ASSIGNMENT_EXPRESSION" << RESET << std::endl;}
+                         | ARGUMENT_EXPRESSION_LIST T_COMMA ASSIGNMENT_EXPRESSION {$$ = new List($1); ($$)->addtoList($3); std::cout << "argument expression list: arg expr list comma assignment expr" << std::endl;std::cout << RED << "new list with ARGUMENT_EXPRESSION_LIST and ASSIGNMENT_EXPRESSION added" << RESET << std::endl;}
                          ;
 UNARY_EXPRESSION : POSTFIX_EXPRESSION {$$ = $1;}
                  | UNARY_OPERATOR CAST_EXPRESSION
@@ -144,11 +144,11 @@ EXPRESSION : ASSIGNMENT_EXPRESSION { std::cout << "expression: assignment expres
 CONSTANT_EXPRESSION : CONDITIONAL_EXPRESSION { std::cout << "constant expression: condiitional expression" << std::endl; }
                     ;
 
-INIT_DECLARATOR_LIST : INIT_DECLARATOR { $$ = new List($1); std::cout << "init declarator list: init declarator" << std::endl; }
-                     | INIT_DECLARATOR_LIST T_COMMA INIT_DECLARATOR { $$ = new List($1); ($$)->addtoList($3); std::cout << "init declarator list: init declarator list, init declarator" << std::endl; }
+INIT_DECLARATOR_LIST : INIT_DECLARATOR { $$ = new List($1); std::cout << "init declarator list: init declarator" << std::endl; std::cout << RED << "new list with InitDeclaTOR" << RESET << std::endl; }
+                     | INIT_DECLARATOR_LIST T_COMMA INIT_DECLARATOR { $$ = new List($1); ($$)->addtoList($3); std::cout << "init declarator list: init declarator list, init declarator" << std::endl; std::cout << RED << "new list with init declarator list and thenn init declarator added" << RESET << std::endl;}
                      ;
 
-INIT_DECLARATOR : DECLARATOR {$$ = new initDeclarator($1); std::cout << "init declarator: declarator" << std::endl; }
+INIT_DECLARATOR : DECLARATOR {$$ = new initDeclarator($1); std::cout << "init declarator: declarator" << std::endl; std::cout << RED << "new init declarator with declarator" << RESET << std::endl; }
                 | DECLARATOR T_ASSIGN INITIALIZER { $$ = new initDeclarator($1, $3); std::cout << "init declarator: declarator = initializer" << std::endl; std::cout << RED << "new init declarator with declarator and initializer" << RESET << std::endl;} //IMPLEMENT THIS BIG BOI
                 ;
 
