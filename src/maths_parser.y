@@ -213,8 +213,8 @@ TYPE_QUALIFIER : T_CONST { std::cout << "type qualifier: const" << std::endl; }
 
 DIRECT_DECLARATOR : T_IDENTIFIER  { $$ = new Identifier(*$1); std::cout << "direct declarator: identifier" << std::endl; std::cout << RED << "new identifier with t_identifier" << RESET << std::endl;}
                   | T_LBRACKET DECLARATOR T_RBRACKET { $$ = $2; std::cout << "direct declarator: ( declarator )" << std::endl; }
-                  | DIRECT_DECLARATOR T_LBRACKET PARAMETER_TYPE_LIST T_RBRACKET { $$ = new functionDef($1, $3); std::cout << "direct declarator: direct declarator ( parameter type list )" << std::endl;std::cout << RED << "new functiondef with direct delcarator and parameter type list" << RESET << std::endl; }
-                  | DIRECT_DECLARATOR T_LBRACKET IDENTIFIER_LIST T_RBRACKET { $$ = new functionDef($1, $3); std::cout << "direct declarator: direct declarator ( identifier list )" << std::endl; std::cout << RED << "new functiondef with direct delcarator and identifier list" << RESET << std::endl; }
+                  | DIRECT_DECLARATOR T_LBRACKET PARAMETER_TYPE_LIST T_RBRACKET { $$ = new functionDec($1, $3); std::cout << "direct declarator: direct declarator ( parameter type list )" << std::endl; std::cout << RED << "new functiondef with direct delcarator and parameter type list" << RESET << std::endl; }
+                  | DIRECT_DECLARATOR T_LBRACKET IDENTIFIER_LIST T_RBRACKET { $$ = new functionDec($1, $3); delete $3; std::cout << "direct declarator: direct declarator ( identifier list )" << std::endl; std::cout << RED << "new functiondef with direct delcarator and identifier list" << RESET << std::endl; }
                   | DIRECT_DECLARATOR T_LBRACKET T_RBRACKET { std::cout << "direct declarator: direct declarator( )" << std::endl; }
                   ;
 
@@ -321,8 +321,8 @@ DECLARATION_LIST : DECLARATION { $$ = new List($1); std::cout << "declaration li
                  | DECLARATION_LIST DECLARATION { $$ = new List($1); ($$)->addtoList($2); std::cout << "declaration list: declaration list declaration" << std::endl; std::cout << RED << "new List made with DECLARATION_LIST DECLARATION but secnod is added" << RESET << std::endl; }
                  ;
 
-FUNCTION_DEFINITION : DECLARATION_SPECIFIERS DECLARATOR DECLARATION_LIST COMPOUND_STATEMENT {std::cout << "declaration_specifiers, declarator, declaration list, compound_statement" << std::endl;}
-                    | DECLARATION_SPECIFIERS DECLARATOR COMPOUND_STATEMENT { $$ = new functionDef($1, $2, $3); std::cout << "declaration_specifiers, declarator, compound_statement" << std::endl; std::cout << RED << "functionDef made with DECLARATION_SPECIFIERS DECLARATOR COMPOUND_STATEMENT" << RESET << std::endl;}
+FUNCTION_DEFINITION : DECLARATION_SPECIFIERS DECLARATOR DECLARATION_LIST COMPOUND_STATEMENT { std::cout << "declaration_specifiers, declarator, declaration list, compound_statement" << std::endl;}
+                    | DECLARATION_SPECIFIERS DECLARATOR COMPOUND_STATEMENT { $$ = new functionDef(new Declaration($1, $2), $3); std::cout << "function definition: declaration_specifiers, declarator, compound_statement" << std::endl; std::cout << RED << "functionDef made with DECLARATION_SPECIFIERS DECLARATOR COMPOUND_STATEMENT" << RESET << std::endl;}
                     | DECLARATOR DECLARATION_LIST COMPOUND_STATEMENT {std::cout << "declarator declaration_list, compound_statement" << std::endl;}
                     | DECLARATOR COMPOUND_STATEMENT { std::cout << "declarator, compound_statement" << std::endl;}
                     ;

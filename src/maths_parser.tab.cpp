@@ -1917,13 +1917,13 @@ yyreduce:
 
   case 75:
 #line 216 "src/maths_parser.y" /* yacc.c:1646  */
-    { (yyval.expr) = new functionDef((yyvsp[-3].expr), (yyvsp[-1].exprList)); std::cout << "direct declarator: direct declarator ( parameter type list )" << std::endl;std::cout << RED << "new functiondef with direct delcarator and parameter type list" << RESET << std::endl; }
+    { (yyval.expr) = new functionDec((yyvsp[-3].expr), (yyvsp[-1].exprList)); std::cout << "direct declarator: direct declarator ( parameter type list )" << std::endl; std::cout << RED << "new functiondef with direct delcarator and parameter type list" << RESET << std::endl; }
 #line 1922 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 76:
 #line 217 "src/maths_parser.y" /* yacc.c:1646  */
-    { (yyval.expr) = new functionDef((yyvsp[-3].expr), (yyvsp[-1].exprList)); std::cout << "direct declarator: direct declarator ( identifier list )" << std::endl; std::cout << RED << "new functiondef with direct delcarator and identifier list" << RESET << std::endl; }
+    { (yyval.expr) = new functionDec((yyvsp[-3].expr), (yyvsp[-1].exprList)); delete (yyvsp[-1].exprList); std::cout << "direct declarator: direct declarator ( identifier list )" << std::endl; std::cout << RED << "new functiondef with direct delcarator and identifier list" << RESET << std::endl; }
 #line 1928 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
@@ -2265,13 +2265,13 @@ yyreduce:
 
   case 133:
 #line 324 "src/maths_parser.y" /* yacc.c:1646  */
-    {std::cout << "declaration_specifiers, declarator, declaration list, compound_statement" << std::endl;}
+    { std::cout << "declaration_specifiers, declarator, declaration list, compound_statement" << std::endl;}
 #line 2270 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 134:
 #line 325 "src/maths_parser.y" /* yacc.c:1646  */
-    { (yyval.expr) = new functionDef((yyvsp[-2].expr), (yyvsp[-1].expr), (yyvsp[0].expr)); std::cout << "declaration_specifiers, declarator, compound_statement" << std::endl; std::cout << RED << "functionDef made with DECLARATION_SPECIFIERS DECLARATOR COMPOUND_STATEMENT" << RESET << std::endl;}
+    { (yyval.expr) = new functionDef(new Declaration((yyvsp[-2].expr), (yyvsp[-1].expr)), (yyvsp[0].expr)); std::cout << "function definition: declaration_specifiers, declarator, compound_statement" << std::endl; std::cout << RED << "functionDef made with DECLARATION_SPECIFIERS DECLARATOR COMPOUND_STATEMENT" << RESET << std::endl;}
 #line 2276 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 

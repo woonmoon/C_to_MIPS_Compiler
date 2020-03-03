@@ -16,29 +16,28 @@ public:
   }
   
   List(const ListPtr& lol) {
-     listOfExpressions = lol->listOfExpressions; 
-     std::cout << "copy  constructor in list made ===================" << std::endl;
-      for(int i=0; i<listOfExpressions.size(); i++){
-      listOfExpressions[i]->print(std::cout);
-     }
-    }
+    listOfExpressions = lol->listOfExpressions; 
+  }
 
   ~List() {
     for(int i=0; i<listOfExpressions.size(); i++) {
       delete listOfExpressions[i];
     }
   }
-  virtual void print(std::ostream &dst) const {
+  void print(std::ostream &dst) const {
      for(int i=0; i<listOfExpressions.size(); i++){
       listOfExpressions[i]->print(dst);
+      if(i!=listOfExpressions.size()-1) {
+        dst << ", ";
+      }
      }
   }
-  virtual void pythonGen(std::ostream& os) const { }
+  void pythonGen(std::ostream& os) const { }
 
   std::vector<NodePtr> getlistOfExpressions() { return listOfExpressions; }
 
   void addtoList(NodePtr n) {
-    std::cout << "hi cunt" << std::endl; 
+    //std::cout << "hi cunt" << std::endl; 
     listOfExpressions.push_back(n); 
     for(int i=0; i<listOfExpressions.size(); i++){
       listOfExpressions[i]->print(std::cout);

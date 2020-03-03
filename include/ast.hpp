@@ -15,6 +15,7 @@
 #include "ast/conditionals/ifStatement.hpp"
 #include "ast/conditionals/ifElseStatement.hpp"
 #include "ast/functionDef.hpp"
+#include "ast/functionDec.hpp"
 #include "ast/loop/while.hpp"
 
 extern const Node *parseAST();
