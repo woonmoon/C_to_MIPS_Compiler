@@ -8,12 +8,15 @@ class localScope: public Scope {
 public:
     localScope(){ std::cout << "Scope made!" << std::endl; }
 
-    localScope(NodePtr inNode) {
-        sequence.push_back(inNode);
-    }
-
     localScope(ListPtr inList) {
         sequence=inList->getlistOfExpressions();
+    }
+    localScope(ListPtr inList, ListPtr inList2) {
+        sequence=inList->getlistOfExpressions();
+        std::vector<NodePtr> sequenceTemp;
+        sequenceTemp = inList2->getlistOfExpressions(); 
+        sequence.insert(sequence.end(), sequenceTemp.begin(), sequenceTemp.end());
+ 
     }
 
     void print(std::ostream& dst, pycon& con, int level) const {

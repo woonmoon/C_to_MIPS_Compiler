@@ -18,6 +18,7 @@ public:
     Scope(ListPtr inList) {
         sequence=inList->getlistOfExpressions();
     }
+    
     std::vector<NodePtr> getSequence() {
         return sequence;
     }
