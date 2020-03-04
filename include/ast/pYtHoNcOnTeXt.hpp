@@ -35,6 +35,9 @@ public:
   void subTab() { 
     tab--;
   }
+  void zeroTab(){
+    tab = 0;
+  }
 
 private:
   std::vector<std::string> globals;

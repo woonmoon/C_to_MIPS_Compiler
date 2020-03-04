@@ -10,10 +10,14 @@ public:
     NodePtr getCondition() { return condition; }
     NodePtr getExecution() { return executeBlock; }
     void print(std::ostream& dst, pycon& con, int level) const {
+        con.indent(dst);
         dst << "if (";
         condition->print(dst, con, level);
         dst<< ")";
+        con.addTab();
+        con.indent(dst);
         executeBlock->print(dst, con, level);
+        con.subTab();
     }
     void pythonGen(std::ostream& os) const { }
 protected:

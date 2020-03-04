@@ -6,7 +6,7 @@ typedef const globalScope* globalScopePtr;
 
 class globalScope: public Scope{
 public:
-    globalScope() { std::cout << "Scope made!" << std::endl; }
+    globalScope() { std::cout << "global Scope made!" << std::endl; }
 
     globalScope(NodePtr inNode) {
         sequence.push_back(inNode);
@@ -18,7 +18,9 @@ public:
 
     void print(std::ostream& dst, pycon& con, int level) const {
         for(int i=0; i<sequence.size(); i++) {
+            dst << std::endl;
             sequence[i]->print(dst, con, level);
+            con.zeroTab();
         }
     }
     void genPython(std::ostream& os) const { }

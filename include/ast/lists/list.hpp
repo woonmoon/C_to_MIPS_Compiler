@@ -37,7 +37,6 @@ public:
   std::vector<NodePtr> getlistOfExpressions() { return listOfExpressions; }
 
   void addtoList(NodePtr n) {
-    //std::cout << "hi cunt" << std::endl; 
     listOfExpressions.push_back(n); 
   }
 

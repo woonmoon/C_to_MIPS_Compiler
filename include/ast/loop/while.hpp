@@ -10,7 +10,7 @@ class whileLoop : public Node {
 public:
     whileLoop(NodePtr cond, NodePtr block): condition(cond), loopBlock(block) { };
     void print(std::ostream& dst, pycon& con, int level) const {
-        std::cout << "I GET HERE DONNY I GET HERE HEHE" << std::endl;
+        con.indent(dst);
         dst << "while (";
         condition->print(dst, con, level);
         dst<< ")";
