@@ -9,8 +9,8 @@ typedef List* ListPtr;
 
 class List : public Node {
 public:
+  List() {}
   List(NodePtr b) {
-    b->print(std::cout);
     listOfExpressions.push_back(b);
     std::cout << " :constructed a list" << std::endl;
   }
@@ -24,9 +24,9 @@ public:
       delete listOfExpressions[i];
     }
   }
-  void print(std::ostream &dst) const {
+  void print(std::ostream& dst, pycon& con, int level) const {
      for(int i=0; i<listOfExpressions.size(); i++){
-      listOfExpressions[i]->print(dst);
+      listOfExpressions[i]->print(dst, con, level);
       if(i!=listOfExpressions.size()-1) {
         dst << ", ";
       }
@@ -39,9 +39,6 @@ public:
   void addtoList(NodePtr n) {
     //std::cout << "hi cunt" << std::endl; 
     listOfExpressions.push_back(n); 
-    for(int i=0; i<listOfExpressions.size(); i++){
-      listOfExpressions[i]->print(std::cout);
-     }
   }
 
 private:

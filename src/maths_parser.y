@@ -64,8 +64,8 @@ PRIMARY_EXPRESSION : T_IDENTIFIER {$$ = new Identifier(*$1);std::cout << RED << 
                    | T_LBRACKET EXPRESSION T_RBRACKET { std::cout << "lbr rbr" << std::endl; }
                    ;
 POSTFIX_EXPRESSION : PRIMARY_EXPRESSION {$$ = $1;}
-                   | POSTFIX_EXPRESSION T_LBRACKET T_RBRACKET
-                   | POSTFIX_EXPRESSION T_LBRACKET ARGUMENT_EXPRESSION_LIST T_RBRACKET
+                   | POSTFIX_EXPRESSION T_LBRACKET T_RBRACKET { $$ = new functionCall($1, new List()); }
+                   | POSTFIX_EXPRESSION T_LBRACKET ARGUMENT_EXPRESSION_LIST T_RBRACKET { $$ = new functionCall($1, $3); }
                    ;
 ARGUMENT_EXPRESSION_LIST : ASSIGNMENT_EXPRESSION {$$ = new List($1); std::cout << "argument axpression lsit: argument expression" << std::endl;std::cout << RED << "new list with ASSIGNMENT_EXPRESSION" << RESET << std::endl;}
                          | ARGUMENT_EXPRESSION_LIST T_COMMA ASSIGNMENT_EXPRESSION {$$ = new List($1); ($$)->addtoList($3); std::cout << "argument expression list: arg expr list comma assignment expr" << std::endl;std::cout << RED << "new list with ARGUMENT_EXPRESSION_LIST and ASSIGNMENT_EXPRESSION added" << RESET << std::endl;}
@@ -302,7 +302,7 @@ ITERATION_STATEMENT : T_WHILE T_LBRACKET EXPRESSION T_RBRACKET STATEMENT { $$ = 
                     ;
 
 JUMP_STATEMENT : T_RETURN T_SEMICOLON { std::cout << "jump statement: return" << std::endl; }
-               | T_RETURN EXPRESSION T_SEMICOLON { std::cout << "jump statement: return expression" << std::endl; }
+               | T_RETURN EXPRESSION T_SEMICOLON { $$ = new Return($2); std::cout << "jump statement: return expression" << std::endl; }
                ;
 
 DECLARATION_SPECIFIERS : STORAGE_CLASS_SPECIFIER { std::cout << "declaration specifier: storage class specifier" << std::endl; }

@@ -17,7 +17,7 @@ public:
 
   ~PrimitiveType();
 
-  void print(std::ostream& dst) const{
+  void print(std::ostream& dst, pycon& con, int level) const{
   // switch(type) {    DO NOT NEED TO PRINT FOR PYTHON
   //   case _int:
   //     dst << "int lolm ";

@@ -10,13 +10,13 @@ public:
     NodePtr getCondition() { return condition; }
     NodePtr getIfExecute() { return ifExecute; }
     NodePtr getElseExecute() { return elseExecute; }
-    void print(std::ostream& dst) const {
+    void print(std::ostream& dst, pycon& con, int level) const {
         dst << "if (";
-        condition->print(dst);
+        condition->print(dst, con, level);
         dst << ")";
-        ifExecute->print(dst);
+        ifExecute->print(dst, con, level);
         dst << " else (";
-        elseExecute->print(dst);
+        elseExecute->print(dst, con, level);
     }
     void pythonGen(std::ostream& os) const { }
 protected:

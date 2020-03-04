@@ -4,7 +4,9 @@ int main()
 {
     const Node *ast=parseAST();
 
-    ast->print(std::cout);
+    pycon context;
+
+    ast->print(std::cout, context, 0);
 
     std::cout<<std::endl;
 

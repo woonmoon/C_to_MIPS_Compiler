@@ -9,11 +9,15 @@ typedef const whileLoop* whileLoopPtr;
 class whileLoop : public Node {
 public:
     whileLoop(NodePtr cond, NodePtr block): condition(cond), loopBlock(block) { };
-    void print(std::ostream &dst) const {
+    void print(std::ostream& dst, pycon& con, int level) const {
+        std::cout << "I GET HERE DONNY I GET HERE HEHE" << std::endl;
         dst << "while (";
-        condition->print(dst);
+        condition->print(dst, con, level);
         dst<< ")";
-        loopBlock->print(dst);
+        con.addTab();
+        con.indent(dst);
+        loopBlock->print(dst, con, level);
+        con.subTab();
     }
     void pythonGen(std::ostream& os) const { }
 protected:
@@ -22,3 +26,4 @@ protected:
 };
 
 #endif
+

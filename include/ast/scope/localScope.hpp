@@ -16,9 +16,9 @@ public:
         sequence=inList->getlistOfExpressions();
     }
 
-    void print(std::ostream& dst) const {
+    void print(std::ostream& dst, pycon& con, int level) const {
         for(int i=0; i<sequence.size(); i++) {
-            sequence[i]->print(dst);
+            sequence[i]->print(dst, con, level);
         }
     }
     void genPython(std::ostream& os) const { }

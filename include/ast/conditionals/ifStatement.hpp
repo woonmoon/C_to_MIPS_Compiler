@@ -6,14 +6,14 @@ typedef const ifStatement* ifStatementPtr;
 
 class ifStatement: public Node{
 public:
-    ifStatement(NodePtr exp, NodePtr nod): condition(exp), executeBlock(nod) { std::cout << "hello mate im an if" << std::endl;}
+    ifStatement(NodePtr exp, NodePtr nod): condition(exp), executeBlock(nod) { }
     NodePtr getCondition() { return condition; }
     NodePtr getExecution() { return executeBlock; }
-    void print(std::ostream &dst) const {
+    void print(std::ostream& dst, pycon& con, int level) const {
         dst << "if (";
-        condition->print(dst);
+        condition->print(dst, con, level);
         dst<< ")";
-        executeBlock->print(dst);
+        executeBlock->print(dst, con, level);
     }
     void pythonGen(std::ostream& os) const { }
 protected:

@@ -1,6 +1,7 @@
 #ifndef ast_hpp
 #define ast_hpp
 
+#include "ast/pYtHoNcOnTeXt.hpp"
 #include "ast/node.hpp"
 #include "ast/identifier.hpp"
 #include "ast/expression.hpp"
@@ -14,9 +15,11 @@
 #include "ast/scope/localScope.hpp"
 #include "ast/conditionals/ifStatement.hpp"
 #include "ast/conditionals/ifElseStatement.hpp"
-#include "ast/functionDef.hpp"
-#include "ast/functionDec.hpp"
+#include "ast/functions/functionDef.hpp"
+#include "ast/functions/functionDec.hpp"
+#include "ast/functions/functionCall.hpp"
 #include "ast/loop/while.hpp"
+#include "ast/return.hpp"
 
 extern const Node *parseAST();
 

@@ -21,7 +21,7 @@ public:
     std::vector<NodePtr> getSequence() {
         return sequence;
     }
-    virtual void print(std::ostream& dst) const=0;
+    virtual void print(std::ostream& dst, pycon& con, int level) const=0;
     virtual void pythonGen(std::ostream& os) const { } 
 
 protected:

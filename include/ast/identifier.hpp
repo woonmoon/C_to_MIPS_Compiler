@@ -14,8 +14,10 @@ typedef const Identifier* IdentifierPtr;
 class Identifier: public Node {
     public:
         Identifier(std::string v) : identifierName(v) {};
-        void print(std::ostream& os) const{
-          os << identifierName;
+
+        void print(std::ostream& dst, pycon& con, int level) const{
+          std::cout << "loool identifier" << std::endl;
+          dst << identifierName;
         }
 
         void pythonGen(std::ostream &os) const{

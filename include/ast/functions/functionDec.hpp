@@ -1,8 +1,6 @@
 #ifndef functionDec_hpp
 #define functionDec_hpp
 
-#include "declaration.hpp"
-
 class functionDec: public Expression{
 public:
      functionDec(NodePtr n1, NodePtr n2, NodePtr n3) {
@@ -16,10 +14,10 @@ public:
         branches.push_back(n2);
      }
 
-      void print(std::ostream &dst) const{
-         branches[0]->print(dst);
+      void print(std::ostream& dst, pycon& con, int level) const{
+         branches[0]->print(dst, con, level);
          dst << "(";
-         branches[1]->print(dst);
+         branches[1]->print(dst, con, level);
          dst << ")";
     }
       void pythonGen(std::ostream& os) const { }

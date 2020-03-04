@@ -14,8 +14,8 @@ typedef const Constant* ConstantPtr;
 class Constant: public Node {
     public:
         Constant(int v) : val(v) {};
-        void print(std::ostream& os) const{
-          os << val;
+        void print(std::ostream& dst, pycon& con, int level) const{
+          dst << val;
         }
 
         void pythonGen(std::ostream &os) const{

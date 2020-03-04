@@ -8,7 +8,7 @@
 class pycon {
 public:
 
-  pycon(){}
+  pycon(){tab = 0;}
 
   void addGlobal(std::string glob){
     globals.push_back(glob);
@@ -17,16 +17,28 @@ public:
   void printGlobals(std::ostream& os){
     for(int i = 0; i < globals.size(); i++){
       os << std::endl;
+      os << "global ";
       os << globals[i];
     }
   }
 
   void indent(std::ostream& os){
-
+    os << std::endl;
+    for(int i = 0; i < tab; i++){
+      os << "\t";
+    }
   }
   
+  void addTab(){
+    tab++;
+  }
+  void subTab() { 
+    tab--;
+  }
+
 private:
   std::vector<std::string> globals;
+  int tab;
 };
 
 #endif

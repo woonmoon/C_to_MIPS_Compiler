@@ -18,7 +18,7 @@ class Expression  : public Node
 public:
     virtual ~Expression() {}
 
-    virtual void print(std::ostream &dst) const { }
+    virtual void print(std::ostream& dst, pycon& con, int level) const { }
     virtual void pythonGen(std::ostream& os) const { }
     std::vector<NodePtr> branches;
 protected:
