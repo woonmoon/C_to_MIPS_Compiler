@@ -17,8 +17,8 @@
 // Represents the value associated with any kind of
 // AST node.
 %union{
-   Node *expr;
-   List *exprList;
+  Node *expr;
+  List *exprList;
   double number;
   std::string *string;
 }
@@ -44,9 +44,9 @@
 %type <expr> STRUCT_OR_UNION_SPECIFIER ENUM_SPECIFIER STRUCT_DECLARATOR ENUMERATOR TYPE_SPECIFIER
 %type <expr> DIRECT_DECLARATOR POINTER PARAMETER_DECLARATION ABSTRACT_DECLARATOR DIRECT_ABSTRACT_DECLARATOR
 %type <expr> STATEMENT LABELED_STATEMENT COMPOUND_STATEMENT EXPRESSION_STATEMENT SELECTION_STATEMENT ITERATION_STATEMENT JUMP_STATEMENT
-%type <expr> TRANSLATION_UNIT EXTERNAL_DECLARATION FUNCTION_DEFINITION INIT_DECLARATOR 
+%type <expr> EXTERNAL_DECLARATION FUNCTION_DEFINITION INIT_DECLARATOR 
 
-%type <exprList> ARGUMENT_EXPRESSION_LIST STRUCT_DECLARATOR_LIST
+%type <exprList> ARGUMENT_EXPRESSION_LIST STRUCT_DECLARATOR_LIST TRANSLATION_UNIT
 %type <exprList> SPECIFIER_QUALIFIER_LIST ENUMERATOR_LIST INIT_DECLARATOR_LIST PARAMETER_LIST DECLARATION_LIST
 %type <exprList> PARAMETER_TYPE_LIST IDENTIFIER_LIST TYPE_QUALIFIER_LIST INITIALIZER_LIST STATEMENT_LIST
 
@@ -64,12 +64,13 @@ PRIMARY_EXPRESSION : T_IDENTIFIER {$$ = new Identifier(*$1);std::cout << RED << 
                    | T_LBRACKET EXPRESSION T_RBRACKET { std::cout << "lbr rbr" << std::endl; }
                    ;
 POSTFIX_EXPRESSION : PRIMARY_EXPRESSION {$$ = $1;}
-                   | POSTFIX_EXPRESSION T_LBRACKET T_RBRACKET { $$ = new functionCall($1, new List()); }
+                   | POSTFIX_EXPRESSION T_LBRACKET T_RBRACKET { $$ = new functionCall($1, new List()); std::cout << RED << "made a function call" << RESET << std::endl; }
                    | POSTFIX_EXPRESSION T_LBRACKET ARGUMENT_EXPRESSION_LIST T_RBRACKET { $$ = new functionCall($1, $3); }
                    ;
 ARGUMENT_EXPRESSION_LIST : ASSIGNMENT_EXPRESSION {$$ = new List($1); std::cout << "argument axpression lsit: argument expression" << std::endl;std::cout << RED << "new list with ASSIGNMENT_EXPRESSION" << RESET << std::endl;}
                          | ARGUMENT_EXPRESSION_LIST T_COMMA ASSIGNMENT_EXPRESSION {$$ = new List($1); ($$)->addtoList($3); std::cout << "argument expression list: arg expr list comma assignment expr" << std::endl;std::cout << RED << "new list with ARGUMENT_EXPRESSION_LIST and ASSIGNMENT_EXPRESSION added" << RESET << std::endl;}
                          ;
+
 UNARY_EXPRESSION : POSTFIX_EXPRESSION {$$ = $1;}
                  | UNARY_OPERATOR CAST_EXPRESSION
                  ;
@@ -335,11 +336,11 @@ EXTERNAL_DECLARATION : FUNCTION_DEFINITION { $$ = $1; std::cout << "external dec
                      | DECLARATION {$$ = $1; std::cout << "external declaration: declaration" << std::endl;}
                      ;
 
-TRANSLATION_UNIT : EXTERNAL_DECLARATION { $$ = $1; std::cout << "translational unit: external declaration" << std::endl; }
-                 | TRANSLATION_UNIT EXTERNAL_DECLARATION {$$ = $1; std::cout << "translational unit: translational unit external declaration" << std::endl;}
+TRANSLATION_UNIT : EXTERNAL_DECLARATION { $$ = new List($1); std::cout << "translational unit: external declaration" << std::endl; }
+                 | TRANSLATION_UNIT EXTERNAL_DECLARATION { $$ = new List($1); ($$)->addtoList($2); std::cout << "translational unit: translational unit external declaration" << std::endl;}
                  ;
 
-ROOT : TRANSLATION_UNIT { g_root = $1; std::cout << "Made the root" << std::endl;}
+ROOT : TRANSLATION_UNIT { g_root = new globalScope($1); std::cout << "Made the root" << std::endl;}
 
 %%
 

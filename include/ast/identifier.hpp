@@ -16,7 +16,6 @@ class Identifier: public Node {
         Identifier(std::string v) : identifierName(v) {};
 
         void print(std::ostream& dst, pycon& con, int level) const{
-          std::cout << "loool identifier" << std::endl;
           dst << identifierName;
         }
 
