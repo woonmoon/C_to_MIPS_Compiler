@@ -20,9 +20,11 @@ public:
     }
 
     void print(std::ostream& dst, pycon& con, int level) const {
+        
         for(int i=0; i<sequence.size(); i++) {
-            //con.addTab();
+            con.indent(dst);
             sequence[i]->print(dst, con, level);
+            //dst << std::endl;
         }
     }
     void genPython(std::ostream& os) const { }

@@ -8,13 +8,18 @@ class functionDef: public Node {
 public:
     functionDef(NodePtr decl, NodePtr scope): Declarator(decl), scopeBlock(scope) { }
     void print(std::ostream& dst, pycon& con, int level) const {
+        con.indent(dst);
+        con.setFunc();
         dst << "def ";
         Declarator->print(dst, con, level);
         dst << ":";
+        //dst << std::endl;
         con.addTab();
-        std::cout << std::endl;
+        con.printGlobals(dst);
+        con.indent(dst);
         scopeBlock->print(dst, con, level);
         con.subTab();
+        con.clearFunc();
     }
     void pythonGen(std::ostream& os) const { }
 protected:

@@ -16,6 +16,10 @@ class Identifier: public Node {
         Identifier(std::string v) : identifierName(v) {};
 
         void print(std::ostream& dst, pycon& con, int level) const{
+          
+          if(con.returnTab() == 0 && !con.notFunc()){ 
+            con.addGlobal(identifierName);
+          }
           dst << identifierName;
         }
 

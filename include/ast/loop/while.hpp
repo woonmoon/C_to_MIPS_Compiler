@@ -10,12 +10,16 @@ class whileLoop : public Node {
 public:
     whileLoop(NodePtr cond, NodePtr block): condition(cond), loopBlock(block) { };
     void print(std::ostream& dst, pycon& con, int level) const {
+        dst << std::endl;
         con.indent(dst);
         dst << "while (";
+        con.subTab();
         condition->print(dst, con, level);
-        dst<< ")";
+        con.addTab();
+        dst<< "):";
         con.addTab();
         std::cout << std::endl;
+        con.indent(dst);
         loopBlock->print(dst, con, level);
         con.subTab();
     }

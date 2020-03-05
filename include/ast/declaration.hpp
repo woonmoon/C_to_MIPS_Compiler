@@ -22,6 +22,8 @@ public:
       branches[1]->print(dst, con, level);
     }
     virtual void pythonGen(std::ostream& os) const { };
+private:
+    
 };
 
 

@@ -21,6 +21,7 @@ public:
             dst << std::endl;
             sequence[i]->print(dst, con, level);
             con.zeroTab();
+            con.indent(dst);
         }
     }
     void genPython(std::ostream& os) const { }

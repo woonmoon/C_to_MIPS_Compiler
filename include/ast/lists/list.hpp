@@ -24,14 +24,17 @@ public:
       delete listOfExpressions[i];
     }
   }
+
   void print(std::ostream& dst, pycon& con, int level) const {
      for(int i=0; i<listOfExpressions.size(); i++){
+      
       listOfExpressions[i]->print(dst, con, level);
       if(i!=listOfExpressions.size()-1) {
         dst << ", ";
       }
      }
   }
+  
   void pythonGen(std::ostream& os) const { }
 
   std::vector<NodePtr> getlistOfExpressions() { return listOfExpressions; }

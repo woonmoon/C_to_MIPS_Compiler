@@ -17,15 +17,16 @@ public:
       branches.push_back(name);
     }
     void print(std::ostream& dst, pycon& con, int level) const{
-      con.indent(dst);
       branches[0]->print(dst, con, level);
       dst << " = ";
       if(isAssign){
+        con.setAssign();
         branches[1]->print(dst, con, level);
       }
       else{
         dst << "0";
       }
+      con.clearAssign();
       dst << std::endl;
     }
     virtual void pythonGen(std::ostream& os) const { }
