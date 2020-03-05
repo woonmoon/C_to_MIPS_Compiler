@@ -12,7 +12,7 @@ public:
         Declarator->print(dst, con, level);
         dst << ":";
         con.addTab();
-        con.indent(dst);
+        std::cout << std::endl;
         scopeBlock->print(dst, con, level);
         con.subTab();
     }

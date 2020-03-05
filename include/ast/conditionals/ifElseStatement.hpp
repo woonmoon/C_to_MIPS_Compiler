@@ -11,12 +11,21 @@ public:
     NodePtr getIfExecute() { return ifExecute; }
     NodePtr getElseExecute() { return elseExecute; }
     void print(std::ostream& dst, pycon& con, int level) const {
+        con.indent(dst);
         dst << "if (";
         condition->print(dst, con, level);
         dst << ")";
+        con.addTab();
+        std::cout << std::endl;
         ifExecute->print(dst, con, level);
-        dst << " else (";
+        std::cout << std::endl;
+        con.subTab();
+        con.indent(dst);
+        dst << "else:";
+        con.addTab();
+        std::cout << std::endl;
         elseExecute->print(dst, con, level);
+        con.subTab();
     }
     void pythonGen(std::ostream& os) const { }
 protected:

@@ -15,7 +15,7 @@ public:
         condition->print(dst, con, level);
         dst<< ")";
         con.addTab();
-        con.indent(dst);
+        std::cout << std::endl;
         loopBlock->print(dst, con, level);
         con.subTab();
     }

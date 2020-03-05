@@ -12,7 +12,7 @@ public:
         con.indent(dst);
         branches[0]->print(dst, con, level); 
         dst << "("; branches[1]->print(dst, con, level); 
-        dst <<")"; }
+        dst <<")" << std::endl; }
 };
 
 #endif

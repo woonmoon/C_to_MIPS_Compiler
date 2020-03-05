@@ -10,7 +10,7 @@ class Return : public Node {
 public:
     Return(NodePtr ret): returnVal(ret) {}
     void pythonGen(std::ostream& os) const{}
-    void print(std::ostream& dst, pycon& con, int level) const{ dst << "return "; returnVal->print(dst, con, level); }
+    void print(std::ostream& dst, pycon& con, int level) const{ con.indent(dst); dst << "return "; returnVal->print(dst, con, level); }
 protected:
     NodePtr returnVal;
 };
