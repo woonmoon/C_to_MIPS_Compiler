@@ -19,6 +19,13 @@
 #include "ast/functions/functionDec.hpp"
 #include "ast/functions/functionCall.hpp"
 #include "ast/operators/addOp.hpp"
+#include "ast/operators/subOp.hpp"
+#include "ast/operators/mulOp.hpp"
+#include "ast/operators/logAndOp.hpp"
+#include "ast/operators/logOrOp.hpp"
+#include "ast/operators/lessThan.hpp"
+#include "ast/operators/equalTo.hpp"
+#include "ast/operators/assignOp.hpp"
 #include "ast/loop/while.hpp"
 #include "ast/return.hpp"
 

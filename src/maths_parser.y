@@ -84,12 +84,12 @@ CAST_EXPRESSION : UNARY_EXPRESSION { $$ = $1; std::cout << "cast expression: una
                 ;
 
 MULTIPLICATIVE_EXPRESSION : CAST_EXPRESSION { $$ = $1; std::cout << "multiplicative expression: cast expression" << std::endl; }
-                          | MULTIPLICATIVE_EXPRESSION T_STAR CAST_EXPRESSION { std::cout << "multiplicative expression: multiplicative expression * cast expression" << std::endl; }
+                          | MULTIPLICATIVE_EXPRESSION T_STAR CAST_EXPRESSION { $$ = new mulOp($1, $3); std::cout << "multiplicative expression: multiplicative expression * cast expression" << std::endl; }
                           ;
 
 ADDITIVE_EXPRESSION : MULTIPLICATIVE_EXPRESSION { $$ = $1; std::cout << "additive expression: multiplicative expression" << std::endl; }
-                    | ADDITIVE_EXPRESSION T_PLUS MULTIPLICATIVE_EXPRESSION { std::cout << "additive expression: additive expression + multiplicative expression" << std::endl; }
-                    | ADDITIVE_EXPRESSION T_MINUS MULTIPLICATIVE_EXPRESSION { std::cout << "additive expression: additive expression - multiplicative expression" << std::endl; }
+                    | ADDITIVE_EXPRESSION T_PLUS MULTIPLICATIVE_EXPRESSION { $$ = new addOp($1, $3); std::cout << "additive expression: additive expression + multiplicative expression" << std::endl; }
+                    | ADDITIVE_EXPRESSION T_MINUS MULTIPLICATIVE_EXPRESSION { $$ = new subOp($1, $3); std::cout << "additive expression: additive expression - multiplicative expression" << std::endl; }
                     ;
 
 SHIFT_EXPRESSION : ADDITIVE_EXPRESSION { $$ = $1; std::cout << "shift expression: additive expression" << std::endl; }
@@ -98,12 +98,12 @@ SHIFT_EXPRESSION : ADDITIVE_EXPRESSION { $$ = $1; std::cout << "shift expression
                  ;
 
 RELATIONAL_EXPRESSION : SHIFT_EXPRESSION { $$ = $1; std::cout << "relational expression: shift expression" << std::endl; }
-                      | RELATIONAL_EXPRESSION T_LESSTHAN SHIFT_EXPRESSION { std::cout << "relational expression: relational expression < shift expression" << std::endl; }
+                      | RELATIONAL_EXPRESSION T_LESSTHAN SHIFT_EXPRESSION { $$ = new lessThan($1, $3); std::cout << "relational expression: relational expression < shift expression" << std::endl; }
                       | RELATIONAL_EXPRESSION T_GREATERTHAN SHIFT_EXPRESSION { std::cout << "relational expression: relational expression > shift expression" << std::endl; }
                       ;
 
 EQUALITY_EXPRESSION : RELATIONAL_EXPRESSION { $$ = $1; std::cout << "equality expression: relational expression" << std::endl; }
-                    | EQUALITY_EXPRESSION T_EQUALS RELATIONAL_EXPRESSION { std::cout << "equality expression: equality expression = relational expression" << std::endl; }
+                    | EQUALITY_EXPRESSION T_EQUALS RELATIONAL_EXPRESSION { $$ = new equalTo($1, $3); std::cout << "equality expression: equality expression = relational expression" << std::endl; }
                     | EQUALITY_EXPRESSION T_NOT_EQUALS RELATIONAL_EXPRESSION { std::cout << "equality expression: equality expression != relational expression" << std::endl; }
                     ;
 
@@ -120,11 +120,11 @@ INCLUSIVE_OR_EXPRESSION : EXCLUSIVE_OR_EXPRESSION { $$ = $1; std::cout << "inclu
                         ;
 
 LOGICAL_AND_EXPRESSION : INCLUSIVE_OR_EXPRESSION {$$ = $1;  std::cout << "logical and expression: inclusive or expression" << std::endl; }
-                       | LOGICAL_AND_EXPRESSION T_AND_OP INCLUSIVE_OR_EXPRESSION { std::cout << "logical and expression: logical and expression & inclusive or expression" << std::endl; }
+                       | LOGICAL_AND_EXPRESSION T_AND_OP INCLUSIVE_OR_EXPRESSION { $$ = new logAndOp($1, $3); std::cout << "logical and expression: logical and expression & inclusive or expression" << std::endl; }
                        ;
 
 LOGICAL_OR_EXPRESSION : LOGICAL_AND_EXPRESSION {$$ = $1;  std::cout << "logical or expression: logical and expression" << std::endl; }
-                      | LOGICAL_OR_EXPRESSION T_OR_OP LOGICAL_AND_EXPRESSION { std::cout << "logical or expression: logical or expression | logical and expression" << std::endl; }
+                      | LOGICAL_OR_EXPRESSION T_OR_OP LOGICAL_AND_EXPRESSION { $$ = new logOrOp($1, $3); std::cout << "logical or expression: logical or expression | logical and expression" << std::endl; }
                       ;
 
 CONDITIONAL_EXPRESSION : LOGICAL_OR_EXPRESSION { $$ = $1; std::cout << "conditional expression: logical or expression" << std::endl; }
@@ -132,7 +132,7 @@ CONDITIONAL_EXPRESSION : LOGICAL_OR_EXPRESSION { $$ = $1; std::cout << "conditio
                        ;
 
 ASSIGNMENT_EXPRESSION : CONDITIONAL_EXPRESSION { $$ = $1; std::cout << "assignment expression: conditional expression" << std::endl; }
-                      | UNARY_EXPRESSION T_ASSIGN ASSIGNMENT_EXPRESSION { std::cout << "assignment expression: unary expression = assignment expression" << std::endl; }
+                      | UNARY_EXPRESSION T_ASSIGN ASSIGNMENT_EXPRESSION { $$ = new assignOp($1, $3); std::cout << "assignment expression: unary expression = assignment expression" << std::endl; }
                       ;
 
 ASSIGNMENT_OPERATOR : T_ASSIGN { std::cout << "assignment operator: =" << std::endl; }

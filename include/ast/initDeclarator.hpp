@@ -13,7 +13,6 @@ public:
       branches.push_back(0);
     }
     initDeclarator(NodePtr type, NodePtr name): isAssign(1){
-      std::cout << "***************I'M IN AN INIT DECLARATOR!!!************" << std::endl;
       branches.push_back(type);
       branches.push_back(name);
     }
