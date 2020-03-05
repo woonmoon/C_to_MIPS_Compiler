@@ -12,7 +12,9 @@ public:
     void print(std::ostream& dst, pycon& con, int level) const {
         con.indent(dst);
         dst << "if (";
+        con.subTab();
         condition->print(dst, con, level);
+        con.addTab();
         dst<< ")";
         con.addTab();
         std::cout << std::endl;
