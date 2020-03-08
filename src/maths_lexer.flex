@@ -47,7 +47,6 @@ if              { return T_IF; }
 else            { return T_ELSE; }
 while           { return T_WHILE; }
 return          { return T_RETURN; }
-main            { return T_MAIN; }
 int             { return T_INT; }
 void            { return T_VOID; }
 typedef         { return T_TYPEDEF; }

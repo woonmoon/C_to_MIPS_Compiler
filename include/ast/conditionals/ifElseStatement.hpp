@@ -17,7 +17,7 @@ public:
         con.subTab();
         condition->print(dst, con, level);
         con.addTab();
-        dst << ")";
+        dst << "):";
         dst << std::endl;
         con.addTab();
         con.indent(dst); ////////////////////////////

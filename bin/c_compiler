@@ -32,4 +32,3 @@ done
 if [ "$TRANSLATE" == "true" ] ; then
   cat "$INFILE" | bin/print_canonical > "$OUTFILE"
 fi
-

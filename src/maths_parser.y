@@ -29,7 +29,7 @@
 %token T_AND T_XOR T_OR T_AND_OP T_OR_OP T_QUESTION
 %token T_LBRACKET T_RBRACKET T_LCURLY T_RCURLY T_SEMICOLON T_COLON
 %token T_LOG T_EXP T_SQRT
-%token T_IF T_ELSE T_WHILE T_RETURN T_MAIN T_INT T_VOID T_STRUCT T_UNION T_ENUM
+%token T_IF T_ELSE T_WHILE T_RETURN T_INT T_VOID T_STRUCT T_UNION T_ENUM
 %token T_ASSIGN
 %token T_CONSTANT T_IDENTIFIER T_TYPEDEF T_CONST T_VOLATILE 
 
@@ -52,7 +52,7 @@
 
 %type <token> ASSIGNMENT_OPERATOR
 %type <number> T_CONSTANT
-%type <string> T_IF T_ELSE T_WHILE T_RETURN T_MAIN T_INT T_VOID
+%type <string> T_IF T_ELSE T_WHILE T_RETURN T_INT T_VOID
 %type <string> T_IDENTIFIER T_LOG T_EXP T_SQRT FUNCTION_NAME
 
 %start ROOT
@@ -216,7 +216,7 @@ DIRECT_DECLARATOR : T_IDENTIFIER  { $$ = new Identifier(*$1); std::cout << "dire
                   | T_LBRACKET DECLARATOR T_RBRACKET { $$ = $2; std::cout << "direct declarator: ( declarator )" << std::endl; }
                   | DIRECT_DECLARATOR T_LBRACKET PARAMETER_TYPE_LIST T_RBRACKET { $$ = new functionDec($1, $3); std::cout << "direct declarator: direct declarator ( parameter type list )" << std::endl; std::cout << RED << "new functiondef with direct delcarator and parameter type list" << RESET << std::endl; }
                   | DIRECT_DECLARATOR T_LBRACKET IDENTIFIER_LIST T_RBRACKET { $$ = new functionDec($1, $3); delete $3; std::cout << "direct declarator: direct declarator ( identifier list )" << std::endl; std::cout << RED << "new functiondef with direct delcarator and identifier list" << RESET << std::endl; }
-                  | DIRECT_DECLARATOR T_LBRACKET T_RBRACKET { std::cout << "direct declarator: direct declarator( )" << std::endl; }
+                  | DIRECT_DECLARATOR T_LBRACKET T_RBRACKET { $$ = new functionDec($1); std::cout << "direct declarator: direct declarator( )" << std::endl; }
                   ;
 
 POINTER : T_STAR { std::cout << "pointer: *" << std::endl; }
