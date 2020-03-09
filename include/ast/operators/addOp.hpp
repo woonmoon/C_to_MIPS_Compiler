@@ -18,7 +18,7 @@ protected:
 
 class unaryOp : public Expression{
     public:
-        unaryOp(std::string opi, NodePtr expri) { branches.push_back(expri); }
+        unaryOp(std::string opi, NodePtr expri) { op=opi; branches.push_back(expri); }
         ~unaryOp(){}
         void print(std::ostream& dst, pycon& con, int level) const {
             dst << op;
