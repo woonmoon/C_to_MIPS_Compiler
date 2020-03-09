@@ -5,13 +5,13 @@ class PrimitiveType;
 typedef const PrimitiveType *PrimitiveTypePtr;
 
 
-class PrimitiveType: public Node{
+class PrimitiveType: public Node {
 public:
 
     enum Specifier {
     _int,
     _void //more to come
-  };
+    };
 
   PrimitiveType(Specifier inType): type(inType){}
 

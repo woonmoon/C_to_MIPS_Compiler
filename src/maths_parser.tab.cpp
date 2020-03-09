@@ -147,18 +147,17 @@ extern int yydebug;
     T_ELSE = 286,
     T_WHILE = 287,
     T_RETURN = 288,
-    T_MAIN = 289,
-    T_INT = 290,
-    T_VOID = 291,
-    T_STRUCT = 292,
-    T_UNION = 293,
-    T_ENUM = 294,
-    T_ASSIGN = 295,
-    T_CONSTANT = 296,
-    T_IDENTIFIER = 297,
-    T_TYPEDEF = 298,
-    T_CONST = 299,
-    T_VOLATILE = 300
+    T_INT = 289,
+    T_VOID = 290,
+    T_STRUCT = 291,
+    T_UNION = 292,
+    T_ENUM = 293,
+    T_ASSIGN = 294,
+    T_CONSTANT = 295,
+    T_IDENTIFIER = 296,
+    T_TYPEDEF = 297,
+    T_CONST = 298,
+    T_VOLATILE = 299
   };
 #endif
 
@@ -174,7 +173,7 @@ union YYSTYPE
   double number;
   std::string *string;
 
-#line 178 "src/maths_parser.tab.cpp" /* yacc.c:355  */
+#line 177 "src/maths_parser.tab.cpp" /* yacc.c:355  */
 };
 
 typedef union YYSTYPE YYSTYPE;
@@ -191,7 +190,7 @@ int yyparse (void);
 
 /* Copy the second part of user declarations.  */
 
-#line 195 "src/maths_parser.tab.cpp" /* yacc.c:358  */
+#line 194 "src/maths_parser.tab.cpp" /* yacc.c:358  */
 
 #ifdef short
 # undef short
@@ -433,10 +432,10 @@ union yyalloc
 /* YYFINAL -- State number of the termination state.  */
 #define YYFINAL  49
 /* YYLAST -- Last index in YYTABLE.  */
-#define YYLAST   451
+#define YYLAST   458
 
 /* YYNTOKENS -- Number of terminals.  */
-#define YYNTOKENS  46
+#define YYNTOKENS  45
 /* YYNNTS -- Number of nonterminals.  */
 #define YYNNTS  59
 /* YYNRULES -- Number of rules.  */
@@ -447,7 +446,7 @@ union yyalloc
 /* YYTRANSLATE[YYX] -- Symbol number corresponding to YYX as returned
    by yylex, with out-of-bounds checking.  */
 #define YYUNDEFTOK  2
-#define YYMAXUTOK   300
+#define YYMAXUTOK   299
 
 #define YYTRANSLATE(YYX)                                                \
   ((unsigned int) (YYX) <= YYMAXUTOK ? yytranslate[YYX] : YYUNDEFTOK)
@@ -485,8 +484,7 @@ static const yytype_uint8 yytranslate[] =
        5,     6,     7,     8,     9,    10,    11,    12,    13,    14,
       15,    16,    17,    18,    19,    20,    21,    22,    23,    24,
       25,    26,    27,    28,    29,    30,    31,    32,    33,    34,
-      35,    36,    37,    38,    39,    40,    41,    42,    43,    44,
-      45
+      35,    36,    37,    38,    39,    40,    41,    42,    43,    44
 };
 
 #if YYDEBUG
@@ -521,8 +519,8 @@ static const char *const yytname[] =
   "T_GREATERTHAN", "T_EQUALS", "T_NOT_EQUALS", "T_AND", "T_XOR", "T_OR",
   "T_AND_OP", "T_OR_OP", "T_QUESTION", "T_LBRACKET", "T_RBRACKET",
   "T_LCURLY", "T_RCURLY", "T_SEMICOLON", "T_COLON", "T_LOG", "T_EXP",
-  "T_SQRT", "T_IF", "T_ELSE", "T_WHILE", "T_RETURN", "T_MAIN", "T_INT",
-  "T_VOID", "T_STRUCT", "T_UNION", "T_ENUM", "T_ASSIGN", "T_CONSTANT",
+  "T_SQRT", "T_IF", "T_ELSE", "T_WHILE", "T_RETURN", "T_INT", "T_VOID",
+  "T_STRUCT", "T_UNION", "T_ENUM", "T_ASSIGN", "T_CONSTANT",
   "T_IDENTIFIER", "T_TYPEDEF", "T_CONST", "T_VOLATILE", "$accept",
   "PRIMARY_EXPRESSION", "POSTFIX_EXPRESSION", "ARGUMENT_EXPRESSION_LIST",
   "UNARY_EXPRESSION", "UNARY_OPERATOR", "CAST_EXPRESSION",
@@ -555,7 +553,7 @@ static const yytype_uint16 yytoknum[] =
      265,   266,   267,   268,   269,   270,   271,   272,   273,   274,
      275,   276,   277,   278,   279,   280,   281,   282,   283,   284,
      285,   286,   287,   288,   289,   290,   291,   292,   293,   294,
-     295,   296,   297,   298,   299,   300
+     295,   296,   297,   298,   299
 };
 # endif
 
@@ -573,29 +571,29 @@ static const yytype_uint16 yytoknum[] =
      STATE-NUM.  */
 static const yytype_int16 yypact[] =
 {
-     250,    13,     6,  -112,  -112,  -112,  -112,     5,  -112,  -112,
-    -112,  -112,   406,   406,  -112,   -32,  -112,   406,    24,    -7,
-      19,   395,  -112,  -112,  -112,   250,    55,  -112,  -112,    13,
-      50,    59,    86,  -112,  -112,  -112,  -112,   237,    24,  -112,
-      34,  -112,   384,   157,  -112,    19,   395,  -112,  -112,  -112,
-    -112,  -112,  -112,    64,    45,  -112,    59,  -112,  -112,    98,
-     128,  -112,    92,    20,     6,  -112,   100,  -112,   395,  -112,
-    -112,  -112,   213,  -112,  -112,   107,   119,   359,  -112,   124,
-    -112,   133,   132,   100,  -112,   158,   106,    11,   134,   139,
-     164,   172,   174,   179,   147,  -112,  -112,    35,  -112,  -112,
-    -112,   305,  -112,  -112,  -112,  -112,   200,   167,  -112,  -112,
-     100,    59,  -112,    89,  -112,   406,   162,  -112,   225,     8,
-    -112,   187,  -112,  -112,  -112,  -112,  -112,  -112,   116,   120,
-      15,   120,   188,   100,   100,  -112,    46,   349,   372,   100,
+     277,    11,     6,  -112,  -112,  -112,  -112,    12,  -112,  -112,
+    -112,  -112,   414,   414,  -112,   -23,  -112,   414,     8,    -5,
+      19,   403,  -112,  -112,  -112,   277,    50,  -112,  -112,    11,
+      43,    28,    86,  -112,  -112,  -112,  -112,   174,     8,  -112,
+      37,  -112,   385,   157,  -112,    19,   403,  -112,  -112,  -112,
+    -112,  -112,  -112,    33,    34,  -112,    28,  -112,  -112,   114,
+     134,  -112,    49,     7,     6,  -112,   100,  -112,   403,  -112,
+    -112,  -112,   241,  -112,  -112,   129,   137,   353,  -112,   135,
+    -112,   138,   140,   100,  -112,   161,    15,    91,   101,   132,
+     168,   156,   169,   170,   133,  -112,  -112,    89,  -112,  -112,
+    -112,   330,  -112,  -112,  -112,  -112,   199,   175,  -112,  -112,
+     100,    28,  -112,    96,  -112,   414,   162,  -112,   252,     2,
+    -112,   192,  -112,  -112,  -112,  -112,  -112,  -112,   116,   131,
+      38,   131,   197,   100,   100,  -112,   103,   374,   395,   100,
     -112,  -112,   100,   100,   100,   100,   100,   100,   100,   100,
      100,   100,   100,   100,   100,   100,   100,   100,  -112,  -112,
-    -112,  -112,   318,  -112,  -112,  -112,  -112,  -112,  -112,  -112,
-     189,   190,   187,   367,  -112,  -112,   262,   192,  -112,  -112,
+    -112,  -112,   343,  -112,  -112,  -112,  -112,  -112,  -112,  -112,
+     203,   204,   192,   216,  -112,  -112,   288,   200,  -112,  -112,
      100,   121,   122,  -112,  -112,  -112,   125,  -112,  -112,  -112,
-     158,   158,   106,   106,    11,    11,   134,   134,   139,   164,
-     172,   174,   179,    26,  -112,  -112,  -112,  -112,  -112,   193,
-    -112,   349,   349,   100,  -112,   100,  -112,   178,  -112,  -112,
-    -112,   349,  -112
+     161,   161,    15,    15,    91,    91,   101,   101,   132,   168,
+     156,   169,   170,    26,  -112,  -112,  -112,  -112,  -112,   205,
+    -112,   374,   374,   100,  -112,   100,  -112,   214,  -112,  -112,
+    -112,   374,  -112
 };
 
   /* YYDEFACT[STATE-NUM] -- Default reduction number in state STATE-NUM.
@@ -631,12 +629,12 @@ static const yytype_uint8 yydefact[] =
   /* YYPGOTO[NTERM-NUM].  */
 static const yytype_int16 yypgoto[] =
 {
-    -112,  -112,  -112,  -112,   -64,  -112,   -72,    25,    29,    23,
-      36,    63,    65,    67,    68,    71,  -112,  -105,   -65,   -39,
-    -112,  -112,   163,  -112,   -33,  -112,  -112,   -66,  -112,   173,
-     129,     3,   -12,     1,  -112,   -34,  -112,   151,  -112,  -112,
-     -37,  -111,  -112,   -86,  -112,    81,   150,  -112,  -112,  -112,
-    -112,     0,     4,   141,  -112,    31,   206,  -112,  -112
+    -112,  -112,  -112,  -112,   -64,  -112,   -72,    13,     9,    23,
+      35,    77,    78,    95,   102,    94,  -112,  -105,   -65,   -39,
+    -112,  -112,   193,  -112,   -33,  -112,  -112,   -68,  -112,   207,
+     150,     3,   -12,     1,  -112,   -34,  -112,   149,  -112,  -112,
+     -37,  -111,  -112,   -86,  -112,    81,   159,  -112,  -112,  -112,
+    -112,     0,     4,   164,  -112,    31,   242,  -112,  -112
 };
 
   /* YYDEFGOTO[NTERM-NUM].  */
@@ -656,150 +654,150 @@ static const yytype_int16 yydefgoto[] =
 static const yytype_uint8 yytable[] =
 {
       20,   125,    28,    59,    27,   163,    30,    38,   172,     1,
-      35,   141,    33,    34,     2,   160,     1,    36,     1,   140,
-     145,   146,     1,     1,    42,    20,   120,     2,    31,   118,
-      51,    23,    50,   128,   157,     8,   176,    63,   136,   129,
-       2,   118,    64,   157,    39,    37,   140,    32,     8,   107,
-       8,   184,   215,   111,   157,    49,    23,    10,    11,    65,
-     158,     8,     8,   175,   119,   179,   172,   122,   107,   112,
-     189,   183,    52,   187,   188,   131,   160,   109,   140,   140,
+       1,   141,    33,    34,     1,   160,     2,    36,    35,   140,
+     143,   144,     1,   118,    42,    20,   120,     2,   118,    37,
+      51,    23,    50,   128,   157,    31,     8,    63,   136,   129,
+       2,     1,   111,     8,    39,    64,   140,     8,     8,   107,
+      49,   184,   215,    32,    10,    11,    23,   116,   112,   176,
+       8,   175,    65,   179,   119,    52,   172,   122,   107,    53,
+     189,   117,   110,   187,   188,   131,   160,   109,   140,   140,
      140,   140,   140,   140,   140,   140,   140,   140,   140,   140,
-     140,   140,   204,   178,   181,   182,   129,   111,   129,   109,
-     116,    53,    44,    69,   110,    70,    71,    38,   210,    56,
-     220,   143,   144,   166,   117,    63,   140,   203,    63,   119,
-     114,    72,    30,    67,   157,   217,   218,   108,   133,   157,
-     157,   177,   131,   213,   131,   222,   115,   109,   174,   209,
-     134,    78,   124,   211,   212,   147,   148,   214,   219,   127,
-     137,   140,   149,   150,   138,     3,     4,     5,     6,     7,
-      69,   142,    70,    71,    10,    11,   155,   156,   190,   191,
-     194,   195,   139,    63,   192,   193,    63,   177,    72,   151,
-      43,    73,    74,    68,   106,   196,   197,    75,   152,    76,
-      77,   153,     3,     4,     5,     6,     7,   154,    78,    79,
-       9,    10,    11,    69,   168,    70,    71,    66,   173,   221,
-     180,   206,   207,   176,   198,   216,    69,   199,    70,    71,
-     200,    72,   201,    43,   161,    74,   202,   123,     1,   113,
-      75,    48,    76,    77,    72,     3,     4,     5,     6,     7,
-     165,    78,    79,     9,    10,    11,   118,   169,     3,     4,
-       5,     6,     7,     1,    78,   124,   162,    10,    11,    57,
-       3,     4,     5,     6,     7,     1,   167,     8,     9,    10,
-      11,     2,     3,     4,     5,     6,     7,     0,     0,    58,
-       9,    10,    11,   176,   169,     3,     4,     5,     6,     7,
-       0,     0,     8,     9,    10,    11,     0,     3,     4,     5,
-       6,     7,     0,     0,     0,     9,    10,    11,    69,     0,
-      70,    71,     0,     0,     0,     0,     0,     0,     0,     0,
-       0,    69,     0,    70,    71,     0,    72,     0,    43,   159,
-      74,     0,     0,     0,     0,    75,     0,    76,    77,    72,
-       0,    43,   205,    74,     0,     0,    78,    79,    75,     0,
-      76,    77,    69,     0,    70,    71,     0,     0,     0,    78,
-      79,     0,    69,     0,    70,    71,     0,     0,     0,     0,
-      72,     0,    43,     0,    74,    69,     0,    70,    71,    75,
-      72,    76,    77,     0,   135,     0,     0,     0,     0,   208,
-      78,    79,     0,    72,   185,     0,     0,     0,     0,     0,
-      78,   124,     3,     4,     5,     6,     7,    43,     0,     0,
-       9,    10,    11,    78,   124,     0,     0,     0,    43,     3,
-       4,     5,     6,     7,    66,     0,     0,     9,    10,    11,
-       3,     4,     5,     6,     7,     0,     0,     0,     9,    10,
-      11,     3,     4,     5,     6,     7,     0,     0,     0,     9,
-      10,    11
+     140,   140,   204,   178,   181,   182,   129,   157,   129,   109,
+     145,   146,    44,    69,   111,    70,    71,    38,   210,    56,
+     220,   157,   147,   148,   158,    63,   140,   203,    63,   119,
+     166,    72,    30,    67,   157,   217,   218,   108,   183,   157,
+     157,   177,   131,   213,   131,   222,   114,   109,   174,   209,
+      78,   124,   115,   211,   212,   149,   150,   214,   219,   127,
+     133,   140,   155,   156,   192,   193,   190,   191,   134,   138,
+      69,   137,    70,    71,   142,     3,     4,     5,     6,     7,
+     194,   195,   152,    63,    10,    11,    63,   177,    72,   139,
+      43,    73,    74,   151,   196,   197,   153,    75,   154,    76,
+      77,     3,     4,     5,     6,     7,    57,    78,    79,     9,
+      10,    11,    69,   168,    70,    71,    68,   106,     3,     4,
+       5,     6,     7,   173,    66,    58,     9,    10,    11,   180,
+      72,   176,    43,   161,    74,   206,   207,   216,   198,    75,
+     199,    76,    77,     3,     4,     5,     6,     7,   208,    78,
+      79,     9,    10,    11,    69,   221,    70,    71,   200,   202,
+       3,     4,     5,     6,     7,     1,   201,   123,     9,    10,
+      11,   165,    72,   113,   167,   162,     0,    48,     0,     0,
+       0,     0,     0,   118,   169,     3,     4,     5,     6,     7,
+       1,    78,   124,     0,    10,    11,     3,     4,     5,     6,
+       7,     1,     0,     8,     9,    10,    11,     0,     2,     0,
+       0,     0,     0,     0,     0,     0,     0,     0,     0,   176,
+     169,     3,     4,     5,     6,     7,     0,     0,     8,     9,
+      10,    11,     3,     4,     5,     6,     7,     0,     0,     0,
+       9,    10,    11,    69,     0,    70,    71,     0,     0,     0,
+       0,     0,     0,     0,     0,     0,    69,     0,    70,    71,
+       0,    72,     0,    43,   159,    74,    69,     0,    70,    71,
+      75,     0,    76,    77,    72,     0,    43,   205,    74,     0,
+      78,    79,     0,    75,    72,    76,    77,    69,   135,    70,
+      71,     0,     0,    78,    79,     0,     0,     0,     0,     0,
+       0,     0,     0,    78,   124,    72,     0,    43,    69,    74,
+      70,    71,     0,     0,    75,     0,    76,    77,    43,     0,
+       0,     0,     0,     0,    78,    79,    72,   185,     0,     3,
+       4,     5,     6,     7,    66,     0,    43,     9,    10,    11,
+       0,     0,     0,     0,     0,    78,   124,     3,     4,     5,
+       6,     7,     0,     0,     0,     9,    10,    11,     3,     4,
+       5,     6,     7,     0,     0,     0,     9,    10,    11
 };
 
 static const yytype_int16 yycheck[] =
 {
        0,    66,     1,    37,     1,   110,     2,    19,   119,     3,
-      42,    83,    12,    13,    21,   101,     3,    17,     3,    83,
-       9,    10,     3,     3,    20,    25,    63,    21,    23,    21,
-      29,     0,    29,    72,     8,    42,    21,    37,    77,    72,
-      21,    21,     8,     8,    25,    21,   110,    42,    42,    45,
-      42,   137,    26,     8,     8,     0,    25,    44,    45,    25,
-      25,    42,    42,   129,    63,   131,   177,    63,    64,    24,
-     142,    25,    22,   138,   139,    72,   162,    46,   142,   143,
+       3,    83,    12,    13,     3,   101,    21,    17,    41,    83,
+       5,     6,     3,    21,    20,    25,    63,    21,    21,    21,
+      29,     0,    29,    72,     8,    23,    41,    37,    77,    72,
+      21,     3,     8,    41,    25,     8,   110,    41,    41,    45,
+       0,   137,    26,    41,    43,    44,    25,     8,    24,    21,
+      41,   129,    25,   131,    63,    22,   177,    63,    64,    41,
+     142,    22,    39,   138,   139,    72,   162,    46,   142,   143,
      144,   145,   146,   147,   148,   149,   150,   151,   152,   153,
      154,   155,   157,   130,   133,   134,   129,     8,   131,    68,
-       8,    42,    21,     3,    40,     5,     6,   119,   180,    23,
-     215,     5,     6,    24,    22,   115,   180,   156,   118,   118,
-      22,    21,   118,    42,     8,   211,   212,    46,    21,     8,
-       8,   130,   129,     8,   131,   221,     8,   106,    22,   173,
-      21,    41,    42,    22,    22,    11,    12,    22,   213,    68,
-      26,   215,    13,    14,    21,    35,    36,    37,    38,    39,
-       3,     3,     5,     6,    44,    45,    19,    20,   143,   144,
-     147,   148,    40,   173,   145,   146,   176,   176,    21,    15,
-      23,    24,    25,    42,    43,   149,   150,    30,    16,    32,
-      33,    17,    35,    36,    37,    38,    39,    18,    41,    42,
-      43,    44,    45,     3,    42,     5,     6,    40,    21,    31,
-      22,    22,    22,    21,   151,    22,     3,   152,     5,     6,
-     153,    21,   154,    23,    24,    25,   155,    64,     3,    56,
-      30,    25,    32,    33,    21,    35,    36,    37,    38,    39,
-     111,    41,    42,    43,    44,    45,    21,    22,    35,    36,
-      37,    38,    39,     3,    41,    42,   106,    44,    45,    22,
-      35,    36,    37,    38,    39,     3,   115,    42,    43,    44,
-      45,    21,    35,    36,    37,    38,    39,    -1,    -1,    42,
-      43,    44,    45,    21,    22,    35,    36,    37,    38,    39,
-      -1,    -1,    42,    43,    44,    45,    -1,    35,    36,    37,
-      38,    39,    -1,    -1,    -1,    43,    44,    45,     3,    -1,
-       5,     6,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,
-      -1,     3,    -1,     5,     6,    -1,    21,    -1,    23,    24,
-      25,    -1,    -1,    -1,    -1,    30,    -1,    32,    33,    21,
-      -1,    23,    24,    25,    -1,    -1,    41,    42,    30,    -1,
-      32,    33,     3,    -1,     5,     6,    -1,    -1,    -1,    41,
-      42,    -1,     3,    -1,     5,     6,    -1,    -1,    -1,    -1,
-      21,    -1,    23,    -1,    25,     3,    -1,     5,     6,    30,
-      21,    32,    33,    -1,    25,    -1,    -1,    -1,    -1,    22,
-      41,    42,    -1,    21,    22,    -1,    -1,    -1,    -1,    -1,
-      41,    42,    35,    36,    37,    38,    39,    23,    -1,    -1,
-      43,    44,    45,    41,    42,    -1,    -1,    -1,    23,    35,
-      36,    37,    38,    39,    40,    -1,    -1,    43,    44,    45,
-      35,    36,    37,    38,    39,    -1,    -1,    -1,    43,    44,
-      45,    35,    36,    37,    38,    39,    -1,    -1,    -1,    43,
-      44,    45
+       9,    10,    21,     3,     8,     5,     6,   119,   180,    23,
+     215,     8,    11,    12,    25,   115,   180,   156,   118,   118,
+      24,    21,   118,    42,     8,   211,   212,    46,    25,     8,
+       8,   130,   129,     8,   131,   221,    22,   106,    22,   173,
+      40,    41,     8,    22,    22,    13,    14,    22,   213,    68,
+      21,   215,    19,    20,   145,   146,   143,   144,    21,    21,
+       3,    26,     5,     6,     3,    34,    35,    36,    37,    38,
+     147,   148,    16,   173,    43,    44,   176,   176,    21,    39,
+      23,    24,    25,    15,   149,   150,    17,    30,    18,    32,
+      33,    34,    35,    36,    37,    38,    22,    40,    41,    42,
+      43,    44,     3,    41,     5,     6,    42,    43,    34,    35,
+      36,    37,    38,    21,    39,    41,    42,    43,    44,    22,
+      21,    21,    23,    24,    25,    22,    22,    22,   151,    30,
+     152,    32,    33,    34,    35,    36,    37,    38,    22,    40,
+      41,    42,    43,    44,     3,    31,     5,     6,   153,   155,
+      34,    35,    36,    37,    38,     3,   154,    64,    42,    43,
+      44,   111,    21,    56,   115,   106,    -1,    25,    -1,    -1,
+      -1,    -1,    -1,    21,    22,    34,    35,    36,    37,    38,
+       3,    40,    41,    -1,    43,    44,    34,    35,    36,    37,
+      38,     3,    -1,    41,    42,    43,    44,    -1,    21,    -1,
+      -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    21,
+      22,    34,    35,    36,    37,    38,    -1,    -1,    41,    42,
+      43,    44,    34,    35,    36,    37,    38,    -1,    -1,    -1,
+      42,    43,    44,     3,    -1,     5,     6,    -1,    -1,    -1,
+      -1,    -1,    -1,    -1,    -1,    -1,     3,    -1,     5,     6,
+      -1,    21,    -1,    23,    24,    25,     3,    -1,     5,     6,
+      30,    -1,    32,    33,    21,    -1,    23,    24,    25,    -1,
+      40,    41,    -1,    30,    21,    32,    33,     3,    25,     5,
+       6,    -1,    -1,    40,    41,    -1,    -1,    -1,    -1,    -1,
+      -1,    -1,    -1,    40,    41,    21,    -1,    23,     3,    25,
+       5,     6,    -1,    -1,    30,    -1,    32,    33,    23,    -1,
+      -1,    -1,    -1,    -1,    40,    41,    21,    22,    -1,    34,
+      35,    36,    37,    38,    39,    -1,    23,    42,    43,    44,
+      -1,    -1,    -1,    -1,    -1,    40,    41,    34,    35,    36,
+      37,    38,    -1,    -1,    -1,    42,    43,    44,    34,    35,
+      36,    37,    38,    -1,    -1,    -1,    42,    43,    44
 };
 
   /* YYSTOS[STATE-NUM] -- The (internal number of the) accessing
      symbol of state STATE-NUM.  */
 static const yytype_uint8 yystos[] =
 {
-       0,     3,    21,    35,    36,    37,    38,    39,    42,    43,
-      44,    45,    69,    70,    71,    72,    74,    77,    78,    79,
-      97,    98,   100,   101,   102,   103,   104,    77,    79,    80,
-      98,    23,    42,    97,    97,    42,    97,    21,    78,    25,
-      67,    68,    98,    23,    91,    97,    99,   101,   102,     0,
-      77,    79,    22,    42,    75,    76,    23,    22,    42,    81,
-      82,    83,    84,    97,     8,    25,    40,    91,    99,     3,
-       5,     6,    21,    24,    25,    30,    32,    33,    41,    42,
-      47,    48,    50,    51,    52,    53,    54,    55,    56,    57,
-      58,    59,    60,    61,    62,    63,    64,    65,    89,    90,
-      91,    92,    93,    94,    95,    96,    99,    98,    91,   101,
-      40,     8,    24,    75,    22,     8,     8,    22,    21,    79,
-      86,    87,    98,    68,    42,    64,    88,    91,    65,    70,
-      73,    77,    85,    21,    21,    25,    65,    26,    21,    40,
-      50,    52,     3,     5,     6,     9,    10,    11,    12,    13,
+       0,     3,    21,    34,    35,    36,    37,    38,    41,    42,
+      43,    44,    68,    69,    70,    71,    73,    76,    77,    78,
+      96,    97,    99,   100,   101,   102,   103,    76,    78,    79,
+      97,    23,    41,    96,    96,    41,    96,    21,    77,    25,
+      66,    67,    97,    23,    90,    96,    98,   100,   101,     0,
+      76,    78,    22,    41,    74,    75,    23,    22,    41,    80,
+      81,    82,    83,    96,     8,    25,    39,    90,    98,     3,
+       5,     6,    21,    24,    25,    30,    32,    33,    40,    41,
+      46,    47,    49,    50,    51,    52,    53,    54,    55,    56,
+      57,    58,    59,    60,    61,    62,    63,    64,    88,    89,
+      90,    91,    92,    93,    94,    95,    98,    97,    90,   100,
+      39,     8,    24,    74,    22,     8,     8,    22,    21,    78,
+      85,    86,    97,    67,    41,    63,    87,    90,    64,    69,
+      72,    76,    84,    21,    21,    25,    64,    26,    21,    39,
+      49,    51,     3,     5,     6,     9,    10,    11,    12,    13,
       14,    15,    16,    17,    18,    19,    20,     8,    25,    24,
-      89,    24,    92,    63,    66,    76,    24,    83,    42,    22,
-      81,    86,    87,    21,    22,    73,    21,    79,    86,    73,
-      22,    65,    65,    25,    89,    22,    49,    64,    64,    52,
-      53,    53,    54,    54,    55,    55,    56,    56,    57,    58,
-      59,    60,    61,    65,    64,    24,    22,    22,    22,    81,
-      52,    22,    22,     8,    22,    26,    22,    89,    89,    64,
-      63,    31,    89
+      88,    24,    91,    62,    65,    75,    24,    82,    41,    22,
+      80,    85,    86,    21,    22,    72,    21,    78,    85,    72,
+      22,    64,    64,    25,    88,    22,    48,    63,    63,    51,
+      52,    52,    53,    53,    54,    54,    55,    55,    56,    57,
+      58,    59,    60,    64,    63,    24,    22,    22,    22,    80,
+      51,    22,    22,     8,    22,    26,    22,    88,    88,    63,
+      62,    31,    88
 };
 
   /* YYR1[YYN] -- Symbol number of symbol that rule YYN derives.  */
 static const yytype_uint8 yyr1[] =
 {
-       0,    46,    47,    47,    47,    48,    48,    48,    49,    49,
-      50,    50,    51,    51,    51,    52,    52,    53,    53,    54,
-      54,    54,    55,    55,    55,    56,    56,    56,    57,    57,
-      57,    58,    58,    59,    59,    60,    60,    61,    61,    62,
-      62,    63,    63,    64,    64,    65,    65,    66,    67,    67,
-      68,    68,    69,    70,    70,    70,    70,    71,    72,    72,
-      73,    73,    73,    73,    74,    74,    74,    75,    75,    76,
-      76,    77,    77,    78,    78,    78,    78,    78,    79,    79,
-      79,    79,    80,    80,    81,    82,    82,    83,    83,    83,
-      84,    84,    85,    85,    86,    86,    86,    87,    87,    87,
-      87,    87,    88,    89,    89,    89,    89,    89,    89,    90,
-      91,    91,    91,    91,    92,    92,    93,    93,    94,    94,
-      95,    96,    96,    97,    97,    97,    97,    97,    97,    98,
-      98,    99,    99,   100,   100,   100,   100,   101,   101,   102,
-     102,   103,   103,   104
+       0,    45,    46,    46,    46,    47,    47,    47,    48,    48,
+      49,    49,    50,    50,    50,    51,    51,    52,    52,    53,
+      53,    53,    54,    54,    54,    55,    55,    55,    56,    56,
+      56,    57,    57,    58,    58,    59,    59,    60,    60,    61,
+      61,    62,    62,    63,    63,    64,    64,    65,    66,    66,
+      67,    67,    68,    69,    69,    69,    69,    70,    71,    71,
+      72,    72,    72,    72,    73,    73,    73,    74,    74,    75,
+      75,    76,    76,    77,    77,    77,    77,    77,    78,    78,
+      78,    78,    79,    79,    80,    81,    81,    82,    82,    82,
+      83,    83,    84,    84,    85,    85,    85,    86,    86,    86,
+      86,    86,    87,    88,    88,    88,    88,    88,    88,    89,
+      90,    90,    90,    90,    91,    91,    92,    92,    93,    93,
+      94,    95,    95,    96,    96,    96,    96,    96,    96,    97,
+      97,    98,    98,    99,    99,    99,    99,   100,   100,   101,
+     101,   102,   102,   103
 };
 
   /* YYR2[YYN] -- Number of symbols on the right hand side of rule YYN.  */
@@ -1498,851 +1496,851 @@ yyreduce:
         case 2:
 #line 62 "src/maths_parser.y" /* yacc.c:1646  */
     {(yyval.expr) = new Identifier(*(yyvsp[0].string));std::cout << RED << "new identifier" << RESET << std::endl; }
-#line 1502 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 1500 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 3:
 #line 63 "src/maths_parser.y" /* yacc.c:1646  */
     { (yyval.expr) = new Constant((yyvsp[0].number)); std::cout << "issa constant" << std::endl;  std::cout << RED << "new constant" << RESET << std::endl;}
-#line 1508 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 1506 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 4:
 #line 64 "src/maths_parser.y" /* yacc.c:1646  */
     { std::cout << "lbr rbr" << std::endl; }
-#line 1514 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 1512 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 5:
 #line 66 "src/maths_parser.y" /* yacc.c:1646  */
     {(yyval.expr) = (yyvsp[0].expr);}
-#line 1520 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 1518 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 6:
 #line 67 "src/maths_parser.y" /* yacc.c:1646  */
     { (yyval.expr) = new functionCall((yyvsp[-2].expr), new List()); std::cout << RED << "made a function call" << RESET << std::endl; }
-#line 1526 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 1524 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 7:
 #line 68 "src/maths_parser.y" /* yacc.c:1646  */
     { (yyval.expr) = new functionCall((yyvsp[-3].expr), (yyvsp[-1].exprList)); }
-#line 1532 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 1530 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 8:
 #line 70 "src/maths_parser.y" /* yacc.c:1646  */
     {(yyval.exprList) = new List((yyvsp[0].expr)); std::cout << "argument axpression lsit: argument expression" << std::endl;std::cout << RED << "new list with ASSIGNMENT_EXPRESSION" << RESET << std::endl;}
-#line 1538 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 1536 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 9:
 #line 71 "src/maths_parser.y" /* yacc.c:1646  */
     {(yyval.exprList) = new List((yyvsp[-2].exprList)); ((yyval.exprList))->addtoList((yyvsp[0].expr)); std::cout << "argument expression list: arg expr list comma assignment expr" << std::endl;std::cout << RED << "new list with ARGUMENT_EXPRESSION_LIST and ASSIGNMENT_EXPRESSION added" << RESET << std::endl;}
-#line 1544 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 1542 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 10:
 #line 74 "src/maths_parser.y" /* yacc.c:1646  */
     {(yyval.expr) = (yyvsp[0].expr);}
-#line 1550 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 1548 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 12:
 #line 77 "src/maths_parser.y" /* yacc.c:1646  */
     { std::cout << "* found" << std::endl; }
-#line 1556 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 1554 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 13:
 #line 78 "src/maths_parser.y" /* yacc.c:1646  */
     { std::cout << "+ found" << std::endl; }
-#line 1562 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 1560 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 14:
 #line 79 "src/maths_parser.y" /* yacc.c:1646  */
     { std::cout << "- found" << std::endl; }
-#line 1568 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 1566 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 15:
 #line 82 "src/maths_parser.y" /* yacc.c:1646  */
     { (yyval.expr) = (yyvsp[0].expr); std::cout << "cast expression: unary expression" << std::endl; }
-#line 1574 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 1572 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 16:
 #line 83 "src/maths_parser.y" /* yacc.c:1646  */
     { std::cout << "cast expression: ( type name ) cast expression" << std::endl; }
-#line 1580 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 1578 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 17:
 #line 86 "src/maths_parser.y" /* yacc.c:1646  */
     { (yyval.expr) = (yyvsp[0].expr); std::cout << "multiplicative expression: cast expression" << std::endl; }
-#line 1586 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 1584 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 18:
 #line 87 "src/maths_parser.y" /* yacc.c:1646  */
     { (yyval.expr) = new mulOp((yyvsp[-2].expr), (yyvsp[0].expr)); std::cout << "multiplicative expression: multiplicative expression * cast expression" << std::endl; }
-#line 1592 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 1590 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 19:
 #line 90 "src/maths_parser.y" /* yacc.c:1646  */
     { (yyval.expr) = (yyvsp[0].expr); std::cout << "additive expression: multiplicative expression" << std::endl; }
-#line 1598 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 1596 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 20:
 #line 91 "src/maths_parser.y" /* yacc.c:1646  */
     { (yyval.expr) = new addOp((yyvsp[-2].expr), (yyvsp[0].expr)); std::cout << "additive expression: additive expression + multiplicative expression" << std::endl; }
-#line 1604 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 1602 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 21:
 #line 92 "src/maths_parser.y" /* yacc.c:1646  */
     { (yyval.expr) = new subOp((yyvsp[-2].expr), (yyvsp[0].expr)); std::cout << "additive expression: additive expression - multiplicative expression" << std::endl; }
-#line 1610 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 1608 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 22:
 #line 95 "src/maths_parser.y" /* yacc.c:1646  */
     { (yyval.expr) = (yyvsp[0].expr); std::cout << "shift expression: additive expression" << std::endl; }
-#line 1616 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 1614 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 23:
 #line 96 "src/maths_parser.y" /* yacc.c:1646  */
     { std::cout << "shift expression: shift expression << additive expression" << std::endl; }
-#line 1622 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 1620 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 24:
 #line 97 "src/maths_parser.y" /* yacc.c:1646  */
     { std::cout << "shift expression: shift expression >> additive expression" << std::endl; }
-#line 1628 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 1626 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 25:
 #line 100 "src/maths_parser.y" /* yacc.c:1646  */
     { (yyval.expr) = (yyvsp[0].expr); std::cout << "relational expression: shift expression" << std::endl; }
-#line 1634 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 1632 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 26:
 #line 101 "src/maths_parser.y" /* yacc.c:1646  */
     { (yyval.expr) = new lessThan((yyvsp[-2].expr), (yyvsp[0].expr)); std::cout << "relational expression: relational expression < shift expression" << std::endl; }
-#line 1640 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 1638 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 27:
 #line 102 "src/maths_parser.y" /* yacc.c:1646  */
     { std::cout << "relational expression: relational expression > shift expression" << std::endl; }
-#line 1646 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 1644 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 28:
 #line 105 "src/maths_parser.y" /* yacc.c:1646  */
     { (yyval.expr) = (yyvsp[0].expr); std::cout << "equality expression: relational expression" << std::endl; }
-#line 1652 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 1650 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 29:
 #line 106 "src/maths_parser.y" /* yacc.c:1646  */
     { (yyval.expr) = new equalTo((yyvsp[-2].expr), (yyvsp[0].expr)); std::cout << "equality expression: equality expression = relational expression" << std::endl; }
-#line 1658 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 1656 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 30:
 #line 107 "src/maths_parser.y" /* yacc.c:1646  */
     { std::cout << "equality expression: equality expression != relational expression" << std::endl; }
-#line 1664 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 1662 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 31:
 #line 110 "src/maths_parser.y" /* yacc.c:1646  */
     { (yyval.expr) = (yyvsp[0].expr); std::cout << "and expression: equality expression" << std::endl; }
-#line 1670 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 1668 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 32:
 #line 111 "src/maths_parser.y" /* yacc.c:1646  */
     { std::cout << "and expression: and expression & equality expression" << std::endl; }
-#line 1676 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 1674 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 33:
 #line 114 "src/maths_parser.y" /* yacc.c:1646  */
     { (yyval.expr) = (yyvsp[0].expr); std::cout << "exclusive or expression: and expression" << std::endl; }
-#line 1682 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 1680 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 34:
 #line 115 "src/maths_parser.y" /* yacc.c:1646  */
     { std::cout << "exclusive or expression: exclusive or expression ^ and expression" << std::endl; }
-#line 1688 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 1686 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 35:
 #line 118 "src/maths_parser.y" /* yacc.c:1646  */
     { (yyval.expr) = (yyvsp[0].expr); std::cout << "inclusive or expression: exclusive or expression" << std::endl; }
-#line 1694 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 1692 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 36:
 #line 119 "src/maths_parser.y" /* yacc.c:1646  */
     { std::cout << "inclusive or expression: inclusive or expression | exclusive or expression" << std::endl; }
-#line 1700 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 1698 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 37:
 #line 122 "src/maths_parser.y" /* yacc.c:1646  */
     {(yyval.expr) = (yyvsp[0].expr);  std::cout << "logical and expression: inclusive or expression" << std::endl; }
-#line 1706 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 1704 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 38:
 #line 123 "src/maths_parser.y" /* yacc.c:1646  */
     { (yyval.expr) = new logAndOp((yyvsp[-2].expr), (yyvsp[0].expr)); std::cout << "logical and expression: logical and expression & inclusive or expression" << std::endl; }
-#line 1712 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 1710 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 39:
 #line 126 "src/maths_parser.y" /* yacc.c:1646  */
     {(yyval.expr) = (yyvsp[0].expr);  std::cout << "logical or expression: logical and expression" << std::endl; }
-#line 1718 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 1716 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 40:
 #line 127 "src/maths_parser.y" /* yacc.c:1646  */
     { (yyval.expr) = new logOrOp((yyvsp[-2].expr), (yyvsp[0].expr)); std::cout << "logical or expression: logical or expression | logical and expression" << std::endl; }
-#line 1724 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 1722 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 41:
 #line 130 "src/maths_parser.y" /* yacc.c:1646  */
     { (yyval.expr) = (yyvsp[0].expr); std::cout << "conditional expression: logical or expression" << std::endl; }
-#line 1730 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 1728 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 42:
 #line 131 "src/maths_parser.y" /* yacc.c:1646  */
     { std::cout << "conditional expression: logical or expression? conditional expression" << std::endl; }
-#line 1736 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 1734 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 43:
 #line 134 "src/maths_parser.y" /* yacc.c:1646  */
     { (yyval.expr) = (yyvsp[0].expr); std::cout << "assignment expression: conditional expression" << std::endl; }
-#line 1742 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 1740 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 44:
 #line 135 "src/maths_parser.y" /* yacc.c:1646  */
     { (yyval.expr) = new assignOp((yyvsp[-2].expr), (yyvsp[0].expr)); std::cout << "assignment expression: unary expression = assignment expression" << std::endl; }
-#line 1748 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 1746 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 45:
 #line 141 "src/maths_parser.y" /* yacc.c:1646  */
     { std::cout << "expression: assignment expression" << std::endl; }
-#line 1754 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 1752 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 46:
 #line 142 "src/maths_parser.y" /* yacc.c:1646  */
     { std::cout << "expression: expression, assignment expression" << std::endl; }
-#line 1760 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 1758 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 47:
 #line 145 "src/maths_parser.y" /* yacc.c:1646  */
     { std::cout << "constant expression: condiitional expression" << std::endl; }
-#line 1766 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 1764 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 48:
 #line 148 "src/maths_parser.y" /* yacc.c:1646  */
     { (yyval.exprList) = new List((yyvsp[0].expr)); std::cout << "init declarator list: init declarator" << std::endl; std::cout << RED << "new list with InitDeclaTOR" << RESET << std::endl; }
-#line 1772 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 1770 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 49:
 #line 149 "src/maths_parser.y" /* yacc.c:1646  */
     { (yyval.exprList) = new List((yyvsp[-2].exprList)); ((yyval.exprList))->addtoList((yyvsp[0].expr)); std::cout << "init declarator list: init declarator list, init declarator" << std::endl; std::cout << RED << "new list with init declarator list and thenn init declarator added" << RESET << std::endl;}
-#line 1778 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 1776 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 50:
 #line 152 "src/maths_parser.y" /* yacc.c:1646  */
     {(yyval.expr) = new initDeclarator((yyvsp[0].expr)); std::cout << "init declarator: declarator" << std::endl; std::cout << RED << "new init declarator with declarator" << RESET << std::endl; }
-#line 1784 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 1782 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 51:
 #line 153 "src/maths_parser.y" /* yacc.c:1646  */
     { (yyval.expr) = new initDeclarator((yyvsp[-2].expr), (yyvsp[0].expr)); std::cout << "init declarator: declarator = initializer" << std::endl; std::cout << RED << "new init declarator with declarator and initializer" << RESET << std::endl;}
-#line 1790 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 1788 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 52:
 #line 156 "src/maths_parser.y" /* yacc.c:1646  */
     { std::cout << "storage class specifier: typedef" << std::endl; }
-#line 1796 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 1794 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 53:
 #line 159 "src/maths_parser.y" /* yacc.c:1646  */
     { (yyval.expr) = new PrimitiveType(PrimitiveType::Specifier::_void); std::cout << "type specifier: void" << std::endl; std::cout << RED << "new proimitive typ void" << RESET << std::endl; }
-#line 1802 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 1800 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 54:
 #line 160 "src/maths_parser.y" /* yacc.c:1646  */
     {(yyval.expr) = new PrimitiveType(PrimitiveType::Specifier::_int); std::cout << "type specifier: int" << std::endl; std::cout << RED << "new priitive typpe int" << RESET << std::endl;}
-#line 1808 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 1806 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 55:
 #line 161 "src/maths_parser.y" /* yacc.c:1646  */
     { std::cout << "type specifier: struct or union specifier" << std::endl; }
-#line 1814 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 1812 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 56:
 #line 162 "src/maths_parser.y" /* yacc.c:1646  */
     { std::cout << "type specifier: enum specifier" << std::endl; }
-#line 1820 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 1818 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 57:
 #line 167 "src/maths_parser.y" /* yacc.c:1646  */
     { std::cout << "struct or union specifier: struct or union identifier" << std::endl; }
-#line 1826 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 1824 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 58:
 #line 170 "src/maths_parser.y" /* yacc.c:1646  */
     { std::cout << "struct or union: struct" << std::endl; }
-#line 1832 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 1830 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 59:
 #line 171 "src/maths_parser.y" /* yacc.c:1646  */
     { std::cout << "struct or union: union" << std::endl; }
-#line 1838 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 1836 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 60:
 #line 181 "src/maths_parser.y" /* yacc.c:1646  */
     { std::cout << "specifier qualifier list: type specifier specifier qualifier list" << std::endl; }
-#line 1844 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 1842 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 61:
 #line 182 "src/maths_parser.y" /* yacc.c:1646  */
     { std::cout << "specifier qualifier list: type specifier" << std::endl; }
-#line 1850 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 1848 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 62:
 #line 183 "src/maths_parser.y" /* yacc.c:1646  */
     { std::cout << "specifier qualifier list: type qualifier specifier qualifier list" << std::endl; }
-#line 1856 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 1854 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 63:
 #line 184 "src/maths_parser.y" /* yacc.c:1646  */
     { std::cout << "specifier qualifier list: type qualifier" << std::endl; }
-#line 1862 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 1860 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 64:
 #line 196 "src/maths_parser.y" /* yacc.c:1646  */
     { std::cout << "enum specifier: enum { enumerator list }" << std::endl; }
-#line 1868 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 1866 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 65:
 #line 197 "src/maths_parser.y" /* yacc.c:1646  */
     { std::cout << "enum specifier: enum identifier { enumerator list }" << std::endl; }
-#line 1874 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 1872 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 66:
 #line 198 "src/maths_parser.y" /* yacc.c:1646  */
     { std::cout << "enum identifier" << std::endl; }
-#line 1880 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 1878 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 67:
 #line 201 "src/maths_parser.y" /* yacc.c:1646  */
     { std::cout << "enumerator list: enumerator" << std::endl; }
-#line 1886 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 1884 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 68:
 #line 202 "src/maths_parser.y" /* yacc.c:1646  */
     { std::cout << "enumerator list: enumerator list, enumerator" << std::endl; }
-#line 1892 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 1890 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 69:
 #line 205 "src/maths_parser.y" /* yacc.c:1646  */
     { std::cout << "enumerator: identifier" << std::endl; }
-#line 1898 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 1896 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 70:
 #line 206 "src/maths_parser.y" /* yacc.c:1646  */
     { std::cout << "enumerator: identifier = constant expression" << std::endl; }
-#line 1904 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 1902 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 71:
 #line 209 "src/maths_parser.y" /* yacc.c:1646  */
     { std::cout << "type qualifier: const" << std::endl; }
-#line 1910 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 1908 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 72:
 #line 210 "src/maths_parser.y" /* yacc.c:1646  */
     { std::cout << "type qualifier: volatile" << std::endl; }
-#line 1916 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 1914 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 73:
 #line 215 "src/maths_parser.y" /* yacc.c:1646  */
     { (yyval.expr) = new Identifier(*(yyvsp[0].string)); std::cout << "direct declarator: identifier" << std::endl; std::cout << RED << "new identifier with t_identifier" << RESET << std::endl;}
-#line 1922 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 1920 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 74:
 #line 216 "src/maths_parser.y" /* yacc.c:1646  */
     { (yyval.expr) = (yyvsp[-1].expr); std::cout << "direct declarator: ( declarator )" << std::endl; }
-#line 1928 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 1926 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 75:
 #line 217 "src/maths_parser.y" /* yacc.c:1646  */
     { (yyval.expr) = new functionDec((yyvsp[-3].expr), (yyvsp[-1].exprList)); std::cout << "direct declarator: direct declarator ( parameter type list )" << std::endl; std::cout << RED << "new functiondef with direct delcarator and parameter type list" << RESET << std::endl; }
-#line 1934 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 1932 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 76:
 #line 218 "src/maths_parser.y" /* yacc.c:1646  */
     { (yyval.expr) = new functionDec((yyvsp[-3].expr), (yyvsp[-1].exprList)); delete (yyvsp[-1].exprList); std::cout << "direct declarator: direct declarator ( identifier list )" << std::endl; std::cout << RED << "new functiondef with direct delcarator and identifier list" << RESET << std::endl; }
-#line 1940 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 1938 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 77:
 #line 219 "src/maths_parser.y" /* yacc.c:1646  */
-    { std::cout << "direct declarator: direct declarator( )" << std::endl; }
-#line 1946 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+    { (yyval.expr) = new functionDec((yyvsp[-2].expr)); std::cout << "direct declarator: direct declarator( )" << std::endl; }
+#line 1944 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 78:
 #line 222 "src/maths_parser.y" /* yacc.c:1646  */
     { std::cout << "pointer: *" << std::endl; }
-#line 1952 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 1950 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 79:
 #line 223 "src/maths_parser.y" /* yacc.c:1646  */
     { std::cout << "pointer: * type qualifier list" << std::endl; }
-#line 1958 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 1956 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 80:
 #line 224 "src/maths_parser.y" /* yacc.c:1646  */
     { std::cout << "pointer: * pointer" << std::endl; }
-#line 1964 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 1962 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 81:
 #line 225 "src/maths_parser.y" /* yacc.c:1646  */
     { std::cout << "pointer: * type qualifier list pointer" << std::endl; }
-#line 1970 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 1968 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 82:
 #line 228 "src/maths_parser.y" /* yacc.c:1646  */
     {(yyval.exprList) = new List((yyvsp[0].expr)); std::cout << "type qualifier list: type qualifier" << std::endl; std::cout << RED << "new list with type_qualifier" << RESET << std::endl;}
-#line 1976 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 1974 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 83:
 #line 229 "src/maths_parser.y" /* yacc.c:1646  */
     { (yyval.exprList) = new List((yyvsp[-1].exprList)); ((yyval.exprList))->addtoList((yyvsp[0].expr)); std::cout << "type qualifier list: type qualifier list type qualifier" << std::endl; std::cout << RED << "new list with type_qualifier_list then added tyoe_qualifier" << RESET << std::endl; }
-#line 1982 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 1980 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 84:
 #line 232 "src/maths_parser.y" /* yacc.c:1646  */
     { std::cout << "parameter type list: parameter list" << std::endl; }
-#line 1988 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 1986 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 85:
 #line 235 "src/maths_parser.y" /* yacc.c:1646  */
     { (yyval.exprList) = new List((yyvsp[0].expr)); std::cout << "parameter list: parameter declaration" << std::endl;  std::cout << RED << "new lsit woth prarameter declaration" << RESET << std::endl;}
-#line 1994 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 1992 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 86:
 #line 236 "src/maths_parser.y" /* yacc.c:1646  */
     { (yyval.exprList) = new List((yyvsp[-2].exprList)); ((yyval.exprList))->addtoList((yyvsp[0].expr)); std::cout << "parameter list: parameter list, parameter declaration" << std::endl; std::cout << RED << "new list with paramter_list then added param delcaration" << RESET << std::endl;}
-#line 2000 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 1998 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 87:
 #line 239 "src/maths_parser.y" /* yacc.c:1646  */
     { (yyval.expr) = new Declaration((yyvsp[-1].expr), (yyvsp[0].expr)); std::cout << "parameter declaration: declaration specifiers declarator" << std::endl; std::cout << RED << "new Declaration with DECLARATINO_SPECIFIERS AND DECLARATOR" << RESET << std::endl; }
-#line 2006 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 2004 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 88:
 #line 240 "src/maths_parser.y" /* yacc.c:1646  */
     { std::cout << "parameter declaration: declaration specifiers abstract declarator" << std::endl; }
-#line 2012 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 2010 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 89:
 #line 241 "src/maths_parser.y" /* yacc.c:1646  */
     { (yyval.expr) = new Declaration((yyvsp[0].expr)); std::cout << "parameter declaration: declaration specifiers" << std::endl; std::cout << RED << "new declaraction with DECLARATION_SPECIFIERS" << RESET << std::endl; }
-#line 2018 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 2016 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 90:
 #line 244 "src/maths_parser.y" /* yacc.c:1646  */
     { (yyval.exprList) = new List(new Identifier(*(yyvsp[0].string))); std::cout << "identifier list: identifier" << std::endl; std::cout << RED << "NEW LIST WITH IDENTIFIER" << RESET << std::endl;}
-#line 2024 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 2022 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 91:
 #line 245 "src/maths_parser.y" /* yacc.c:1646  */
     { (yyval.exprList) = new List((yyvsp[-2].exprList)); ((yyval.exprList))->addtoList(new Identifier(*(yyvsp[0].string))); std::cout << "identifier list: identifier list, identifier" << std::endl;std::cout << RED << "new list with identifier_list and dientifier added to it" << RESET << std::endl; }
-#line 2030 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 2028 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 92:
 #line 248 "src/maths_parser.y" /* yacc.c:1646  */
     { std::cout << "type name: specifier qualifier list" << std::endl; }
-#line 2036 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 2034 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 93:
 #line 249 "src/maths_parser.y" /* yacc.c:1646  */
     { std::cout << "type name: specifier qualifier list abstract declarator" << std::endl; }
-#line 2042 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 2040 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 94:
 #line 252 "src/maths_parser.y" /* yacc.c:1646  */
     { std::cout << "abstract declarator: pointer" << std::endl; }
-#line 2048 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 2046 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 95:
 #line 253 "src/maths_parser.y" /* yacc.c:1646  */
     { std::cout << "abstract declarator: direct abstract declarator" << std::endl; }
-#line 2054 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 2052 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 96:
 #line 254 "src/maths_parser.y" /* yacc.c:1646  */
     { std::cout << "abstract declarator: pointer direct abstract declarator" << std::endl; }
-#line 2060 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 2058 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 97:
 #line 257 "src/maths_parser.y" /* yacc.c:1646  */
     { std::cout << "direct abstract declarator: ( abstract declarator )" << std::endl; }
-#line 2066 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 2064 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 98:
 #line 258 "src/maths_parser.y" /* yacc.c:1646  */
     { std::cout << "direct abstract declarator: ()" << std::endl; }
-#line 2072 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 2070 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 99:
 #line 259 "src/maths_parser.y" /* yacc.c:1646  */
     { std::cout << "direct abstract declarator: ( parameter type list)" << std::endl; }
-#line 2078 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 2076 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 100:
 #line 260 "src/maths_parser.y" /* yacc.c:1646  */
     { std::cout << "direct abstract declarator: ()" << std::endl; }
-#line 2084 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 2082 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 101:
 #line 261 "src/maths_parser.y" /* yacc.c:1646  */
     { std::cout << "direct abstract declator: ( parameter type list)" << std::endl; }
-#line 2090 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 2088 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 102:
 #line 264 "src/maths_parser.y" /* yacc.c:1646  */
     { (yyval.expr) = (yyvsp[0].expr); std::cout << "initializer: assignment expression" << std::endl; }
-#line 2096 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 2094 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 103:
 #line 272 "src/maths_parser.y" /* yacc.c:1646  */
     { (yyval.expr) = (yyvsp[0].expr); std::cout << "statement: labeled statement" << std::endl; }
-#line 2102 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 2100 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 104:
 #line 273 "src/maths_parser.y" /* yacc.c:1646  */
     { (yyval.expr) = (yyvsp[0].expr); std::cout << "statement: compound statement" << std::endl; }
-#line 2108 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 2106 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 105:
 #line 274 "src/maths_parser.y" /* yacc.c:1646  */
     { (yyval.expr) = (yyvsp[0].expr); std::cout << "statement: expression statement" << std::endl; }
-#line 2114 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 2112 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 106:
 #line 275 "src/maths_parser.y" /* yacc.c:1646  */
     { (yyval.expr) = (yyvsp[0].expr); std::cout << "statement: selection statement" << std::endl; }
-#line 2120 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 2118 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 107:
 #line 276 "src/maths_parser.y" /* yacc.c:1646  */
     { (yyval.expr) = (yyvsp[0].expr); std::cout << "statement: iteration statement" << std::endl; }
-#line 2126 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 2124 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 108:
 #line 277 "src/maths_parser.y" /* yacc.c:1646  */
     { (yyval.expr) = (yyvsp[0].expr);  std::cout << "statement: jump statement" << std::endl; }
-#line 2132 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 2130 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 109:
 #line 280 "src/maths_parser.y" /* yacc.c:1646  */
     { std::cout << "labelled statement: identifier: statement" << std::endl; }
-#line 2138 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 2136 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 110:
 #line 283 "src/maths_parser.y" /* yacc.c:1646  */
     { (yyval.expr) = new localScope(); std::cout << "compound statement: { }" << std::endl; std::cout << RED << "NEW localScope empty" << RESET << std::endl;}
-#line 2144 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 2142 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 111:
 #line 284 "src/maths_parser.y" /* yacc.c:1646  */
     { (yyval.expr) = new localScope((yyvsp[-1].exprList)); std::cout << "compound statement: { statement list }" << std::endl; std::cout << RED << "NEW LOCALsCOPE WITHH satement list" << RESET << std::endl; }
-#line 2150 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 2148 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 112:
 #line 285 "src/maths_parser.y" /* yacc.c:1646  */
     { (yyval.expr) = new localScope((yyvsp[-1].exprList)); std::cout << "compound statement: { declaration list }" << std::endl; }
-#line 2156 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 2154 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 113:
 #line 286 "src/maths_parser.y" /* yacc.c:1646  */
     { (yyval.expr) = new localScope((yyvsp[-2].exprList), (yyvsp[-1].exprList)); std::cout << "compound statement: { declaration list }" << std::endl; }
-#line 2162 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 2160 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 114:
 #line 290 "src/maths_parser.y" /* yacc.c:1646  */
     { (yyval.exprList) = new List((yyvsp[0].expr)); std::cout << "statement list: statement" << std::endl;std::cout << RED << "new list with Statement" << RESET << std::endl; }
-#line 2168 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 2166 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 115:
 #line 291 "src/maths_parser.y" /* yacc.c:1646  */
     { (yyval.exprList) = new List((yyvsp[-1].exprList)); ((yyval.exprList))->addtoList((yyvsp[0].expr)); std::cout << "statement list: statement list statement" << std::endl;std::cout << RED << "new list STATEMENT_LIST and statement added to it" << RESET << std::endl; }
-#line 2174 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 2172 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 116:
 #line 294 "src/maths_parser.y" /* yacc.c:1646  */
     { std::cout << "expression statement: ; " << std::endl; }
-#line 2180 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 2178 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 117:
 #line 295 "src/maths_parser.y" /* yacc.c:1646  */
     { std::cout << "expression statement: expression;" << std::endl; }
-#line 2186 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 2184 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 118:
 #line 298 "src/maths_parser.y" /* yacc.c:1646  */
     { (yyval.expr) = new ifStatement((yyvsp[-2].expr), (yyvsp[0].expr)); std::cout << "if statement" << std::endl; std::cout << RED << " new iF WITH EXPRESSION AND STATEMENT" << RESET << std::endl; }
-#line 2192 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 2190 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 119:
 #line 299 "src/maths_parser.y" /* yacc.c:1646  */
     { (yyval.expr) = new ifElseStatement((yyvsp[-4].expr), (yyvsp[-2].expr), (yyvsp[0].expr)); std::cout << "if else statement" << std::endl; std::cout << RED << " new iFeLSE WITH EXPRESSION  STATEMENT STATEMENT" << RESET << std::endl;}
-#line 2198 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 2196 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 120:
 #line 302 "src/maths_parser.y" /* yacc.c:1646  */
     { (yyval.expr) = new whileLoop((yyvsp[-2].expr), (yyvsp[0].expr)); std::cout << "while loop" << std::endl; std::cout << RED << "new whileLoop with EXPRESSION and STATEMENT" << RESET << std::endl;}
-#line 2204 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 2202 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 121:
 #line 305 "src/maths_parser.y" /* yacc.c:1646  */
     { std::cout << "jump statement: return" << std::endl; }
-#line 2210 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 2208 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 122:
 #line 306 "src/maths_parser.y" /* yacc.c:1646  */
     { (yyval.expr) = new Return((yyvsp[-1].expr)); std::cout << "jump statement: return expression" << std::endl; }
-#line 2216 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 2214 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 123:
 #line 309 "src/maths_parser.y" /* yacc.c:1646  */
     { std::cout << "declaration specifier: storage class specifier" << std::endl; }
-#line 2222 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 2220 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 124:
 #line 310 "src/maths_parser.y" /* yacc.c:1646  */
     { std::cout << "declaration specifier: storage class specifier declaration specifier" << std::endl; }
-#line 2228 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 2226 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 125:
 #line 311 "src/maths_parser.y" /* yacc.c:1646  */
     {(yyval.expr) = (yyvsp[0].expr); std::cout << "declaration specifier: type specifier" << std::endl; }
-#line 2234 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 2232 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 126:
 #line 312 "src/maths_parser.y" /* yacc.c:1646  */
     { std::cout << "declaration specifier: type specifier declaration specifiers" << std::endl; }
-#line 2240 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 2238 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 127:
 #line 313 "src/maths_parser.y" /* yacc.c:1646  */
     { std::cout << "declaration specifier: type qualifier" << std::endl; }
-#line 2246 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 2244 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 128:
 #line 314 "src/maths_parser.y" /* yacc.c:1646  */
     { std::cout << "declaration specifier: type qualifier declaration specifiers" << std::endl; }
-#line 2252 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 2250 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 129:
 #line 317 "src/maths_parser.y" /* yacc.c:1646  */
     { std::cout << "declarator: pointer direct declarator" << std::endl; }
-#line 2258 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 2256 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 130:
 #line 318 "src/maths_parser.y" /* yacc.c:1646  */
     { (yyval.expr) = (yyvsp[0].expr); std::cout << "declarator: direct declarator" << std::endl; }
-#line 2264 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 2262 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 131:
 #line 321 "src/maths_parser.y" /* yacc.c:1646  */
     { (yyval.exprList) = new List((yyvsp[0].expr)); std::cout << "declaration list: declaration" << std::endl; std::cout << RED << "new list with DECLARATION " << RESET << std::endl; }
-#line 2270 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 2268 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 132:
 #line 322 "src/maths_parser.y" /* yacc.c:1646  */
     { (yyval.exprList) = new List((yyvsp[-1].exprList)); ((yyval.exprList))->addtoList((yyvsp[0].expr)); std::cout << "declaration list: declaration list declaration" << std::endl; std::cout << RED << "new List made with DECLARATION_LIST DECLARATION but secnod is added" << RESET << std::endl; }
-#line 2276 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 2274 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 133:
 #line 325 "src/maths_parser.y" /* yacc.c:1646  */
     { std::cout << "declaration_specifiers, declarator, declaration list, compound_statement" << std::endl;}
-#line 2282 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 2280 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 134:
 #line 326 "src/maths_parser.y" /* yacc.c:1646  */
     { (yyval.expr) = new functionDef(new Declaration((yyvsp[-2].expr), (yyvsp[-1].expr)), (yyvsp[0].expr)); std::cout << "function definition: declaration_specifiers, declarator, compound_statement" << std::endl; std::cout << RED << "functionDef made with DECLARATION_SPECIFIERS DECLARATOR COMPOUND_STATEMENT" << RESET << std::endl;}
-#line 2288 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 2286 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 135:
 #line 327 "src/maths_parser.y" /* yacc.c:1646  */
     {std::cout << "declarator declaration_list, compound_statement" << std::endl;}
-#line 2294 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 2292 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 136:
 #line 328 "src/maths_parser.y" /* yacc.c:1646  */
     { std::cout << "declarator, compound_statement" << std::endl;}
-#line 2300 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 2298 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 137:
 #line 331 "src/maths_parser.y" /* yacc.c:1646  */
     { std::cout << "declaration: declaration specifiers;" << std::endl;}
-#line 2306 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 2304 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 138:
 #line 332 "src/maths_parser.y" /* yacc.c:1646  */
     { (yyval.expr)  = new Declaration((yyvsp[-2].expr), (yyvsp[-1].exprList)); std::cout << "declaration: declaration specifiers init declarator list;" << std::endl; std::cout << RED << "made declaration class with dec_specifiers and init_declarator list" << RESET << std::endl;}
-#line 2312 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 2310 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 139:
 #line 335 "src/maths_parser.y" /* yacc.c:1646  */
     { (yyval.expr) = (yyvsp[0].expr); std::cout << "external declaration: funct declaration"<<std::endl; }
-#line 2318 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 2316 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 140:
 #line 336 "src/maths_parser.y" /* yacc.c:1646  */
     {(yyval.expr) = (yyvsp[0].expr); std::cout << "external declaration: declaration" << std::endl;}
-#line 2324 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 2322 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 141:
 #line 339 "src/maths_parser.y" /* yacc.c:1646  */
     { (yyval.exprList) = new List((yyvsp[0].expr)); std::cout << "translational unit: external declaration" << std::endl; }
-#line 2330 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 2328 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 142:
 #line 340 "src/maths_parser.y" /* yacc.c:1646  */
     { (yyval.exprList) = new List((yyvsp[-1].exprList)); ((yyval.exprList))->addtoList((yyvsp[0].expr)); std::cout << "translational unit: translational unit external declaration" << std::endl;}
-#line 2336 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 2334 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 143:
 #line 343 "src/maths_parser.y" /* yacc.c:1646  */
     { g_root = new globalScope((yyvsp[0].exprList)); std::cout << "Made the root" << std::endl;}
-#line 2342 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 2340 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
 
-#line 2346 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 2344 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
       default: break;
     }
   /* User semantic actions sometimes alter yychar, and that requires
