@@ -58,7 +58,7 @@ volatile        { return T_VOLATILE; }
 
 
 [0-9]+([.][0-9]*)?              { yylval.number=strtod(yytext, 0); return T_CONSTANT; }
-{letter}({letter}|{digit})*     { yylval.string=new std::string(yytext); return T_IDENTIFIER; }
+[_]*[a-zA-Z0-9_]*     { yylval.string=new std::string(yytext); return T_IDENTIFIER; }
 
 [ \t\r\n]+		{;}
 

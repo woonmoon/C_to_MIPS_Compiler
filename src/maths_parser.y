@@ -18,6 +18,7 @@
 // AST node.
 %union{
   Node *expr;
+  Expression* actualExpression;
   List *exprList;
   double number;
   std::string *string;
@@ -53,7 +54,7 @@
 %type <token> ASSIGNMENT_OPERATOR
 %type <number> T_CONSTANT
 %type <string> T_IF T_ELSE T_WHILE T_RETURN T_INT T_VOID
-%type <string> T_IDENTIFIER T_LOG T_EXP T_SQRT FUNCTION_NAME
+%type <string> T_IDENTIFIER T_LOG T_EXP T_SQRT FUNCTION_NAME UNARY_OPERATOR
 
 %start ROOT
 %%
@@ -61,7 +62,7 @@
 
 PRIMARY_EXPRESSION : T_IDENTIFIER {$$ = new Identifier(*$1);std::cout << RED << "new identifier" << RESET << std::endl; }
                    | T_CONSTANT { $$ = new Constant($1); std::cout << "issa constant" << std::endl;  std::cout << RED << "new constant" << RESET << std::endl;}
-                   | T_LBRACKET EXPRESSION T_RBRACKET { std::cout << "lbr rbr" << std::endl; }
+                   | T_LBRACKET EXPRESSION T_RBRACKET { $$ = $2; std::cout << "lbr rbr" << std::endl; }
                    ;
 POSTFIX_EXPRESSION : PRIMARY_EXPRESSION {$$ = $1;}
                    | POSTFIX_EXPRESSION T_LBRACKET T_RBRACKET { $$ = new functionCall($1, new List()); std::cout << RED << "made a function call" << RESET << std::endl; }
@@ -72,11 +73,11 @@ ARGUMENT_EXPRESSION_LIST : ASSIGNMENT_EXPRESSION {$$ = new List($1); std::cout <
                          ;
 
 UNARY_EXPRESSION : POSTFIX_EXPRESSION {$$ = $1;}
-                 | UNARY_OPERATOR CAST_EXPRESSION
+                 | UNARY_OPERATOR CAST_EXPRESSION {$$ = new unaryOp(*$1, $2); }
                  ;
-UNARY_OPERATOR : T_STAR { std::cout << "* found" << std::endl; }
-               | T_PLUS { std::cout << "+ found" << std::endl; }
-               | T_MINUS { std::cout << "- found" << std::endl; }
+UNARY_OPERATOR : T_STAR { $$ = new std::string("*"); std::cout << "* found" << std::endl; }
+               | T_PLUS { $$ = new std::string("+"); std::cout << "+ found" << std::endl; }
+               | T_MINUS {$$ = new std::string("-");  std::cout << "- found" << std::endl; }
                ;
 
 CAST_EXPRESSION : UNARY_EXPRESSION { $$ = $1; std::cout << "cast expression: unary expression" << std::endl; }

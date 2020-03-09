@@ -94,18 +94,17 @@ extern int yydebug;
     T_ELSE = 286,
     T_WHILE = 287,
     T_RETURN = 288,
-    T_MAIN = 289,
-    T_INT = 290,
-    T_VOID = 291,
-    T_STRUCT = 292,
-    T_UNION = 293,
-    T_ENUM = 294,
-    T_ASSIGN = 295,
-    T_CONSTANT = 296,
-    T_IDENTIFIER = 297,
-    T_TYPEDEF = 298,
-    T_CONST = 299,
-    T_VOLATILE = 300
+    T_INT = 289,
+    T_VOID = 290,
+    T_STRUCT = 291,
+    T_UNION = 292,
+    T_ENUM = 293,
+    T_ASSIGN = 294,
+    T_CONSTANT = 295,
+    T_IDENTIFIER = 296,
+    T_TYPEDEF = 297,
+    T_CONST = 298,
+    T_VOLATILE = 299
   };
 #endif
 
@@ -117,6 +116,7 @@ union YYSTYPE
 #line 19 "src/maths_parser.y" /* yacc.c:1909  */
 
   Node *expr;
+  Expression* actualExpression;
   List *exprList;
   double number;
   std::string *string;

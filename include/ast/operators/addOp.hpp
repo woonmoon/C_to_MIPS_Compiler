@@ -16,4 +16,18 @@ public:
 protected:
 };
 
+class unaryOp : public Expression{
+    public:
+        unaryOp(std::string opi, NodePtr expri) { branches.push_back(expri); }
+        ~unaryOp(){}
+        void print(std::ostream& dst, pycon& con, int level) const {
+            dst << op;
+            branches[0]->print(dst, con, level);
+        }
+        void pythonGen(std::ostream& os) const { }
+    private:
+        std::string op;
+        ExpressionPtr expr;
+};
+
 #endif
