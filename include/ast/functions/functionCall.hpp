@@ -13,7 +13,9 @@ public:
         dst << "("; 
         branches[1]->print(dst, con, level); 
         dst <<")";
-         }
+    }
+    void mipsGen(std::ostream& os) const { }
+
 };
 
 #endif

@@ -36,13 +36,13 @@ public:
   }
   
   void pythonGen(std::ostream& os) const { }
+  void mipsGen(std::ostream& os) const { }
 
   std::vector<NodePtr> getlistOfExpressions() { return listOfExpressions; }
 
   void addtoList(NodePtr n) {
     listOfExpressions.push_back(n); 
   }
-
 private:
   std::vector<NodePtr> listOfExpressions;
 };

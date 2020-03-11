@@ -116,11 +116,12 @@ union YYSTYPE
 #line 19 "src/maths_parser.y" /* yacc.c:1909  */
 
   Node *expr;
+  Expression* actualExpression;
   List *exprList;
   double number;
   std::string *string;
 
-#line 124 "src/maths_parser.tab.hpp" /* yacc.c:1909  */
+#line 125 "src/maths_parser.tab.hpp" /* yacc.c:1909  */
 };
 
 typedef union YYSTYPE YYSTYPE;

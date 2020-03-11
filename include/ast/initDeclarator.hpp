@@ -29,7 +29,8 @@ public:
       con.clearAssign();
       dst << std::endl;
     }
-    virtual void pythonGen(std::ostream& os) const { }
+    void pythonGen(std::ostream& os) const { }
+    void mipsGen(std::ostream& os) const { }
 private:
  bool isAssign;
 };

@@ -13,7 +13,6 @@ public:
         dst << "def ";
         Declarator->print(dst, con, level);
         dst << ":";
-        //dst << std::endl;
         con.addTab();
         con.printGlobals(dst);
         con.indent(dst);
@@ -22,6 +21,7 @@ public:
         con.clearFunc();
     }
     void pythonGen(std::ostream& os) const { }
+    void mipsGen(std::ostream& os) const { }
 protected:
     NodePtr Declarator;
     NodePtr scopeBlock;

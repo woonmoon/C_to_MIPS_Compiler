@@ -169,11 +169,12 @@ union YYSTYPE
 #line 19 "src/maths_parser.y" /* yacc.c:355  */
 
   Node *expr;
+  Expression* actualExpression;
   List *exprList;
   double number;
   std::string *string;
 
-#line 177 "src/maths_parser.tab.cpp" /* yacc.c:355  */
+#line 178 "src/maths_parser.tab.cpp" /* yacc.c:355  */
 };
 
 typedef union YYSTYPE YYSTYPE;
@@ -190,7 +191,7 @@ int yyparse (void);
 
 /* Copy the second part of user declarations.  */
 
-#line 194 "src/maths_parser.tab.cpp" /* yacc.c:358  */
+#line 195 "src/maths_parser.tab.cpp" /* yacc.c:358  */
 
 #ifdef short
 # undef short
@@ -491,21 +492,21 @@ static const yytype_uint8 yytranslate[] =
   /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_uint16 yyrline[] =
 {
-       0,    62,    62,    63,    64,    66,    67,    68,    70,    71,
-      74,    75,    77,    78,    79,    82,    83,    86,    87,    90,
-      91,    92,    95,    96,    97,   100,   101,   102,   105,   106,
-     107,   110,   111,   114,   115,   118,   119,   122,   123,   126,
-     127,   130,   131,   134,   135,   141,   142,   145,   148,   149,
-     152,   153,   156,   159,   160,   161,   162,   167,   170,   171,
-     181,   182,   183,   184,   196,   197,   198,   201,   202,   205,
-     206,   209,   210,   215,   216,   217,   218,   219,   222,   223,
-     224,   225,   228,   229,   232,   235,   236,   239,   240,   241,
-     244,   245,   248,   249,   252,   253,   254,   257,   258,   259,
-     260,   261,   264,   272,   273,   274,   275,   276,   277,   280,
-     283,   284,   285,   286,   290,   291,   294,   295,   298,   299,
-     302,   305,   306,   309,   310,   311,   312,   313,   314,   317,
-     318,   321,   322,   325,   326,   327,   328,   331,   332,   335,
-     336,   339,   340,   343
+       0,    63,    63,    64,    65,    67,    68,    69,    71,    72,
+      75,    76,    78,    79,    80,    83,    84,    87,    88,    91,
+      92,    93,    96,    97,    98,   101,   102,   103,   106,   107,
+     108,   111,   112,   115,   116,   119,   120,   123,   124,   127,
+     128,   131,   132,   135,   136,   142,   143,   146,   149,   150,
+     153,   154,   157,   160,   161,   162,   163,   168,   171,   172,
+     182,   183,   184,   185,   197,   198,   199,   202,   203,   206,
+     207,   210,   211,   216,   217,   218,   219,   220,   223,   224,
+     225,   226,   229,   230,   233,   236,   237,   240,   241,   242,
+     245,   246,   249,   250,   253,   254,   255,   258,   259,   260,
+     261,   262,   265,   273,   274,   275,   276,   277,   278,   281,
+     284,   285,   286,   287,   291,   292,   295,   296,   299,   300,
+     303,   306,   307,   310,   311,   312,   313,   314,   315,   318,
+     319,   322,   323,   326,   327,   328,   329,   332,   333,   336,
+     337,   340,   341,   344
 };
 #endif
 
@@ -1494,853 +1495,859 @@ yyreduce:
   switch (yyn)
     {
         case 2:
-#line 62 "src/maths_parser.y" /* yacc.c:1646  */
+#line 63 "src/maths_parser.y" /* yacc.c:1646  */
     {(yyval.expr) = new Identifier(*(yyvsp[0].string));std::cout << RED << "new identifier" << RESET << std::endl; }
-#line 1500 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 1501 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 3:
-#line 63 "src/maths_parser.y" /* yacc.c:1646  */
+#line 64 "src/maths_parser.y" /* yacc.c:1646  */
     { (yyval.expr) = new Constant((yyvsp[0].number)); std::cout << "issa constant" << std::endl;  std::cout << RED << "new constant" << RESET << std::endl;}
-#line 1506 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 1507 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 4:
-#line 64 "src/maths_parser.y" /* yacc.c:1646  */
-    { std::cout << "lbr rbr" << std::endl; }
-#line 1512 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 65 "src/maths_parser.y" /* yacc.c:1646  */
+    { (yyval.expr) = (yyvsp[-1].expr); std::cout << "lbr rbr" << std::endl; }
+#line 1513 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 5:
-#line 66 "src/maths_parser.y" /* yacc.c:1646  */
+#line 67 "src/maths_parser.y" /* yacc.c:1646  */
     {(yyval.expr) = (yyvsp[0].expr);}
-#line 1518 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 1519 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 6:
-#line 67 "src/maths_parser.y" /* yacc.c:1646  */
+#line 68 "src/maths_parser.y" /* yacc.c:1646  */
     { (yyval.expr) = new functionCall((yyvsp[-2].expr), new List()); std::cout << RED << "made a function call" << RESET << std::endl; }
-#line 1524 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 1525 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 7:
-#line 68 "src/maths_parser.y" /* yacc.c:1646  */
+#line 69 "src/maths_parser.y" /* yacc.c:1646  */
     { (yyval.expr) = new functionCall((yyvsp[-3].expr), (yyvsp[-1].exprList)); }
-#line 1530 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 1531 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 8:
-#line 70 "src/maths_parser.y" /* yacc.c:1646  */
+#line 71 "src/maths_parser.y" /* yacc.c:1646  */
     {(yyval.exprList) = new List((yyvsp[0].expr)); std::cout << "argument axpression lsit: argument expression" << std::endl;std::cout << RED << "new list with ASSIGNMENT_EXPRESSION" << RESET << std::endl;}
-#line 1536 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 1537 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 9:
-#line 71 "src/maths_parser.y" /* yacc.c:1646  */
+#line 72 "src/maths_parser.y" /* yacc.c:1646  */
     {(yyval.exprList) = new List((yyvsp[-2].exprList)); ((yyval.exprList))->addtoList((yyvsp[0].expr)); std::cout << "argument expression list: arg expr list comma assignment expr" << std::endl;std::cout << RED << "new list with ARGUMENT_EXPRESSION_LIST and ASSIGNMENT_EXPRESSION added" << RESET << std::endl;}
-#line 1542 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 1543 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 10:
-#line 74 "src/maths_parser.y" /* yacc.c:1646  */
+#line 75 "src/maths_parser.y" /* yacc.c:1646  */
     {(yyval.expr) = (yyvsp[0].expr);}
-#line 1548 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 1549 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+    break;
+
+  case 11:
+#line 76 "src/maths_parser.y" /* yacc.c:1646  */
+    {(yyval.expr) = new unaryOp(*(yyvsp[-1].string), (yyvsp[0].expr)); }
+#line 1555 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 12:
-#line 77 "src/maths_parser.y" /* yacc.c:1646  */
-    { std::cout << "* found" << std::endl; }
-#line 1554 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 78 "src/maths_parser.y" /* yacc.c:1646  */
+    { (yyval.string) = new std::string("*"); std::cout << "* found" << std::endl; }
+#line 1561 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 13:
-#line 78 "src/maths_parser.y" /* yacc.c:1646  */
-    { std::cout << "+ found" << std::endl; }
-#line 1560 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 79 "src/maths_parser.y" /* yacc.c:1646  */
+    { (yyval.string) = new std::string("+"); std::cout << "+ found" << std::endl; }
+#line 1567 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 14:
-#line 79 "src/maths_parser.y" /* yacc.c:1646  */
-    { std::cout << "- found" << std::endl; }
-#line 1566 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 80 "src/maths_parser.y" /* yacc.c:1646  */
+    {(yyval.string) = new std::string("-");  std::cout << "- found" << std::endl; }
+#line 1573 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 15:
-#line 82 "src/maths_parser.y" /* yacc.c:1646  */
+#line 83 "src/maths_parser.y" /* yacc.c:1646  */
     { (yyval.expr) = (yyvsp[0].expr); std::cout << "cast expression: unary expression" << std::endl; }
-#line 1572 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 1579 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 16:
-#line 83 "src/maths_parser.y" /* yacc.c:1646  */
+#line 84 "src/maths_parser.y" /* yacc.c:1646  */
     { std::cout << "cast expression: ( type name ) cast expression" << std::endl; }
-#line 1578 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 1585 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 17:
-#line 86 "src/maths_parser.y" /* yacc.c:1646  */
+#line 87 "src/maths_parser.y" /* yacc.c:1646  */
     { (yyval.expr) = (yyvsp[0].expr); std::cout << "multiplicative expression: cast expression" << std::endl; }
-#line 1584 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 1591 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 18:
-#line 87 "src/maths_parser.y" /* yacc.c:1646  */
+#line 88 "src/maths_parser.y" /* yacc.c:1646  */
     { (yyval.expr) = new mulOp((yyvsp[-2].expr), (yyvsp[0].expr)); std::cout << "multiplicative expression: multiplicative expression * cast expression" << std::endl; }
-#line 1590 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 1597 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 19:
-#line 90 "src/maths_parser.y" /* yacc.c:1646  */
+#line 91 "src/maths_parser.y" /* yacc.c:1646  */
     { (yyval.expr) = (yyvsp[0].expr); std::cout << "additive expression: multiplicative expression" << std::endl; }
-#line 1596 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 1603 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 20:
-#line 91 "src/maths_parser.y" /* yacc.c:1646  */
+#line 92 "src/maths_parser.y" /* yacc.c:1646  */
     { (yyval.expr) = new addOp((yyvsp[-2].expr), (yyvsp[0].expr)); std::cout << "additive expression: additive expression + multiplicative expression" << std::endl; }
-#line 1602 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 1609 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 21:
-#line 92 "src/maths_parser.y" /* yacc.c:1646  */
+#line 93 "src/maths_parser.y" /* yacc.c:1646  */
     { (yyval.expr) = new subOp((yyvsp[-2].expr), (yyvsp[0].expr)); std::cout << "additive expression: additive expression - multiplicative expression" << std::endl; }
-#line 1608 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 1615 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 22:
-#line 95 "src/maths_parser.y" /* yacc.c:1646  */
+#line 96 "src/maths_parser.y" /* yacc.c:1646  */
     { (yyval.expr) = (yyvsp[0].expr); std::cout << "shift expression: additive expression" << std::endl; }
-#line 1614 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 1621 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 23:
-#line 96 "src/maths_parser.y" /* yacc.c:1646  */
+#line 97 "src/maths_parser.y" /* yacc.c:1646  */
     { std::cout << "shift expression: shift expression << additive expression" << std::endl; }
-#line 1620 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 1627 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 24:
-#line 97 "src/maths_parser.y" /* yacc.c:1646  */
+#line 98 "src/maths_parser.y" /* yacc.c:1646  */
     { std::cout << "shift expression: shift expression >> additive expression" << std::endl; }
-#line 1626 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 1633 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 25:
-#line 100 "src/maths_parser.y" /* yacc.c:1646  */
+#line 101 "src/maths_parser.y" /* yacc.c:1646  */
     { (yyval.expr) = (yyvsp[0].expr); std::cout << "relational expression: shift expression" << std::endl; }
-#line 1632 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 1639 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 26:
-#line 101 "src/maths_parser.y" /* yacc.c:1646  */
+#line 102 "src/maths_parser.y" /* yacc.c:1646  */
     { (yyval.expr) = new lessThan((yyvsp[-2].expr), (yyvsp[0].expr)); std::cout << "relational expression: relational expression < shift expression" << std::endl; }
-#line 1638 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 1645 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 27:
-#line 102 "src/maths_parser.y" /* yacc.c:1646  */
+#line 103 "src/maths_parser.y" /* yacc.c:1646  */
     { std::cout << "relational expression: relational expression > shift expression" << std::endl; }
-#line 1644 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 1651 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 28:
-#line 105 "src/maths_parser.y" /* yacc.c:1646  */
+#line 106 "src/maths_parser.y" /* yacc.c:1646  */
     { (yyval.expr) = (yyvsp[0].expr); std::cout << "equality expression: relational expression" << std::endl; }
-#line 1650 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 1657 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 29:
-#line 106 "src/maths_parser.y" /* yacc.c:1646  */
+#line 107 "src/maths_parser.y" /* yacc.c:1646  */
     { (yyval.expr) = new equalTo((yyvsp[-2].expr), (yyvsp[0].expr)); std::cout << "equality expression: equality expression = relational expression" << std::endl; }
-#line 1656 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 1663 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 30:
-#line 107 "src/maths_parser.y" /* yacc.c:1646  */
+#line 108 "src/maths_parser.y" /* yacc.c:1646  */
     { std::cout << "equality expression: equality expression != relational expression" << std::endl; }
-#line 1662 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 1669 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 31:
-#line 110 "src/maths_parser.y" /* yacc.c:1646  */
+#line 111 "src/maths_parser.y" /* yacc.c:1646  */
     { (yyval.expr) = (yyvsp[0].expr); std::cout << "and expression: equality expression" << std::endl; }
-#line 1668 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 1675 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 32:
-#line 111 "src/maths_parser.y" /* yacc.c:1646  */
+#line 112 "src/maths_parser.y" /* yacc.c:1646  */
     { std::cout << "and expression: and expression & equality expression" << std::endl; }
-#line 1674 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 1681 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 33:
-#line 114 "src/maths_parser.y" /* yacc.c:1646  */
+#line 115 "src/maths_parser.y" /* yacc.c:1646  */
     { (yyval.expr) = (yyvsp[0].expr); std::cout << "exclusive or expression: and expression" << std::endl; }
-#line 1680 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 1687 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 34:
-#line 115 "src/maths_parser.y" /* yacc.c:1646  */
+#line 116 "src/maths_parser.y" /* yacc.c:1646  */
     { std::cout << "exclusive or expression: exclusive or expression ^ and expression" << std::endl; }
-#line 1686 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 1693 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 35:
-#line 118 "src/maths_parser.y" /* yacc.c:1646  */
+#line 119 "src/maths_parser.y" /* yacc.c:1646  */
     { (yyval.expr) = (yyvsp[0].expr); std::cout << "inclusive or expression: exclusive or expression" << std::endl; }
-#line 1692 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 1699 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 36:
-#line 119 "src/maths_parser.y" /* yacc.c:1646  */
+#line 120 "src/maths_parser.y" /* yacc.c:1646  */
     { std::cout << "inclusive or expression: inclusive or expression | exclusive or expression" << std::endl; }
-#line 1698 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 1705 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 37:
-#line 122 "src/maths_parser.y" /* yacc.c:1646  */
+#line 123 "src/maths_parser.y" /* yacc.c:1646  */
     {(yyval.expr) = (yyvsp[0].expr);  std::cout << "logical and expression: inclusive or expression" << std::endl; }
-#line 1704 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 1711 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 38:
-#line 123 "src/maths_parser.y" /* yacc.c:1646  */
+#line 124 "src/maths_parser.y" /* yacc.c:1646  */
     { (yyval.expr) = new logAndOp((yyvsp[-2].expr), (yyvsp[0].expr)); std::cout << "logical and expression: logical and expression & inclusive or expression" << std::endl; }
-#line 1710 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 1717 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 39:
-#line 126 "src/maths_parser.y" /* yacc.c:1646  */
+#line 127 "src/maths_parser.y" /* yacc.c:1646  */
     {(yyval.expr) = (yyvsp[0].expr);  std::cout << "logical or expression: logical and expression" << std::endl; }
-#line 1716 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 1723 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 40:
-#line 127 "src/maths_parser.y" /* yacc.c:1646  */
+#line 128 "src/maths_parser.y" /* yacc.c:1646  */
     { (yyval.expr) = new logOrOp((yyvsp[-2].expr), (yyvsp[0].expr)); std::cout << "logical or expression: logical or expression | logical and expression" << std::endl; }
-#line 1722 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 1729 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 41:
-#line 130 "src/maths_parser.y" /* yacc.c:1646  */
+#line 131 "src/maths_parser.y" /* yacc.c:1646  */
     { (yyval.expr) = (yyvsp[0].expr); std::cout << "conditional expression: logical or expression" << std::endl; }
-#line 1728 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 1735 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 42:
-#line 131 "src/maths_parser.y" /* yacc.c:1646  */
+#line 132 "src/maths_parser.y" /* yacc.c:1646  */
     { std::cout << "conditional expression: logical or expression? conditional expression" << std::endl; }
-#line 1734 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 1741 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 43:
-#line 134 "src/maths_parser.y" /* yacc.c:1646  */
+#line 135 "src/maths_parser.y" /* yacc.c:1646  */
     { (yyval.expr) = (yyvsp[0].expr); std::cout << "assignment expression: conditional expression" << std::endl; }
-#line 1740 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 1747 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 44:
-#line 135 "src/maths_parser.y" /* yacc.c:1646  */
+#line 136 "src/maths_parser.y" /* yacc.c:1646  */
     { (yyval.expr) = new assignOp((yyvsp[-2].expr), (yyvsp[0].expr)); std::cout << "assignment expression: unary expression = assignment expression" << std::endl; }
-#line 1746 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 1753 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 45:
-#line 141 "src/maths_parser.y" /* yacc.c:1646  */
+#line 142 "src/maths_parser.y" /* yacc.c:1646  */
     { std::cout << "expression: assignment expression" << std::endl; }
-#line 1752 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 1759 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 46:
-#line 142 "src/maths_parser.y" /* yacc.c:1646  */
+#line 143 "src/maths_parser.y" /* yacc.c:1646  */
     { std::cout << "expression: expression, assignment expression" << std::endl; }
-#line 1758 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 1765 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 47:
-#line 145 "src/maths_parser.y" /* yacc.c:1646  */
+#line 146 "src/maths_parser.y" /* yacc.c:1646  */
     { std::cout << "constant expression: condiitional expression" << std::endl; }
-#line 1764 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 1771 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 48:
-#line 148 "src/maths_parser.y" /* yacc.c:1646  */
+#line 149 "src/maths_parser.y" /* yacc.c:1646  */
     { (yyval.exprList) = new List((yyvsp[0].expr)); std::cout << "init declarator list: init declarator" << std::endl; std::cout << RED << "new list with InitDeclaTOR" << RESET << std::endl; }
-#line 1770 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 1777 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 49:
-#line 149 "src/maths_parser.y" /* yacc.c:1646  */
+#line 150 "src/maths_parser.y" /* yacc.c:1646  */
     { (yyval.exprList) = new List((yyvsp[-2].exprList)); ((yyval.exprList))->addtoList((yyvsp[0].expr)); std::cout << "init declarator list: init declarator list, init declarator" << std::endl; std::cout << RED << "new list with init declarator list and thenn init declarator added" << RESET << std::endl;}
-#line 1776 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 1783 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 50:
-#line 152 "src/maths_parser.y" /* yacc.c:1646  */
+#line 153 "src/maths_parser.y" /* yacc.c:1646  */
     {(yyval.expr) = new initDeclarator((yyvsp[0].expr)); std::cout << "init declarator: declarator" << std::endl; std::cout << RED << "new init declarator with declarator" << RESET << std::endl; }
-#line 1782 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 1789 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 51:
-#line 153 "src/maths_parser.y" /* yacc.c:1646  */
+#line 154 "src/maths_parser.y" /* yacc.c:1646  */
     { (yyval.expr) = new initDeclarator((yyvsp[-2].expr), (yyvsp[0].expr)); std::cout << "init declarator: declarator = initializer" << std::endl; std::cout << RED << "new init declarator with declarator and initializer" << RESET << std::endl;}
-#line 1788 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 1795 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 52:
-#line 156 "src/maths_parser.y" /* yacc.c:1646  */
+#line 157 "src/maths_parser.y" /* yacc.c:1646  */
     { std::cout << "storage class specifier: typedef" << std::endl; }
-#line 1794 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 1801 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 53:
-#line 159 "src/maths_parser.y" /* yacc.c:1646  */
+#line 160 "src/maths_parser.y" /* yacc.c:1646  */
     { (yyval.expr) = new PrimitiveType(PrimitiveType::Specifier::_void); std::cout << "type specifier: void" << std::endl; std::cout << RED << "new proimitive typ void" << RESET << std::endl; }
-#line 1800 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 1807 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 54:
-#line 160 "src/maths_parser.y" /* yacc.c:1646  */
+#line 161 "src/maths_parser.y" /* yacc.c:1646  */
     {(yyval.expr) = new PrimitiveType(PrimitiveType::Specifier::_int); std::cout << "type specifier: int" << std::endl; std::cout << RED << "new priitive typpe int" << RESET << std::endl;}
-#line 1806 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 1813 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 55:
-#line 161 "src/maths_parser.y" /* yacc.c:1646  */
+#line 162 "src/maths_parser.y" /* yacc.c:1646  */
     { std::cout << "type specifier: struct or union specifier" << std::endl; }
-#line 1812 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 1819 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 56:
-#line 162 "src/maths_parser.y" /* yacc.c:1646  */
+#line 163 "src/maths_parser.y" /* yacc.c:1646  */
     { std::cout << "type specifier: enum specifier" << std::endl; }
-#line 1818 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 1825 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 57:
-#line 167 "src/maths_parser.y" /* yacc.c:1646  */
+#line 168 "src/maths_parser.y" /* yacc.c:1646  */
     { std::cout << "struct or union specifier: struct or union identifier" << std::endl; }
-#line 1824 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 1831 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 58:
-#line 170 "src/maths_parser.y" /* yacc.c:1646  */
+#line 171 "src/maths_parser.y" /* yacc.c:1646  */
     { std::cout << "struct or union: struct" << std::endl; }
-#line 1830 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 1837 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 59:
-#line 171 "src/maths_parser.y" /* yacc.c:1646  */
+#line 172 "src/maths_parser.y" /* yacc.c:1646  */
     { std::cout << "struct or union: union" << std::endl; }
-#line 1836 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 1843 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 60:
-#line 181 "src/maths_parser.y" /* yacc.c:1646  */
+#line 182 "src/maths_parser.y" /* yacc.c:1646  */
     { std::cout << "specifier qualifier list: type specifier specifier qualifier list" << std::endl; }
-#line 1842 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 1849 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 61:
-#line 182 "src/maths_parser.y" /* yacc.c:1646  */
+#line 183 "src/maths_parser.y" /* yacc.c:1646  */
     { std::cout << "specifier qualifier list: type specifier" << std::endl; }
-#line 1848 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 1855 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 62:
-#line 183 "src/maths_parser.y" /* yacc.c:1646  */
+#line 184 "src/maths_parser.y" /* yacc.c:1646  */
     { std::cout << "specifier qualifier list: type qualifier specifier qualifier list" << std::endl; }
-#line 1854 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 1861 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 63:
-#line 184 "src/maths_parser.y" /* yacc.c:1646  */
+#line 185 "src/maths_parser.y" /* yacc.c:1646  */
     { std::cout << "specifier qualifier list: type qualifier" << std::endl; }
-#line 1860 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 1867 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 64:
-#line 196 "src/maths_parser.y" /* yacc.c:1646  */
+#line 197 "src/maths_parser.y" /* yacc.c:1646  */
     { std::cout << "enum specifier: enum { enumerator list }" << std::endl; }
-#line 1866 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 1873 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 65:
-#line 197 "src/maths_parser.y" /* yacc.c:1646  */
+#line 198 "src/maths_parser.y" /* yacc.c:1646  */
     { std::cout << "enum specifier: enum identifier { enumerator list }" << std::endl; }
-#line 1872 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 1879 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 66:
-#line 198 "src/maths_parser.y" /* yacc.c:1646  */
+#line 199 "src/maths_parser.y" /* yacc.c:1646  */
     { std::cout << "enum identifier" << std::endl; }
-#line 1878 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 1885 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 67:
-#line 201 "src/maths_parser.y" /* yacc.c:1646  */
+#line 202 "src/maths_parser.y" /* yacc.c:1646  */
     { std::cout << "enumerator list: enumerator" << std::endl; }
-#line 1884 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 1891 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 68:
-#line 202 "src/maths_parser.y" /* yacc.c:1646  */
+#line 203 "src/maths_parser.y" /* yacc.c:1646  */
     { std::cout << "enumerator list: enumerator list, enumerator" << std::endl; }
-#line 1890 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 1897 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 69:
-#line 205 "src/maths_parser.y" /* yacc.c:1646  */
+#line 206 "src/maths_parser.y" /* yacc.c:1646  */
     { std::cout << "enumerator: identifier" << std::endl; }
-#line 1896 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 1903 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 70:
-#line 206 "src/maths_parser.y" /* yacc.c:1646  */
+#line 207 "src/maths_parser.y" /* yacc.c:1646  */
     { std::cout << "enumerator: identifier = constant expression" << std::endl; }
-#line 1902 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 1909 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 71:
-#line 209 "src/maths_parser.y" /* yacc.c:1646  */
+#line 210 "src/maths_parser.y" /* yacc.c:1646  */
     { std::cout << "type qualifier: const" << std::endl; }
-#line 1908 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 1915 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 72:
-#line 210 "src/maths_parser.y" /* yacc.c:1646  */
+#line 211 "src/maths_parser.y" /* yacc.c:1646  */
     { std::cout << "type qualifier: volatile" << std::endl; }
-#line 1914 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 1921 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 73:
-#line 215 "src/maths_parser.y" /* yacc.c:1646  */
+#line 216 "src/maths_parser.y" /* yacc.c:1646  */
     { (yyval.expr) = new Identifier(*(yyvsp[0].string)); std::cout << "direct declarator: identifier" << std::endl; std::cout << RED << "new identifier with t_identifier" << RESET << std::endl;}
-#line 1920 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 1927 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 74:
-#line 216 "src/maths_parser.y" /* yacc.c:1646  */
+#line 217 "src/maths_parser.y" /* yacc.c:1646  */
     { (yyval.expr) = (yyvsp[-1].expr); std::cout << "direct declarator: ( declarator )" << std::endl; }
-#line 1926 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 1933 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 75:
-#line 217 "src/maths_parser.y" /* yacc.c:1646  */
+#line 218 "src/maths_parser.y" /* yacc.c:1646  */
     { (yyval.expr) = new functionDec((yyvsp[-3].expr), (yyvsp[-1].exprList)); std::cout << "direct declarator: direct declarator ( parameter type list )" << std::endl; std::cout << RED << "new functiondef with direct delcarator and parameter type list" << RESET << std::endl; }
-#line 1932 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 1939 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 76:
-#line 218 "src/maths_parser.y" /* yacc.c:1646  */
+#line 219 "src/maths_parser.y" /* yacc.c:1646  */
     { (yyval.expr) = new functionDec((yyvsp[-3].expr), (yyvsp[-1].exprList)); delete (yyvsp[-1].exprList); std::cout << "direct declarator: direct declarator ( identifier list )" << std::endl; std::cout << RED << "new functiondef with direct delcarator and identifier list" << RESET << std::endl; }
-#line 1938 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 1945 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 77:
-#line 219 "src/maths_parser.y" /* yacc.c:1646  */
+#line 220 "src/maths_parser.y" /* yacc.c:1646  */
     { (yyval.expr) = new functionDec((yyvsp[-2].expr)); std::cout << "direct declarator: direct declarator( )" << std::endl; }
-#line 1944 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 1951 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 78:
-#line 222 "src/maths_parser.y" /* yacc.c:1646  */
+#line 223 "src/maths_parser.y" /* yacc.c:1646  */
     { std::cout << "pointer: *" << std::endl; }
-#line 1950 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 1957 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 79:
-#line 223 "src/maths_parser.y" /* yacc.c:1646  */
+#line 224 "src/maths_parser.y" /* yacc.c:1646  */
     { std::cout << "pointer: * type qualifier list" << std::endl; }
-#line 1956 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 1963 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 80:
-#line 224 "src/maths_parser.y" /* yacc.c:1646  */
+#line 225 "src/maths_parser.y" /* yacc.c:1646  */
     { std::cout << "pointer: * pointer" << std::endl; }
-#line 1962 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 1969 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 81:
-#line 225 "src/maths_parser.y" /* yacc.c:1646  */
+#line 226 "src/maths_parser.y" /* yacc.c:1646  */
     { std::cout << "pointer: * type qualifier list pointer" << std::endl; }
-#line 1968 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 1975 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 82:
-#line 228 "src/maths_parser.y" /* yacc.c:1646  */
+#line 229 "src/maths_parser.y" /* yacc.c:1646  */
     {(yyval.exprList) = new List((yyvsp[0].expr)); std::cout << "type qualifier list: type qualifier" << std::endl; std::cout << RED << "new list with type_qualifier" << RESET << std::endl;}
-#line 1974 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 1981 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 83:
-#line 229 "src/maths_parser.y" /* yacc.c:1646  */
+#line 230 "src/maths_parser.y" /* yacc.c:1646  */
     { (yyval.exprList) = new List((yyvsp[-1].exprList)); ((yyval.exprList))->addtoList((yyvsp[0].expr)); std::cout << "type qualifier list: type qualifier list type qualifier" << std::endl; std::cout << RED << "new list with type_qualifier_list then added tyoe_qualifier" << RESET << std::endl; }
-#line 1980 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 1987 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 84:
-#line 232 "src/maths_parser.y" /* yacc.c:1646  */
+#line 233 "src/maths_parser.y" /* yacc.c:1646  */
     { std::cout << "parameter type list: parameter list" << std::endl; }
-#line 1986 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 1993 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 85:
-#line 235 "src/maths_parser.y" /* yacc.c:1646  */
+#line 236 "src/maths_parser.y" /* yacc.c:1646  */
     { (yyval.exprList) = new List((yyvsp[0].expr)); std::cout << "parameter list: parameter declaration" << std::endl;  std::cout << RED << "new lsit woth prarameter declaration" << RESET << std::endl;}
-#line 1992 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 1999 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 86:
-#line 236 "src/maths_parser.y" /* yacc.c:1646  */
+#line 237 "src/maths_parser.y" /* yacc.c:1646  */
     { (yyval.exprList) = new List((yyvsp[-2].exprList)); ((yyval.exprList))->addtoList((yyvsp[0].expr)); std::cout << "parameter list: parameter list, parameter declaration" << std::endl; std::cout << RED << "new list with paramter_list then added param delcaration" << RESET << std::endl;}
-#line 1998 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 2005 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 87:
-#line 239 "src/maths_parser.y" /* yacc.c:1646  */
+#line 240 "src/maths_parser.y" /* yacc.c:1646  */
     { (yyval.expr) = new Declaration((yyvsp[-1].expr), (yyvsp[0].expr)); std::cout << "parameter declaration: declaration specifiers declarator" << std::endl; std::cout << RED << "new Declaration with DECLARATINO_SPECIFIERS AND DECLARATOR" << RESET << std::endl; }
-#line 2004 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 2011 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 88:
-#line 240 "src/maths_parser.y" /* yacc.c:1646  */
+#line 241 "src/maths_parser.y" /* yacc.c:1646  */
     { std::cout << "parameter declaration: declaration specifiers abstract declarator" << std::endl; }
-#line 2010 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 2017 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 89:
-#line 241 "src/maths_parser.y" /* yacc.c:1646  */
+#line 242 "src/maths_parser.y" /* yacc.c:1646  */
     { (yyval.expr) = new Declaration((yyvsp[0].expr)); std::cout << "parameter declaration: declaration specifiers" << std::endl; std::cout << RED << "new declaraction with DECLARATION_SPECIFIERS" << RESET << std::endl; }
-#line 2016 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 2023 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 90:
-#line 244 "src/maths_parser.y" /* yacc.c:1646  */
+#line 245 "src/maths_parser.y" /* yacc.c:1646  */
     { (yyval.exprList) = new List(new Identifier(*(yyvsp[0].string))); std::cout << "identifier list: identifier" << std::endl; std::cout << RED << "NEW LIST WITH IDENTIFIER" << RESET << std::endl;}
-#line 2022 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 2029 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 91:
-#line 245 "src/maths_parser.y" /* yacc.c:1646  */
+#line 246 "src/maths_parser.y" /* yacc.c:1646  */
     { (yyval.exprList) = new List((yyvsp[-2].exprList)); ((yyval.exprList))->addtoList(new Identifier(*(yyvsp[0].string))); std::cout << "identifier list: identifier list, identifier" << std::endl;std::cout << RED << "new list with identifier_list and dientifier added to it" << RESET << std::endl; }
-#line 2028 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 2035 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 92:
-#line 248 "src/maths_parser.y" /* yacc.c:1646  */
+#line 249 "src/maths_parser.y" /* yacc.c:1646  */
     { std::cout << "type name: specifier qualifier list" << std::endl; }
-#line 2034 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 2041 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 93:
-#line 249 "src/maths_parser.y" /* yacc.c:1646  */
+#line 250 "src/maths_parser.y" /* yacc.c:1646  */
     { std::cout << "type name: specifier qualifier list abstract declarator" << std::endl; }
-#line 2040 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 2047 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 94:
-#line 252 "src/maths_parser.y" /* yacc.c:1646  */
+#line 253 "src/maths_parser.y" /* yacc.c:1646  */
     { std::cout << "abstract declarator: pointer" << std::endl; }
-#line 2046 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 2053 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 95:
-#line 253 "src/maths_parser.y" /* yacc.c:1646  */
+#line 254 "src/maths_parser.y" /* yacc.c:1646  */
     { std::cout << "abstract declarator: direct abstract declarator" << std::endl; }
-#line 2052 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 2059 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 96:
-#line 254 "src/maths_parser.y" /* yacc.c:1646  */
+#line 255 "src/maths_parser.y" /* yacc.c:1646  */
     { std::cout << "abstract declarator: pointer direct abstract declarator" << std::endl; }
-#line 2058 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 2065 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 97:
-#line 257 "src/maths_parser.y" /* yacc.c:1646  */
+#line 258 "src/maths_parser.y" /* yacc.c:1646  */
     { std::cout << "direct abstract declarator: ( abstract declarator )" << std::endl; }
-#line 2064 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 2071 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 98:
-#line 258 "src/maths_parser.y" /* yacc.c:1646  */
+#line 259 "src/maths_parser.y" /* yacc.c:1646  */
     { std::cout << "direct abstract declarator: ()" << std::endl; }
-#line 2070 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 2077 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 99:
-#line 259 "src/maths_parser.y" /* yacc.c:1646  */
+#line 260 "src/maths_parser.y" /* yacc.c:1646  */
     { std::cout << "direct abstract declarator: ( parameter type list)" << std::endl; }
-#line 2076 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 2083 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 100:
-#line 260 "src/maths_parser.y" /* yacc.c:1646  */
+#line 261 "src/maths_parser.y" /* yacc.c:1646  */
     { std::cout << "direct abstract declarator: ()" << std::endl; }
-#line 2082 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 2089 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 101:
-#line 261 "src/maths_parser.y" /* yacc.c:1646  */
+#line 262 "src/maths_parser.y" /* yacc.c:1646  */
     { std::cout << "direct abstract declator: ( parameter type list)" << std::endl; }
-#line 2088 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 2095 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 102:
-#line 264 "src/maths_parser.y" /* yacc.c:1646  */
+#line 265 "src/maths_parser.y" /* yacc.c:1646  */
     { (yyval.expr) = (yyvsp[0].expr); std::cout << "initializer: assignment expression" << std::endl; }
-#line 2094 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 2101 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 103:
-#line 272 "src/maths_parser.y" /* yacc.c:1646  */
+#line 273 "src/maths_parser.y" /* yacc.c:1646  */
     { (yyval.expr) = (yyvsp[0].expr); std::cout << "statement: labeled statement" << std::endl; }
-#line 2100 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 2107 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 104:
-#line 273 "src/maths_parser.y" /* yacc.c:1646  */
+#line 274 "src/maths_parser.y" /* yacc.c:1646  */
     { (yyval.expr) = (yyvsp[0].expr); std::cout << "statement: compound statement" << std::endl; }
-#line 2106 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 2113 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 105:
-#line 274 "src/maths_parser.y" /* yacc.c:1646  */
+#line 275 "src/maths_parser.y" /* yacc.c:1646  */
     { (yyval.expr) = (yyvsp[0].expr); std::cout << "statement: expression statement" << std::endl; }
-#line 2112 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 2119 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 106:
-#line 275 "src/maths_parser.y" /* yacc.c:1646  */
+#line 276 "src/maths_parser.y" /* yacc.c:1646  */
     { (yyval.expr) = (yyvsp[0].expr); std::cout << "statement: selection statement" << std::endl; }
-#line 2118 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 2125 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 107:
-#line 276 "src/maths_parser.y" /* yacc.c:1646  */
+#line 277 "src/maths_parser.y" /* yacc.c:1646  */
     { (yyval.expr) = (yyvsp[0].expr); std::cout << "statement: iteration statement" << std::endl; }
-#line 2124 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 2131 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 108:
-#line 277 "src/maths_parser.y" /* yacc.c:1646  */
+#line 278 "src/maths_parser.y" /* yacc.c:1646  */
     { (yyval.expr) = (yyvsp[0].expr);  std::cout << "statement: jump statement" << std::endl; }
-#line 2130 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 2137 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 109:
-#line 280 "src/maths_parser.y" /* yacc.c:1646  */
+#line 281 "src/maths_parser.y" /* yacc.c:1646  */
     { std::cout << "labelled statement: identifier: statement" << std::endl; }
-#line 2136 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 2143 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 110:
-#line 283 "src/maths_parser.y" /* yacc.c:1646  */
+#line 284 "src/maths_parser.y" /* yacc.c:1646  */
     { (yyval.expr) = new localScope(); std::cout << "compound statement: { }" << std::endl; std::cout << RED << "NEW localScope empty" << RESET << std::endl;}
-#line 2142 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 2149 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 111:
-#line 284 "src/maths_parser.y" /* yacc.c:1646  */
+#line 285 "src/maths_parser.y" /* yacc.c:1646  */
     { (yyval.expr) = new localScope((yyvsp[-1].exprList)); std::cout << "compound statement: { statement list }" << std::endl; std::cout << RED << "NEW LOCALsCOPE WITHH satement list" << RESET << std::endl; }
-#line 2148 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 2155 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 112:
-#line 285 "src/maths_parser.y" /* yacc.c:1646  */
+#line 286 "src/maths_parser.y" /* yacc.c:1646  */
     { (yyval.expr) = new localScope((yyvsp[-1].exprList)); std::cout << "compound statement: { declaration list }" << std::endl; }
-#line 2154 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 2161 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 113:
-#line 286 "src/maths_parser.y" /* yacc.c:1646  */
+#line 287 "src/maths_parser.y" /* yacc.c:1646  */
     { (yyval.expr) = new localScope((yyvsp[-2].exprList), (yyvsp[-1].exprList)); std::cout << "compound statement: { declaration list }" << std::endl; }
-#line 2160 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 2167 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 114:
-#line 290 "src/maths_parser.y" /* yacc.c:1646  */
+#line 291 "src/maths_parser.y" /* yacc.c:1646  */
     { (yyval.exprList) = new List((yyvsp[0].expr)); std::cout << "statement list: statement" << std::endl;std::cout << RED << "new list with Statement" << RESET << std::endl; }
-#line 2166 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 2173 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 115:
-#line 291 "src/maths_parser.y" /* yacc.c:1646  */
+#line 292 "src/maths_parser.y" /* yacc.c:1646  */
     { (yyval.exprList) = new List((yyvsp[-1].exprList)); ((yyval.exprList))->addtoList((yyvsp[0].expr)); std::cout << "statement list: statement list statement" << std::endl;std::cout << RED << "new list STATEMENT_LIST and statement added to it" << RESET << std::endl; }
-#line 2172 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 2179 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 116:
-#line 294 "src/maths_parser.y" /* yacc.c:1646  */
+#line 295 "src/maths_parser.y" /* yacc.c:1646  */
     { std::cout << "expression statement: ; " << std::endl; }
-#line 2178 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 2185 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 117:
-#line 295 "src/maths_parser.y" /* yacc.c:1646  */
+#line 296 "src/maths_parser.y" /* yacc.c:1646  */
     { std::cout << "expression statement: expression;" << std::endl; }
-#line 2184 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 2191 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 118:
-#line 298 "src/maths_parser.y" /* yacc.c:1646  */
+#line 299 "src/maths_parser.y" /* yacc.c:1646  */
     { (yyval.expr) = new ifStatement((yyvsp[-2].expr), (yyvsp[0].expr)); std::cout << "if statement" << std::endl; std::cout << RED << " new iF WITH EXPRESSION AND STATEMENT" << RESET << std::endl; }
-#line 2190 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 2197 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 119:
-#line 299 "src/maths_parser.y" /* yacc.c:1646  */
+#line 300 "src/maths_parser.y" /* yacc.c:1646  */
     { (yyval.expr) = new ifElseStatement((yyvsp[-4].expr), (yyvsp[-2].expr), (yyvsp[0].expr)); std::cout << "if else statement" << std::endl; std::cout << RED << " new iFeLSE WITH EXPRESSION  STATEMENT STATEMENT" << RESET << std::endl;}
-#line 2196 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 2203 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 120:
-#line 302 "src/maths_parser.y" /* yacc.c:1646  */
+#line 303 "src/maths_parser.y" /* yacc.c:1646  */
     { (yyval.expr) = new whileLoop((yyvsp[-2].expr), (yyvsp[0].expr)); std::cout << "while loop" << std::endl; std::cout << RED << "new whileLoop with EXPRESSION and STATEMENT" << RESET << std::endl;}
-#line 2202 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 2209 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 121:
-#line 305 "src/maths_parser.y" /* yacc.c:1646  */
+#line 306 "src/maths_parser.y" /* yacc.c:1646  */
     { std::cout << "jump statement: return" << std::endl; }
-#line 2208 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 2215 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 122:
-#line 306 "src/maths_parser.y" /* yacc.c:1646  */
+#line 307 "src/maths_parser.y" /* yacc.c:1646  */
     { (yyval.expr) = new Return((yyvsp[-1].expr)); std::cout << "jump statement: return expression" << std::endl; }
-#line 2214 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 2221 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 123:
-#line 309 "src/maths_parser.y" /* yacc.c:1646  */
+#line 310 "src/maths_parser.y" /* yacc.c:1646  */
     { std::cout << "declaration specifier: storage class specifier" << std::endl; }
-#line 2220 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 2227 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 124:
-#line 310 "src/maths_parser.y" /* yacc.c:1646  */
+#line 311 "src/maths_parser.y" /* yacc.c:1646  */
     { std::cout << "declaration specifier: storage class specifier declaration specifier" << std::endl; }
-#line 2226 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 2233 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 125:
-#line 311 "src/maths_parser.y" /* yacc.c:1646  */
+#line 312 "src/maths_parser.y" /* yacc.c:1646  */
     {(yyval.expr) = (yyvsp[0].expr); std::cout << "declaration specifier: type specifier" << std::endl; }
-#line 2232 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 2239 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 126:
-#line 312 "src/maths_parser.y" /* yacc.c:1646  */
+#line 313 "src/maths_parser.y" /* yacc.c:1646  */
     { std::cout << "declaration specifier: type specifier declaration specifiers" << std::endl; }
-#line 2238 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 2245 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 127:
-#line 313 "src/maths_parser.y" /* yacc.c:1646  */
+#line 314 "src/maths_parser.y" /* yacc.c:1646  */
     { std::cout << "declaration specifier: type qualifier" << std::endl; }
-#line 2244 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 2251 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 128:
-#line 314 "src/maths_parser.y" /* yacc.c:1646  */
+#line 315 "src/maths_parser.y" /* yacc.c:1646  */
     { std::cout << "declaration specifier: type qualifier declaration specifiers" << std::endl; }
-#line 2250 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 2257 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 129:
-#line 317 "src/maths_parser.y" /* yacc.c:1646  */
+#line 318 "src/maths_parser.y" /* yacc.c:1646  */
     { std::cout << "declarator: pointer direct declarator" << std::endl; }
-#line 2256 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 2263 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 130:
-#line 318 "src/maths_parser.y" /* yacc.c:1646  */
+#line 319 "src/maths_parser.y" /* yacc.c:1646  */
     { (yyval.expr) = (yyvsp[0].expr); std::cout << "declarator: direct declarator" << std::endl; }
-#line 2262 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 2269 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 131:
-#line 321 "src/maths_parser.y" /* yacc.c:1646  */
+#line 322 "src/maths_parser.y" /* yacc.c:1646  */
     { (yyval.exprList) = new List((yyvsp[0].expr)); std::cout << "declaration list: declaration" << std::endl; std::cout << RED << "new list with DECLARATION " << RESET << std::endl; }
-#line 2268 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 2275 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 132:
-#line 322 "src/maths_parser.y" /* yacc.c:1646  */
+#line 323 "src/maths_parser.y" /* yacc.c:1646  */
     { (yyval.exprList) = new List((yyvsp[-1].exprList)); ((yyval.exprList))->addtoList((yyvsp[0].expr)); std::cout << "declaration list: declaration list declaration" << std::endl; std::cout << RED << "new List made with DECLARATION_LIST DECLARATION but secnod is added" << RESET << std::endl; }
-#line 2274 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 2281 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 133:
-#line 325 "src/maths_parser.y" /* yacc.c:1646  */
+#line 326 "src/maths_parser.y" /* yacc.c:1646  */
     { std::cout << "declaration_specifiers, declarator, declaration list, compound_statement" << std::endl;}
-#line 2280 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 2287 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 134:
-#line 326 "src/maths_parser.y" /* yacc.c:1646  */
+#line 327 "src/maths_parser.y" /* yacc.c:1646  */
     { (yyval.expr) = new functionDef(new Declaration((yyvsp[-2].expr), (yyvsp[-1].expr)), (yyvsp[0].expr)); std::cout << "function definition: declaration_specifiers, declarator, compound_statement" << std::endl; std::cout << RED << "functionDef made with DECLARATION_SPECIFIERS DECLARATOR COMPOUND_STATEMENT" << RESET << std::endl;}
-#line 2286 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 2293 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 135:
-#line 327 "src/maths_parser.y" /* yacc.c:1646  */
+#line 328 "src/maths_parser.y" /* yacc.c:1646  */
     {std::cout << "declarator declaration_list, compound_statement" << std::endl;}
-#line 2292 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 2299 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 136:
-#line 328 "src/maths_parser.y" /* yacc.c:1646  */
+#line 329 "src/maths_parser.y" /* yacc.c:1646  */
     { std::cout << "declarator, compound_statement" << std::endl;}
-#line 2298 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 2305 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 137:
-#line 331 "src/maths_parser.y" /* yacc.c:1646  */
+#line 332 "src/maths_parser.y" /* yacc.c:1646  */
     { std::cout << "declaration: declaration specifiers;" << std::endl;}
-#line 2304 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 2311 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 138:
-#line 332 "src/maths_parser.y" /* yacc.c:1646  */
+#line 333 "src/maths_parser.y" /* yacc.c:1646  */
     { (yyval.expr)  = new Declaration((yyvsp[-2].expr), (yyvsp[-1].exprList)); std::cout << "declaration: declaration specifiers init declarator list;" << std::endl; std::cout << RED << "made declaration class with dec_specifiers and init_declarator list" << RESET << std::endl;}
-#line 2310 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 2317 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 139:
-#line 335 "src/maths_parser.y" /* yacc.c:1646  */
+#line 336 "src/maths_parser.y" /* yacc.c:1646  */
     { (yyval.expr) = (yyvsp[0].expr); std::cout << "external declaration: funct declaration"<<std::endl; }
-#line 2316 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 2323 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 140:
-#line 336 "src/maths_parser.y" /* yacc.c:1646  */
+#line 337 "src/maths_parser.y" /* yacc.c:1646  */
     {(yyval.expr) = (yyvsp[0].expr); std::cout << "external declaration: declaration" << std::endl;}
-#line 2322 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 2329 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 141:
-#line 339 "src/maths_parser.y" /* yacc.c:1646  */
+#line 340 "src/maths_parser.y" /* yacc.c:1646  */
     { (yyval.exprList) = new List((yyvsp[0].expr)); std::cout << "translational unit: external declaration" << std::endl; }
-#line 2328 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 2335 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 142:
-#line 340 "src/maths_parser.y" /* yacc.c:1646  */
+#line 341 "src/maths_parser.y" /* yacc.c:1646  */
     { (yyval.exprList) = new List((yyvsp[-1].exprList)); ((yyval.exprList))->addtoList((yyvsp[0].expr)); std::cout << "translational unit: translational unit external declaration" << std::endl;}
-#line 2334 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 2341 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 143:
-#line 343 "src/maths_parser.y" /* yacc.c:1646  */
+#line 344 "src/maths_parser.y" /* yacc.c:1646  */
     { g_root = new globalScope((yyvsp[0].exprList)); std::cout << "Made the root" << std::endl;}
-#line 2340 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 2347 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
     break;
 
 
-#line 2344 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
+#line 2351 "src/maths_parser.tab.cpp" /* yacc.c:1646  */
       default: break;
     }
   /* User semantic actions sometimes alter yychar, and that requires
@@ -2568,7 +2575,7 @@ yyreturn:
 #endif
   return yyresult;
 }
-#line 345 "src/maths_parser.y" /* yacc.c:1906  */
+#line 346 "src/maths_parser.y" /* yacc.c:1906  */
 
 
 const Node *g_root; // Definition of variable (to match declaration earlier)

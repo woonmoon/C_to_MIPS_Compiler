@@ -11,6 +11,7 @@ public:
     Return(NodePtr ret): returnVal(ret) {}
     void pythonGen(std::ostream& os) const{}
     void print(std::ostream& dst, pycon& con, int level) const{ con.indent(dst); dst << "return "; returnVal->print(dst, con, level); }
+    void mipsGen(std::ostream& os) const{}
 protected:
     NodePtr returnVal;
 };

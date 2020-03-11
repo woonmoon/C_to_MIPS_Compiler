@@ -18,6 +18,7 @@ public:
      ~Node(){}
     virtual void print(std::ostream& dst, pycon& con, int level) const = 0;
     virtual void pythonGen(std::ostream& os) const = 0;
+    virtual void mipsGen(std::ostream& os) const = 0;
 };
 
 

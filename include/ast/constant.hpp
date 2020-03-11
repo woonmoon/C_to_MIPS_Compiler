@@ -21,7 +21,7 @@ class Constant: public Node {
         void pythonGen(std::ostream &os) const{
           os << val;
         }
-
+        void mipsGen(std::ostream& os) const { }
     private:
         int val;
 };

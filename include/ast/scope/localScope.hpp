@@ -28,6 +28,7 @@ public:
         }
     }
     void genPython(std::ostream& os) const { }
+    void mipsGen(std::ostream& os) const { }
 };
 
 #endif
