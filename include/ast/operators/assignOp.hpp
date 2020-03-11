@@ -13,6 +13,8 @@ public:
         branches[1]->print(dst, con, level);
     }
     void pythonGen(std::ostream& os) const { }
+    void mipsGen(std::ostream& os) const { }
+
 protected:
 };
 

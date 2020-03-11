@@ -23,6 +23,14 @@ public:
          dst << ")";
     }
       void pythonGen(std::ostream& os) const { }
+      void mipsGen(std::ostream& os) const { 
+         os << "sw $fp -4($sp)";
+         os << std::endl;
+         os << "addiu $sp, $sp, -8";
+         os << std::endl;
+         os << "move $fp, $sp";
+         os << std::endl;
+      }
 protected:
      DeclarationPtr deckedBoi;
      int argNum;

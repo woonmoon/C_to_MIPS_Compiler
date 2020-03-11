@@ -21,7 +21,10 @@ public:
         con.clearFunc();
     }
     void pythonGen(std::ostream& os) const { }
-    void mipsGen(std::ostream& os) const { }
+    void mipsGen(std::ostream& os) const { 
+        Declarator->mipsGen(os);
+        scopeBlock->mipsGen(os);
+    }
 protected:
     NodePtr Declarator;
     NodePtr scopeBlock;
