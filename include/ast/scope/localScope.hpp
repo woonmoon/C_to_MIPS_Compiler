@@ -6,7 +6,7 @@ typedef const localScope* localScopePtr;
 
 class localScope: public Scope {
 public:
-    localScope(){ std::cout << "Scope made!" << std::endl; }
+    localScope(){ /*std::cout << "Scope made!" << std::endl;*/ }
 
     localScope(ListPtr inList) {
         sequence=inList->getlistOfExpressions();
