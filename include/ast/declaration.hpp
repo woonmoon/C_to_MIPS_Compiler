@@ -21,10 +21,8 @@ public:
       branches[0]->print(dst, con, level);
       branches[1]->print(dst, con, level);
     }
-    void pythonGen(std::ostream& os) const { };
-    void mipsGen(std::ostream& os) const { };
-private:
-    
+    void pythonGen(std::ostream& os) const { }
+    void mipsGen(std::ostream& os) const { }
 };
 
 

@@ -30,7 +30,10 @@ public:
       dst << std::endl;
     }
     void pythonGen(std::ostream& os) const { }
-    void mipsGen(std::ostream& os) const { }
+    void mipsGen(std::ostream& os) const { 
+      if(isAssign) {
+      }  
+    }
 private:
  bool isAssign;
 };

@@ -6,7 +6,7 @@ typedef const globalScope* globalScopePtr;
 
 class globalScope: public Scope{
 public:
-    globalScope() { std::cout << "global Scope made!" << std::endl; }
+    globalScope() { }
 
     globalScope(NodePtr inNode) {
         sequence.push_back(inNode);

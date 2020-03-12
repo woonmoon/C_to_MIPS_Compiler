@@ -17,10 +17,10 @@ class Constant: public Node {
         void print(std::ostream& dst, pycon& con, int level) const{
           dst << val;
         }
-
         void pythonGen(std::ostream &os) const{
           os << val;
         }
+        int getVal() { return val; }
         void mipsGen(std::ostream& os) const { }
     private:
         int val;

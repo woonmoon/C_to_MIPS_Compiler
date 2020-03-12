@@ -22,7 +22,7 @@ class Identifier: public Node {
           }
           dst << identifierName;
         }
-
+        std::string getId() { return identifierName; }
         void pythonGen(std::ostream &os) const{
           os << identifierName;
         }
