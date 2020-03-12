@@ -36,7 +36,16 @@ public:
   }
   
   void pythonGen(std::ostream& os) const { }
-  void mipsGen(std::ostream& os) const { }
+
+  void mipsGen(std::ostream& os) const { 
+      for(int i=0; i<listOfExpressions.size(); i++){
+      
+      listOfExpressions[i]->mipsGen(os);
+      if(i!=listOfExpressions.size()-1) {
+        os << std::endl;
+      }
+     }
+  }
 
   std::vector<NodePtr> getlistOfExpressions() { return listOfExpressions; }
 

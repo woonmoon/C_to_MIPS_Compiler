@@ -21,5 +21,6 @@ bin/print_canonical : src/print_canonical.o src/maths_parser.tab.o src/maths_lex
 clean :
 	rm src/*.o
 	rm bin/print_canonical
+	rm bin/gen_mips
 	rm src/*.tab.cpp
 	rm src/*.yy.cpp
