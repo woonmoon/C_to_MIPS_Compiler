@@ -22,6 +22,7 @@ public:
     }
     void pythonGen(std::ostream& os) const { }
     void mipsGen(std::ostream& os) const { 
+        std::cout << "got to functionDef mipsGen" << std::endl;
         Declarator->mipsGen(os);
         scopeBlock->mipsGen(os);
     }

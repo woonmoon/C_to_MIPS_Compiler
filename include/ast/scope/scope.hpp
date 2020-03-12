@@ -11,7 +11,7 @@ public:
             delete sequence[i];
         }
     }
-    Scope() { std::cout << "Scope made!" << std::endl; }
+    Scope() { /*std::cout << "Scope made!" << std::endl;*/ }
     Scope(NodePtr inNode) {
         sequence.push_back(inNode);
     }
