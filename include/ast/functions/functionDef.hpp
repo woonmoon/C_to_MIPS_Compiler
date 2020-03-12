@@ -22,9 +22,24 @@ public:
     }
     void pythonGen(std::ostream& os) const { }
     void mipsGen(std::ostream& os) const { 
-        std::cout << "got to functionDef mipsGen" << std::endl;
-        Declarator->mipsGen(os);
+        os << "sw $fp -4($sp)";
+        os << std::endl;
+        os << "addiu $sp, $sp, -8";
+        os << std::endl;
+        os << "addiu $fp, $sp, 4";
+        os << std::endl;
         scopeBlock->mipsGen(os);
+        os << "should've done shit in the scopeBlock";
+        os << std::endl;
+        os << "move $sp, $fp";
+        os << std::endl;
+        //os << "lw $fp, 4($sp)";
+        //os << std::endl;
+        os << "addiu $sp, $sp, 8";
+        os << std::endl;
+        os << "lw $fp, 4($sp)";
+        os << std::endl;
+        os << "j $31";
     }
 protected:
     NodePtr Declarator;
