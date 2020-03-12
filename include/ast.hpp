@@ -2,6 +2,7 @@
 #define ast_hpp
 
 #include "ast/pYtHoNcOnTeXt.hpp"
+#include "ast/mipsCon.hpp"
 #include "ast/node.hpp"
 #include "ast/identifier.hpp"
 #include "ast/expression.hpp"

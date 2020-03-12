@@ -27,7 +27,7 @@ class unaryOp : public Expression{
             branches[0]->print(dst, con, level);
         }
         void pythonGen(std::ostream& os) const { }
-        void mipsGen(std::ostream& os) const { }
+        void mipsGen(std::ostream& os, mipsCon& con) const { }
     private:
         std::string op;
         ExpressionPtr expr;

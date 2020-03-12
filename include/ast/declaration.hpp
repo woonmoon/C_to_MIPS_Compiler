@@ -18,7 +18,7 @@ public:
       branches.push_back(name);
     }
     Declaration(NodePtr type, NodePtr name, bool isFunc){
-      bool isFunc = 1;
+      isFunction = isFunc;
       branches.push_back(type);
       branches.push_back(name);
     }
@@ -28,16 +28,16 @@ public:
     }
     void pythonGen(std::ostream& os) const { }
 
-    void mipsGen(std::ostream& os) const {
+    void mipsGen(std::ostream& os, mipsCon& con) const {
       if(!isFunction){
-        mipsCon.count += 4;
+        con.count += 4;
       }else{
         //WIPE THE MAP
         //reset count
       }
-      branches[0]->mipsGen(os);
-      branches[1]->mipsGen(os);
-
+      branches[0]->mipsGen(os, con);
+      branches[1]->mipsGen(os, con);
+    }
 private:
     bool isFunction;
     

@@ -37,10 +37,10 @@ public:
   
   void pythonGen(std::ostream& os) const { }
 
-  void mipsGen(std::ostream& os) const { 
+  void mipsGen(std::ostream& os, mipsCon& con) const { 
       for(int i=0; i<listOfExpressions.size(); i++){
       
-      listOfExpressions[i]->mipsGen(os);
+      listOfExpressions[i]->mipsGen(os, con);
       if(i!=listOfExpressions.size()-1) {
         os << std::endl;
       }

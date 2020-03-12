@@ -21,7 +21,7 @@ class Constant: public Node {
           os << val;
         }
         int getVal() { return val; }
-        void mipsGen(std::ostream& os) const { }
+        void mipsGen(std::ostream& os, mipsCon& con) const { }
     private:
         int val;
 };

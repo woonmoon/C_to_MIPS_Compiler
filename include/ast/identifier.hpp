@@ -26,7 +26,7 @@ class Identifier: public Node {
         void pythonGen(std::ostream &os) const{
           os << identifierName;
         }
-        void mipsGen(std::ostream& os) const {}
+        void mipsGen(std::ostream& os, mipsCon& con) const {}
 
     private:
         std::string identifierName;

@@ -24,7 +24,7 @@ public:
     }
       void pythonGen(std::ostream& os) const { }
 
-      void mipsGen(std::ostream& os) const { 
+      void mipsGen(std::ostream& os, mipsCon& con) const { 
          os << "sw $fp -4($sp)";
          os << std::endl;
          os << "addiu $sp, $sp, -8";

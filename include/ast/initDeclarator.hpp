@@ -36,20 +36,20 @@ public:
     void pythonGen(std::ostream& os) const { }
 
 
-    void mipsGen(std::ostream& os) const { 
-      branches[0]->print(dst, con, level);
-      dst << " = ";
+    void mipsGen(std::ostream& os, mipsCon& con) const { 
+      branches[0]->mipsGen(os, con);
+      os << " = ";
       if(isAssign){
         con.setAssign();
-        branches[1]->print(dst, con, level);
+        branches[1]->mipsGen(os, con);
       }
       else{
-        dst << "0";
+        os << "0";
       }
       con.clearAssign();
-      dst << std::endl;
+      os << std::endl;
     }
-    
+
 private:
  bool isAssign;
 };

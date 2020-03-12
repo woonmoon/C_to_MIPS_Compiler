@@ -16,10 +16,14 @@ public:
     void tickReg(int num) { regTrack[num]=true; }
     void untickReg(int num) { regTrack[num]=false; }
     bool regTicked(int num) { if(regTrack[num]) { return true;} return false; }
+    void setAssign() { isAssign = 1; }
+    void clearAssign() { isAssign = 0; }
     int count; 
+
 private:
     std::map<std::string, uint32_t> bindings;
     std::map<int, bool> regTrack;
+    bool isAssign;
 };
 
 #endif

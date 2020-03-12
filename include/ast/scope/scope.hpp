@@ -24,7 +24,7 @@ public:
     }
     void print(std::ostream& dst, pycon& con, int level) const=0;
     void pythonGen(std::ostream& os) const { } 
-    void mipsGen(std::ostream& os) const { }
+    void mipsGen(std::ostream& os, mipsCon& con) const { }
 protected:
     std::vector<NodePtr> sequence;
 };

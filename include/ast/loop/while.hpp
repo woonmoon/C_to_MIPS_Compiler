@@ -24,7 +24,7 @@ public:
         con.subTab();
     }
     void pythonGen(std::ostream& os) const { }
-    void mipsGen(std::ostream& os) const { }
+    void mipsGen(std::ostream& os, mipsCon& con) const { }
 
 protected:
     NodePtr condition;

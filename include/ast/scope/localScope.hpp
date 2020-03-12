@@ -28,9 +28,9 @@ public:
         }
     }
     void genPython(std::ostream& os) const { }
-    void mipsGen(std::ostream& os) const { 
+    void mipsGen(std::ostream& os, mipsCon& con) const { 
         for(int i=0; i<sequence.size(); i++) {
-            sequence[i]->mipsGen(os);
+            sequence[i]->mipsGen(os, con);
         }
         os << "nop";
         os << std::endl;
