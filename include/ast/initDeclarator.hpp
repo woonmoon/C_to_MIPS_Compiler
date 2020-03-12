@@ -38,7 +38,7 @@ public:
 
     void mipsGen(std::ostream& os, mipsCon& con) const { 
       branches[0]->mipsGen(os, con);
-      os << " = ";
+      os << "li $2,";
       if(isAssign){
         con.setAssign();
         branches[1]->mipsGen(os, con);
@@ -47,7 +47,7 @@ public:
         os << "0";
       }
       con.clearAssign();
-      os << std::endl;
+      os << std::endl << "sw " << con.count <<"($fp)";
     }
 
 private:
