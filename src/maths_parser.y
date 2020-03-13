@@ -215,8 +215,8 @@ TYPE_QUALIFIER : T_CONST { std::cout << "type qualifier: const" << std::endl; }
 
 DIRECT_DECLARATOR : T_IDENTIFIER  { $$ = new Identifier(*$1); std::cout << "direct declarator: identifier" << std::endl; std::cout << RED << "new identifier with t_identifier" << RESET << std::endl;}
                   | T_LBRACKET DECLARATOR T_RBRACKET { $$ = $2; std::cout << "direct declarator: ( declarator )" << std::endl; }
-                  | DIRECT_DECLARATOR T_LBRACKET PARAMETER_TYPE_LIST T_RBRACKET { $$ = new functionDec($1, $3); std::cout << "direct declarator: direct declarator ( parameter type list )" << std::endl; std::cout << RED << "new functiondef with direct delcarator and parameter type list" << RESET << std::endl; }
-                  | DIRECT_DECLARATOR T_LBRACKET IDENTIFIER_LIST T_RBRACKET { $$ = new functionDec($1, $3); delete $3; std::cout << "direct declarator: direct declarator ( identifier list )" << std::endl; std::cout << RED << "new functiondef with direct delcarator and identifier list" << RESET << std::endl; }
+                  | DIRECT_DECLARATOR T_LBRACKET PARAMETER_TYPE_LIST T_RBRACKET { $$ = new functionDec($1, $3); std::cout << "direct declarator: direct declarator ( parameter type list )" << std::endl; std::cout << RED << "new functiondec with direct delcarator and parameter type list" << RESET << std::endl; }
+                  | DIRECT_DECLARATOR T_LBRACKET IDENTIFIER_LIST T_RBRACKET { $$ = new functionDec($1, $3); delete $3; std::cout << "direct declarator: direct declarator ( identifier list )" << std::endl; std::cout << RED << "new functiondec with direct delcarator and identifier list" << RESET << std::endl; }
                   | DIRECT_DECLARATOR T_LBRACKET T_RBRACKET { $$ = new functionDec($1); std::cout << "direct declarator: direct declarator( )" << std::endl; }
                   ;
 

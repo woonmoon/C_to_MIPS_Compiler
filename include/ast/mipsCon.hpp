@@ -11,6 +11,7 @@ public:
         for(int i=0; i<32; i++) { regTrack[i]=false; }
         count = 0;
         isFunction = 0;
+        isFunc = 0;
     }
     std::string makeALabel(const std::string &str) {
         static int id = 0;
@@ -48,6 +49,7 @@ public:
     void clearAssign() { isAssign = 0; }
     int count; 
     bool isFunction;
+    bool isFunc; //different to the above one
     std::string tempIdentifierName;
 
 private:

@@ -29,7 +29,8 @@ class Identifier: public Node {
 
 
         void mipsGen(std::ostream& os, mipsCon& con) const {
-          con.tempIdentifierName = identifierName;
+          if(con.tempIdentifierName  != identifierName){
+            con.tempIdentifierName = identifierName;
           if(!con.isFunction) {
             if(con.variableBound(identifierName)) {
               os << std::endl; 
@@ -40,8 +41,10 @@ class Identifier: public Node {
               con.addBinding(identifierName, con.count);
             }
           }
-          else{
+          } 
+           if(con.isFunc){
             os << identifierName;
+            con.isFunc = 0;
           }
         }
 

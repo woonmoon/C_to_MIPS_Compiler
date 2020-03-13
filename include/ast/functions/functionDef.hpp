@@ -24,8 +24,10 @@ public:
     void pythonGen(std::ostream& os) const { }
 
     void mipsGen(std::ostream& os, mipsCon& con) const {
+        con.isFunc = 1;
         Declarator->mipsGen(os, con);
         scopeBlock->mipsGen(os, con);
+        con.isFunc = 0;
         //os << "should've done shit in the scopeBlock";
         os << std::endl;
         os << "move $sp, $fp";
