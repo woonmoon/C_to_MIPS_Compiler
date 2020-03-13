@@ -31,7 +31,7 @@ class Identifier: public Node {
         void mipsGen(std::ostream& os, mipsCon& con) const {
           if(!con.isFunction) {
             if(con.variableBound(identifierName)) {
-              os << std::endl;
+              os << std::endl; 
               int destReg=con.freeReg();
               os << "lw $" << destReg << ", " << con.findOffset(identifierName) << "($fp)";
               con.tickReg(destReg);
