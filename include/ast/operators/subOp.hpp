@@ -20,6 +20,9 @@ public:
         os << "nop";
         os << std::endl;
         os << "sub $2, $2, $3";
+        os << std::endl;
+        os << "sw $2, " << con.count << "($fp)";
+        //replace element
     }
 protected:
 };
