@@ -14,12 +14,9 @@ public:
     }
     void pythonGen(std::ostream& os) const { }
     void mipsGen(std::ostream& os, mipsCon& con) const {
-        std::cout << "STARTING THE 0TH BRANCH" << std::endl;
         branches[0]->mipsGen(os, con);
         os << std::endl;
-        std::cout << "FINISHED THE 0TH BRANCH" << std::endl;
         branches[1]->mipsGen(os, con);
-        std::cout << "FINISHED THE 1ST BRANCH" << std::endl;
     }
 
 protected:
