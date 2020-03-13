@@ -12,7 +12,6 @@ public:
   List() {}
   List(NodePtr b) {
     listOfExpressions.push_back(b);
-    std::cout << " :constructed a list" << std::endl;
   }
   
   List(const ListPtr& lol) {
@@ -39,11 +38,7 @@ public:
 
   void mipsGen(std::ostream& os, mipsCon& con) const { 
       for(int i=0; i<listOfExpressions.size(); i++){
-      
-      listOfExpressions[i]->mipsGen(os, con);
-      if(i!=listOfExpressions.size()-1) {
-        os << std::endl;
-      }
+        listOfExpressions[i]->mipsGen(os, con);
      }
   }
 

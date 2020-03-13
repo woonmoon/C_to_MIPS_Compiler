@@ -22,7 +22,10 @@ class Constant: public Node {
         }
         int getVal() { return val; }
         void mipsGen(std::ostream& os, mipsCon& con) const {
-          os << val;
+          int destReg=con.freeReg();
+          os << std::endl;
+          os << "li $" << destReg << ", " << val;
+          con.tickReg(destReg);
         }
     private:
         int val;

@@ -20,7 +20,6 @@ public:
     }
 
     void print(std::ostream& dst, pycon& con, int level) const {
-        
         for(int i=0; i<sequence.size(); i++) {
             con.indent(dst);
             sequence[i]->print(dst, con, level);
@@ -32,8 +31,6 @@ public:
         for(int i=0; i<sequence.size(); i++) {
             sequence[i]->mipsGen(os, con);
         }
-        os << "nop";
-        os << std::endl;
     }
 };
 

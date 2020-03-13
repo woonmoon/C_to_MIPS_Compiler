@@ -13,7 +13,14 @@ public:
         branches[1]->print(dst, con, level);
     }
     void pythonGen(std::ostream& os) const { }
-    void mipsGen(std::ostream& os) const { }
+    void mipsGen(std::ostream& os, mipsCon& con) const {
+        branches[0]->mipsGen(os, con);
+        branches[1]->mipsGen(os, con);
+        os << std::endl;
+        os << "nop";
+        os << std::endl;
+        os << "add $2, $2, $3";
+    }
 
 protected:
 };

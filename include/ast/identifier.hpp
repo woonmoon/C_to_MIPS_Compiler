@@ -29,7 +29,19 @@ class Identifier: public Node {
 
 
         void mipsGen(std::ostream& os, mipsCon& con) const {
-          con.addBinding(identifierName, con.count);
+          if(!con.isFunction) {
+            if(con.variableBound(identifierName)) {
+              os << std::endl;
+              int destReg=con.freeReg();
+              os << "lw $" << destReg << ", " << con.findOffset(identifierName) << "($fp)";
+              con.tickReg(destReg);
+            }else{
+              con.addBinding(identifierName, con.count);
+            }
+          }
+          else{
+            os << identifierName;
+          }
         }
 
     private:

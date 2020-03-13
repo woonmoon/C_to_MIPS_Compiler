@@ -7,14 +7,14 @@ class initDeclarator;
 
 class initDeclarator : public Expression {
 public:
-    ~initDeclarator(){}
+    ~initDeclarator() {}
     
-    initDeclarator(Node* type): isAssign(0){
+    initDeclarator(Node* type): isAssign(0) {
       branches.push_back(type);
       branches.push_back(0);
     }
 
-    initDeclarator(NodePtr type, NodePtr name): isAssign(1){
+    initDeclarator(NodePtr type, NodePtr name): isAssign(1) {
       branches.push_back(type);
       branches.push_back(name);
     }
@@ -25,29 +25,23 @@ public:
       if(isAssign){
         con.setAssign();
         branches[1]->print(dst, con, level);
-      }
-      else{
-        dst << "0";
-      }
+      }else{ dst << "0"; }
       con.clearAssign();
       dst << std::endl;
     }
 
     void pythonGen(std::ostream& os) const { }
 
-
-    void mipsGen(std::ostream& os, mipsCon& con) const { 
+    void mipsGen(std::ostream& os, mipsCon& con) const {
+      os << std::endl;
       branches[0]->mipsGen(os, con);
-      os << "li $2,";
-      if(isAssign){
-        con.setAssign();
-        branches[1]->mipsGen(os, con);
-      }
-      else{
-        os << "0";
-      }
+      int destReg=con.freeReg();
+      if(isAssign) {
+          branches[1]->mipsGen(os, con);
+      }else{ os << "0"; }
       con.clearAssign();
-      os << std::endl << "sw " << con.count <<"($fp)";
+      os << std::endl << "sw " << con.count << "($fp)";
+      con.untickReg(destReg);
     }
 
 private:
