@@ -26,6 +26,8 @@ class Constant: public Node {
           os << std::endl;
           os << "li $" << destReg << ", " << val;
           con.tickReg(destReg);
+          os << std::endl << "sw $2, " << con.count << "($fp)";
+          con.untickReg(destReg);
         }
     private:
         int val;
