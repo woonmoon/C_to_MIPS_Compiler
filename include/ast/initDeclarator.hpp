@@ -40,7 +40,7 @@ public:
           branches[1]->mipsGen(os, con);
       }else{ os << "0"; }
       con.clearAssign();
-      os << std::endl << "sw " << con.count << "($fp)";
+      os << std::endl << "sw $2, " << con.count << "($fp)";
       con.untickReg(destReg);
     }
 
