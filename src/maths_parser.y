@@ -93,7 +93,7 @@ ADDITIVE_EXPRESSION : MULTIPLICATIVE_EXPRESSION { $$ = $1; std::cout << "additiv
                     | ADDITIVE_EXPRESSION T_MINUS MULTIPLICATIVE_EXPRESSION { $$ = new subOp($1, $3); std::cout << "additive expression: additive expression - multiplicative expression" << std::endl; }
                     ;
 
-SHIFT_EXPRESSION : ADDITIVE_EXPRESSION { $$ = $1; stdmake::cout << "shift expression: additive expression" << std::endl; }
+SHIFT_EXPRESSION : ADDITIVE_EXPRESSION { $$ = $1; std::cout << "shift expression: additive expression" << std::endl; }
                  | SHIFT_EXPRESSION T_LSHIFT ADDITIVE_EXPRESSION { std::cout << "shift expression: shift expression << additive expression" << std::endl; }
                  | SHIFT_EXPRESSION T_RSHIFT ADDITIVE_EXPRESSION { std::cout << "shift expression: shift expression >> additive expression" << std::endl; }
                  ;
