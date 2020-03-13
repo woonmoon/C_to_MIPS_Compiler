@@ -48,6 +48,7 @@ public:
     void clearAssign() { isAssign = 0; }
     int count; 
     bool isFunction;
+    std::string tempIdentifierName;
 
 private:
     std::map<std::string, uint32_t> bindings;

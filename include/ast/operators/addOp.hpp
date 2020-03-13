@@ -14,6 +14,7 @@ public:
     }
     void pythonGen(std::ostream& os) const { }
     void mipsGen(std::ostream& os, mipsCon& con) const {
+        std::string tempName = con.tempIdentifierName;
         branches[0]->mipsGen(os, con);
         branches[1]->mipsGen(os, con);
         os << std::endl;
@@ -21,9 +22,9 @@ public:
         os << std::endl;
         os << "add $2, $2, $3";
         os << std::endl;
-        os << "sw $2, " << con.count << "($fp)";
-        //replace elemnt 
-        if(con.)
+        int offset = con.findOffset(tempName);
+        os << "sw $2, " << offset << "($fp)";
+                
     }
 
 protected:

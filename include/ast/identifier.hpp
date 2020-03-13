@@ -29,6 +29,7 @@ class Identifier: public Node {
 
 
         void mipsGen(std::ostream& os, mipsCon& con) const {
+          con.tempIdentifierName = identifierName;
           if(!con.isFunction) {
             if(con.variableBound(identifierName)) {
               os << std::endl; 
