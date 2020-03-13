@@ -20,6 +20,10 @@ public:
         os << "nop";
         os << std::endl;
         os << "add $2, $2, $3";
+        os << std::endl;
+        std::cout << "fuck this" << std::endl;
+        os << "sw $2, " << con.count << "($fp)";
+        //replace elemnt 
     }
 
 protected:

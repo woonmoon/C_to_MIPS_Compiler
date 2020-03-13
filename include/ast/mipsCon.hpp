@@ -52,7 +52,6 @@ public:
 private:
     std::map<std::string, uint32_t> bindings;
     std::map<int, bool> regTrack;
-    std::map<int, std::string> regVar;
     bool isAssign;
     
 };
