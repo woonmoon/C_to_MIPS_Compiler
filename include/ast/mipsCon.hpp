@@ -12,6 +12,7 @@ public:
         count = 0;
         isFunction = 0;
         isFunc = 0;
+        isConditional = 0;
     }
     std::string makeALabel(const std::string &str) {
         static int id = 0;
@@ -59,13 +60,13 @@ public:
     int count; 
     bool isFunction;
     bool isFunc; //different to the above one
+    bool isConditional;
     std::string tempIdentifierName;
 
 private:
     std::map<std::string, uint32_t> bindings;
     std::map<int, bool> regTrack;
     bool isAssign;
-    
 };
 
 #endif

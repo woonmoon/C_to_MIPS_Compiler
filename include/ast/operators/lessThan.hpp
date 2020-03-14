@@ -10,7 +10,14 @@ public:
         branches[1]->print(dst, con, level);
     }
     void pythonGen(std::ostream& os) const { }
-    void mipsGen(std::ostream& os, mipsCon& con) const { }
+    void mipsGen(std::ostream& os, mipsCon& con) const {
+        if(con.isConditional) {
+            branches[0]->mipsGen(os, con);
+            branches[1]->mipsGen(os, con);
+            os << std::endl;
+            os << "bgt $2, $3, ";
+        }
+    }
 
 protected:
 };

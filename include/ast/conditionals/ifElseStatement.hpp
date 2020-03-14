@@ -23,8 +23,6 @@ public:
         con.indent(dst); ////////////////////////////
         ifExecute->print(dst, con, level);
         con.subTab();
-        
-
         con.indent(dst);
         dst << "else:";
         dst << std::endl;
@@ -34,7 +32,18 @@ public:
         con.subTab();
     }
     void pythonGen(std::ostream& os) const { }
-    void mipsGen(std::ostream& os, mipsCon& con) const { }
+    void mipsGen(std::ostream& os, mipsCon& con) const { 
+        // con.isConditional=true;
+        // condition->mipsGen(os, con);
+        // std::string elseBranch=con.makeALabel("else");
+        // os << elseBranch;
+        // os << std::endl;
+        // ifExecute->mipsGen(os, con);
+        // os << std::endl;
+        // os << elseBranch << ":";
+        // os << std::endl;
+        // elseExecute->mipsGen(os, con);
+    }
 
 protected:
     NodePtr condition;

@@ -23,7 +23,14 @@ public:
     }
     void pythonGen(std::ostream& os) const { }
     void mipsGen(std::ostream& os, mipsCon& con) const {
+        con.isConditional=true;
         condition->mipsGen(os, con);
+        std::string skip=con.makeALabel("branch");
+        os << skip;
+        os << std::endl;
+        executeBlock->mipsGen(os, con);
+        os << std::endl;
+        os << skip << ":";
     }
 
 protected:
