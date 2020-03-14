@@ -38,7 +38,7 @@ public:
       int destReg=con.freeReg();
       if(isAssign) {
           branches[1]->mipsGen(os, con);
-      }else{ os << "0"; }
+      }else{ os << "0"; } //THIS HERE 
       con.clearAssign();
     }
 

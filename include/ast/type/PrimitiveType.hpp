@@ -31,7 +31,7 @@ public:
   void pythonGen(std::ostream& os) const{
       os<<"identifier"; 
       }
-  void mipsGen(std::ostream& os, mipsCon& con) const { }
+  void mipsGen(std::ostream& os, mipsCon& con) const { con.isInt = 1; }
 private:
   Specifier type;
 };

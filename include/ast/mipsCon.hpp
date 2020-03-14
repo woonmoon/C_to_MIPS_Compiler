@@ -13,6 +13,9 @@ public:
         isFunction = 0;
         isFunc = 0;
         isConditional = 0;
+        isAss = 0;
+        isInt = 0;
+        newIsInt = 0;
     }
     std::string makeALabel(const std::string &str) {
         static int id = 0;
@@ -61,7 +64,12 @@ public:
     bool isFunction;
     bool isFunc; //different to the above one
     bool isConditional;
+    bool isAss;
+    bool isInt;
+    bool newIsInt;
     std::string tempIdentifierName;
+    std::string storeTo;
+    std::string justForInt;
 
 private:
     std::map<std::string, uint32_t> bindings;

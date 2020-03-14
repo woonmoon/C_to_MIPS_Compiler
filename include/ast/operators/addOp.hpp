@@ -14,7 +14,12 @@ public:
     }
     void pythonGen(std::ostream& os) const { }
     void mipsGen(std::ostream& os, mipsCon& con) const {
-        std::string tempName = con.tempIdentifierName;
+        std::string tempName;
+        if(con.newIsInt){
+            con.newIsInt = 0;
+            tempName = con.justForInt;
+        }else tempName = con.storeTo;
+
         branches[0]->mipsGen(os, con);
         branches[1]->mipsGen(os, con);
         os << std::endl;

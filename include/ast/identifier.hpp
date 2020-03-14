@@ -29,20 +29,31 @@ class Identifier: public Node {
 
 
         void mipsGen(std::ostream& os, mipsCon& con) const {
-          if(con.tempIdentifierName  != identifierName){
-            con.tempIdentifierName = identifierName;
-          if(!con.isFunction) {
-            if(con.variableBound(identifierName)) {
-              os << std::endl; 
-              int destReg=con.freeReg();
-              os << "lw $" << destReg << ", " << con.findOffset(identifierName) << "($fp)";
-              con.tickReg(destReg);
-            }else{
-              con.addBinding(identifierName, con.count);
+          if(!con.isAss){ //added this shit
+            //if(con.tempIdentifierName  != identifierName){
+              con.tempIdentifierName = identifierName;
+            if(!con.isFunction) {
+              if(con.variableBound(identifierName)) {
+                os << std::endl; 
+                int destReg=con.freeReg();
+                os << "lw $" << destReg << ", " << con.findOffset(identifierName) << "($fp)";
+                con.tickReg(destReg);
+              }else{
+                con.addBinding(identifierName, con.count);
+                con.tempIdentifierName = identifierName;
+              }
             }
+            //}
           }
-          } 
+           con.tempIdentifierName = identifierName;
+           if(con.isInt){
+             con.justForInt = identifierName;
+             con.isInt = 0;
+             con.newIsInt = 1;
+           }
            if(con.isFunc){
+            os << ".globl " << identifierName;
+            os << std::endl;
             os << identifierName;
             con.isFunc = 0;
           }

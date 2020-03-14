@@ -33,16 +33,16 @@ public:
     }
     void pythonGen(std::ostream& os) const { }
     void mipsGen(std::ostream& os, mipsCon& con) const { 
-        // con.isConditional=true;
-        // condition->mipsGen(os, con);
-        // std::string elseBranch=con.makeALabel("else");
-        // os << elseBranch;
-        // os << std::endl;
-        // ifExecute->mipsGen(os, con);
-        // os << std::endl;
-        // os << elseBranch << ":";
-        // os << std::endl;
-        // elseExecute->mipsGen(os, con);
+        con.isConditional=true;
+        condition->mipsGen(os, con);
+        std::string elseBranch=con.makeALabel("else");
+        os << elseBranch;
+        os << std::endl;
+        ifExecute->mipsGen(os, con);
+        os << std::endl;
+        os << elseBranch << ":";
+        os << std::endl;
+        elseExecute->mipsGen(os, con);
     }
 
 protected:
