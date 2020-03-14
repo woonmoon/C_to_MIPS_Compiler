@@ -2,7 +2,7 @@
 
 # Option String
 LONG=translate:
-SHORT=o:
+SHORT=o:S:
 
 OPTS=$(getopt --options $SHORT --long $LONG --name "$1" -- "$@")
 
@@ -19,6 +19,10 @@ while true ; do
       OUTFILE="$2"
       shift 2
       ;;
+    -S )
+      INFILE="$2"
+      shift 2
+      ;;
     -- )
       shift
       break
@@ -31,4 +35,7 @@ while true ; do
 done
 if [ "$TRANSLATE" == "true" ] ; then
   cat "$INFILE" | bin/print_canonical > "$OUTFILE"
+else
+  cat "$INFILE" | bin/gen_mips > "$OUTFILE"
 fi
+
