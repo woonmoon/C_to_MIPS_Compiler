@@ -42,11 +42,20 @@ public:
         return -1;
     }
     uint32_t findOffset(std::string _label) { return bindings[_label]; }
+    uint32_t lastOffset() {
+        uint32_t maxOffset=0;
+        for(auto it=bindings.cbegin(); it!=bindings.cend(); ++it) {
+            if(it->second>maxOffset) { maxOffset=it->second; }
+        }
+        count+=4;
+        return maxOffset;
+    }
     void tickReg(int num) { regTrack[num]=true; }
     void untickReg(int num) { regTrack[num]=false; }
     bool regTicked(int num) { if(regTrack[num]) { return true; } return false; }
     void setAssign() { isAssign = 1; }
     void clearAssign() { isAssign = 0; }
+
     int count; 
     bool isFunction;
     bool isFunc; //different to the above one

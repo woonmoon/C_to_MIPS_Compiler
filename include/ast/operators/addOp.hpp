@@ -24,6 +24,8 @@ public:
         os << std::endl;
         int offset = con.findOffset(tempName);
         os << "sw $2, " << offset << "($fp)";
+        con.untickReg(2);
+        con.untickReg(3);
     }
 
 protected:

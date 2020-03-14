@@ -4,13 +4,12 @@
 class ifStatement;
 typedef const ifStatement* ifStatementPtr;
 
-class ifStatement: public Node{
+class ifStatement: public Node {
 public:
     ifStatement(NodePtr exp, NodePtr nod): condition(exp), executeBlock(nod) { }
     NodePtr getCondition() { return condition; }
     NodePtr getExecution() { return executeBlock; }
     void print(std::ostream& dst, pycon& con, int level) const {
-       
         //con.indent(dst);
         dst << "if (";
         con.subTab();
@@ -23,7 +22,9 @@ public:
         con.subTab();
     }
     void pythonGen(std::ostream& os) const { }
-    void mipsGen(std::ostream& os, mipsCon& con) const { }
+    void mipsGen(std::ostream& os, mipsCon& con) const {
+        condition->mipsGen(os, con);
+    }
 
 protected:
     NodePtr condition;

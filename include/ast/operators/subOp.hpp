@@ -14,8 +14,8 @@ public:
     }
     void pythonGen(std::ostream& os) const { }
     void mipsGen(std::ostream& os, mipsCon& con) const {
-        branches[0]->mipsGen(os, con);
         std::string tempName = con.tempIdentifierName;
+        branches[0]->mipsGen(os, con);
         branches[1]->mipsGen(os, con);
         os << std::endl;
         os << "nop";
