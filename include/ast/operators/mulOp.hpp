@@ -20,18 +20,13 @@ public:
         os << std::endl;
         os << "nop";
         os << std::endl;
-        os << "mult $2, $3";
-        os << std::endl;
-        os << "mfhi $2";
-        os << std::endl;
-        int offset = con.findOffset(tempName);
-        os << "sw $2, " << offset << "($fp)";
+        os << "mult $3, $2";
         os << std::endl;
         os << "mflo $2";
         os << std::endl;
-        offset=con.lastOffset();
-        con.addBinding(tempName+"_hi", offset);
-        os << "sw $2, " << offset+4 << "($fp)";
+        int offset=con.findOffset(tempName);
+        os << "sw $2, " << offset << "($fp)";
+        os << std::endl;
         con.untickReg(2);
         con.untickReg(3);
     }
