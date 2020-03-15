@@ -21,6 +21,7 @@ public:
             os << "bne $2, $3, ";
             con.untickReg(2);
             con.untickReg(3);
+            con.isConditional=false;
         }
     }
 protected:

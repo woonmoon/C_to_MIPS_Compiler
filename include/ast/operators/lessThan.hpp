@@ -16,6 +16,9 @@ public:
             branches[1]->mipsGen(os, con);
             os << std::endl;
             os << "bgt $2, $3, ";
+            con.untickReg(2);
+            con.untickReg(3);
+            con.isConditional=false;
         }
     }
 
