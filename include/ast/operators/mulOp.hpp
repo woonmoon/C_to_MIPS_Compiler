@@ -38,15 +38,15 @@ public:
         os << std::endl;
         branches[0]->mipsGen(os, con); //
         os << std::endl;
-        os << "move $2, $8";
+        os << "move $9, $8";
         os << std::endl;
         branches[1]->mipsGen(os, con); //
         os << std::endl;
-        os << "move $3, $8";
+        os << "move $10, $8";
         os << std::endl;
         os << "nop";
         os << std::endl;
-        os << "mul $8, $2, $3";
+        os << "mul $8, $9, $10";
         os << std::endl;
        // int offset = con.findOffset(tempName);
        //  os << "sw $2, " << offset << "($fp)";
