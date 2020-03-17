@@ -133,7 +133,7 @@ CONDITIONAL_EXPRESSION : LOGICAL_OR_EXPRESSION { $$ = $1; std::cout << "conditio
                        ;
 
 ASSIGNMENT_EXPRESSION : CONDITIONAL_EXPRESSION { $$ = $1; std::cout << "assignment expression: conditional expression" << std::endl; }
-                      | UNARY_EXPRESSION T_ASSIGN ASSIGNMENT_EXPRESSION { $$ = new assignOp($1, $3); std::cout << "assignment expression: unary expression = assignment expression" << std::endl; }
+                      | UNARY_EXPRESSION T_ASSIGN ASSIGNMENT_EXPRESSION { $$ = new assignOp($1, $3); std::cout << "=====================assignment expression: unary expression = assignment expression===============" << std::endl; }
                       ;
 
 ASSIGNMENT_OPERATOR : T_ASSIGN { std::cout << "assignment operator: =" << std::endl; }

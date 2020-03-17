@@ -35,9 +35,8 @@ class Identifier: public Node {
             if(!con.isFunction) {
               if(con.variableBound(identifierName)) {
                 os << std::endl; 
-                int destReg=con.freeReg();
-                os << "lw $" << destReg << ", " << con.findOffset(identifierName) << "($fp)";
-                con.tickReg(destReg);
+                os << "lw $8, "  << con.findOffset(identifierName) << "($fp)";
+                con.tickReg(8);
               }else{
                 con.addBinding(identifierName, con.count);
                 con.tempIdentifierName = identifierName;

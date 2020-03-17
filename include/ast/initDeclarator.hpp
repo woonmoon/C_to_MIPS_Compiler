@@ -35,7 +35,7 @@ public:
     void mipsGen(std::ostream& os, mipsCon& con) const {
       os << std::endl;
       branches[0]->mipsGen(os, con);
-      int destReg=con.freeReg();
+      //int destReg=con.freeReg();
       if(isAssign) {
           branches[1]->mipsGen(os, con);
       }else{ os << "0"; } //THIS HERE 

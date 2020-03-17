@@ -15,20 +15,26 @@ public:
     void pythonGen(std::ostream& os) const { }
     void mipsGen(std::ostream& os, mipsCon& con) const {
         std::string tempName;
-        if(con.newIsInt){
+        if(con.newIsInt){           //this whole thing is to distinguish beween functions and int declarations
             con.newIsInt = 0;
             tempName = con.justForInt;
         }else tempName = con.storeTo;
 
-        branches[0]->mipsGen(os, con);
-        branches[1]->mipsGen(os, con);
+        os << std::endl;
+        branches[0]->mipsGen(os, con); //
+        os << std::endl;
+        os << "move $2, $8";
+        os << std::endl;
+        branches[1]->mipsGen(os, con); //
+        os << std::endl;
+        os << "move $3, $8";
         os << std::endl;
         os << "nop";
         os << std::endl;
-        os << "sub $2, $2, $3";
+        os << "sub $8, $2, $3";
         os << std::endl;
-        int offset = con.findOffset(tempName);
-        os << "sw $2, " << offset << "($fp)";
+       // int offset = con.findOffset(tempName);
+       //  os << "sw $2, " << offset << "($fp)";
         con.untickReg(2);
         con.untickReg(3);
     }

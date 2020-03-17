@@ -24,10 +24,8 @@ class Constant: public Node {
         void mipsGen(std::ostream& os, mipsCon& con) const {
           int destReg=con.freeReg();
           os << std::endl;
-          os << "li $" << destReg << ", " << val;
-          con.tickReg(destReg);
-          os << std::endl << "sw $2, " << con.count << "($fp)";
-          con.untickReg(destReg);
+          os << "li $8" << ", " << val;
+          con.tickReg(8);
         }
     private:
         int val;

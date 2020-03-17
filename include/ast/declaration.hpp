@@ -35,8 +35,12 @@ public:
         //WIPE THE MAP
         //reset count
       }
+      int tempCount = con.count;
       branches[0]->mipsGen(os, con);
       branches[1]->mipsGen(os, con);
+      os << std::endl;
+      os << "sw $8, " << tempCount << "($fp)";
+      con.untickReg(8);
     }
 private:
     bool isFunction;

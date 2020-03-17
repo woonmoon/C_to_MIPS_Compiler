@@ -16,12 +16,23 @@ public:
     void mipsGen(std::ostream& os, mipsCon& con) const {
         con.isAss = 1;
         branches[0]->mipsGen(os, con);
-        con.storeTo = con.tempIdentifierName;
+
+        std::string storeTo = con.storeTo = con.tempIdentifierName;
         con.isAss = 0;
         con.newIsInt = 0;
         con.isInt = 0;
         os << std::endl;
+
         branches[1]->mipsGen(os, con);
+
+        //THIS IS WHERE I WANT TO DO SW, we know it is the end of the ENTIRE operation, theres no way it isnt, therefore we store here.
+        //store to storeTo
+
+        int offset = con.findOffset(storeTo);
+
+        os << std::endl;
+        os << "sw $8, " << offset << "($fp)";
+
     }
 
 protected:
