@@ -46,6 +46,9 @@ public:
         return -1;
     }
     uint32_t findOffset(std::string _label) { return bindings[_label]; }
+    void bindToLastOffset(std::string _label) {
+        bindings[_label]=count;
+    }
     uint32_t lastOffset() {
         uint32_t maxOffset=0;
         for(auto it=bindings.cbegin(); it!=bindings.cend(); ++it) {
@@ -67,6 +70,7 @@ public:
     bool isAss;
     bool isInt;
     bool newIsInt;
+    bool isLogical;
     std::string tempIdentifierName;
     std::string storeTo;
     std::string justForInt;

@@ -32,7 +32,8 @@ public:
 
         os << std::endl;
         os << "sw $8, " << offset << "($fp)";
-
+        os << std::endl;
+        os << "addiu $sp, $sp, -4";
     }
 
 protected:

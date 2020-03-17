@@ -40,6 +40,8 @@ public:
       branches[1]->mipsGen(os, con);
       os << std::endl;
       os << "sw $8, " << tempCount << "($fp)";
+      os << std::endl;
+      os << "addiu $sp, $sp, -8";
       con.untickReg(8);
     }
 private:

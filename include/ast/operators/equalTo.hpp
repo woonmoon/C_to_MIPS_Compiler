@@ -23,6 +23,12 @@ public:
             con.untickReg(3);
             con.isConditional=false;
         }
+        if(con.isLogical) {
+            branches[0]->mipsGen(os, con);
+            os << std::endl;
+            os << "seq $8, $2, $3";
+            con.isLogical=false;
+        }
     }
 protected:
 };
