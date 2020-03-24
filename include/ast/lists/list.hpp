@@ -36,10 +36,11 @@ public:
   
   void pythonGen(std::ostream& os) const { }
 
-  void mipsGen(std::ostream& os, mipsCon& con) const { 
-      for(int i=0; i<listOfExpressions.size(); i++){
-        listOfExpressions[i]->mipsGen(os, con);
-     }
+  void mipsGen(std::ostream& os, mipsCon& con, int dest=0) const {
+    int reg=con.registerSet.freeRegister();
+    for(int i=0; i<listOfExpressions.size(); i++) {
+      listOfExpressions[i]->mipsGen(os, con, reg);
+    }
   }
 
   std::vector<NodePtr> getlistOfExpressions() { return listOfExpressions; }
@@ -47,7 +48,7 @@ public:
   void addtoList(NodePtr n) {
     listOfExpressions.push_back(n); 
   }
-private:
+protected:
   std::vector<NodePtr> listOfExpressions;
 };
 

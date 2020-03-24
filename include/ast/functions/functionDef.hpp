@@ -23,20 +23,20 @@ public:
     }
     void pythonGen(std::ostream& os) const { }
 
-    void mipsGen(std::ostream& os, mipsCon& con) const {
-        con.isFunc = 1;
+    void mipsGen(std::ostream& os, mipsCon& con, int dest=0) const {
+        //con.enterNewFunc(os);
+        con.funcDec().functionDef=true;
+        //std::cout << "***functionDef***: entering declarator" << std::endl;
         Declarator->mipsGen(os, con);
+        if(!con.firstTime){
+         con.enterNewFunc(os);
+        }
+        con.firstTime = 0;
+        //con.funcDec().functionDef=false; probably should do this in declarator
+        con.funcContent().functionPatty=true;
+        //std::cout << "***functionDef***: entering scopeBlock" << std::endl;
         scopeBlock->mipsGen(os, con);
-        con.isFunc = 0;
-        //os << "should've done shit in the scopeBlock";
-        os << std::endl;
-        os << "move $sp, $fp";
-        os << std::endl;
-        os << "addiu $sp, $sp, 8";
-        os << std::endl;
-        os << "lw $fp, 4($sp)";
-        os << std::endl;
-        os << "j $31";
+        //con.exitFunc(os);
     }
 protected:
     ExpressionPtr Declarator;

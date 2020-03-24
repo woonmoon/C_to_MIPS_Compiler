@@ -13,45 +13,24 @@ public:
         branches[1]->print(dst, con, level);
     }
     void pythonGen(std::ostream& os) const { }
-    void mipsGen(std::ostream& os, mipsCon& con) const {
-        // std::string tempName = con.tempIdentifierName;
-        // branches[0]->mipsGen(os, con);
-        // branches[1]->mipsGen(os, con);
-        // os << std::endl;
-        // os << "nop";
-        // os << std::endl;
-        // os << "mult $3, $2";
-        // os << std::endl;
-        // os << "mflo $2";
-        // os << std::endl;
-        // int offset=con.findOffset(tempName);
-        // os << "sw $2, " << offset << "($fp)";
-        // os << std::endl;
-        // con.untickReg(2);
-        // con.untickReg(3);
-        std::string tempName;
-        if(con.newIsInt){           //this whole thing is to distinguish beween functions and int declarations
-            con.newIsInt = 0;
-            tempName = con.justForInt;
-        }else tempName = con.storeTo;
+    void mipsGen(std::ostream& os, mipsCon& con, int dest=0) const { 
+
+        int addrDest1 = con.registerSet.freeRegister();
+        int addrDest2 = con.registerSet.freeRegister();
+        
+        con.flushReg({addrDest1, addrDest2}, os);
+
+        branches[0]->mipsGen(os, con, addrDest1);
+        branches[1]->mipsGen(os, con, addrDest2);
 
         os << std::endl;
-        branches[0]->mipsGen(os, con); //
+        os << "mult " << con.reg(addrDest1) << ", " << con.reg(addrDest2);
         os << std::endl;
-        os << "move $9, $8";
+        os << "mflo " << con.reg(dest);
         os << std::endl;
-        branches[1]->mipsGen(os, con); //
-        os << std::endl;
-        os << "move $10, $8";
-        os << std::endl;
-        os << "nop";
-        os << std::endl;
-        os << "mul $8, $9, $10";
-        os << std::endl;
-       // int offset = con.findOffset(tempName);
-       //  os << "sw $2, " << offset << "($fp)";
-        con.untickReg(2);
-        con.untickReg(3);
+
+        con.recoverReg({addrDest2, addrDest1}, os); //ORDERED LIKE THIS SO IT DOESNT HAVE TO GO UP AND DOWN, JUST UP
+
     }
 protected:
 };

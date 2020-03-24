@@ -13,31 +13,31 @@ public:
         branches[1]->print(dst, con, level);
     }
     void pythonGen(std::ostream& os) const { }
-    void mipsGen(std::ostream& os, mipsCon& con) const {
-        std::string tempName;
-        if(con.newIsInt){           //this whole thing is to distinguish beween functions and int declarations
-            con.newIsInt = 0;
-            tempName = con.justForInt;
-        }else tempName = con.storeTo;
-        if(con.isConditional) {
-            con.isLogical=true;
-            branches[0]->mipsGen(os, con);
-            os << std::endl;
-            os << "move $2, $8";
-            os << std::endl;
-            con.isLogical=true;
-            branches[1]->mipsGen(os, con);
-            os << std::endl;
-            os << "move $3, $8";
-            os << std::endl;
-            os << "and $2, $2, $3";
-            os << std::endl;
-            os << "li $3, 1";
-            os << std::endl;
-            os << "bne #2, $3 "; 
-            con.isLogical=false;
-            con.isConditional=false;
-        }
+    void mipsGen(std::ostream& os, mipsCon& con, int dest=0) const {
+        std::string falseEx=con.makeALabel("false");
+        std::string ending=con.makeALabel("theEnd");
+        int dest0=con.registerSet.freeRegister();
+        int dest1=con.registerSet.freeRegister();
+        con.flushReg({dest0, dest1}, os);
+
+        branches[0]->mipsGen(os, con, dest0);
+        os << "beq " << con.reg(dest0) << ", " << con.reg(0) << ", " << falseEx;
+        os << std::endl;
+        branches[1]->mipsGen(os, con, dest1);
+        os << "beq " << con.reg(dest1) << ", " << con.reg(0) << ", " << falseEx;
+        os << std::endl;
+        os << "addi " << con.reg(dest) << ", " << con.reg(dest) << ", 1";
+        os << std::endl;
+        os << "j " << ending;
+        os << std::endl;
+        os << falseEx << ":";
+        os << std::endl;
+        os << "addi " << con.reg(dest) << ", " << con.reg(0) << ", 0";
+        os << std::endl;
+        os << ending << ":";
+        os << std::endl;
+
+        con.recoverReg({dest0, dest1}, os); 
     }
 
 protected:

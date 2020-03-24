@@ -1,84 +1,166 @@
-#ifndef mipsCon_hpp
-#define mipsCon_hpp
+#ifndef mipsContext_hpp
+#define mipsContext_hpp
+#include <vector>
+#include <string>
 #include <map>
 
-class mipsCon;
-typedef const mipsCon* mipsConPtr;
+struct Instruction;
+typedef const Instruction* InstructionPtr;
+struct stackFrame;
+typedef const stackFrame* stackFramePtr;
+struct registerSet;
+typedef const registerSet* registerSetPtr;
 
-class mipsCon {
-public:
-    mipsCon() {
-        for(int i=0; i<32; i++) { regTrack[i]=false; }
-        count = 0;
-        isFunction = 0;
-        isFunc = 0;
-        isConditional = 0;
-        isAss = 0;
-        isInt = 0;
-        newIsInt = 0;
+struct mipsCon{
+    struct varInfo{
+        int size;
+        uint32_t offset;
+    };
+
+    struct funcInfo{
+        int returnSize;
+        uint32_t offset;
+        //std::map<std::string, int> arg;
+    };
+
+    struct{
+        std::string id;
+        int size;
+    }dummyDec;
+
+    struct stackFrame{
+        struct funcDecStruct { bool functionDef; std::string funcID; } funcDec;
+        struct funcContentStruct { bool functionPatty; std::string funcID; } funcContent; //get it? because it's the MEAT of the function??
+        struct varDecStruct { bool variableDec; std::string varID; } varDec; 
+        struct assignStruct { bool isAssign; std::string assID; } assign;
+        struct conditialStruct { bool isCond; } conditional;
+        struct condContentStruct { bool conditionalPatty; } condContent;
+        std::map<std::string, varInfo> varBinding;
+        int spOffset;
+    };
+
+    std::vector<stackFrame> stack;
+    std::map<std::string, funcInfo> funcBinding;
+
+    bool isParam = 0;
+    bool firstTime;
+    bool extraCheck;
+    int paramReg;
+
+    std::map<std::string, varInfo>& varBinding() { return stack.back().varBinding; }
+    //int& currentSP() { return stack.back().spOffset; }
+    stackFrame::funcDecStruct& funcDec() { return stack.back().funcDec; }
+    stackFrame::funcContentStruct& funcContent() { return stack.back().funcContent; }
+    stackFrame::varDecStruct& varDec() { return stack.back().varDec; }
+    stackFrame::assignStruct& assign() { return stack.back().assign; }
+    stackFrame::conditialStruct& conditional() { return stack.back().conditional; }
+    stackFrame::condContentStruct& condContent() { return stack.back().condContent; }
+
+
+    struct registers{
+        std::vector<bool> set={ 1,1,0,0,1,1,1,1,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,0,0,1,1,1,1,1 };
+        void tickReg(int i) { set[i]=1; }
+        void untickReg(int i) { set[i]=0; }
+        int freeRegister() {
+            for(int i=0; i<32; i++) { if(set[i]==false) { tickReg(i); return i; } }
+            return -1;
+        }
+    } registerSet;
+
+    std::string reg(int i) { 
+        registerSet.set.at(i)=i; 
+        registerSet.tickReg(i);
+        return "$"+std::to_string(i);
     }
+    
     std::string makeALabel(const std::string &str) {
         static int id = 0;
         return "_" + str + "_" + std::to_string(id++);
     }
-    void addBinding(std::string _label, uint32_t offset) { bindings[_label]=offset; }
-    void rmBinding(std::string _label) { std::map<std::string, uint32_t>::iterator it=bindings.find(_label); bindings.erase(it); }
-    bool variableBound(std::string _label) { 
-        std::map<std::string, uint32_t>::iterator it=bindings.find(_label); 
-        if(it!=bindings.end()) {
-            return true;
-        }
+
+    bool inFrame(std::string _label) {
+        std::map<std::string, varInfo>::iterator it=varBinding().find(_label); 
+        if(it!=varBinding().end()) { return true; }
         return false;
     }
-    int freeReg() { //finding free registers to put shit in
-        if(!regTicked(2)) { return 2; } 
-        else if(!regTicked(3)) { return 3; } 
-        else if(!regTicked(8)) { return 8; }
-        else if(!regTicked(9)) { return 9; }
-        else if(!regTicked(10)) { return 10; }
-        else if(!regTicked(11)) { return 11; }
-        else if(!regTicked(12)) { return 12; }
-        else if(!regTicked(13)) { return 13; }
-        else if(!regTicked(14)) { return 14; }
-        else if(!regTicked(15)) { return 15; }
-        else if(!regTicked(24)) { return 24; }
-        else if(!regTicked(25)) { return 25; }
-        return -1;
-    }
-    uint32_t findOffset(std::string _label) { return bindings[_label]; }
-    void bindToLastOffset(std::string _label) {
-        bindings[_label]=count;
-    }
-    uint32_t lastOffset() {
-        uint32_t maxOffset=0;
-        for(auto it=bindings.cbegin(); it!=bindings.cend(); ++it) {
-            if(it->second>maxOffset) { maxOffset=it->second; }
+
+    void flushReg(const std::vector<int>& storingReg, std::ostream& os) {
+        //std::cout << "***flushReg***" << std::endl;
+        for(int i=0; i<storingReg.size(); i++) {
+            stackSize+=4;
+            os << "addi " << reg(29) << ", " << reg(29) << ", -4";
+            os << std::endl;
+            os << "sw " << reg(storingReg[i]) << ", 0(" << reg(29) << ")";
+            os << std::endl;
         }
-        count+=4;
-        return maxOffset;
     }
-    void tickReg(int num) { regTrack[num]=true; }
-    void untickReg(int num) { regTrack[num]=false; }
-    bool regTicked(int num) { if(regTrack[num]) { return true; } return false; }
-    void setAssign() { isAssign = 1; }
-    void clearAssign() { isAssign = 0; }
 
-    int count; 
-    bool isFunction;
-    bool isFunc; //different to the above one
-    bool isConditional;
-    bool isAss;
-    bool isInt;
-    bool newIsInt;
-    bool isLogical;
-    std::string tempIdentifierName;
-    std::string storeTo;
-    std::string justForInt;
+    void recoverReg(const std::vector<int>& loadingReg, std::ostream& os) {
+        //std::cout << "***recoverReg***" << std::endl;
+        for(int i=0; i<loadingReg.size(); i++) {
 
-private:
-    std::map<std::string, uint32_t> bindings;
-    std::map<int, bool> regTrack;
-    bool isAssign;
+            os << "lw " << reg(loadingReg[i]) << ", 0(" << reg(29) << ")";
+            os << std::endl;
+            os << "addi " << reg(29) << ", " << reg(29) << ", 4";
+            os << std::endl;
+            stackSize-=4;
+        }
+    }
+
+    void writeToStack(int storeReg, int offset, std::ostream& os) {
+        //std::cout << "***writeToStack***" << std::endl;
+        os << "sw " << reg(storeReg) << ", " << stackSize-offset << "("<< reg(29) << ")";
+        os << std::endl;
+    }
+
+    void readFromStack(int readReg, std::ostream& os) {
+        os << "lw " << reg(readReg) << ", (" << reg(29) << ")";
+        os << std::endl;
+    }
+
+    void returnFunc(std::ostream& os) {
+        os << "lw " << reg(31) << ", " << stackSize-4 << "(" << reg(29) << ")";
+        os << std::endl;
+        os << "lw " << reg(30) << ", " << stackSize-8 << "(" << reg(29) << ")";
+        os << std::endl;
+        os << "addiu " << reg(29) << ", " << reg(29) << ", " << stackSize;
+        os << std::endl;
+        os << "jr " << reg(31);
+        os << std::endl;
+        os << "nop";
+        os << std::endl;
+    }
+
+    void enterNewFunc(std::ostream& os) {
+        stackSize+=stack.back().spOffset;
+        stackFrame newFrame={0}; //spOffset of newFrame=0
+        stack.push_back(newFrame);
+        flushReg({31, 30}, os); //SP and RA
+    } //exclusively for new functions
+
+    void exitFunc(std::ostream& os) {
+        returnFunc(os);
+    }
+
+    void enterScope() {
+        if(stack.size()>0) {
+            stackSize+=stack.back().spOffset;
+            stack.push_back(stack.back());
+            stack.back().spOffset=stackSize; //not global
+        }else if(stack.size()==0) {
+            stackFrame newFrame={0};
+            stack.push_back(newFrame);
+        } //global
+    } //exclusively for NOT functions (conditionals, loops, etc)
+
+    void exitScope(std::ostream& os) {
+        int backspace=stackSize-stack.back().spOffset;
+        stackSize=stack.back().spOffset;
+        os << "addi " << reg(29) << ", " << reg(29) << " " << backspace;
+        stack.pop_back();
+    } //exclusively for NOT functions (conditionals, loops, etc)
+
+    int stackSize=0;    
 };
 
 #endif

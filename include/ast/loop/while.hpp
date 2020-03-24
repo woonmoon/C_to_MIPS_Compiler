@@ -24,21 +24,8 @@ public:
         con.subTab();
     }
     void pythonGen(std::ostream& os) const { }
-    void mipsGen(std::ostream& os, mipsCon& con) const {
-        std::string startLoop=con.makeALabel("start");
-        con.isConditional=true;
-        os << std::endl;
-        os << startLoop << ":";
-        os << std::endl;
-        condition->mipsGen(os, con);
-        std::string endLoop=con.makeALabel("end");
-        os << endLoop;
-        os << std::endl;
-        loopBlock->mipsGen(os, con);
-        os << std::endl;
-        os << "j " << startLoop;
-        os << std::endl;
-        os << endLoop << ":";
+    void mipsGen(std::ostream& os, mipsCon& con, int dest=0) const {
+    //don't know how to scope this properly
     }
 
 protected:

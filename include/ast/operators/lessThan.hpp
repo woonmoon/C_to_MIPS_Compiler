@@ -10,23 +10,20 @@ public:
         branches[1]->print(dst, con, level);
     }
     void pythonGen(std::ostream& os) const { }
-    void mipsGen(std::ostream& os, mipsCon& con) const {
-        if(con.isConditional) {
-            branches[0]->mipsGen(os, con);
-            branches[1]->mipsGen(os, con);
-            os << std::endl;
-            os << "bgt $2, $3, ";
-            con.untickReg(2);
-            con.untickReg(3);
-            con.isConditional=false;
-        }
-        if(con.isLogical) {
-            branches[0]->mipsGen(os, con);
-            branches[1]->mipsGen(os, con);
-            os << std::endl;
-            os << "slt $8, $2, $3";
-            con.isLogical=false;
-        }
+    void mipsGen(std::ostream& os, mipsCon& con, int dest=0) const { 
+
+        int addrDest = con.registerSet.freeRegister();
+
+        con.flushReg({addrDest}, os);
+
+        branches[0]->mipsGen(os, con, dest);
+        branches[1]->mipsGen(os, con, addrDest);
+
+        os << std::endl;
+        os << "slt " << con.reg(dest) << ", " << con.reg(dest) << ", " << con.reg(addrDest);
+        os << std::endl;
+        
+        con.recoverReg({addrDest}, os);
     }
 
 protected:

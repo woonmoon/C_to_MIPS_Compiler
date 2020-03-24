@@ -28,22 +28,29 @@ public:
     }
     void pythonGen(std::ostream& os) const { }
 
-    void mipsGen(std::ostream& os, mipsCon& con) const {
-      if(!isFunction){
-        con.count += 4;
-      }else{
-        //WIPE THE MAP
-        //reset count
+    void mipsGen(std::ostream& os, mipsCon& con, int dest=0) const {
+      //std::cout << "GOT TO DECLARATION" << std::endl;
+      if(!con.funcDec().functionDef) {
+        if(con.firstTime&&con.extraCheck){
+          con.enterNewFunc(os);
+          con.extraCheck = 0;
+        }
+        con.varDec().variableDec=true;
+        con.dummyDec={};
       }
-      int tempCount = con.count;
+      //std::cout << "GOT TO DECLARATION" << std::endl;
       branches[0]->mipsGen(os, con);
+      //std::cout << "FINISHED BRANCH[0] DECL" << std::endl;
       branches[1]->mipsGen(os, con);
-      os << std::endl;
-      os << "sw $8, " << tempCount << "($fp)";
-      os << std::endl;
-      os << "addiu $sp, $sp, -8";
-      con.untickReg(8);
-    }
+      //if(con.varDec().variableDec) {
+        // std::cout << "stackSize is " << con.stackSize << " varBinding offset is " << con.varBinding().at(con.dummyDec.id).offset << std::endl;
+        // int furthest_sp=con.stackSize-con.varBinding().at(con.dummyDec.id).offset;
+        // os << "addi " << con.reg(29) << ", " << con.reg(29) << ", " << furthest_sp;
+        // os << std::endl;
+      //}
+      //std::cout << "FINISHED BRANCH[1] DECL" << std::endl;
+      con.varDec().variableDec=false;
+     }
 private:
     bool isFunction;
     

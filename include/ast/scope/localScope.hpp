@@ -16,7 +16,6 @@ public:
         std::vector<NodePtr> sequenceTemp;
         sequenceTemp = inList2->getlistOfExpressions(); 
         sequence.insert(sequence.end(), sequenceTemp.begin(), sequenceTemp.end());
- 
     }
 
     void print(std::ostream& dst, pycon& con, int level) const {
@@ -27,9 +26,19 @@ public:
         }
     }
     void genPython(std::ostream& os) const { }
-    void mipsGen(std::ostream& os, mipsCon& con) const { 
-        for(int i=0; i<sequence.size(); i++) {
-            sequence[i]->mipsGen(os, con);
+    void mipsGen(std::ostream& os, mipsCon& con, int dest=0) const {
+        if(con.funcContent().functionPatty) {
+            con.funcContent().functionPatty=false;
+            for(int i=0; i<sequence.size(); i++) {
+                sequence[i]->mipsGen(os, con);
+            }
+        }else if(con.condContent().conditionalPatty) {
+            con.condContent().conditionalPatty=false;
+            con.enterScope();
+            for(int i=0; i<sequence.size(); i++) {
+                sequence[i]->mipsGen(os, con);
+            }
+            con.exitScope(os);
         }
     }
 };

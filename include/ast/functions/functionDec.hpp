@@ -24,18 +24,13 @@ public:
     }
       void pythonGen(std::ostream& os) const { }
 
-      void mipsGen(std::ostream& os, mipsCon& con) const { 
-         con.isFunction = 1;
+      void mipsGen(std::ostream& os, mipsCon& con, int dest=0) const {
+         //std::cout << "***functionDec***: branch[0]" << std::endl;
          branches[0]->mipsGen(os, con);
-         os << ":";
-         os << std::endl;
-         os << "sw $fp -4($sp)";
-         os << std::endl;
-         os << "addiu $sp, $sp, -8";
-         os << std::endl;
-         os << "move $fp, $sp";
-         con.isFunction = 0;
-
+         if(!single){
+            //std::cout << "***functionDec***: branch[1]" << std::endl;
+            branches[1]->mipsGen(os, con);
+         }
       }
       
 protected:

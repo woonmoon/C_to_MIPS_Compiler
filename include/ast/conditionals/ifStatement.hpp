@@ -22,15 +22,15 @@ public:
         con.subTab();
     }
     void pythonGen(std::ostream& os) const { }
-    void mipsGen(std::ostream& os, mipsCon& con) const {
-        con.isConditional=true;
-        condition->mipsGen(os, con);
-        std::string skip=con.makeALabel("branch");
-        os << skip;
+    void mipsGen(std::ostream& os, mipsCon& con, int dest=0) const {
+        int evalDest=con.registerSet.freeRegister();
+        std::string falseCond=con.makeALabel("falsy");
+        condition->mipsGen(os, con, evalDest);
+        os << "beq " << con.reg(evalDest) << ", " << con.reg(0) << ", " << falseCond;
         os << std::endl;
         executeBlock->mipsGen(os, con);
+        os << falseCond << ":";
         os << std::endl;
-        os << skip << ":";
     }
 
 protected:

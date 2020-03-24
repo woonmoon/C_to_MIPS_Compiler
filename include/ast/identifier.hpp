@@ -28,34 +28,45 @@ class Identifier: public Node {
         }
 
 
-        void mipsGen(std::ostream& os, mipsCon& con) const {
-          if(!con.isAss){ //added this shit
-            //if(con.tempIdentifierName  != identifierName){
-              con.tempIdentifierName = identifierName;
-            if(!con.isFunction) {
-              if(con.variableBound(identifierName)) {
-                os << std::endl; 
-                os << "lw $8, "  << con.findOffset(identifierName) << "($fp)";
-                con.tickReg(8);
-              }else{
-                con.addBinding(identifierName, con.count);
-                con.tempIdentifierName = identifierName;
-              }
-            }
-            //}
-          }
-           con.tempIdentifierName = identifierName;
-           if(con.isInt){
-             con.justForInt = identifierName;
-             con.isInt = 0;
-             con.newIsInt = 1;
-           }
-           if(con.isFunc){
-            os << ".globl " << identifierName;
+        void mipsGen(std::ostream& os, mipsCon& con, int dest=0) const {
+          if(con.funcDec().functionDef) { //new function definition, insert a label
+            con.funcDec().functionDef=false;
+            con.funcDec().funcID=identifierName;
+             os << ".globl " << identifierName << std::endl;
+            os << identifierName << ":";
             os << std::endl;
-            os << identifierName;
-            con.isFunc = 0;
+          }else if(con.inFrame(identifierName)) { //already a pre-used variable
+            con.dummyDec.id=identifierName; // I ADDED THIS FOR ASSIGNMENT OPERATOR HOPE IT DOESNT CAUSE PROBLEMS xoxo
+            int id_offset=con.varBinding().at(identifierName).offset;
+            os << "lw " << con.reg(dest) << ", " << con.stackSize-id_offset <<  "(" << con.reg(29) << ")";
+            os << std::endl;
+          }else if(con.isParam){
+            if(con.paramReg<8){
+              con.dummyDec.id=identifierName;
+              os << "addi " << con.reg(29) << ", " << con.reg(29) << ", -" << con.dummyDec.size;
+              os << std::endl;
+              con.stackSize+=con.dummyDec.size;
+              con.varBinding()[con.dummyDec.id]={4, static_cast<uint32_t>(con.stackSize)};
+
+              os << "move " << con.reg(2) << ", " << con.reg(con.paramReg);
+              os<<std::endl;
+
+            } //THIS IS ADDED IN 
           }
+          else{ //completely new variable
+            con.dummyDec.id=identifierName;
+            //std::cout << "stack size is " << con.stackSize << " dummy size is " << con.dummyDec.size << std::endl;
+             if(con.stack.size()>=1) {
+          //os << "addi " << con.reg(29) << ", " << con.reg(29) << ", -" << con.dummyDec.size;
+          //os << std::endl;
+              os << "addi " << con.reg(29) << ", " << con.reg(29) << ", -" << con.dummyDec.size;
+              os << std::endl;
+              con.stackSize+=con.dummyDec.size;
+              con.varBinding()[con.dummyDec.id]={4, static_cast<uint32_t>(con.stackSize)};
+            }
+            //con.varBinding()[con.dummyDec.id].offset=con.stackSize;
+          }
+          //**MISSING GLOBAL CASES AND PARAMETER CASES** 
         }
 
     private:

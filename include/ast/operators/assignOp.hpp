@@ -13,27 +13,19 @@ public:
         branches[1]->print(dst, con, level);
     }
     void pythonGen(std::ostream& os) const { }
-    void mipsGen(std::ostream& os, mipsCon& con) const {
-        con.isAss = 1;
-        branches[0]->mipsGen(os, con);
 
-        std::string storeTo = con.storeTo = con.tempIdentifierName;
-        con.isAss = 0;
-        con.newIsInt = 0;
-        con.isInt = 0;
-        os << std::endl;
 
-        branches[1]->mipsGen(os, con);
+    void mipsGen(std::ostream& os, mipsCon& con, int dest=0) const { 
+        int addrDest = con.registerSet.freeRegister();
+        con.flushReg({addrDest}, os);
 
-        //THIS IS WHERE I WANT TO DO SW, we know it is the end of the ENTIRE operation, theres no way it isnt, therefore we store here.
-        //store to storeTo
+        branches[0]->mipsGen(os, con, addrDest);
+        std::string storeTo = con.dummyDec.id;
+        branches[1]->mipsGen(os, con, addrDest);
+        con.writeToStack(addrDest, con.varBinding().at(storeTo).offset, os);;
+        //os << "sw " << con.reg(dest) << ", " << con.reg(addrDest);
 
-        int offset = con.findOffset(storeTo);
-
-        os << std::endl;
-        os << "sw $8, " << offset << "($fp)";
-        os << std::endl;
-        os << "addiu $sp, $sp, -4";
+        con.recoverReg({addrDest}, os);
     }
 
 protected:

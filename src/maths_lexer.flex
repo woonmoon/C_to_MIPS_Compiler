@@ -15,6 +15,7 @@ letter          [a-zA-Z]
 "+"             { return T_PLUS; }
 "^"            { return T_XOR; }
 "/"            { return T_DIVIDE; }
+"%"            { return T_DIVIDE; }
 "-"             { return T_MINUS; }
 ","             { return T_COMMA; }
 "="             { return T_ASSIGN; }
@@ -23,6 +24,8 @@ letter          [a-zA-Z]
 "<<"            { return T_RSHIFT; }
 "<"             { return T_LESSTHAN; }
 ">"             { return T_GREATERTHAN; }
+"<="             { return T_LESSTHAN_EQUAL; }
+">="             { return T_GREATERTHAN_EQUAL; }
 "=="            { return T_EQUALS; }
 "!="            { return T_NOT_EQUALS; }
 

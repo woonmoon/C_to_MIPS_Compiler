@@ -13,31 +13,24 @@ public:
         branches[1]->print(dst, con, level);
     }
     void pythonGen(std::ostream& os) const { }
-    void mipsGen(std::ostream& os, mipsCon& con) const {
-        std::string tempName;
-        if(con.newIsInt){           //this whole thing is to distinguish beween functions and int declarations
-            con.newIsInt = 0;
-            tempName = con.justForInt;
-        }else tempName = con.storeTo;
+
+
+    void mipsGen(std::ostream& os, mipsCon& con, int dest=0) const {
+        
+        int addrDest = con.registerSet.freeRegister();
+        
+        branches[0]->mipsGen(os, con, dest);
+        con.flushReg({addrDest}, os);
+        branches[1]->mipsGen(os, con, addrDest);
 
         os << std::endl;
-        branches[0]->mipsGen(os, con); //
-        os << std::endl;
-        os << "move $2, $8";
-        os << std::endl;
-        branches[1]->mipsGen(os, con); //
-        os << std::endl;
-        os << "move $3, $8";
-        os << std::endl;
-        os << "nop";
-        os << std::endl;
-        os << "add $8, $2, $3";
-        os << std::endl;
-       // int offset = con.findOffset(tempName);
-       //  os << "sw $2, " << offset << "($fp)";
-        con.untickReg(2);
-        con.untickReg(3);
-    }
+        os << "addu " << con.reg(dest) << ", " << con.reg(dest) << ", " << con.reg(addrDest);
+        os<< std::endl;
+
+        con.recoverReg({addrDest}, os);
+
+
+     }
 
 protected:
 };
@@ -51,7 +44,7 @@ class unaryOp : public Expression{
             branches[0]->print(dst, con, level);
         }
         void pythonGen(std::ostream& os) const { }
-        void mipsGen(std::ostream& os, mipsCon& con) const { }
+        void mipsGen(std::ostream& os, mipsCon& con, int dest=0) const { }
     private:
         std::string op;
         ExpressionPtr expr;

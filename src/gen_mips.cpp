@@ -6,7 +6,6 @@ int main()
 
     mipsCon con;
 
-    std::cout << "parsed AST" << std::endl;
     ast->mipsGen(std::cout, con);
     std::cout<<std::endl;
 
