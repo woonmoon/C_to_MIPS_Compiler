@@ -153,7 +153,7 @@ struct mipsCon{
     void exitScope(std::ostream& os) {
         int backspace=stackSize-stack.back().spOffset;
         stackSize=stack.back().spOffset;
-        os << "addi " << reg(29) << ", " << reg(29) << " " << backspace;
+        os << "addi " << reg(29) << ", " << reg(29) << ", " << backspace;
         os << std::endl;
         stack.pop_back();
     } //exclusively for NOT functions (conditionals, loops, etc)
