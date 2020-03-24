@@ -28,7 +28,9 @@ slt $2, $8, $2
 lw $8, 0($29)
 addi $29, $29, 4
 beq $2, $0, _end_1
+nop
 j _cont_0
+nop
 _end_1:
 addi $29, $29, 0
 lw $2, 0($29)

@@ -35,8 +35,12 @@ public:
         condition->mipsGen(os, con, 2);
         os << "beq " << con.reg(2) << ", " << con.reg(0) << ", " << con.statement().endFlag;
         os << std::endl;
+        os << "nop";
+        os << std::endl;
         loopBlock->mipsGen(os, con);
         os << "j " << con.statement().contFlag;
+        os << std::endl;
+        os << "nop";
         os << std::endl;
         os << con.statement().endFlag << ":";
         os << std::endl;
