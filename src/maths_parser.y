@@ -118,7 +118,7 @@ AND_EXPRESSION : EQUALITY_EXPRESSION { $$ = $1;}
                ;
 
 EXCLUSIVE_OR_EXPRESSION : AND_EXPRESSION { $$ = $1; }
-                        | EXCLUSIVE_OR_EXPRESSION T_XOR AND_EXPRESSION {  }
+                        | EXCLUSIVE_OR_EXPRESSION T_XOR AND_EXPRESSION {  $$ = new xorOp($1, $3); }
                         ;
 
 INCLUSIVE_OR_EXPRESSION : EXCLUSIVE_OR_EXPRESSION { $$ = $1;  }

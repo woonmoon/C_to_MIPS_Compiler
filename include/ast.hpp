@@ -32,6 +32,7 @@
 #include "ast/operators/logAndOp.hpp"
 #include "ast/operators/logOrOp.hpp"
 #include "ast/operators/orOp.hpp"
+#include "ast/operators/xorOp.hpp"
 #include "ast/operators/lessThan.hpp"
 #include "ast/operators/greaterThan.hpp"
 #include "ast/operators/lessThanEqual.hpp"

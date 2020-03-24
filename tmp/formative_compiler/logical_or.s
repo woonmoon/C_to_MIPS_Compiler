@@ -15,17 +15,20 @@ sw $3, 0($29)
 addi $29, $29, -4
 sw $8, 0($29)
 lw $3, 12($29)
-bne $3, $0, _false_0
 lw $8, 8($29)
-bne $8, $0, _false_0
-addi $2, $0, 0
-j _theEnd_1
-_false_0:
-addi $2, $2, 1
-_theEnd_1:
-lw $3, 0($29)
-addi $29, $29, 4
+bne $3, $0, _true_or_0
+nop
+bne $8, $0, _true_or_0
+nop
+li $2, 0
+beq $0, $0, _false_or_1
+nop
+_true_or_0:
+li $2, 1
+_false_or_1:
 lw $8, 0($29)
+addi $29, $29, 4
+lw $3, 0($29)
 addi $29, $29, 4
 lw $31, 12($29)
 lw $30, 8($29)
