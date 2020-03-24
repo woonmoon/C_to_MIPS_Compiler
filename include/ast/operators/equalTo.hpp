@@ -26,6 +26,7 @@ public:
         os << "sub " << con.reg(dest) << ", " << con.reg(dest) <<  ", " << con.reg(addrDest); 
         os << std::endl;
         os << "sltiu " << con.reg(dest) << ", " << con.reg(dest) << ", 1";
+        os << std::endl;
         
         con.recoverReg({addrDest}, os);
 

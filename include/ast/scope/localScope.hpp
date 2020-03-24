@@ -32,8 +32,8 @@ public:
             for(int i=0; i<sequence.size(); i++) {
                 sequence[i]->mipsGen(os, con);
             }
-        }else if(con.condContent().conditionalPatty) {
-            con.condContent().conditionalPatty=false;
+        }else if(con.conditional().conditionalPatty) {
+            con.conditional().conditionalPatty=false;
             con.enterScope();
             for(int i=0; i<sequence.size(); i++) {
                 sequence[i]->mipsGen(os, con);

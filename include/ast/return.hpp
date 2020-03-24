@@ -22,6 +22,7 @@ public:
 
         if(returnVal == NULL) {
             os << "addi " << con.reg(2) << ", " << con.reg(0) << ", " << "0";
+            os << std::endl;
         } 
         else{
             returnVal->mipsGen(os, con, 2);

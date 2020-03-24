@@ -20,7 +20,6 @@ struct mipsCon{
     struct funcInfo{
         int returnSize;
         uint32_t offset;
-        //std::map<std::string, int> arg;
     };
 
     struct{
@@ -33,8 +32,7 @@ struct mipsCon{
         struct funcContentStruct { bool functionPatty; std::string funcID; } funcContent; //get it? because it's the MEAT of the function??
         struct varDecStruct { bool variableDec; std::string varID; } varDec; 
         struct assignStruct { bool isAssign; std::string assID; } assign;
-        struct conditialStruct { bool isCond; } conditional;
-        struct condContentStruct { bool conditionalPatty; } condContent;
+        struct conditialStruct { bool isCond; bool conditionalPatty; } conditional;
         std::map<std::string, varInfo> varBinding;
         int spOffset;
     };
@@ -54,7 +52,6 @@ struct mipsCon{
     stackFrame::varDecStruct& varDec() { return stack.back().varDec; }
     stackFrame::assignStruct& assign() { return stack.back().assign; }
     stackFrame::conditialStruct& conditional() { return stack.back().conditional; }
-    stackFrame::condContentStruct& condContent() { return stack.back().condContent; }
 
 
     struct registers{
@@ -157,6 +154,7 @@ struct mipsCon{
         int backspace=stackSize-stack.back().spOffset;
         stackSize=stack.back().spOffset;
         os << "addi " << reg(29) << ", " << reg(29) << " " << backspace;
+        os << std::endl;
         stack.pop_back();
     } //exclusively for NOT functions (conditionals, loops, etc)
 
