@@ -15,10 +15,21 @@ letter          [a-zA-Z]
 "+"             { return T_PLUS; }
 "^"            { return T_XOR; }
 "/"            { return T_DIVIDE; }
-"%"            { return T_DIVIDE; }
+"%"            { return T_MOD; }
 "-"             { return T_MINUS; }
 ","             { return T_COMMA; }
+
 "="             { return T_ASSIGN; }
+"+="            { return T_PLUS_EQ; }
+"-="            { return T_MINUS_EQ; }
+"*="            { return T_TIMES_EQ; }
+"/="            { return T_DIV_EQ; }
+"%="            { return T_MOD_EQ; }
+"&="            { return T_AND_EQ; }
+"|="            { return T_OR_EQ; }
+"^="            { return T_XOR_EQ; }
+"<<="            { return T_LSHIFT_EQ; }
+">>="            { return T_RSHIFT_EQ; }
 
 ">>"            { return T_LSHIFT; }
 "<<"            { return T_RSHIFT; }
@@ -26,6 +37,7 @@ letter          [a-zA-Z]
 ">"             { return T_GREATERTHAN; }
 "<="             { return T_LESSTHAN_EQUAL; }
 ">="             { return T_GREATERTHAN_EQUAL; }
+
 "=="            { return T_EQUALS; }
 "!="            { return T_NOT_EQUALS; }
 

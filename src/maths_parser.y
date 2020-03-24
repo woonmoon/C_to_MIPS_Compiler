@@ -21,6 +21,7 @@
   Expression* actualExpression;
   List *exprList;
   double number;
+  yytokentype token;
   std::string *string;
 }
 
@@ -31,7 +32,7 @@
 %token T_LBRACKET T_RBRACKET T_LCURLY T_RCURLY T_SEMICOLON T_COLON
 %token T_LOG T_EXP T_SQRT
 %token T_IF T_ELSE T_WHILE T_RETURN T_INT T_VOID T_STRUCT T_UNION T_ENUM T_CONTINUE T_BREAK
-%token T_ASSIGN
+%token T_ASSIGN T_PLUS_EQ T_MINUS_EQ T_TIMES_EQ T_DIV_EQ T_MOD_EQ T_AND_EQ T_OR_EQ T_XOR_EQ T_LSHIFT_EQ T_RSHIFT_EQ
 %token T_CONSTANT T_IDENTIFIER T_TYPEDEF T_CONST T_VOLATILE 
 
 %type <expr> EXPR TERM UNARY FACTOR
@@ -138,11 +139,22 @@ CONDITIONAL_EXPRESSION : LOGICAL_OR_EXPRESSION { $$ = $1; }
                        ;
 
 ASSIGNMENT_EXPRESSION : CONDITIONAL_EXPRESSION { $$ = $1;}
-                      | UNARY_EXPRESSION T_ASSIGN ASSIGNMENT_EXPRESSION { $$ = new assignOp($1, $3);  }
+                      | UNARY_EXPRESSION ASSIGNMENT_OPERATOR ASSIGNMENT_EXPRESSION { $$ = new assignOp($1, $3);  }
                       ;
 
-ASSIGNMENT_OPERATOR : T_ASSIGN { }
-                      ;
+ASSIGNMENT_OPERATOR : T_ASSIGN { $$ = T_ASSIGN; }
+                    | T_PLUS_EQ { $$ = T_PLUS_EQ; }
+                    | T_MINUS_EQ { $$ = T_MINUS_EQ; }
+                    | T_TIMES_EQ { $$ = T_TIMES_EQ; }
+                    | T_DIV_EQ { $$ = T_DIV_EQ; }
+                    | T_MOD_EQ { $$ = T_MOD_EQ; }
+                    | T_AND_EQ { $$ = T_AND_EQ; }
+                    | T_OR_EQ { $$ = T_OR_EQ; }
+                    | T_XOR_EQ { $$ = T_XOR_EQ; }
+                    | T_LSHIFT_EQ { $$ = T_LSHIFT_EQ; }
+                    | T_RSHIFT_EQ { $$ = T_RSHIFT_EQ; }
+
+                    ;
 
 EXPRESSION : ASSIGNMENT_EXPRESSION {  }
            | EXPRESSION T_COMMA ASSIGNMENT_EXPRESSION {  }

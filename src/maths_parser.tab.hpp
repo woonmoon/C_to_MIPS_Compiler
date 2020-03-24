@@ -105,11 +105,21 @@ extern int yydebug;
     T_CONTINUE = 297,
     T_BREAK = 298,
     T_ASSIGN = 299,
-    T_CONSTANT = 300,
-    T_IDENTIFIER = 301,
-    T_TYPEDEF = 302,
-    T_CONST = 303,
-    T_VOLATILE = 304
+    T_PLUS_EQ = 300,
+    T_MINUS_EQ = 301,
+    T_TIMES_EQ = 302,
+    T_DIV_EQ = 303,
+    T_MOD_EQ = 304,
+    T_AND_EQ = 305,
+    T_OR_EQ = 306,
+    T_XOR_EQ = 307,
+    T_LSHIFT_EQ = 308,
+    T_RSHIFT_EQ = 309,
+    T_CONSTANT = 310,
+    T_IDENTIFIER = 311,
+    T_TYPEDEF = 312,
+    T_CONST = 313,
+    T_VOLATILE = 314
   };
 #endif
 
@@ -124,9 +134,10 @@ union YYSTYPE
   Expression* actualExpression;
   List *exprList;
   double number;
+  yytokentype token;
   std::string *string;
 
-#line 130 "src/maths_parser.tab.hpp" /* yacc.c:1909  */
+#line 141 "src/maths_parser.tab.hpp" /* yacc.c:1909  */
 };
 
 typedef union YYSTYPE YYSTYPE;
