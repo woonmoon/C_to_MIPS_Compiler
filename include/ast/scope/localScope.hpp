@@ -34,11 +34,11 @@ public:
             }
         }else if(con.conditional().conditionalPatty) {
             con.conditional().conditionalPatty=false;
-            con.enterScope();
+            //con.enterScope();
             for(int i=0; i<sequence.size(); i++) {
                 sequence[i]->mipsGen(os, con);
             }
-            con.exitScope(os);
+            //con.exitScope(os);
         }
     }
 };

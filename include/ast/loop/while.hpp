@@ -27,6 +27,7 @@ public:
     void mipsGen(std::ostream& os, mipsCon& con, int dest=0) const {
     //don't know how to scope this properly
         con.enterScope();
+        //std::cout << "entered scope" << std::endl;
         con.statement().offset=con.stack.back().spOffset;
         con.statement().contFlag=con.makeALabel("cont");
         con.statement().endFlag=con.makeALabel("end");
@@ -37,6 +38,7 @@ public:
         os << std::endl;
         os << "nop";
         os << std::endl;
+        con.conditional().conditionalPatty=true;
         loopBlock->mipsGen(os, con);
         os << "j " << con.statement().contFlag;
         os << std::endl;

@@ -145,6 +145,7 @@ struct mipsCon{
             stackSize+=stack.back().spOffset;
             stack.push_back(stack.back());
             stack.back().spOffset=stackSize; //not global
+            //std::cout << "have entered scope where stackSize is " << stackSize << std::endl;
         }else if(stack.size()==0) {
             stackFrame newFrame={0};
             stack.push_back(newFrame);

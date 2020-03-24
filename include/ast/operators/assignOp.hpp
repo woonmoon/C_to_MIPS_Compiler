@@ -23,8 +23,6 @@ public:
         std::string storeTo = con.dummyDec.id;
         branches[1]->mipsGen(os, con, addrDest);
         con.writeToStack(addrDest, con.varBinding().at(storeTo).offset, os);;
-        //os << "sw " << con.reg(dest) << ", " << con.reg(addrDest);
-
         con.recoverReg({addrDest}, os);
     }
 
