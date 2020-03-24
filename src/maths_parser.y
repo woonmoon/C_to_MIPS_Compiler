@@ -111,7 +111,7 @@ RELATIONAL_EXPRESSION : SHIFT_EXPRESSION { $$ = $1;  }
 
 EQUALITY_EXPRESSION : RELATIONAL_EXPRESSION { $$ = $1;  }
                     | EQUALITY_EXPRESSION T_EQUALS RELATIONAL_EXPRESSION { $$ = new equalTo($1, $3);  }
-                    | EQUALITY_EXPRESSION T_NOT_EQUALS RELATIONAL_EXPRESSION { }
+                    | EQUALITY_EXPRESSION T_NOT_EQUALS RELATIONAL_EXPRESSION { $$ = new notEqualTo($1, $3); }
                     ;
 
 AND_EXPRESSION : EQUALITY_EXPRESSION { $$ = $1;}
@@ -139,7 +139,23 @@ CONDITIONAL_EXPRESSION : LOGICAL_OR_EXPRESSION { $$ = $1; }
                        ;
 
 ASSIGNMENT_EXPRESSION : CONDITIONAL_EXPRESSION { $$ = $1;}
-                      | UNARY_EXPRESSION ASSIGNMENT_OPERATOR ASSIGNMENT_EXPRESSION { $$ = new assignOp($1, $3);  }
+                      | UNARY_EXPRESSION ASSIGNMENT_OPERATOR ASSIGNMENT_EXPRESSION { 
+                        
+                        switch($2){
+                            case T_ASSIGN: $$ = new assignOp($1, $3); break;
+                            case T_PLUS_EQ: $$ = new assignOp($1, $3); break;
+                            case T_MINUS_EQ: $$ = new assignOp($1, $3); break;
+                            case T_TIMES_EQ: $$ = new assignOp($1, $3); break;
+                            case T_DIV_EQ: $$ = new assignOp($1, $3); break;
+                            case T_MOD_EQ: $$ = new assignOp($1, $3); break;
+                            case T_AND_EQ: $$ = new assignOp($1, $3); break;
+                            case T_OR_EQ: $$ = new assignOp($1, $3); break;
+                            case T_XOR_EQ: $$ = new assignOp($1, $3); break;
+                            case T_LSHIFT_EQ: $$ = new assignOp($1, $3); break;
+                            case T_RSHIFT_EQ: $$ = new assignOp($1, $3); break;
+                            default: break;
+                          }  
+                        }
                       ;
 
 ASSIGNMENT_OPERATOR : T_ASSIGN { $$ = T_ASSIGN; }

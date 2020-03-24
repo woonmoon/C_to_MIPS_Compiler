@@ -38,6 +38,7 @@
 #include "ast/operators/lessThanEqual.hpp"
 #include "ast/operators/greaterThanEqual.hpp"
 #include "ast/operators/equalTo.hpp"
+#include "ast/operators/notEqualTo.hpp"
 #include "ast/operators/assignOp.hpp"
 #include "ast/operators/andOp.hpp"
 #include "ast/loop/while.hpp"
