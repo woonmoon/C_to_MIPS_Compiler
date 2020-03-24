@@ -39,11 +39,13 @@ public:
         condition->mipsGen(os, con, evalDest);
         os << "beq " << con.reg(evalDest) << ", " << con.reg(0) << ", " << falseCond;
         os << std::endl;
+        con.conditional().conditionalPatty=true;
         ifExecute->mipsGen(os, con);
         os << "j " << end; 
         os << std::endl;
         os << falseCond << ":";
         os << std::endl;
+        con.conditional().conditionalPatty=true;
         elseExecute->mipsGen(os, con);
         os << end << ":";
         os << std::endl;
