@@ -102,12 +102,14 @@ extern int yydebug;
     T_STRUCT = 294,
     T_UNION = 295,
     T_ENUM = 296,
-    T_ASSIGN = 297,
-    T_CONSTANT = 298,
-    T_IDENTIFIER = 299,
-    T_TYPEDEF = 300,
-    T_CONST = 301,
-    T_VOLATILE = 302
+    T_CONTINUE = 297,
+    T_BREAK = 298,
+    T_ASSIGN = 299,
+    T_CONSTANT = 300,
+    T_IDENTIFIER = 301,
+    T_TYPEDEF = 302,
+    T_CONST = 303,
+    T_VOLATILE = 304
   };
 #endif
 
@@ -124,7 +126,7 @@ union YYSTYPE
   double number;
   std::string *string;
 
-#line 128 "src/maths_parser.tab.hpp" /* yacc.c:1909  */
+#line 130 "src/maths_parser.tab.hpp" /* yacc.c:1909  */
 };
 
 typedef union YYSTYPE YYSTYPE;

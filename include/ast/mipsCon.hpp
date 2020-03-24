@@ -33,6 +33,7 @@ struct mipsCon{
         struct varDecStruct { bool variableDec; std::string varID; } varDec; 
         struct assignStruct { bool isAssign; std::string assID; } assign;
         struct conditialStruct { bool isCond; bool conditionalPatty; } conditional;
+        struct statementStruct { bool compound=true; std::string contFlag; std::string endFlag; int offset=0; } statement;
         std::map<std::string, varInfo> varBinding;
         int spOffset;
     };
@@ -46,12 +47,12 @@ struct mipsCon{
     int paramReg;
 
     std::map<std::string, varInfo>& varBinding() { return stack.back().varBinding; }
-    //int& currentSP() { return stack.back().spOffset; }
     stackFrame::funcDecStruct& funcDec() { return stack.back().funcDec; }
     stackFrame::funcContentStruct& funcContent() { return stack.back().funcContent; }
     stackFrame::varDecStruct& varDec() { return stack.back().varDec; }
     stackFrame::assignStruct& assign() { return stack.back().assign; }
     stackFrame::conditialStruct& conditional() { return stack.back().conditional; }
+    stackFrame::statementStruct& statement() { return stack.back().statement; }
 
 
     struct registers{

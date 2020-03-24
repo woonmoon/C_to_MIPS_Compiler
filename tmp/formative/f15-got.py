@@ -1,4 +1,3 @@
-hello mate I am an if else statement
 
 
 def main():

@@ -58,6 +58,8 @@ union           { return T_UNION; }
 enum            { return T_ENUM; }
 const           { return T_CONST; }
 volatile        { return T_VOLATILE; }
+continue        { return T_CONTINUE; }
+break           { return T_BREAK; }
 
 
 [0-9]+([.][0-9]*)?              { yylval.number=strtod(yytext, 0); return T_CONSTANT; }
