@@ -50,6 +50,8 @@ letter          [a-zA-Z]
 ")"             { return T_RBRACKET; }
 "{"             { return T_LCURLY; }
 "}"             { return T_RCURLY; }
+"["             { return T_RSQUARE; }
+"]"             { return T_LSQUARE; }
 ";"             { return T_SEMICOLON; }
 ":"             { return T_COLON; }
 
