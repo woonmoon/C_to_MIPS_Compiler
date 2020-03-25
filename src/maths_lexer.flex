@@ -66,6 +66,7 @@ sqrt            { return T_SQRT; }
 if              { return T_IF; }
 else            { return T_ELSE; }
 while           { return T_WHILE; }
+for             { return T_FOR; }
 return          { return T_RETURN; }
 int             { return T_INT; }
 void            { return T_VOID; }

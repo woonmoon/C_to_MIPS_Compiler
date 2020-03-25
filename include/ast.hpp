@@ -43,6 +43,7 @@
 #include "ast/operators/assignOp.hpp"
 #include "ast/operators/andOp.hpp"
 #include "ast/loop/while.hpp"
+#include "ast/loop/forLoop.hpp"
 #include "ast/return.hpp"
 
 extern const Node *parseAST();
