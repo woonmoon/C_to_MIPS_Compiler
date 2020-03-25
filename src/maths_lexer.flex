@@ -19,6 +19,9 @@ letter          [a-zA-Z]
 "-"             { return T_MINUS; }
 ","             { return T_COMMA; }
 
+"++"             { return T_PLUS_PLUS; }
+"--"             { return T_MINUS_MINUS; }
+
 "="             { return T_ASSIGN; }
 "+="            { return T_PLUS_EQ; }
 "-="            { return T_MINUS_EQ; }

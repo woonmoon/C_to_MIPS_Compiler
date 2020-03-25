@@ -143,16 +143,16 @@ ASSIGNMENT_EXPRESSION : CONDITIONAL_EXPRESSION { $$ = $1;}
                         
                         switch($2){
                             case T_ASSIGN: $$ = new assignOp($1, $3); break;
-                            case T_PLUS_EQ: $$ = new assignOp($1, $3); break;
-                            case T_MINUS_EQ: $$ = new assignOp($1, $3); break;
-                            case T_TIMES_EQ: $$ = new assignOp($1, $3); break;
-                            case T_DIV_EQ: $$ = new assignOp($1, $3); break;
-                            case T_MOD_EQ: $$ = new assignOp($1, $3); break;
-                            case T_AND_EQ: $$ = new assignOp($1, $3); break;
-                            case T_OR_EQ: $$ = new assignOp($1, $3); break;
-                            case T_XOR_EQ: $$ = new assignOp($1, $3); break;
-                            case T_LSHIFT_EQ: $$ = new assignOp($1, $3); break;
-                            case T_RSHIFT_EQ: $$ = new assignOp($1, $3); break;
+                            case T_PLUS_EQ: $$ = new plusAssignOp($1, $3); break;
+                            case T_MINUS_EQ: $$ = new subAssignOp($1, $3); break;
+                            case T_TIMES_EQ: $$ = new multAssignOp($1, $3); break;
+                            case T_DIV_EQ: $$ = new divAssignOp($1, $3); break;
+                            case T_MOD_EQ: $$ = new modAssignOp($1, $3); break;
+                            case T_AND_EQ: $$ = new andAssignOp($1, $3); break;
+                            case T_OR_EQ: $$ = new orAssignOp($1, $3); break;
+                            case T_XOR_EQ: $$ = new xorAssignOp($1, $3); break;
+                            case T_LSHIFT_EQ: $$ = new leftShiftAssignOp($1, $3); break;
+                            case T_RSHIFT_EQ: $$ = new rightShiftAssignOp($1, $3); break;
                             default: break;
                           }  
                         }
