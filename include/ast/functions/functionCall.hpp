@@ -19,13 +19,7 @@ public:
 
 
     void mipsGen(std::ostream& os, mipsCon& con, int dest=0) const {
-            if(!empty){
-                con.iJustWantTheNameBro = 1;
-                branches[0]->mipsGen(os,con,dest);
-                con.iJustWantTheNameBro = 0;
-                std::string funcName = con.dummyDec.id;
-                
-            }
+
      }
 
 private:
