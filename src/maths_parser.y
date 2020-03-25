@@ -67,8 +67,8 @@ PRIMARY_EXPRESSION : T_IDENTIFIER {$$ = new Identifier(*$1);}
                    | T_LBRACKET EXPRESSION T_RBRACKET { $$ = $2; }
                    ;
 POSTFIX_EXPRESSION : PRIMARY_EXPRESSION {$$ = $1;}
-                   | POSTFIX_EXPRESSION T_LBRACKET T_RBRACKET { $$ = new functionCall($1, new List());}
-                   | POSTFIX_EXPRESSION T_LBRACKET ARGUMENT_EXPRESSION_LIST T_RBRACKET { $$ = new functionCall($1, $3); }
+                   | POSTFIX_EXPRESSION T_LBRACKET T_RBRACKET { $$ = new functionCall($1, new List(), 1);}
+                   | POSTFIX_EXPRESSION T_LBRACKET ARGUMENT_EXPRESSION_LIST T_RBRACKET { $$ = new functionCall($1, $3, 0); }
                    | POSTFIX_EXPRESSION T_PLUS_PLUS {$$ = new postInc($1); }
                    | POSTFIX_EXPRESSION T_MINUS_MINUS {$$ = new postDec($1); }
                    ;
