@@ -55,7 +55,7 @@ public:
         branches[1]->mipsGen(os, con, addrDest2);
 
         os << "add " << con.reg(addrDest1) << ", " << con.reg(addrDest1) << ", " << con.reg(addrDest2) << std::endl; 
-        con.writeToStack(addrDest1, con.varBinding().at(storeTo).offset, os);;
+        con.writeToStack(addrDest1, con.varBinding().at(storeTo).offset, os);
         con.recoverReg({addrDest2, addrDest1}, os);
     }
 
@@ -84,7 +84,7 @@ public:
         branches[1]->mipsGen(os, con, addrDest2);
 
         os << "sub " << con.reg(addrDest1) << ", " << con.reg(addrDest1) << ", " << con.reg(addrDest2) << std::endl; 
-        con.writeToStack(addrDest1, con.varBinding().at(storeTo).offset, os);;
+        con.writeToStack(addrDest1, con.varBinding().at(storeTo).offset, os);
         con.recoverReg({addrDest2, addrDest1}, os);
     }
 
@@ -114,7 +114,7 @@ public:
 
         os << "mult " << con.reg(addrDest1) << ", " << con.reg(addrDest2) << std::endl; 
         os << "mflo " << con.reg(addrDest1) << std::endl;
-        con.writeToStack(addrDest1, con.varBinding().at(storeTo).offset, os);;
+        con.writeToStack(addrDest1, con.varBinding().at(storeTo).offset, os);
         con.recoverReg({addrDest2, addrDest1}, os);
     }
 
@@ -144,7 +144,7 @@ public:
 
         os << "div " << con.reg(addrDest1) << ", " << con.reg(addrDest2) << std::endl; 
         os << "mflo " << con.reg(addrDest1) << std::endl;
-        con.writeToStack(addrDest1, con.varBinding().at(storeTo).offset, os);;
+        con.writeToStack(addrDest1, con.varBinding().at(storeTo).offset, os);
         con.recoverReg({addrDest2, addrDest1}, os);
     }
 
@@ -174,7 +174,7 @@ public:
 
         os << "div " << con.reg(addrDest1) << ", " << con.reg(addrDest2) << std::endl; 
         os << "mfhi " << con.reg(addrDest1) << std::endl;
-        con.writeToStack(addrDest1, con.varBinding().at(storeTo).offset, os);;
+        con.writeToStack(addrDest1, con.varBinding().at(storeTo).offset, os);
         con.recoverReg({addrDest2, addrDest1}, os);
     }
 
@@ -203,7 +203,7 @@ public:
         branches[1]->mipsGen(os, con, addrDest2);
 
         os << "and " << con.reg(addrDest1) << ", " << con.reg(addrDest1) << ", " << con.reg(addrDest2) << std::endl; 
-        con.writeToStack(addrDest1, con.varBinding().at(storeTo).offset, os);;
+        con.writeToStack(addrDest1, con.varBinding().at(storeTo).offset, os);
         con.recoverReg({addrDest2, addrDest1}, os);
     }
 
@@ -232,7 +232,7 @@ public:
         branches[1]->mipsGen(os, con, addrDest2);
 
         os << "or " << con.reg(addrDest1) << ", " << con.reg(addrDest1) << ", " << con.reg(addrDest2) << std::endl; 
-        con.writeToStack(addrDest1, con.varBinding().at(storeTo).offset, os);;
+        con.writeToStack(addrDest1, con.varBinding().at(storeTo).offset, os);
         con.recoverReg({addrDest2, addrDest1}, os);
     }
 
@@ -261,7 +261,7 @@ public:
         branches[1]->mipsGen(os, con, addrDest2);
 
         os << "xor " << con.reg(addrDest1) << ", " << con.reg(addrDest1) << ", " << con.reg(addrDest2) << std::endl; 
-        con.writeToStack(addrDest1, con.varBinding().at(storeTo).offset, os);;
+        con.writeToStack(addrDest1, con.varBinding().at(storeTo).offset, os);
         con.recoverReg({addrDest2, addrDest1}, os);
     }
 
@@ -290,7 +290,7 @@ public:
         branches[1]->mipsGen(os, con, addrDest2);
 
         os << "sllv " << con.reg(addrDest1) << ", " << con.reg(addrDest1) << ", " << con.reg(addrDest2) << std::endl; 
-        con.writeToStack(addrDest1, con.varBinding().at(storeTo).offset, os);;
+        con.writeToStack(addrDest1, con.varBinding().at(storeTo).offset, os);
         con.recoverReg({addrDest2, addrDest1}, os);
     }
 
@@ -318,7 +318,7 @@ public:
         branches[1]->mipsGen(os, con, addrDest2);
 
         os << "srav " << con.reg(addrDest1) << ", " << con.reg(addrDest1) << ", " << con.reg(addrDest2) << std::endl; 
-        con.writeToStack(addrDest1, con.varBinding().at(storeTo).offset, os);;
+        con.writeToStack(addrDest1, con.varBinding().at(storeTo).offset, os);
         con.recoverReg({addrDest2, addrDest1}, os);
     }
 

@@ -44,7 +44,23 @@ class unaryOp : public Expression{
             branches[0]->print(dst, con, level);
         }
         void pythonGen(std::ostream& os) const { }
-        void mipsGen(std::ostream& os, mipsCon& con, int dest=0) const { }
+        void mipsGen(std::ostream& os, mipsCon& con, int dest=0) const {
+           
+            int addrDest = con.registerSet.freeRegister();
+            if(op == "!"){
+                 branches[0]->mipsGen(os,con,addrDest);
+                 os << "slti " << con.reg(addrDest) << ", " << con.reg(addrDest) << ", 1" << std::endl;
+            }
+            else if(op == "~"){
+                 branches[0]->mipsGen(os,con,addrDest);
+                 os << "not " << con.reg(addrDest) << ", " << con.reg(addrDest) << std::endl;
+            }
+            else if(op == "-"){
+                 branches[0]->mipsGen(os,con,addrDest);
+                 os << "not " << con.reg(addrDest) << ", " << con.reg(addrDest) << std::endl;
+                 os << "addiu " << con.reg(addrDest) << ", " << con.reg(addrDest) << ", 1" << std::endl;
+            }
+         }
     private:
         std::string op;
         ExpressionPtr expr;

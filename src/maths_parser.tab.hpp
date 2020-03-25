@@ -93,33 +93,37 @@ extern int yydebug;
     T_LOG = 285,
     T_EXP = 286,
     T_SQRT = 287,
-    T_IF = 288,
-    T_ELSE = 289,
-    T_WHILE = 290,
-    T_RETURN = 291,
-    T_INT = 292,
-    T_VOID = 293,
-    T_STRUCT = 294,
-    T_UNION = 295,
-    T_ENUM = 296,
-    T_CONTINUE = 297,
-    T_BREAK = 298,
-    T_ASSIGN = 299,
-    T_PLUS_EQ = 300,
-    T_MINUS_EQ = 301,
-    T_TIMES_EQ = 302,
-    T_DIV_EQ = 303,
-    T_MOD_EQ = 304,
-    T_AND_EQ = 305,
-    T_OR_EQ = 306,
-    T_XOR_EQ = 307,
-    T_LSHIFT_EQ = 308,
-    T_RSHIFT_EQ = 309,
-    T_CONSTANT = 310,
-    T_IDENTIFIER = 311,
-    T_TYPEDEF = 312,
-    T_CONST = 313,
-    T_VOLATILE = 314
+    T_NOT = 288,
+    T_INVERT = 289,
+    T_IF = 290,
+    T_ELSE = 291,
+    T_WHILE = 292,
+    T_RETURN = 293,
+    T_INT = 294,
+    T_VOID = 295,
+    T_STRUCT = 296,
+    T_UNION = 297,
+    T_ENUM = 298,
+    T_CONTINUE = 299,
+    T_BREAK = 300,
+    T_ASSIGN = 301,
+    T_PLUS_EQ = 302,
+    T_MINUS_EQ = 303,
+    T_TIMES_EQ = 304,
+    T_DIV_EQ = 305,
+    T_MOD_EQ = 306,
+    T_AND_EQ = 307,
+    T_OR_EQ = 308,
+    T_XOR_EQ = 309,
+    T_LSHIFT_EQ = 310,
+    T_RSHIFT_EQ = 311,
+    T_CONSTANT = 312,
+    T_IDENTIFIER = 313,
+    T_TYPEDEF = 314,
+    T_CONST = 315,
+    T_VOLATILE = 316,
+    T_PLUS_PLUS = 317,
+    T_MINUS_MINUS = 318
   };
 #endif
 
@@ -137,7 +141,7 @@ union YYSTYPE
   yytokentype token;
   std::string *string;
 
-#line 141 "src/maths_parser.tab.hpp" /* yacc.c:1909  */
+#line 145 "src/maths_parser.tab.hpp" /* yacc.c:1909  */
 };
 
 typedef union YYSTYPE YYSTYPE;

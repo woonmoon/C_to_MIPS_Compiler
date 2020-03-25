@@ -18,6 +18,8 @@ letter          [a-zA-Z]
 "%"            { return T_MOD; }
 "-"             { return T_MINUS; }
 ","             { return T_COMMA; }
+"!"             {return T_NOT; }
+"~"             {return T_INVERT; }
 
 "++"             { return T_PLUS_PLUS; }
 "--"             { return T_MINUS_MINUS; }
