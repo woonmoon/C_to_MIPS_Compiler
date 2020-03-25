@@ -29,6 +29,8 @@ addi $29, $29, 4
 beq $8, $0, _falsy_0
 not $12, $12
 addiu $12, $12, 1
+jal multiply
+nop
 not $10, $10
 addiu $10, $10, 1
 lw $31, 20($29)

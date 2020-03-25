@@ -53,9 +53,7 @@ public:
             con.isIdentifierCall = 0;
             con.isConstantCall = 0;
             listOfExpressions[i]->mipsGen(os, con, con.paramReg);
-            //con.writeToStack(2, con.varBinding().at(con.dummyDec.id).offset, os); //THIS IS ADDED IN
-            //SO NEED AN IF FOR IDENTIFIER, FETCH THE VARIABLE AND STORE, AND IF CONST STRAIGHT UP STORE THE GUY IN MIPSCON LMAOOOOOO
-            // we will have the identifier name, just flip a bool
+           
             if(con.isIdentifierCall){
               //load into paramreg, like lw or something from the reg that the identifier is in
               os << "lw " << con.reg(con.paramReg) << ", " << con.varBinding().at(con.dummyDec.id).offset << "(" << con.reg(29) << ")" << std::endl;
@@ -64,7 +62,7 @@ public:
               //li into the paramreg
             }
             con.paramReg++;
-            con.extraCheck = 0;
+
          }
          con.isParam = 0;
    }
