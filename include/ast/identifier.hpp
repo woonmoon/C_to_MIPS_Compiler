@@ -29,6 +29,7 @@ class Identifier: public Node {
 
 
         void mipsGen(std::ostream& os, mipsCon& con, int dest=0) const {
+          if(!con.iJustWantTheNameBro){
           if(con.funcDec().functionDef) { //new function definition, insert a label
             con.funcDec().functionDef=false;
             con.funcDec().funcID=identifierName;
@@ -67,6 +68,10 @@ class Identifier: public Node {
             //con.varBinding()[con.dummyDec.id].offset=con.stackSize;
           }
           //**MISSING GLOBAL CASES AND PARAMETER CASES** 
+        }
+        if(con.iJustWantTheNameBro){
+        con.dummyDec.id=identifierName;
+        }
         }
 
     private:
