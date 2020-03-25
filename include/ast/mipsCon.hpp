@@ -45,6 +45,9 @@ struct mipsCon{
     bool firstTime;
     bool extraCheck;
     bool iJustWantTheNameBro;
+    bool inCall;
+    bool isIdentifierCall;
+    bool isConstantCall;
     int paramReg;
 
     std::map<std::string, varInfo>& varBinding() { return stack.back().varBinding; }

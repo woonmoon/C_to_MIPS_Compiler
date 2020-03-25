@@ -71,6 +71,7 @@ class Identifier: public Node {
         }
         if(con.iJustWantTheNameBro){
         con.dummyDec.id=identifierName;
+        con.isIdentifierCall = 1;
         }
         }
 

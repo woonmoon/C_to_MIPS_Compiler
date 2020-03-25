@@ -22,8 +22,12 @@ public:
             if(!empty){
                 con.iJustWantTheNameBro = 1;
                 branches[0]->mipsGen(os,con,dest);
-                con.iJustWantTheNameBro = 0;
+                //con.iJustWantTheNameBro = 0;
                 std::string funcName = con.dummyDec.id;
+                con.inCall = 1;
+                branches[1]->mipsGen(os,con,dest);
+                con.iJustWantTheNameBro = 0;
+                con.inCall = 0;
             }
      }
 
