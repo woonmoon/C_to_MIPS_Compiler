@@ -5,13 +5,13 @@
 #ifndef LANGPROC_2019_CW_JETSTREAM_CONSTANT_HPP
 #define LANGPROC_2019_CW_JETSTREAM_CONSTANT_HPP
 
-#include "node.hpp"
+#include "expression.hpp"
 
 class Constant;
 
 typedef const Constant* ConstantPtr;
 
-class Constant: public Node {
+class Constant: public Expression {
     public:
         Constant(int v) : val(v) {};
         void print(std::ostream& dst, pycon& con, int level) const{
