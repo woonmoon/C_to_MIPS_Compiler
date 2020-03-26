@@ -28,6 +28,7 @@ public:
         con.recoverReg({addrDest2, addrDest1}, os);
     }
     int evaluate() const { return 0; }
+    std::string getName() const { return ""; }
 protected:
 };
 

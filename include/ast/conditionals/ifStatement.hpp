@@ -35,6 +35,7 @@ public:
         os << std::endl;
     }
     int evaluate() const { return 0; }
+    std::string getName() const { return ""; }
 protected:
     NodePtr condition;
     NodePtr executeBlock;    

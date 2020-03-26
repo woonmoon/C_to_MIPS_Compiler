@@ -13,6 +13,7 @@
 #include "ast/type/PrimitiveType.hpp"
 #include "ast/declaration.hpp"
 #include "ast/arrayDeclarator.hpp"
+#include "ast/arrayIndex.hpp"
 #include "ast/constant.hpp"
 #include "ast/initDeclarator.hpp"
 #include "ast/scope/scope.hpp"

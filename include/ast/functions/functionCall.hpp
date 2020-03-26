@@ -42,6 +42,7 @@ public:
            // con.stack.back().spOffset = oldTwentyNine;
     }
     int evaluate() const { return 0; }
+    std::string getName() const { return ""; }
 private:
     bool empty;
 

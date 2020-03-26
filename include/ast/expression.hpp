@@ -22,6 +22,7 @@ public:
     virtual void pythonGen(std::ostream& os) const { }
     virtual void mipsGen(std::ostream& os, mipsCon& con, int dest=0) const { }
     virtual int evaluate() const = 0;
+    virtual std::string getName() const =0;
     std::vector<NodePtr> branches;
 protected:
 

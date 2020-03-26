@@ -31,6 +31,7 @@ public:
 
     }
     int evaluate() const { return 0; }
+    std::string getName() const { return ""; }
 protected:
 };
 
@@ -64,6 +65,7 @@ public:
 
     }
     int evaluate() const { return 0; }
+    std::string getName() const { return ""; }
 protected:
 };
 
@@ -96,6 +98,7 @@ public:
 
     }
     int evaluate() const { return 0; }
+    std::string getName() const { return ""; }
 protected:
 };
 
@@ -128,6 +131,7 @@ public:
 
      }
     int evaluate() const { return 0; }
+    std::string getName() const { return ""; }
 protected:
 };
 

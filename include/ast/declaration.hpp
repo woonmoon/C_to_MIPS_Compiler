@@ -46,6 +46,7 @@ public:
       con.varDec().variableDec=false;
     }
     int evaluate() const { return 0; }
+    std::string getName() const { return ""; }
 private:
     bool isFunction;
     

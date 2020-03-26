@@ -72,6 +72,7 @@ public:
       //std::cout << "left initdeclarator" << std::endl;
     }
     int evaluate() const { return 0; }
+    std::string getName() const { return ""; }
 
 private:
  bool isAssign;

@@ -25,6 +25,7 @@ class Constant: public Expression {
           os << "li " << con.reg(dest) << ", " << val;
           os << std::endl;
         }
+        std::string getName() const { return ""; }
     private:
         int val;
 };

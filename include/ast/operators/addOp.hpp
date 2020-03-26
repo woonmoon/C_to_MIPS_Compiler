@@ -33,6 +33,7 @@ public:
     }
 
     int evaluate() const { return 0; }
+    std::string getName() const { return ""; }
 
 protected:
 };
@@ -64,6 +65,7 @@ class unaryOp : public Expression{
             }
         }
         int evaluate() const { return 0; }
+        std::string getName() const { return ""; }
     private:
         std::string op;
         ExpressionPtr expr;

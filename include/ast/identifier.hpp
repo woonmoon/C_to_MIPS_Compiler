@@ -69,6 +69,7 @@ class Identifier: public Expression {
         }
         }
     int evaluate() const { return 0; }
+    std::string getName() const { return identifierName; }
     private:
         std::string identifierName;
 };

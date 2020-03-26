@@ -37,6 +37,7 @@ public:
         con.recoverReg({dest2, dest1}, os);  
     }
     int evaluate() const { return 0; }
+    std::string getName() const { return ""; }
 protected:
 };
 

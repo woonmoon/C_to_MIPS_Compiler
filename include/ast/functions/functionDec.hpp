@@ -34,6 +34,7 @@ public:
          //std::cout << "left functionDec" << std::endl
       }
       int evaluate() const { return 0; }
+      std::string getName() const { return ""; }
 protected:
      DeclarationPtr deckedBoi;
      int argNum;
