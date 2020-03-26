@@ -25,16 +25,19 @@ public:
         
             branches[0]->mipsGen(os,con,dest);
             std::string funcName = con.dummyDec.id;
-
+            //confirmed it does enter and goes into branches[1]
             if(!empty){
                 con.inCall = 1;
                 branches[1]->mipsGen(os,con,dest);
                 con.inCall = 0;
             }
+
+            con.iJustWantTheNameBro = 0;
+
             os << "jal " << funcName << std::endl;
             os << "nop" << std::endl;
 
-            con.iJustWantTheNameBro = 0;
+           
 
            // con.stack.back().spOffset = oldTwentyNine;
     }

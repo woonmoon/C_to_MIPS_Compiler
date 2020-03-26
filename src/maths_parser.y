@@ -71,8 +71,8 @@ POSTFIX_EXPRESSION : PRIMARY_EXPRESSION { $$ = $1;}
                    | POSTFIX_EXPRESSION T_MINUS_MINUS {$$ = new postDec($1); }
                    ;
 
-ARGUMENT_EXPRESSION_LIST : ASSIGNMENT_EXPRESSION {$$ = new List($1);}
-                         | ARGUMENT_EXPRESSION_LIST T_COMMA ASSIGNMENT_EXPRESSION {$$ = new List($1); ($$)->addtoList($3);}
+ARGUMENT_EXPRESSION_LIST : ASSIGNMENT_EXPRESSION {$$ = new paramList($1);}
+                         | ARGUMENT_EXPRESSION_LIST T_COMMA ASSIGNMENT_EXPRESSION {$$ = new paramList($1); ($$)->addtoList($3);}
                          ;
 
 UNARY_EXPRESSION : POSTFIX_EXPRESSION { $$ = $1;}

@@ -57,9 +57,9 @@ public:
 
       if(con.isParam) {
 
-        std::cout << "CON.ISPARAM" << std::endl;
+        //std::cout << "CON.ISPARAM" << std::endl;
         branches[0]->mipsGen(os, con, 2);
-        std::cout << "THE DUMMY STATS ARE AS FOLLOWS " << con.dummyDec.id << " and offset is " << con.varBinding().at(con.dummyDec.id).offset << std::endl;
+        //std::cout << "THE DUMMY STATS ARE AS FOLLOWS " << con.dummyDec.id << " and offset is " << con.varBinding().at(con.dummyDec.id).offset << std::endl;
         con.writeToStack(2, con.varBinding().at(con.dummyDec.id).offset, os);
         //std::cout << "stackSize is " << con.stackSize << " varBinding offset is " << con.varBinding().at(con.dummyDec.id).offset << std::endl;
         int far_offset=con.stackSize-con.varBinding().at(con.dummyDec.id).offset;

@@ -53,7 +53,7 @@ public:
             con.isIdentifierCall = 0;
             con.isConstantCall = 0;
             listOfExpressions[i]->mipsGen(os, con, con.paramReg);
-           
+
             if(con.isIdentifierCall){
               //load into paramreg, like lw or something from the reg that the identifier is in
               os << "lw " << con.reg(con.paramReg) << ", " << con.varBinding().at(con.dummyDec.id).offset << "(" << con.reg(29) << ")" << std::endl;
