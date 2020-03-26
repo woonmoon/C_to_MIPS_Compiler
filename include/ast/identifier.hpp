@@ -5,13 +5,13 @@
 #ifndef LANGPROC_2019_CW_JETSTREAM_IDENTIFIER_HPP
 #define LANGPROC_2019_CW_JETSTREAM_IDENTIFIER_HPP
 
-#include "node.hpp"
+#include "expression.hpp"
 
 class Identifier;
 
 typedef const Identifier* IdentifierPtr;
 
-class Identifier: public Node {
+class Identifier: public Expression {
     public:
         Identifier(std::string v) : identifierName(v) {};
 

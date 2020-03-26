@@ -19,16 +19,14 @@ public:
 
     void mipsGen(std::ostream& os, mipsCon& con, int dest=0) const {
         declarator->mipsGen(os, con);
-        if(!con.funcDec().initialize) {
-           //con.dummyDec.
-        }
+        //if(!con.funcDec().initialize) {
+           expression->evaluate();
+        //}
     }
-
-    double eval() const {   }
 
 protected:
     NodePtr declarator;
-    NodePtr expression;
+    ExpressionPtr expression;
 };
 
 #endif
