@@ -37,8 +37,8 @@ public:
             con.iJustWantTheNameBro = 0;
 
            // con.stack.back().spOffset = oldTwentyNine;
-     }
-
+    }
+    int evaluate() const { return 0; }
 private:
     bool empty;
 

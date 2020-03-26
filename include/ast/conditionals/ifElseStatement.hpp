@@ -50,7 +50,7 @@ public:
         os << end << ":";
         os << std::endl;
     }
-
+    int evaluate() const { return 0; }
 protected:
     NodePtr condition;
     NodePtr ifExecute;

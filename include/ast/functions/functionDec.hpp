@@ -32,7 +32,7 @@ public:
             branches[1]->mipsGen(os, con);
          }
       }
-      
+      int evaluate() const { return 0; }
 protected:
      DeclarationPtr deckedBoi;
      int argNum;

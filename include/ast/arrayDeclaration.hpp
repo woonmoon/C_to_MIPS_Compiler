@@ -18,13 +18,8 @@ public:
     void pythonGen(std::ostream& os) const { }
 
     void mipsGen(std::ostream& os, mipsCon& con, int dest=0) const {
-        std::cout << "trying to make a fucking array" << std::endl;
         declarator->mipsGen(os, con);
-        if(!con.funcDec().initialize) {
-            std::cout << expression->evaluate() << std::endl;
-            con.dummyDec.arraySize.push_back(2);
-            std::cout << con.dummyDec.arraySize[0] << std::endl;
-        }
+        if(!con.funcDec().initialize) { con.dummyDec.arraySize.push_back(expression->evaluate()); }
     }
 
 protected:

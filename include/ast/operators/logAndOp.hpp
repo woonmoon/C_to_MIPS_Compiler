@@ -38,7 +38,7 @@ public:
         con.recoverReg({dest2, dest1}, os); 
     }
 
-
+    int evaluate() const { return 0; }
 
     //     void mipsGen(std::ostream& os, mipsCon& con, int dest=0) const {
     //     std::string falseEx=con.makeALabel("false");

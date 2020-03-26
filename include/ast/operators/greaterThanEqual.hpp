@@ -26,7 +26,7 @@ public:
         os << std::endl;
         con.recoverReg({addrDest}, os);
     }
-
+    int evaluate() const { return 0; }
 protected:
 };
 

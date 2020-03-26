@@ -60,7 +60,7 @@
 
 
 PRIMARY_EXPRESSION : T_IDENTIFIER { $$ = new Identifier(*$1);}
-                   | T_CONSTANT { $$ = new Constant($1);}
+                   | T_CONSTANT { $$ = new Constant($1); }
                    | T_LBRACKET EXPRESSION T_RBRACKET { $$ = $2; }
                    ;
 

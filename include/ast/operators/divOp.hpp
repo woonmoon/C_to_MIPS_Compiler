@@ -31,6 +31,7 @@ public:
         con.recoverReg({addrDest2, addrDest1}, os); //THIS ORDER IS DUE TO IT NOT  HAVING TO GO UP THEN DOWN
 
     }
+    int evaluate() const { return 0; }
 protected:
 };
 

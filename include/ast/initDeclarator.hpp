@@ -68,6 +68,7 @@ public:
         con.stackSize-=far_offset;
       }
     }
+    int evaluate() const { return 0; }
 
 private:
  bool isAssign;

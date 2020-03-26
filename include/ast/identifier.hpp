@@ -74,7 +74,7 @@ class Identifier: public Expression {
         con.isIdentifierCall = 1;
         }
         }
-
+    int evaluate() const { return 0; }
     private:
         std::string identifierName;
 };

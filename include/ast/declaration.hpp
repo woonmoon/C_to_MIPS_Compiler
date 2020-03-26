@@ -50,7 +50,8 @@ public:
       //}
       //std::cout << "FINISHED BRANCH[1] DECL" << std::endl;
       con.varDec().variableDec=false;
-     }
+    }
+    int evaluate() const { return 0; }
 private:
     bool isFunction;
     

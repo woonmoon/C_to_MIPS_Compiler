@@ -30,7 +30,8 @@ public:
         con.recoverReg({addrDest}, os);
 
 
-     }
+    }
+    int evaluate() const { return 0; }
 protected:
 };
 

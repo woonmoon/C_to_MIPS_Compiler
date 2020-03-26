@@ -31,6 +31,7 @@ public:
         con.recoverReg({addrDest2, addrDest1}, os); //SWITCH THESE OVER IF IT CAUSES PROBLEMS
 
     }
+    int evaluate() const { return 0; }
 protected:
 };
 

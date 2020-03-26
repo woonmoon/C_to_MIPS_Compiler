@@ -27,9 +27,7 @@ public:
 
         con.recoverReg({addrDest}, os);
     }
-
-    
-
+    int evaluate() const { return 0; }
 protected:
 };
 
@@ -58,7 +56,7 @@ public:
         con.writeToStack(addrDest1, con.varBinding().at(storeTo).offset, os);
         con.recoverReg({addrDest2, addrDest1}, os);
     }
-
+    int evaluate() const { return 0; }
 protected:
 };
 
@@ -87,7 +85,7 @@ public:
         con.writeToStack(addrDest1, con.varBinding().at(storeTo).offset, os);
         con.recoverReg({addrDest2, addrDest1}, os);
     }
-
+    int evaluate() const { return 0; }
 protected:
 };
 
@@ -117,7 +115,7 @@ public:
         con.writeToStack(addrDest1, con.varBinding().at(storeTo).offset, os);
         con.recoverReg({addrDest2, addrDest1}, os);
     }
-
+    int evaluate() const { return 0; }
 protected:
 };
 
@@ -147,7 +145,7 @@ public:
         con.writeToStack(addrDest1, con.varBinding().at(storeTo).offset, os);
         con.recoverReg({addrDest2, addrDest1}, os);
     }
-
+    int evaluate() const { return 0; }
 protected:
 };
 
@@ -177,7 +175,7 @@ public:
         con.writeToStack(addrDest1, con.varBinding().at(storeTo).offset, os);
         con.recoverReg({addrDest2, addrDest1}, os);
     }
-
+    int evaluate() const { return 0; }
 protected:
 };
 
@@ -206,7 +204,7 @@ public:
         con.writeToStack(addrDest1, con.varBinding().at(storeTo).offset, os);
         con.recoverReg({addrDest2, addrDest1}, os);
     }
-
+    int evaluate() const { return 0; }
 protected:
 };
 
@@ -235,7 +233,7 @@ public:
         con.writeToStack(addrDest1, con.varBinding().at(storeTo).offset, os);
         con.recoverReg({addrDest2, addrDest1}, os);
     }
-
+    int evaluate() const { return 0; }
 protected:
 };
 
@@ -264,7 +262,7 @@ public:
         con.writeToStack(addrDest1, con.varBinding().at(storeTo).offset, os);
         con.recoverReg({addrDest2, addrDest1}, os);
     }
-
+    int evaluate() const { return 0; }
 protected:
 };
 
@@ -293,7 +291,7 @@ public:
         con.writeToStack(addrDest1, con.varBinding().at(storeTo).offset, os);
         con.recoverReg({addrDest2, addrDest1}, os);
     }
-
+    int evaluate() const { return 0; }
 protected:
 };
 
@@ -321,7 +319,7 @@ public:
         con.writeToStack(addrDest1, con.varBinding().at(storeTo).offset, os);
         con.recoverReg({addrDest2, addrDest1}, os);
     }
-
+    int evaluate() const { return 0; }
 protected:
 };
 

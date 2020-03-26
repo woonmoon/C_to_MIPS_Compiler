@@ -30,7 +30,9 @@ public:
         con.recoverReg({addrDest}, os);
 
 
-     }
+    }
+
+    int evaluate() const { return 0; }
 
 protected:
 };
@@ -60,7 +62,8 @@ class unaryOp : public Expression{
                  os << "not " << con.reg(addrDest) << ", " << con.reg(addrDest) << std::endl;
                  os << "addiu " << con.reg(addrDest) << ", " << con.reg(addrDest) << ", 1" << std::endl;
             }
-         }
+        }
+        int evaluate() const { return 0; }
     private:
         std::string op;
         ExpressionPtr expr;
