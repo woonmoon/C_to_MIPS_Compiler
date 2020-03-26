@@ -142,6 +142,8 @@ struct mipsCon{
 
     void exitFunc(std::ostream& os) {
         returnFunc(os);
+      //  stack.pop_back(); //added this in
+      //  stackSize = 0;
     }
 
     void enterScope() {
@@ -151,15 +153,14 @@ struct mipsCon{
             stack.back().spOffset=stackSize; //not global
             //std::cout << "have entered scope where stackSize is " << stackSize << std::endl;
         }else if(stack.size()==0) {
-            stackFrame newFrame={0};
-            stack.push_back(newFrame);
+            stack.push_back({});
         } //global
     } //exclusively for NOT functions (conditionals, loops, etc)
 
     void exitScope(std::ostream& os) {
         int backspace=stackSize-stack.back().spOffset;
         stackSize=stack.back().spOffset;
-        os << "addi " << reg(29) << ", " << reg(29) << ", " << backspace;
+      //  os << "addi " << reg(29) << ", " << reg(29) << ", " << backspace; //removed this
         os << std::endl;
         stack.pop_back();
     } //exclusively for NOT functions (conditionals, loops, etc)

@@ -30,6 +30,7 @@ public:
         con.enterScope();
         for(int i=0; i<sequence.size(); i++) {
             sequence[i]->mipsGen(os, con, dest);
+            con.exitScope(os);
         }
     }
 };
