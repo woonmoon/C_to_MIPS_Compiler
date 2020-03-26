@@ -48,24 +48,18 @@ class Identifier: public Expression {
               os << std::endl;
               con.stackSize+=con.dummyDec.size;
               con.varBinding()[con.dummyDec.id]={4, static_cast<uint32_t>(con.stackSize), {}};
-
               os << "move " << con.reg(2) << ", " << con.reg(con.paramReg);
               os<<std::endl;
 
             } //THIS IS ADDED IN 
-          }
-          else{ //completely new variable
+          }else{ //completely new variable
             con.dummyDec.id=identifierName;
-            //std::cout << "stack size is " << con.stackSize << " dummy size is " << con.dummyDec.size << std::endl;
-             if(con.stack.size()>=1) {
-          //os << "addi " << con.reg(29) << ", " << con.reg(29) << ", -" << con.dummyDec.size;
-          //os << std::endl;
+            if(con.stack.size()>=1) {
               os << "addi " << con.reg(29) << ", " << con.reg(29) << ", -" << con.dummyDec.size;
               os << std::endl;
               con.stackSize+=con.dummyDec.size;
-              con.varBinding()[con.dummyDec.id]={4, static_cast<uint32_t>(con.stackSize)};
+              con.varBinding()[con.dummyDec.id]={4, static_cast<uint32_t>(con.stackSize), con.dummyDec.arraySize};
             }
-            //con.varBinding()[con.dummyDec.id].offset=con.stackSize;
           }
           //**MISSING GLOBAL CASES AND PARAMETER CASES** 
         }

@@ -31,6 +31,7 @@ public:
             //std::cout << "***functionDec***: branch[1]" << std::endl;
             branches[1]->mipsGen(os, con);
          }
+         //std::cout << "left functionDec" << std::endl
       }
       int evaluate() const { return 0; }
 protected:

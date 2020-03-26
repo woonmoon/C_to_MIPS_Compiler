@@ -42,13 +42,7 @@ public:
       branches[0]->mipsGen(os, con);
       //std::cout << "FINISHED BRANCH[0] DECL" << std::endl;
       branches[1]->mipsGen(os, con);
-      //if(con.varDec().variableDec) {
-        // std::cout << "stackSize is " << con.stackSize << " varBinding offset is " << con.varBinding().at(con.dummyDec.id).offset << std::endl;
-        // int furthest_sp=con.stackSize-con.varBinding().at(con.dummyDec.id).offset;
-        // os << "addi " << con.reg(29) << ", " << con.reg(29) << ", " << furthest_sp;
-        // os << std::endl;
-      //}
-      //std::cout << "FINISHED BRANCH[1] DECL" << std::endl;
+      //std::cout << "left declaration" << std::endl;
       con.varDec().variableDec=false;
     }
     int evaluate() const { return 0; }

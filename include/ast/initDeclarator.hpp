@@ -35,38 +35,41 @@ public:
     void mipsGen(std::ostream& os, mipsCon& con, int dest=0) const {
       //std::cout << "IN INIT_DECLARATOR" << std::endl;
       if(con.varDec().variableDec&&(!con.isParam)) {
+        //std::cout << "variable declaration!" << std::endl;
         int newDest=con.registerSet.freeRegister();
         con.flushReg({newDest}, os);
-        //std::cout << "***initDeclarator***: entering branch[0]" << std::endl;
         branches[0]->mipsGen(os, con, newDest);
         if(isAssign){
-          //std::cout << "***initDeclarator***: entering branch[1]" << std::endl;
           branches[1]->mipsGen(os, con, newDest);
-          //std::cout << "left declarator branch[1]" << std::endl;
         }
-        //std::cout << "THE DUMMY STATS ARE AS FOLLOWS " << con.dummyDec.id << " and offset is " << con.varBinding().at(con.dummyDec.id).offset << std::endl;
         con.writeToStack(newDest, con.varBinding().at(con.dummyDec.id).offset, os);
         con.recoverReg({newDest}, os);
-        //std::cout << "stackSize is " << con.stackSize << " varBinding offset is " << con.varBinding().at(con.dummyDec.id).offset << std::endl;
-        int far_offset=con.stackSize-con.varBinding().at(con.dummyDec.id).offset;
+        int far_offset;
+        //std::cout << "array size is " << con.varBinding()[con.dummyDec.id].arraySize[0] << std::endl;
+        if(con.varBinding().at(con.dummyDec.id).arraySize.size()==0) {
+          //std::cout << "offset of single variable is " << con.varBinding().at(con.dummyDec.id).offset << std::endl;
+          far_offset=con.stackSize-con.varBinding().at(con.dummyDec.id).offset;
+          //std::cout << "stack size is " << con.stackSize << " far offset is " << far_offset << std::endl;
+        }else{
+          //std::cout << "the array size is " << con.varBinding().at(con.dummyDec.id).arraySize[0] << " and the size is " << con.varBinding().at(con.dummyDec.id).arraySize[0]*4 << std::endl;
+          far_offset=con.stackSize-(con.varBinding()[con.dummyDec.id].offset+con.varBinding().at(con.dummyDec.id).arraySize[0]*4);
+          //std::cout << "stack size is " << con.stackSize << " far offset is " << far_offset << std::endl;
+        }
         os << "addi " << con.reg(29) << ", " << con.reg(29) << ", " << far_offset; //MAY NOT NEED =================
         os << std::endl;
         con.stackSize-=far_offset;
         con.registerSet.untickReg(newDest);
+        //std::cout << "array foo is stored at " << con.varBinding().at("foo").offset << " array size is " << con.varBinding().at("foo").arraySize[0] << std::endl;
       }
 
       if(con.isParam) {
-
-        //std::cout << "CON.ISPARAM" << std::endl;
         branches[0]->mipsGen(os, con, 2);
-        //std::cout << "THE DUMMY STATS ARE AS FOLLOWS " << con.dummyDec.id << " and offset is " << con.varBinding().at(con.dummyDec.id).offset << std::endl;
         con.writeToStack(2, con.varBinding().at(con.dummyDec.id).offset, os);
-        //std::cout << "stackSize is " << con.stackSize << " varBinding offset is " << con.varBinding().at(con.dummyDec.id).offset << std::endl;
         int far_offset=con.stackSize-con.varBinding().at(con.dummyDec.id).offset;
-      //  os << "addi " << con.reg(29) << ", " << con.reg(29) << ", " << far_offset; //MAY NOT NEED =================
         os << std::endl;
         con.stackSize-=far_offset;
       }
+      //std::cout << "left initdeclarator" << std::endl;
     }
     int evaluate() const { return 0; }
 

@@ -254,8 +254,8 @@ TYPE_QUALIFIER : T_CONST {  }
 
 DIRECT_DECLARATOR : T_IDENTIFIER  { $$ = new Identifier(*$1); }
                   | T_LBRACKET DECLARATOR T_RBRACKET { $$ = $2;  }
-                  | DIRECT_DECLARATOR T_LSQUARE CONSTANT_EXPRESSION T_RSQUARE { $$ = new arrayDeclaration($1, $3); }
-                  | DIRECT_DECLARATOR T_LSQUARE T_RSQUARE { $$ = new arrayDeclaration($1, NULL); }
+                  | DIRECT_DECLARATOR T_LSQUARE CONSTANT_EXPRESSION T_RSQUARE { $$ = new arrayDeclarator($1, $3); }
+                  | DIRECT_DECLARATOR T_LSQUARE T_RSQUARE { $$ = new arrayDeclarator($1, NULL); }
                   | DIRECT_DECLARATOR T_LBRACKET PARAMETER_TYPE_LIST T_RBRACKET { $$ = new functionDec($1, $3);  }
                   | DIRECT_DECLARATOR T_LBRACKET IDENTIFIER_LIST T_RBRACKET { $$ = new functionDec($1, $3); delete $3; }
                   | DIRECT_DECLARATOR T_LBRACKET T_RBRACKET { $$ = new functionDec($1); }

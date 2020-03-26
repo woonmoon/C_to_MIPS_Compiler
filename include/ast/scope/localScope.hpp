@@ -40,6 +40,7 @@ public:
             }
             //con.exitScope(os);
         }
+        //std::cout << "left localscope" << std::endl;
     }
 };
 

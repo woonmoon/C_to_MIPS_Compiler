@@ -12,7 +12,7 @@
 #include "ast/lists/parameterList.hpp"
 #include "ast/type/PrimitiveType.hpp"
 #include "ast/declaration.hpp"
-#include "ast/arrayDeclaration.hpp"
+#include "ast/arrayDeclarator.hpp"
 #include "ast/constant.hpp"
 #include "ast/initDeclarator.hpp"
 #include "ast/scope/scope.hpp"

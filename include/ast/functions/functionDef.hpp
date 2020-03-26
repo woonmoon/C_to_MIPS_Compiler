@@ -36,6 +36,7 @@ public:
         con.funcContent().functionPatty=true;
         //std::cout << "***functionDef***: entering scopeBlock" << std::endl;
         scopeBlock->mipsGen(os, con);
+        //std::cout << "left function def" 
         //con.exitFunc(os);
     }
 protected:
