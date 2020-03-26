@@ -5,11 +5,6 @@ Nonterminals useless in grammar
    STRUCT_DECLARATOR_LIST
    STRUCT_DECLARATOR
    INITIALIZER_LIST
-   EXPR
-   FACTOR
-   FUNCTION_NAME
-   TERM
-   UNARY
 
 
 Terminals unused in grammar

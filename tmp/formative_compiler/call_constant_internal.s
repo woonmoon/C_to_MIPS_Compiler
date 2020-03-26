@@ -1,3 +1,33 @@
+primary exp
+issa constant made
+postfix exp
+unary exp
+cast exp
+mult exp
+additive exp
+shift expression
+relational expression
+equality expression
+and exp
+exclusive or
+inclusive or
+logical and 
+logical or
+conditional expression
+postfix exp
+unary exp
+cast exp
+mult exp
+additive exp
+shift expression
+relational expression
+equality expression
+and exp
+exclusive or
+inclusive or
+logical and 
+logical or
+conditional expression
 .globl g
 g:
 addi $29, $29, -4

@@ -35,7 +35,6 @@
 %token T_ASSIGN T_PLUS_EQ T_MINUS_EQ T_TIMES_EQ T_DIV_EQ T_MOD_EQ T_AND_EQ T_OR_EQ T_XOR_EQ T_LSHIFT_EQ T_RSHIFT_EQ
 %token T_CONSTANT T_IDENTIFIER T_TYPEDEF T_CONST T_VOLATILE T_PLUS_PLUS T_MINUS_MINUS
 
-%type <expr> EXPR TERM UNARY FACTOR
 %type <expr> DECLARATION DECLARATION_SPECIFIERS STORAGE_CLASS_SPECIFIER
 %type <expr> TYPE_QUALIFIER DECLARATOR INITIALIZER
 %type <expr> STRUCT_OR_UNION_SPECIFIER ENUM_SPECIFIER STRUCT_DECLARATOR ENUMERATOR TYPE_SPECIFIER
@@ -54,31 +53,34 @@
 %type <token> ASSIGNMENT_OPERATOR
 %type <number> T_CONSTANT
 %type <string> T_IF T_ELSE T_WHILE T_RETURN T_INT T_VOID
-%type <string> T_IDENTIFIER T_LOG T_EXP T_SQRT FUNCTION_NAME UNARY_OPERATOR
+%type <string> T_IDENTIFIER T_LOG T_EXP T_SQRT UNARY_OPERATOR
 
 %start ROOT
 %%
 
 
-PRIMARY_EXPRESSION : T_IDENTIFIER {$$ = new Identifier(*$1);}
+PRIMARY_EXPRESSION : T_IDENTIFIER { $$ = new Identifier(*$1);}
                    | T_CONSTANT { $$ = new Constant($1);}
                    | T_LBRACKET EXPRESSION T_RBRACKET { $$ = $2; }
                    ;
-POSTFIX_EXPRESSION : PRIMARY_EXPRESSION {$$ = $1;}
+
+POSTFIX_EXPRESSION : PRIMARY_EXPRESSION { $$ = $1;}
                    | POSTFIX_EXPRESSION T_LBRACKET T_RBRACKET { $$ = new functionCall($1, new List(), 1);}
                    | POSTFIX_EXPRESSION T_LBRACKET ARGUMENT_EXPRESSION_LIST T_RBRACKET { $$ = new functionCall($1, $3, 0); }
                    | POSTFIX_EXPRESSION T_PLUS_PLUS {$$ = new postInc($1); }
                    | POSTFIX_EXPRESSION T_MINUS_MINUS {$$ = new postDec($1); }
                    ;
+
 ARGUMENT_EXPRESSION_LIST : ASSIGNMENT_EXPRESSION {$$ = new List($1);}
                          | ARGUMENT_EXPRESSION_LIST T_COMMA ASSIGNMENT_EXPRESSION {$$ = new List($1); ($$)->addtoList($3);}
                          ;
 
-UNARY_EXPRESSION : POSTFIX_EXPRESSION {$$ = $1;}
+UNARY_EXPRESSION : POSTFIX_EXPRESSION { $$ = $1;}
                  | UNARY_OPERATOR CAST_EXPRESSION {$$ = new unaryOp(*$1, $2);}
                  | T_PLUS_PLUS UNARY_EXPRESSION {$$ = new preInc($2);}
                  | T_MINUS_MINUS UNARY_EXPRESSION {$$ = new preDec($2);}
                  ;
+
 UNARY_OPERATOR : T_STAR { $$ = new std::string("*");}
                | T_PLUS { $$ = new std::string("+");}
                | T_MINUS {$$ = new std::string("-"); }
@@ -131,11 +133,11 @@ INCLUSIVE_OR_EXPRESSION : EXCLUSIVE_OR_EXPRESSION { $$ = $1;  }
                         | INCLUSIVE_OR_EXPRESSION T_OR EXCLUSIVE_OR_EXPRESSION { $$ = new orOp($1, $3);  }
                         ;
 
-LOGICAL_AND_EXPRESSION : INCLUSIVE_OR_EXPRESSION {$$ = $1;   }
+LOGICAL_AND_EXPRESSION : INCLUSIVE_OR_EXPRESSION { $$ = $1;   }
                        | LOGICAL_AND_EXPRESSION T_AND_OP INCLUSIVE_OR_EXPRESSION { $$ = new logAndOp($1, $3);  }
                        ;
 
-LOGICAL_OR_EXPRESSION : LOGICAL_AND_EXPRESSION {$$ = $1;   }
+LOGICAL_OR_EXPRESSION : LOGICAL_AND_EXPRESSION { $$ = $1;   }
                       | LOGICAL_OR_EXPRESSION T_OR_OP LOGICAL_AND_EXPRESSION { $$ = new logOrOp($1, $3); }
                       ;
 
@@ -250,7 +252,6 @@ TYPE_QUALIFIER : T_CONST {  }
                ;
 
 
-
 DIRECT_DECLARATOR : T_IDENTIFIER  { $$ = new Identifier(*$1); }
                   | T_LBRACKET DECLARATOR T_RBRACKET { $$ = $2;  }
                   | DIRECT_DECLARATOR T_LSQUARE CONSTANT_EXPRESSION T_RSQUARE { $$ = new arrayDeclaration($1, $3); }
@@ -297,7 +298,7 @@ ABSTRACT_DECLARATOR : POINTER { }
 
 DIRECT_ABSTRACT_DECLARATOR : T_LBRACKET ABSTRACT_DECLARATOR T_RBRACKET {  }
                            | T_LBRACKET T_RBRACKET {  }
-                           | T_LSQUARE T_RSQUARE {  }
+                           | T_LSQUARE T_RSQUARE { }
                            | T_LSQUARE CONSTANT_EXPRESSION T_RSQUARE {  }
                            | DIRECT_ABSTRACT_DECLARATOR T_LSQUARE T_RSQUARE {  }
                            | DIRECT_ABSTRACT_DECLARATOR T_LSQUARE CONSTANT_EXPRESSION T_RSQUARE {  }
@@ -309,9 +310,11 @@ DIRECT_ABSTRACT_DECLARATOR : T_LBRACKET ABSTRACT_DECLARATOR T_RBRACKET {  }
 INITIALIZER : ASSIGNMENT_EXPRESSION { $$ = $1;  }
             //removed other 2 because we aren't doing 2D arrays
             ;
+
 INITIALIZER_LIST : INITIALIZER { $$ = new List($1);  }
                  | INITIALIZER_LIST T_COMMA INITIALIZER { $$ = new List($1); ($$)->addtoList($3);  }
                  ;
+
 STATEMENT : LABELED_STATEMENT { $$ = $1;  }
           | COMPOUND_STATEMENT { $$ = $1; }
           | EXPRESSION_STATEMENT { $$ = $1;  }
@@ -319,16 +322,20 @@ STATEMENT : LABELED_STATEMENT { $$ = $1;  }
           | ITERATION_STATEMENT { $$ = $1;  }
           | JUMP_STATEMENT { $$ = $1;  }
           ;
+
 LABELED_STATEMENT : T_IDENTIFIER T_COLON STATEMENT {  }
                   ;
+
 COMPOUND_STATEMENT : T_LCURLY T_RCURLY { $$ = new localScope();}
                    | T_LCURLY STATEMENT_LIST T_RCURLY { $$ = new localScope($2);  }
                    | T_LCURLY DECLARATION_LIST T_RCURLY { $$ = new localScope($2);  }
                    | T_LCURLY DECLARATION_LIST STATEMENT_LIST T_RCURLY { $$ = new localScope($2, $3); }
                    ;
+
 STATEMENT_LIST : STATEMENT { $$ = new List($1);  }
                | STATEMENT_LIST STATEMENT { $$ = new List($1); ($$)->addtoList($2); }
                ;
+
 EXPRESSION_STATEMENT : T_SEMICOLON {  }
                      | EXPRESSION T_SEMICOLON { }
                      ;
@@ -346,31 +353,38 @@ JUMP_STATEMENT : T_RETURN T_SEMICOLON {  }
                ;
 DECLARATION_SPECIFIERS : STORAGE_CLASS_SPECIFIER { }
                        | STORAGE_CLASS_SPECIFIER DECLARATION_SPECIFIERS {  }
-                       | TYPE_SPECIFIER  {$$ = $1;  }
+                       | TYPE_SPECIFIER  { $$ = $1;  }
                        | TYPE_SPECIFIER DECLARATION_SPECIFIERS  {  }
                        | TYPE_QUALIFIER  {  }
                        | TYPE_QUALIFIER DECLARATION_SPECIFIERS  {  }
                        ;
+
 DECLARATOR : POINTER DIRECT_DECLARATOR {  }
            | DIRECT_DECLARATOR { $$ = $1;  }
            ;
+
 DECLARATION_LIST : DECLARATION { $$ = new List($1);  }
                  | DECLARATION_LIST DECLARATION { $$ = new List($1); ($$)->addtoList($2);  }
                  ;
+
 FUNCTION_DEFINITION : DECLARATION_SPECIFIERS DECLARATOR DECLARATION_LIST COMPOUND_STATEMENT { }
                     | DECLARATION_SPECIFIERS DECLARATOR COMPOUND_STATEMENT { $$ = new functionDef(new Declaration($1, $2), $3); }
                     | DECLARATOR DECLARATION_LIST COMPOUND_STATEMENT {}
                     | DECLARATOR COMPOUND_STATEMENT { }
                     ;
+
 DECLARATION : DECLARATION_SPECIFIERS T_SEMICOLON  { }
             | DECLARATION_SPECIFIERS INIT_DECLARATOR_LIST T_SEMICOLON  { $$  = new Declaration($1, $2); }
             ;
+
 EXTERNAL_DECLARATION : FUNCTION_DEFINITION { $$ = $1;  }
                      | DECLARATION {$$ = $1; }
                      ;
+
 TRANSLATION_UNIT : EXTERNAL_DECLARATION { $$ = new List($1);  }
                  | TRANSLATION_UNIT EXTERNAL_DECLARATION { $$ = new List($1); ($$)->addtoList($2);}
                  ;
+
 ROOT : TRANSLATION_UNIT { g_root = new globalScope($1);}
 %%
 const Node *g_root; // Definition of variable (to match declaration earlier)
