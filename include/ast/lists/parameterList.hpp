@@ -56,7 +56,7 @@ public:
 
             if(con.isIdentifierCall){
               //load into paramreg, like lw or something from the reg that the identifier is in
-              os << "lw " << con.reg(con.paramReg) << ", " << con.varBinding().at(con.dummyDec.id).offset << "(" << con.reg(29) << ")" << std::endl;
+              os << "lw " << con.reg(con.paramReg) << ", " << con.stackSize - con.varBinding().at(con.dummyDec.id).offset << "(" << con.reg(29) << ")" << std::endl;
             }
             if(con.isConstantCall){ //MAY NOT NEED THIS COS CONSTANT HAS ITS BOIIIIIIIIIIIIIIIIIIIIIIIIII
               //li into the paramreg
