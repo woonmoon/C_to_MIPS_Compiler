@@ -11,10 +11,13 @@ typedef const stackFrame* stackFramePtr;
 struct registerSet;
 typedef const registerSet* registerSetPtr;
 
+
 struct mipsCon{
+
     struct varInfo{
         int size;
         uint32_t offset;
+        std::vector<int> arraySize;
     };
 
     struct funcInfo{
@@ -25,10 +28,11 @@ struct mipsCon{
     struct{
         std::string id;
         int size;
+        std::vector<int> arraySize;
     }dummyDec;
 
     struct stackFrame{
-        struct funcDecStruct { bool functionDef; std::string funcID; } funcDec;
+        struct funcDecStruct { bool functionDef; bool initialize; std::string funcID; } funcDec;
         struct funcContentStruct { bool functionPatty; std::string funcID; } funcContent; //get it? because it's the MEAT of the function??
         struct varDecStruct { bool variableDec; std::string varID; } varDec; 
         struct assignStruct { bool isAssign; std::string assID; } assign;
@@ -100,7 +104,6 @@ struct mipsCon{
     void recoverReg(const std::vector<int>& loadingReg, std::ostream& os) {
         //std::cout << "***recoverReg***" << std::endl;
         for(int i=0; i<loadingReg.size(); i++) {
-
             os << "lw " << reg(loadingReg[i]) << ", 0(" << reg(29) << ")";
             os << std::endl;
             os << "addi " << reg(29) << ", " << reg(29) << ", 4";

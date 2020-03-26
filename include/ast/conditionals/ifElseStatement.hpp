@@ -4,7 +4,7 @@
 class ifElseStatement;
 typedef const ifElseStatement* ifElseStatementPtr;
 
-class ifElseStatement : public Node {
+class ifElseStatement : public Expression {
 public:
     ifElseStatement(NodePtr exp, NodePtr nod1, NodePtr nod2): condition(exp), ifExecute(nod1), elseExecute(nod2) { }
     NodePtr getCondition() { return condition; }

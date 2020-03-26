@@ -20,7 +20,7 @@ class Constant: public Expression {
         void pythonGen(std::ostream &os) const{
           os << val;
         }
-        int getVal() { return val; }
+        int evaluate() { return val; }
         void mipsGen(std::ostream& os, mipsCon& con, int dest=0) const {
           os << "li " << con.reg(dest) << ", " << val;
           os << std::endl;

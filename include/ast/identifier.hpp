@@ -47,7 +47,7 @@ class Identifier: public Expression {
               os << "addi " << con.reg(29) << ", " << con.reg(29) << ", -" << con.dummyDec.size;
               os << std::endl;
               con.stackSize+=con.dummyDec.size;
-              con.varBinding()[con.dummyDec.id]={4, static_cast<uint32_t>(con.stackSize)};
+              con.varBinding()[con.dummyDec.id]={4, static_cast<uint32_t>(con.stackSize), {}};
 
               os << "move " << con.reg(2) << ", " << con.reg(con.paramReg);
               os<<std::endl;

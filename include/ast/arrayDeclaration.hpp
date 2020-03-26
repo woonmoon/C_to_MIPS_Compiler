@@ -19,9 +19,9 @@ public:
 
     void mipsGen(std::ostream& os, mipsCon& con, int dest=0) const {
         declarator->mipsGen(os, con);
-        //if(!con.funcDec().initialize) {
-           expression->evaluate();
-        //}
+        if(!con.funcDec().initialize) {
+           con.dummyDec.arraySize.push_back(2);
+        }
     }
 
 protected:
