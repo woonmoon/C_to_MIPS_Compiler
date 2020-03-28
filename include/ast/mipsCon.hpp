@@ -35,9 +35,10 @@ struct mipsCon{
         struct funcDecStruct { bool functionDef; bool initialize; std::string funcID; } funcDec;
         struct funcContentStruct { bool functionPatty; std::string funcID; } funcContent; //get it? because it's the MEAT of the function??
         struct varDecStruct { bool variableDec; std::string varID; } varDec; 
-        struct assignStruct { bool isAssign; std::string assID; } assign;
+        struct assignStruct { bool isAssign; std::string assID; bool toArray; int addressReg; } assign;
         struct conditialStruct { bool isCond; bool conditionalPatty; } conditional;
         struct statementStruct { bool compound=true; std::string contFlag; std::string endFlag; int offset=0; } statement;
+        //struct arrayStruct { int addressReg; bool toArray; } arrayAss; 
         std::map<std::string, varInfo> varBinding;
         int spOffset;
     };

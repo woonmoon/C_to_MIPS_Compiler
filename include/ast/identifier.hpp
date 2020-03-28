@@ -37,6 +37,7 @@ class Identifier: public Expression {
             os << identifierName << ":";
             os << std::endl;
           }else if(con.inFrame(identifierName)) { //already a pre-used variable
+            //std::cout << "found the array/variable " << identifierName << " with offset " << con.varBinding()[identifierName].offset <<  std::endl;
             con.dummyDec.id=identifierName; // I ADDED THIS FOR ASSIGNMENT OPERATOR HOPE IT DOESNT CAUSE PROBLEMS xoxo
             int id_offset=con.varBinding().at(identifierName).offset;
             os << "lw " << con.reg(dest) << ", " << con.stackSize-id_offset <<  "(" << con.reg(29) << ")";
@@ -60,6 +61,7 @@ class Identifier: public Expression {
               con.stackSize+=con.dummyDec.size;
               con.varBinding()[con.dummyDec.id]={4, static_cast<uint32_t>(con.stackSize), con.dummyDec.arraySize};
             }
+            //std::cout << "i think this is a completely new variable " << identifierName << " with stored offset " << con.stackSize << std::endl;
           }
           //**MISSING GLOBAL CASES AND PARAMETER CASES** 
         }

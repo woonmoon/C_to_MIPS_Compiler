@@ -16,16 +16,24 @@ public:
 
 
     void mipsGen(std::ostream& os, mipsCon& con, int dest=0) const { 
+        //std::cout << "i'M AN ASSIGNMENT OPERATOR" << std::endl;
         int addrDest = con.registerSet.freeRegister();
         con.flushReg({addrDest}, os);
 
         branches[0]->mipsGen(os, con, addrDest);
-        std::string storeTo = con.dummyDec.id;
-        branches[1]->mipsGen(os, con, addrDest);
-
-        con.writeToStack(addrDest, con.varBinding().at(storeTo).offset, os);
-
+        if(!con.assign().toArray) {
+            std::string storeTo = con.dummyDec.id;
+            branches[1]->mipsGen(os, con, addrDest);
+            con.writeToStack(addrDest, con.varBinding().at(storeTo).offset, os);
+        }else{
+            con.assign().toArray=false;
+            branches[1]->mipsGen(os, con, addrDest);
+            os << "sw " << con.reg(addrDest) << ", 0(" << con.reg(con.assign().addressReg) << ")";
+            os << std::endl;
+            con.registerSet.untickReg(con.assign().addressReg);
+        }
         con.recoverReg({addrDest}, os);
+        con.registerSet.untickReg(addrDest);
     }
     int evaluate() const { return 0; }
     std::string getName() const { return ""; }

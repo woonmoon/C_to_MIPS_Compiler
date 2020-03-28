@@ -1,9 +1,7 @@
 int f()
 {
-    int i;
+    int i=1;
     int x[8];
-    for(i=0; i<8; i++){
-        x[i]=i;
-    }
-    return x[4];
+    x[i+1]=2;
+    return x[2];
 }
