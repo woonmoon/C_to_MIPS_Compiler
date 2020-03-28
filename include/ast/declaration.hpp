@@ -29,7 +29,6 @@ public:
     void pythonGen(std::ostream& os) const { }
 
     void mipsGen(std::ostream& os, mipsCon& con, int dest=0) const {
-      //std::cout << "GOT TO DECLARATION" << std::endl;
       if(!con.funcDec().functionDef) {
         if(con.firstTime&&con.extraCheck){
           con.enterNewFunc(os);
@@ -38,7 +37,7 @@ public:
         con.varDec().variableDec=true;
         con.dummyDec={};
       }
-      //std::cout << "GOT TO DECLARATION" << std::endl;
+      //std::cout << "MADE IT PAST THE CHECKING" << std::endl;
       branches[0]->mipsGen(os, con);
       //std::cout << "FINISHED BRANCH[0] DECL" << std::endl;
       branches[1]->mipsGen(os, con);

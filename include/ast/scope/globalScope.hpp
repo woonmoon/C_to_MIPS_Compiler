@@ -27,7 +27,7 @@ public:
     void genPython(std::ostream& os) const { }
 
     void mipsGen(std::ostream& os, mipsCon& con, int dest=0) const {
-        //con.enterScope();
+        con.stack.push_back({});
         for(int i=0; i<sequence.size(); i++) {
             sequence[i]->mipsGen(os, con, dest);
             con.exitScope(os);
