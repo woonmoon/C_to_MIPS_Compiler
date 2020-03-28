@@ -51,9 +51,13 @@ public:
           far_offset=con.stackSize-con.varBinding().at(con.dummyDec.id).offset;
           //std::cout << "stack size is " << con.stackSize << " far offset is " << far_offset << std::endl;
         }else{
-          //std::cout << "the array size is " << con.varBinding().at(con.dummyDec.id).arraySize[0] << " and the size is " << con.varBinding().at(con.dummyDec.id).arraySize[0]*4 << std::endl;
-          far_offset=con.stackSize-(con.varBinding()[con.dummyDec.id].offset+con.varBinding().at(con.dummyDec.id).arraySize[0]*4);
-          //std::cout << "stack size is " << con.stackSize << " far offset is " << far_offset << std::endl;
+          if(con.stack.size()>1) {
+            //std::cout << "the array size is " << con.varBinding().at(con.dummyDec.id).arraySize[0] << " and the size is " << con.varBinding().at(con.dummyDec.id).arraySize[0]*4 << std::endl;
+            far_offset=con.stackSize-(con.varBinding()[con.dummyDec.id].offset+con.varBinding().at(con.dummyDec.id).arraySize[0]*4);
+            //std::cout << "stack size is " << con.stackSize << " far offset is " << far_offset << std::endl;
+          }else{ //global
+            far_offset=con.gloVar[con.dummyDec.id].offset+con.gloVar[con.dummyDec.id].arraySize[0]*4;
+          }
         }
         os << "addi " << con.reg(29) << ", " << con.reg(29) << ", " << far_offset; //MAY NOT NEED =================
         os << std::endl;

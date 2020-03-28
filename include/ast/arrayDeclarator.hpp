@@ -19,7 +19,13 @@ public:
 
     void mipsGen(std::ostream& os, mipsCon& con, int dest=0) const {
         declarator->mipsGen(os, con);
-        if(!con.funcDec().initialize) { con.varBinding()[con.dummyDec.id].arraySize.push_back(expression->evaluate()); }
+        if(!con.funcDec().initialize) {
+            if(con.stack.size()>1) {
+                con.varBinding()[con.dummyDec.id].arraySize.push_back(expression->evaluate());
+            }else{ //global
+                con.gloVar[con.dummyDec.id].arraySize.push_back(expression->evaluate());
+            } 
+        }
         //std::cout << "left array declarator" << std::endl;
     }
 

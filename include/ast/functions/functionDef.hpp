@@ -25,6 +25,7 @@ public:
 
     void mipsGen(std::ostream& os, mipsCon& con, int dest=0) const {
         //con.enterNewFunc(os);
+        con.enterScope();
         con.funcDec().functionDef=true;
         //std::cout << "***functionDef***: entering declarator" << std::endl;
         Declarator->mipsGen(os, con);

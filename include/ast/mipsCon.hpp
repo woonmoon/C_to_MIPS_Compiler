@@ -38,13 +38,14 @@ struct mipsCon{
         struct assignStruct { bool isAssign; std::string assID; bool toArray; int addressReg; } assign;
         struct conditialStruct { bool isCond; bool conditionalPatty; } conditional;
         struct statementStruct { bool compound=true; std::string contFlag; std::string endFlag; int offset=0; } statement;
-        //struct arrayStruct { int addressReg; bool toArray; } arrayAss; 
+        struct enumStruct { int lastEl=-1; } enumerator;
         std::map<std::string, varInfo> varBinding;
         int spOffset;
     };
 
     std::vector<stackFrame> stack;
     std::map<std::string, funcInfo> funcBinding;
+    std::map<std::string, varInfo> gloVar;
 
     bool isParam = 0;
     bool firstTime;
@@ -62,6 +63,7 @@ struct mipsCon{
     stackFrame::assignStruct& assign() { return stack.back().assign; }
     stackFrame::conditialStruct& conditional() { return stack.back().conditional; }
     stackFrame::statementStruct& statement() { return stack.back().statement; }
+    stackFrame::enumStruct& enumerator() { return stack.back().enumerator; }
 
 
     struct registers{

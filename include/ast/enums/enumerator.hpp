@@ -11,7 +11,12 @@ public:
     void print(std::ostream& dst, pycon& con, int level) const {}
     void pythonGen(std::ostream& os) const {}
     void mipsGen(std::ostream& os, mipsCon& con, int dest=0) const {
-        exp->evaluate();
+        if(exp==NULL) { con.enumerator().lastEl++; }else{ con.enumerator().lastEl=exp->evaluate(); }
+        if(con.stack.size()>1) { //not global
+            
+        }else{ //global
+            con.gloVar[id]={};
+        }
     }
 protected:
     std::string id;
