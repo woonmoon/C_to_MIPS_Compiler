@@ -6,7 +6,7 @@ typedef const postInc* postIncPtr;
 
 class postInc: public Expression {
 public:
-    postInc(NodePtr left) { branches.push_back(left); }
+    postInc(ExpressionPtr left): exp(left) { branches.push_back(left); }
     void print(std::ostream& dst, pycon& con, int level) const { }
     void pythonGen(std::ostream& os) const { }
 
@@ -30,9 +30,10 @@ public:
         con.recoverReg({addrDest2, addrDest1}, os);
 
     }
-    int evaluate() const { return 0; }
+    int evaluate() const { return (exp->evaluate())+1; }
     std::string getName() const { return ""; }
 protected:
+    ExpressionPtr exp;
 };
 
 class postDec;
@@ -40,7 +41,7 @@ typedef const postDec* postDecPtr;
 
 class postDec: public Expression {
 public:
-    postDec(NodePtr left) { branches.push_back(left); }
+    postDec(ExpressionPtr left): exp(left) { branches.push_back(left); }
     void print(std::ostream& dst, pycon& con, int level) const { }
     void pythonGen(std::ostream& os) const { }
 
@@ -64,9 +65,10 @@ public:
         con.recoverReg({addrDest2, addrDest1}, os);
 
     }
-    int evaluate() const { return 0; }
+    int evaluate() const { return (exp->evaluate())-1; }
     std::string getName() const { return ""; }
 protected:
+    ExpressionPtr exp;
 };
 
 class preDec;
@@ -74,7 +76,7 @@ typedef const preDec* preDecPtr;
 
 class preDec: public Expression {
 public:
-    preDec(NodePtr left) { branches.push_back(left); }
+    preDec(ExpressionPtr left): exp(left) { branches.push_back(left); }
     void print(std::ostream& dst, pycon& con, int level) const { }
     void pythonGen(std::ostream& os) const { }
 
@@ -97,9 +99,10 @@ public:
         con.recoverReg({addrDest1}, os);
 
     }
-    int evaluate() const { return 0; }
+    int evaluate() const { return (exp->evaluate())-1; }
     std::string getName() const { return ""; }
 protected:
+    ExpressionPtr exp;
 };
 
 class preInc;
@@ -107,7 +110,7 @@ typedef const preInc* preIncPtr;
 
 class preInc: public Expression {
 public:
-    preInc(NodePtr left) { branches.push_back(left); }
+    preInc(ExpressionPtr left): exp(left) { branches.push_back(left); }
     void print(std::ostream& dst, pycon& con, int level) const { }
     void pythonGen(std::ostream& os) const { }
 
@@ -130,9 +133,10 @@ public:
         con.recoverReg({addrDest1}, os);
 
      }
-    int evaluate() const { return 0; }
+    int evaluate() const { return (exp->evaluate())+1; }
     std::string getName() const { return ""; }
 protected:
+    ExpressionPtr exp;
 };
 
 #endif

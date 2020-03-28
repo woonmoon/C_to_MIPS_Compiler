@@ -6,7 +6,7 @@ typedef const subOp* subOpPtr;
 
 class subOp: public Expression {
 public:
-    subOp(NodePtr left, NodePtr right) { branches.push_back(left); branches.push_back(right); }
+    subOp(ExpressionPtr left, ExpressionPtr right): exp1(left), exp2(right) { branches.push_back(left); branches.push_back(right); }
     void print(std::ostream& dst, pycon& con, int level) const {
         branches[0]->print(dst, con, level);
         dst << " - ";
@@ -31,9 +31,11 @@ public:
 
 
     }
-    int evaluate() const { return 0; }
+    int evaluate() const { return exp1->evaluate()-exp2->evaluate(); }
     std::string getName() const { return ""; }
 protected:
+    ExpressionPtr exp1;
+    ExpressionPtr exp2;
 };
 
 #endif

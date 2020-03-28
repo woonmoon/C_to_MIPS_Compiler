@@ -3,7 +3,7 @@
 
 class lessThanEqual: public Expression {
 public:
-    lessThanEqual(NodePtr left, NodePtr right) { branches.push_back(left); branches.push_back(right); }
+    lessThanEqual(ExpressionPtr left, ExpressionPtr right) { branches.push_back(left); branches.push_back(right); }
     void print(std::ostream& dst, pycon& con, int level) const {
         branches[0]->print(dst, con, level);
         dst << " < ";

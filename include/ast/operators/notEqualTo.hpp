@@ -6,7 +6,7 @@ typedef const notEqualTo* notEqualToPtr;
 
 class notEqualTo: public Expression{
 public:
-    notEqualTo(NodePtr left, NodePtr right) { branches.push_back(left); branches.push_back(right); }
+    notEqualTo(ExpressionPtr left, ExpressionPtr right) { branches.push_back(left); branches.push_back(right); }
     void print(std::ostream& dst, pycon& con, int level) const {
         branches[0]->print(dst, con, level);
         dst << " == ";

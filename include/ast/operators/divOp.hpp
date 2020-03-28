@@ -6,7 +6,7 @@ typedef const divOp* divOpPtr;
 
 class divOp: public Expression {
 public:
-    divOp(NodePtr left, NodePtr right) { branches.push_back(left); branches.push_back(right); }
+    divOp(ExpressionPtr left, ExpressionPtr right): exp1(left), exp2(right) { branches.push_back(left); branches.push_back(right); }
 
     void print(std::ostream& dst, pycon& con, int level) const { }
 
@@ -31,9 +31,12 @@ public:
         con.recoverReg({addrDest2, addrDest1}, os); //THIS ORDER IS DUE TO IT NOT  HAVING TO GO UP THEN DOWN
 
     }
-    int evaluate() const { return 0; }
+    int evaluate() const { return exp1->evaluate() / exp2->evaluate(); }
     std::string getName() const { return ""; }
+
 protected:
+    ExpressionPtr exp1;
+    ExpressionPtr exp2;
 };
 
 #endif

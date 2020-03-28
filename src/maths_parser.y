@@ -244,8 +244,8 @@ ENUMERATOR_LIST : ENUMERATOR {  }
                 | ENUMERATOR_LIST T_COMMA ENUMERATOR { }
                 ;
 
-ENUMERATOR : T_IDENTIFIER {  }
-           | T_IDENTIFIER T_ASSIGN CONSTANT_EXPRESSION { }
+ENUMERATOR : T_IDENTIFIER { $$ = new Enumerator(*$1, NULL); }
+           | T_IDENTIFIER T_ASSIGN CONSTANT_EXPRESSION { $$ = new Enumerator(*$1, $3); }
            ;
 
 TYPE_QUALIFIER : T_CONST {  }

@@ -3,7 +3,7 @@
 
 class greaterThan: public Expression {
 public:
-    greaterThan(NodePtr left, NodePtr right) { branches.push_back(left); branches.push_back(right); }
+    greaterThan(ExpressionPtr left, ExpressionPtr right) { branches.push_back(left); branches.push_back(right); }
     void print(std::ostream& dst, pycon& con, int level) const { }
     void pythonGen(std::ostream& os) const { }
     void mipsGen(std::ostream& os, mipsCon& con, int dest=0) const { 

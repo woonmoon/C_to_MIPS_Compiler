@@ -6,7 +6,7 @@ typedef const logAndOp* logAndOpPtr;
 
 class logAndOp: public Expression {
 public:
-    logAndOp(NodePtr left, NodePtr right) { branches.push_back(left); branches.push_back(right); }
+    logAndOp(ExpressionPtr left, ExpressionPtr right): exp1(left), exp2(right) { branches.push_back(left); branches.push_back(right); }
     void print(std::ostream& dst, pycon& con, int level) const {
         branches[0]->print(dst, con, level);
         dst << " and ";
@@ -38,37 +38,12 @@ public:
         con.recoverReg({dest2, dest1}, os); 
     }
 
-    int evaluate() const { return 0; }
+    int evaluate() const { return exp1->evaluate() && exp2->evaluate(); }
     std::string getName() const { return ""; }
 
-    //     void mipsGen(std::ostream& os, mipsCon& con, int dest=0) const {
-    //     std::string falseEx=con.makeALabel("false");
-    //     std::string ending=con.makeALabel("theEnd");
-    //     int dest0=con.registerSet.freeRegister();
-    //     int dest1=con.registerSet.freeRegister();
-    //     con.flushReg({dest0, dest1}, os);
-
-    //     branches[0]->mipsGen(os, con, dest0);
-    //     os << "beq " << con.reg(dest0) << ", " << con.reg(0) << ", " << falseEx;
-    //     os << std::endl;
-    //     branches[1]->mipsGen(os, con, dest1);
-    //     os << "beq " << con.reg(dest1) << ", " << con.reg(0) << ", " << falseEx;
-    //     os << std::endl;
-    //     os << "addiu " << con.reg(dest) << ", " << con.reg(dest) << ", 1";
-    //     os << std::endl;
-    //     os << "j " << ending;
-    //     os << std::endl;
-    //     os << falseEx << ":";
-    //     os << std::endl;
-    //     os << "addiu " << con.reg(dest) << ", " << con.reg(0) << ", 0";
-    //     os << std::endl;
-    //     os << ending << ":";
-    //     os << std::endl;
-
-    //     con.recoverReg({dest1, dest0}, os); 
-    // }
-
 protected:
+    ExpressionPtr exp1;
+    ExpressionPtr exp2;
 };
 
 #endif

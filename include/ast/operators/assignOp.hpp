@@ -6,7 +6,7 @@ typedef const assignOp* assignOpPtr;
 
 class assignOp: public Expression {
 public:
-    assignOp(NodePtr left, NodePtr right) { branches.push_back(left); branches.push_back(right); }
+    assignOp(ExpressionPtr left, ExpressionPtr right) { branches.push_back(left); branches.push_back(right); }
     void print(std::ostream& dst, pycon& con, int level) const {
         branches[0]->print(dst, con, level);
         dst << " = ";
@@ -45,7 +45,7 @@ typedef const plusAssignOp* plusAssignOpPtr;
 
 class plusAssignOp: public Expression {
 public:
-    plusAssignOp(NodePtr left, NodePtr right) { branches.push_back(left); branches.push_back(right); }
+    plusAssignOp(ExpressionPtr left, ExpressionPtr right) { branches.push_back(left); branches.push_back(right); }
     void print(std::ostream& dst, pycon& con, int level) const { }
     void pythonGen(std::ostream& os) const { }
 
@@ -75,7 +75,7 @@ typedef const subAssignOp* subAssignOpPtr;
 
 class subAssignOp: public Expression {
 public:
-    subAssignOp(NodePtr left, NodePtr right) { branches.push_back(left); branches.push_back(right); }
+    subAssignOp(ExpressionPtr left, ExpressionPtr right) { branches.push_back(left); branches.push_back(right); }
     void print(std::ostream& dst, pycon& con, int level) const { }
     void pythonGen(std::ostream& os) const { }
 
@@ -105,7 +105,7 @@ typedef const multAssignOp* multAssignOpPtr;
 
 class multAssignOp: public Expression {
 public:
-    multAssignOp(NodePtr left, NodePtr right) { branches.push_back(left); branches.push_back(right); }
+    multAssignOp(ExpressionPtr left, ExpressionPtr right) { branches.push_back(left); branches.push_back(right); }
     void print(std::ostream& dst, pycon& con, int level) const { }
     void pythonGen(std::ostream& os) const { }
 
@@ -136,7 +136,7 @@ typedef const divAssignOp* divAssignOpPtr;
 
 class divAssignOp: public Expression {
 public:
-    divAssignOp(NodePtr left, NodePtr right) { branches.push_back(left); branches.push_back(right); }
+    divAssignOp(ExpressionPtr left, ExpressionPtr right) { branches.push_back(left); branches.push_back(right); }
     void print(std::ostream& dst, pycon& con, int level) const { }
     void pythonGen(std::ostream& os) const { }
 
@@ -167,7 +167,7 @@ typedef const modAssignOp* modAssignOpPtr;
 
 class modAssignOp: public Expression {
 public:
-    modAssignOp(NodePtr left, NodePtr right) { branches.push_back(left); branches.push_back(right); }
+    modAssignOp(ExpressionPtr left, ExpressionPtr right) { branches.push_back(left); branches.push_back(right); }
     void print(std::ostream& dst, pycon& con, int level) const { }
     void pythonGen(std::ostream& os) const { }
 
@@ -198,7 +198,7 @@ typedef const andAssignOp* andAssignOpPtr;
 
 class andAssignOp: public Expression {
 public:
-    andAssignOp(NodePtr left, NodePtr right) { branches.push_back(left); branches.push_back(right); }
+    andAssignOp(ExpressionPtr left, ExpressionPtr right) { branches.push_back(left); branches.push_back(right); }
     void print(std::ostream& dst, pycon& con, int level) const { }
     void pythonGen(std::ostream& os) const { }
 
@@ -228,7 +228,7 @@ typedef const orAssignOp* orAssignOpPtr;
 
 class orAssignOp: public Expression {
 public:
-    orAssignOp(NodePtr left, NodePtr right) { branches.push_back(left); branches.push_back(right); }
+    orAssignOp(ExpressionPtr left, ExpressionPtr right) { branches.push_back(left); branches.push_back(right); }
     void print(std::ostream& dst, pycon& con, int level) const { }
     void pythonGen(std::ostream& os) const { }
 
@@ -258,7 +258,7 @@ typedef const xorAssignOp* xorAssignOpPtr;
 
 class xorAssignOp: public Expression {
 public:
-    xorAssignOp(NodePtr left, NodePtr right) { branches.push_back(left); branches.push_back(right); }
+    xorAssignOp(ExpressionPtr left, ExpressionPtr right) { branches.push_back(left); branches.push_back(right); }
     void print(std::ostream& dst, pycon& con, int level) const { }
     void pythonGen(std::ostream& os) const { }
 
@@ -288,7 +288,7 @@ typedef const leftShiftAssignOp* leftShiftAssignOpPtr;
 
 class leftShiftAssignOp: public Expression {
 public:
-    leftShiftAssignOp(NodePtr left, NodePtr right) { branches.push_back(left); branches.push_back(right); }
+    leftShiftAssignOp(ExpressionPtr left, ExpressionPtr right) { branches.push_back(left); branches.push_back(right); }
     void print(std::ostream& dst, pycon& con, int level) const { }
     void pythonGen(std::ostream& os) const { }
 
@@ -318,7 +318,7 @@ typedef const rightShiftAssignOp* rightShiftAssignOpPtr;
 
 class rightShiftAssignOp: public Expression {
 public:
-    rightShiftAssignOp(NodePtr left, NodePtr right) { branches.push_back(left); branches.push_back(right); }
+    rightShiftAssignOp(ExpressionPtr left, ExpressionPtr right) { branches.push_back(left); branches.push_back(right); }
     void print(std::ostream& dst, pycon& con, int level) const { }
     void pythonGen(std::ostream& os) const { }
 

@@ -6,7 +6,7 @@ typedef const mulOp* mulOpPtr;
 
 class mulOp: public Expression {
 public:
-    mulOp(NodePtr left, NodePtr right) { branches.push_back(left); branches.push_back(right); }
+    mulOp(ExpressionPtr left, ExpressionPtr right): exp1(left), exp2(right) { branches.push_back(left); branches.push_back(right); }
     void print(std::ostream& dst, pycon& con, int level) const {
         branches[0]->print(dst, con, level);
         dst << " * ";
@@ -32,9 +32,11 @@ public:
         con.recoverReg({addrDest2, addrDest1}, os); //ORDERED LIKE THIS SO IT DOESNT HAVE TO GO UP AND DOWN, JUST UP
 
     }
-    int evaluate() const { return 0; }
+    int evaluate() const { return exp1->evaluate()*exp2->evaluate(); }
     std::string getName() const { return ""; }
 protected:
+    ExpressionPtr exp1;
+    ExpressionPtr exp2;
 };
 
 #endif

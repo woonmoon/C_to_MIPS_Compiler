@@ -6,7 +6,7 @@ typedef const rightShiftOp* rightShiftOpPtr;
 
 class rightShiftOp: public Expression {
 public:
-    rightShiftOp(NodePtr left, NodePtr right) { branches.push_back(left); branches.push_back(right); }
+    rightShiftOp(ExpressionPtr left, ExpressionPtr right): exp1(left), exp2(right) { branches.push_back(left); branches.push_back(right); }
     void print(std::ostream& dst, pycon& con, int level) const {
     }
     void pythonGen(std::ostream& os) const { }
@@ -27,9 +27,11 @@ public:
         con.recoverReg({addrDest2, addrDest1}, os); 
 
     }
-    int evaluate() const { return 0; }
+    int evaluate() const { return exp1->evaluate() >> exp2->evaluate(); }
     std::string getName() const { return ""; }
 protected:
+    ExpressionPtr exp1;
+    ExpressionPtr exp2;
 };
 
 #endif
