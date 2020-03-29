@@ -46,18 +46,18 @@ public:
         con.recoverReg({newDest}, os);
         int far_offset;
         //std::cout << "array size is " << con.varBinding()[con.dummyDec.id].arraySize[0] << std::endl;
-        if(con.varBinding().at(con.dummyDec.id).arraySize.size()==0) {
-          //std::cout << "offset of single variable is " << con.varBinding().at(con.dummyDec.id).offset << std::endl;
-          far_offset=con.stackSize-con.varBinding().at(con.dummyDec.id).offset;
-          //std::cout << "stack size is " << con.stackSize << " far offset is " << far_offset << std::endl;
-        }else{
-          if(con.stack.size()>1) {
-            //std::cout << "the array size is " << con.varBinding().at(con.dummyDec.id).arraySize[0] << " and the size is " << con.varBinding().at(con.dummyDec.id).arraySize[0]*4 << std::endl;
+        if(con.stack.size()>1) {
+          if(con.varBinding().at(con.dummyDec.id).arraySize.size()==0) {
+            far_offset=con.stackSize-con.varBinding().at(con.dummyDec.id).offset;
+            //std::cout << "stack size is " << con.stackSize << " far offset is " << far_offset << std::endl;
+          }else{
             far_offset=con.stackSize-(con.varBinding()[con.dummyDec.id].offset+con.varBinding().at(con.dummyDec.id).arraySize[0]*4);
             //std::cout << "stack size is " << con.stackSize << " far offset is " << far_offset << std::endl;
-          }else{ //global
-            far_offset=con.gloVar[con.dummyDec.id].offset+con.gloVar[con.dummyDec.id].arraySize[0]*4;
-          }
+          }  
+        }else{ //global
+          //std::cout << "global declaration of array in init declarator" << std::endl;
+          far_offset=con.stackSize-(con.gloVar[con.dummyDec.id].offset+con.gloVar[con.dummyDec.id].arraySize[0]*4);
+          //std::cout << "stack size is " << con.stackSize << " far offset is " << far_offset << std::endl;
         }
         os << "addi " << con.reg(29) << ", " << con.reg(29) << ", " << far_offset; //MAY NOT NEED =================
         os << std::endl;
@@ -65,7 +65,6 @@ public:
         con.registerSet.untickReg(newDest);
         //std::cout << "array foo is stored at " << con.varBinding().at("foo").offset << " array size is " << con.varBinding().at("foo").arraySize[0] << std::endl;
       }
-
       if(con.isParam) {
         branches[0]->mipsGen(os, con, 2);
         con.writeToStack(2, con.varBinding().at(con.dummyDec.id).offset, os);
@@ -78,8 +77,8 @@ public:
     int evaluate() const { return 0; }
     std::string getName() const { return ""; }
 
-private:
- bool isAssign;
+protected:
+  bool isAssign;
 };
 
 #endif

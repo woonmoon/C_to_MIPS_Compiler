@@ -93,6 +93,12 @@ struct mipsCon{
         return false;
     }
 
+    bool isGlobal(std::string _label) {
+        std::map<std::string, varInfo>::iterator it=gloVar.find(_label); 
+        if(it!=gloVar.end()) { return true; }
+        return false;
+    }
+
     void flushReg(const std::vector<int>& storingReg, std::ostream& os) {
         //std::cout << "***flushReg***" << std::endl;
         for(int i=0; i<storingReg.size(); i++) {

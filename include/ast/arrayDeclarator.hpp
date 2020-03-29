@@ -23,8 +23,11 @@ public:
             if(con.stack.size()>1) {
                 con.varBinding()[con.dummyDec.id].arraySize.push_back(expression->evaluate());
             }else{ //global
+                //con.stackSize+=4;
                 con.gloVar[con.dummyDec.id].arraySize.push_back(expression->evaluate());
-            } 
+                con.gloVar[con.dummyDec.id].offset=con.stackSize;
+                con.gloVar[con.dummyDec.id].size=4;
+            }
         }
         //std::cout << "left array declarator" << std::endl;
     }

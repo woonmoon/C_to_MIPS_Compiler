@@ -33,8 +33,13 @@ class Identifier: public Expression {
           if(con.funcDec().functionDef) { //new function definition, insert a label
             con.funcDec().functionDef=false;
             con.funcDec().funcID=identifierName;
-             os << ".globl " << identifierName << std::endl;
+            os << ".globl " << identifierName << std::endl;
             os << identifierName << ":";
+            os << std::endl;
+          }else if(con.isGlobal(identifierName)) {
+            con.dummyDec.id=identifierName; // I ADDED THIS FOR ASSIGNMENT OPERATOR HOPE IT DOESNT CAUSE PROBLEMS xoxo
+            int id_offset=con.gloVar[identifierName].offset;
+            os << "lw " << con.reg(dest) << ", " << con.stackSize-id_offset <<  "(" << con.reg(29) << ")";
             os << std::endl;
           }else if(con.inFrame(identifierName)) { //already a pre-used variable
             //std::cout << "found the array/variable " << identifierName << " with offset " << con.varBinding()[identifierName].offset <<  std::endl;

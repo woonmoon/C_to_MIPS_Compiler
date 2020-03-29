@@ -23,8 +23,13 @@ public:
         os << std::endl;
         os << "mflo " << con.reg(indexReg);
         os << std::endl;
-        os << "addi " << con.reg(indexReg) << ", " << con.reg(indexReg) << ", " << con.varBinding()[arrayName->getName()].offset;
-        os << std::endl;
+        if(con.inFrame(arrayName->getName())) {
+            os << "addi " << con.reg(indexReg) << ", " << con.reg(indexReg) << ", " << con.varBinding()[arrayName->getName()].offset;
+            os << std::endl;
+        }else if(con.isGlobal(arrayName->getName())){
+            os << "addi " << con.reg(indexReg) << ", " << con.reg(indexReg) << ", " << con.gloVar[arrayName->getName()].offset;
+            os << std::endl;
+        }
         //int ind_offset=con.varBinding()[arrayName->getName()].offset + (index->evaluate()*4);
         os << "li " << con.reg(constReg) << ", " << con.stackSize;
         os << std::endl;
