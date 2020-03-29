@@ -14,6 +14,8 @@ fi
 
 input_dir="c_compiler/formative"
 working="tmp/formative_compiler"
+COUNTER=0;
+PASSES=0;
 mkdir -p ${working}
 
 for i in ${input_dir}/* ; do
@@ -47,10 +49,14 @@ for i in ${input_dir}/* ; do
         
             if [[ ${have_compiler} -ne 0 ]] ; then
                 echo "$base, Fail, No C compiler/translator"
+				((COUNTER=COUNTER+1))
             elif [[ $REF_C_OUT -ne $GOT_ASS_OUT ]] ; then
                 echo "$base, Fail, Expected ${REF_C_OUT}, got ${GOT_ASS_OUT}"
+				((COUNTER=COUNTER+1))
             else
                 echo "$base, Pass"
+				((PASSES=PASSES+1))
+				((COUNTER=COUNTER+1))
             fi
             echo $'\n'
 
@@ -61,3 +67,5 @@ for i in ${input_dir}/* ; do
 
    
 done
+
+echo "Passes ${PASSES} out of ${COUNTER}"

@@ -349,8 +349,8 @@ ITERATION_STATEMENT : T_WHILE T_LBRACKET EXPRESSION T_RBRACKET STATEMENT { $$ = 
                     ;
 JUMP_STATEMENT : T_RETURN T_SEMICOLON {  }
                | T_RETURN EXPRESSION T_SEMICOLON { $$ = new Return($2);  }
-               | T_CONTINUE T_SEMICOLON { }
-               | T_BREAK T_SEMICOLON { }
+               | T_CONTINUE T_SEMICOLON { $$ = new Continue(); }
+               | T_BREAK T_SEMICOLON { $$ = new Break(); }
                ;
 DECLARATION_SPECIFIERS : STORAGE_CLASS_SPECIFIER { }
                        | STORAGE_CLASS_SPECIFIER DECLARATION_SPECIFIERS {  }
