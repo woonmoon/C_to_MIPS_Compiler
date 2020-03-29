@@ -33,6 +33,7 @@ addiu $11, $11, 1
 lw $5, 8($29)
 jal multiply
 nop
+move $10, $2
 not $10, $10
 addiu $10, $10, 1
 lw $31, 20($29)

@@ -20,6 +20,8 @@ public:
 
     void mipsGen(std::ostream& os, mipsCon& con, int dest=0) const{
 
+        con.isReturn = 1;
+
         if(returnVal == NULL) {
             os << "addi " << con.reg(2) << ", " << con.reg(0) << ", " << "0";
             os << std::endl;
@@ -29,7 +31,8 @@ public:
         }
 
         con.returnFunc(os);
-
+            
+        con.isReturn = 0;
     }
 protected:
     NodePtr returnVal;

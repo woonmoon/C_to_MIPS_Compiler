@@ -18,13 +18,17 @@ public:
     void mipsGen(std::ostream& os, mipsCon& con, int dest=0) const {
         
         int addrDest = con.registerSet.freeRegister();
-        
+        int oldDest = dest;
+        if(con.isReturn){
+            dest = con.registerSet.freeRegister();
+        }
+
         branches[0]->mipsGen(os, con, dest);
         con.flushReg({addrDest}, os);
         branches[1]->mipsGen(os, con, addrDest);
 
         os << std::endl;
-        os << "addu " << con.reg(dest) << ", " << con.reg(dest) << ", " << con.reg(addrDest);
+        os << "addu " << con.reg(oldDest) << ", " << con.reg(dest) << ", " << con.reg(addrDest);
         os<< std::endl;
 
         con.recoverReg({addrDest}, os);

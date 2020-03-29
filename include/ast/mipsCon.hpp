@@ -54,6 +54,7 @@ struct mipsCon{
     bool inCall;
     bool isIdentifierCall; //we can remove
     bool isConstantCall; //we can remove
+    bool isReturn;
     int paramReg;
     
 

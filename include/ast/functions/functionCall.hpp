@@ -37,6 +37,9 @@ public:
             os << "jal " << funcName << std::endl;
             os << "nop" << std::endl;
 
+            if(dest!=0){
+                os << "move " << con.reg(dest) << ", " << con.reg(2) << std::endl;
+            }
            
 
            // con.stack.back().spOffset = oldTwentyNine;
