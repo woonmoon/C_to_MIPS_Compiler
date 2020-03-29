@@ -44,8 +44,6 @@ public:
   void addtoList(NodePtr n) {
     listOfExpressions.push_back(n); 
   }
-protected:
-  std::vector<NodePtr> listOfExpressions;
 };
 
 #endif

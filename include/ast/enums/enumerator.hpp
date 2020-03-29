@@ -11,7 +11,7 @@ public:
     void print(std::ostream& dst, pycon& con, int level) const {}
     void pythonGen(std::ostream& os) const {}
     void mipsGen(std::ostream& os, mipsCon& con, int dest=0) const {
-        if(exp==NULL) { con.enumerator().lastEl++; }else{ con.enumerator().lastEl=exp->evaluate(); }
+        if(exp==NULL) { con.enumerator().lastEl=0; }else{ con.enumerator().lastEl=exp->evaluate(); }
         if(con.stack.size()>1) { //not global
             con.stackSize+=4;
             os << "addi " << con.reg(29) << ", " << con.reg(29) << ", -4";
@@ -31,7 +31,7 @@ public:
             con.gloVar[id].size=4;
             //con.gloVar[id].offset=static_cast<uint32_t>(con.stackSize);
             //con.gloVar[id].arraySize={};
-            os << id << ": .word 0";
+            os << id << ": .word " << con.enumerator().lastEl;
             os << std::endl;
         }
     }
