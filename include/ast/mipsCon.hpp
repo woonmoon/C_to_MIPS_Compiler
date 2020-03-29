@@ -52,9 +52,10 @@ struct mipsCon{
     bool extraCheck;
     bool iJustWantTheNameBro;
     bool inCall;
-    bool isIdentifierCall;
-    bool isConstantCall;
+    bool isIdentifierCall; //we can remove
+    bool isConstantCall; //we can remove
     int paramReg;
+    
 
     std::map<std::string, varInfo>& varBinding() { return stack.back().varBinding; }
     stackFrame::funcDecStruct& funcDec() { return stack.back().funcDec; }

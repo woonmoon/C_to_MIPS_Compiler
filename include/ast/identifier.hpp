@@ -73,6 +73,9 @@ class Identifier: public Expression {
         if(con.iJustWantTheNameBro){
         con.dummyDec.id=identifierName;
         con.isIdentifierCall = 1;
+        if(con.isParam){
+          os << "lw " << con.reg(con.paramReg) << ", " << con.stackSize - con.varBinding().at(con.dummyDec.id).offset << "(" << con.reg(29) << ")" << std::endl;
+        }
         }
         }
     int evaluate() const { return 0; }

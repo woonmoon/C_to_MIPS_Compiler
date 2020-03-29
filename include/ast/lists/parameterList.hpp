@@ -50,17 +50,12 @@ public:
     }else if(con.inCall){
          for(int i=0; i<listOfExpressions.size(); i++) {
 
+            con.isParam = 1;
             con.isIdentifierCall = 0;
-            con.isConstantCall = 0;
+            con.isConstantCall = 0;   //these all get activated if they are it
+
             listOfExpressions[i]->mipsGen(os, con, con.paramReg);
 
-            if(con.isIdentifierCall){
-              //load into paramreg, like lw or something from the reg that the identifier is in
-              os << "lw " << con.reg(con.paramReg) << ", " << con.stackSize - con.varBinding().at(con.dummyDec.id).offset << "(" << con.reg(29) << ")" << std::endl;
-            }
-            if(con.isConstantCall){ //MAY NOT NEED THIS COS CONSTANT HAS ITS BOIIIIIIIIIIIIIIIIIIIIIIIIII
-              //li into the paramreg
-            }
             con.paramReg++;
 
          }

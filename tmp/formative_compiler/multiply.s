@@ -27,9 +27,9 @@ slt $8, $8, $9
 lw $9, 0($29)
 addi $29, $29, 4
 beq $8, $0, _falsy_0
+lw $4, 12($29)
 not $11, $11
 addiu $11, $11, 1
-lw $4, 12($29)
 lw $5, 8($29)
 jal multiply
 nop
