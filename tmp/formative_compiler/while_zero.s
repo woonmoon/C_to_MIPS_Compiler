@@ -4,13 +4,13 @@ addi $29, $29, -4
 sw $31, 0($29)
 addi $29, $29, -4
 sw $30, 0($29)
-_cont_0: 
+_continue_0: 
 li $2, 0
-beq $2, $0, _end_1
+beq $2, $0, _break_1
 nop
-j _cont_0
+j _continue_0
 nop
-_end_1:
+_break_1:
 
 li $2, 19937
 lw $31, 4($29)

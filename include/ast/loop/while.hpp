@@ -29,22 +29,22 @@ public:
         con.enterScope();
         //std::cout << "entered scope" << std::endl;
         con.statement().offset=con.stack.back().spOffset;
-        con.statement().contFlag=con.makeALabel("cont");
-        con.statement().endFlag=con.makeALabel("end");
-        os << con.statement().contFlag << ": ";
+        con.statement().continueFlag=con.makeALabel("continue");
+        con.statement().breakFlag=con.makeALabel("break");
+        os << con.statement().continueFlag << ": ";
         os << std::endl;
         condition->mipsGen(os, con, 2);
-        os << "beq " << con.reg(2) << ", " << con.reg(0) << ", " << con.statement().endFlag;
+        os << "beq " << con.reg(2) << ", " << con.reg(0) << ", " << con.statement().breakFlag;
         os << std::endl;
         os << "nop";
         os << std::endl;
         con.conditional().conditionalPatty=true;
         loopBlock->mipsGen(os, con);
-        os << "j " << con.statement().contFlag;
+        os << "j " << con.statement().continueFlag;
         os << std::endl;
         os << "nop";
         os << std::endl;
-        os << con.statement().endFlag << ":";
+        os << con.statement().breakFlag << ":";
         os << std::endl;
         con.exitScope(os);
     }

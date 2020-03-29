@@ -35,4 +35,48 @@ protected:
     NodePtr returnVal;
 };
 
+class Break;
+typedef const Break* BreakPtr;
+
+class Break : public Node {
+public:
+    Break() {}
+    void pythonGen(std::ostream& os) const{}
+    void print(std::ostream& dst, pycon& con, int level) const{ }
+
+
+    void mipsGen(std::ostream& os, mipsCon& con, int dest=0) const{
+
+		int offset = con.stackSize -  con.statement().offset;
+        os << "addi " << con.reg(29) << ", " << con.reg(29) << ", " << offset << std::endl;
+        os << "j " << con.statement().breakFlag << std::endl;
+        os << "nop" << std::endl;
+      
+    }
+protected:
+    NodePtr BreakVal;
+};
+
+class Continue;
+typedef const Continue* ContinuePtr;
+
+class Continue : public Node {
+public:
+    Continue() {}
+    void pythonGen(std::ostream& os) const{}
+    void print(std::ostream& dst, pycon& con, int level) const{ }
+
+
+    void mipsGen(std::ostream& os, mipsCon& con, int dest=0) const{
+
+		int offset = con.stackSize -  con.statement().offset;
+        os << "addi " << con.reg(29) << ", " << con.reg(29) << ", " << offset << std::endl;
+        os << "j " <<  con.statement().continueFlag << std::endl;
+        os << "nop" << std::endl;
+      
+    }
+protected:
+    NodePtr ContinueVal;
+};
+
 #endif

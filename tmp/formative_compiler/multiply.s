@@ -41,7 +41,7 @@ addiu $29, $29, 24
 jr $31
 nop
 _falsy_0:
-_cont_1: 
+_continue_1: 
 addi $29, $29, -4
 sw $12, 0($29)
 lw $2, 16($29)
@@ -50,7 +50,7 @@ li $12, 0
 slt $2, $12, $2
 lw $12, 0($29)
 addi $29, $29, 4
-beq $2, $0, _end_2
+beq $2, $0, _break_2
 nop
 addi $29, $29, -4
 sw $13, 0($29)
@@ -76,9 +76,9 @@ lw $16, 0($29)
 addi $29, $29, 4
 lw $15, 0($29)
 addi $29, $29, 4
-j _cont_1
+j _continue_1
 nop
-_end_2:
+_break_2:
 
 lw $2, 0($29)
 lw $31, 20($29)

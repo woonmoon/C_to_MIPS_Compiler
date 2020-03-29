@@ -37,7 +37,7 @@ struct mipsCon{
         struct varDecStruct { bool variableDec; std::string varID; } varDec; 
         struct assignStruct { bool isAssign; std::string assID; bool toArray; int addressReg; } assign;
         struct conditialStruct { bool isCond; bool conditionalPatty; } conditional;
-        struct statementStruct { bool compound=true; std::string contFlag; std::string endFlag; int offset=0; } statement;
+        struct statementStruct { bool compound=true; std::string continueFlag; std::string breakFlag; int offset=0; } statement;
         struct enumStruct { int lastEl=-1; } enumerator;
         std::map<std::string, varInfo> varBinding;
         int spOffset;

@@ -14,16 +14,16 @@ public:
     void mipsGen(std::ostream& os, mipsCon& con, int dest=0) const {
         con.enterScope();
         con.statement().offset=con.stack.back().spOffset;
-        con.statement().contFlag=con.makeALabel("cont");
-        con.statement().endFlag=con.makeALabel("end");
+        con.statement().continueFlag=con.makeALabel("continue");
+        con.statement().breakFlag=con.makeALabel("break");
         if(condExp1!=NULL) { 
             condExp1->mipsGen(os, con, 2);
-            os << con.statement().contFlag << ": ";
+            os << con.statement().continueFlag << ": ";
             os << std::endl;
         }
         if(condExp2!=NULL) {
             condExp2->mipsGen(os, con, 2);
-            os << "beq " << con.reg(2) << ", " << con.reg(0) << ", " << con.statement().endFlag;
+            os << "beq " << con.reg(2) << ", " << con.reg(0) << ", " << con.statement().breakFlag;
             os << std::endl;
             os << "nop";
             os << std::endl;
@@ -31,11 +31,11 @@ public:
         con.conditional().conditionalPatty=true;
         loopBlock->mipsGen(os, con);
         if(condExp3!=NULL) { condExp3->mipsGen(os, con, 2); }
-        os << "j " << con.statement().contFlag;
+        os << "j " << con.statement().continueFlag;
         os << std::endl;
         os << "nop";
         os << std::endl;
-        os << con.statement().endFlag << ":";
+        os << con.statement().breakFlag << ":";
         os << std::endl;
         con.exitScope(os);
     }
