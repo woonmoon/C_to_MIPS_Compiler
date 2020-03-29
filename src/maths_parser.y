@@ -235,13 +235,13 @@ STRUCT_DECLARATOR : DECLARATOR { }
                   | DECLARATOR T_COLON CONSTANT_EXPRESSION {  }
                   ;
 
-ENUM_SPECIFIER : T_ENUM T_LCURLY ENUMERATOR_LIST T_RCURLY {  }
-               | T_ENUM T_IDENTIFIER T_LCURLY ENUMERATOR_LIST T_RCURLY {  }
-               | T_ENUM T_IDENTIFIER {  }
+ENUM_SPECIFIER : T_ENUM T_LCURLY ENUMERATOR_LIST T_RCURLY { $$ = new enumSpecifier("", $3); }
+               | T_ENUM T_IDENTIFIER T_LCURLY ENUMERATOR_LIST T_RCURLY { $$ = new enumSpecifier(*$2, $4); }
+               | T_ENUM T_IDENTIFIER { $$ = new enumSpecifier(*$2, NULL); }
                ;
 
-ENUMERATOR_LIST : ENUMERATOR {  }
-                | ENUMERATOR_LIST T_COMMA ENUMERATOR { }
+ENUMERATOR_LIST : ENUMERATOR { $$ = new enumList($1); }
+                | ENUMERATOR_LIST T_COMMA ENUMERATOR { $$ = new enumList($1); ($$)->addtoList($3); }
                 ;
 
 ENUMERATOR : T_IDENTIFIER { $$ = new Enumerator(*$1, NULL); }

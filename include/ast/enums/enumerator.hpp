@@ -13,9 +13,26 @@ public:
     void mipsGen(std::ostream& os, mipsCon& con, int dest=0) const {
         if(exp==NULL) { con.enumerator().lastEl++; }else{ con.enumerator().lastEl=exp->evaluate(); }
         if(con.stack.size()>1) { //not global
-            
+            con.stackSize+=4;
+            os << "addi " << con.reg(29) << ", " << con.reg(29) << ", -4";
+            os << std::endl;
+            con.varBinding()[id]={4, static_cast<uint32_t>(con.stackSize), {}};
+            int reg=con.registerSet.freeRegister();
+            con.flushReg({reg}, os);
+            os << "li " << con.reg(reg) << ", " << con.enumerator().lastEl;
+            os << std::endl;
+            con.writeToStack(reg, con.varBinding()[id].offset, os);
+            con.recoverReg({reg}, os);
+            con.registerSet.untickReg(reg);
         }else{ //global
-            con.gloVar[id]={};
+            con.stackSize+=4;
+            //os << "addi " << con.reg(29) << ", " << con.reg(29) << ", -4";
+            //os << std::endl;
+            con.gloVar[id].size=4;
+            //con.gloVar[id].offset=static_cast<uint32_t>(con.stackSize);
+            //con.gloVar[id].arraySize={};
+            os << id << ": .word 0";
+            os << std::endl;
         }
     }
 protected:
