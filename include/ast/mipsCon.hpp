@@ -34,7 +34,7 @@ struct mipsCon{
     struct stackFrame{
         struct funcDecStruct { bool functionDef; bool initialize; std::string funcID; } funcDec;
         struct funcContentStruct { bool functionPatty; std::string funcID; } funcContent; //get it? because it's the MEAT of the function??
-        struct varDecStruct { bool variableDec; std::string varID; } varDec; 
+        struct varDecStruct { bool variableDec; std::string varID; int destReg; } varDec; 
         struct assignStruct { bool isAssign; std::string assID; bool toArray; int addressReg; } assign;
         struct conditialStruct { bool isCond; bool conditionalPatty; } conditional;
         struct statementStruct { bool compound=true; std::string continueFlag; std::string breakFlag; int offset=0; } statement;

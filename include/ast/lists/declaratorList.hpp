@@ -35,6 +35,7 @@ public:
   }
 
   void mipsGen(std::ostream& os, mipsCon& con, int dest=0) const {
+    //std::cout << "in declarator list" << std::endl;
     int reg=con.registerSet.freeRegister();
     for(int i=0; i<listOfExpressions.size(); i++) {
       listOfExpressions[i]->mipsGen(os, con, reg);

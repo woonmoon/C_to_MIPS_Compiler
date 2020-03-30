@@ -37,6 +37,7 @@ public:
         os << std::endl;
         os << con.statement().breakFlag << ":";
         os << std::endl;
+        //con.registerSet.untickAll();
         con.exitScope(os);
     }
 

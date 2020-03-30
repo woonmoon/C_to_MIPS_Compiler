@@ -35,6 +35,7 @@ public:
         os<< std::endl;
 
         con.recoverReg({addrDest1,addrDest}, os);
+        con.registerSet.untickReg(addrDest);
     }
 
     int evaluate() const { return exp1->evaluate()+exp2->evaluate(); }

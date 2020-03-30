@@ -77,6 +77,9 @@ struct          { return T_STRUCT; }
 union           { return T_UNION; }
 enum            { return T_ENUM; }
 const           { return T_CONST; }
+switch          { return T_SWITCH; }
+case            { return T_CASE; }
+default         { return T_DEFAULT; }
 volatile        { return T_VOLATILE; }
 continue        { return T_CONTINUE; }
 break           { return T_BREAK; }

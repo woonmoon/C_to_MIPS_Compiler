@@ -29,7 +29,8 @@ public:
         os<< std::endl;
 
         con.recoverReg({addrDest}, os);
-
+        //con.registerSet.untickReg(addrDest);
+        //con.registerSet.untickReg(oldDest);
 
     }
     int evaluate() const { return exp1->evaluate()-exp2->evaluate(); }

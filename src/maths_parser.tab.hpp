@@ -109,24 +109,27 @@ extern int yydebug;
     T_CONTINUE = 301,
     T_BREAK = 302,
     T_FOR = 303,
-    T_ASSIGN = 304,
-    T_PLUS_EQ = 305,
-    T_MINUS_EQ = 306,
-    T_TIMES_EQ = 307,
-    T_DIV_EQ = 308,
-    T_MOD_EQ = 309,
-    T_AND_EQ = 310,
-    T_OR_EQ = 311,
-    T_XOR_EQ = 312,
-    T_LSHIFT_EQ = 313,
-    T_RSHIFT_EQ = 314,
-    T_CONSTANT = 315,
-    T_IDENTIFIER = 316,
-    T_TYPEDEF = 317,
-    T_CONST = 318,
-    T_VOLATILE = 319,
-    T_PLUS_PLUS = 320,
-    T_MINUS_MINUS = 321
+    T_SWITCH = 304,
+    T_ASSIGN = 305,
+    T_PLUS_EQ = 306,
+    T_MINUS_EQ = 307,
+    T_TIMES_EQ = 308,
+    T_DIV_EQ = 309,
+    T_MOD_EQ = 310,
+    T_AND_EQ = 311,
+    T_OR_EQ = 312,
+    T_XOR_EQ = 313,
+    T_LSHIFT_EQ = 314,
+    T_RSHIFT_EQ = 315,
+    T_CONSTANT = 316,
+    T_IDENTIFIER = 317,
+    T_TYPEDEF = 318,
+    T_CONST = 319,
+    T_VOLATILE = 320,
+    T_PLUS_PLUS = 321,
+    T_MINUS_MINUS = 322,
+    T_CASE = 323,
+    T_DEFAULT = 324
   };
 #endif
 
@@ -144,7 +147,7 @@ union YYSTYPE
   yytokentype token;
   std::string *string;
 
-#line 148 "src/maths_parser.tab.hpp" /* yacc.c:1909  */
+#line 151 "src/maths_parser.tab.hpp" /* yacc.c:1909  */
 };
 
 typedef union YYSTYPE YYSTYPE;

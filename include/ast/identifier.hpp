@@ -29,6 +29,7 @@ class Identifier: public Expression {
 
 
         void mipsGen(std::ostream& os, mipsCon& con, int dest=0) const {
+          //std::cout << "in identifier" << std::endl;
           if(!con.iJustWantTheNameBro){
           if(con.funcDec().functionDef) { //new function definition, insert a label
             con.funcDec().functionDef=false;
@@ -37,13 +38,6 @@ class Identifier: public Expression {
             os << identifierName << ":";
             os << std::endl;
           }else if(con.isGlobal(identifierName)) {
-            //std::cout << "I FOUND A GLOBAL VARIABLE! stack size is " << con.stackSize << " id offset is " << con.gloVar[identifierName].offset << std::endl;
-            //con.dummyDec.id=identifierName; // I ADDED THIS FOR ASSIGNMENT OPERATOR HOPE IT DOESNT CAUSE PROBLEMS xoxo
-            //int id_offset=con.gloVar[identifierName].offset;
-            //std::cout << "stackSize is " << con.stackSize << " id offset is " << id_offset;
-            //std::cout << std::endl;
-            //os << "lw " << con.reg(dest) << ", -" << id_offset <<  "(" << con.reg(0) << ")";
-            //os << std::endl;
             os << "la " << con.reg(dest) << ", " << identifierName;
             os << std::endl;
             os << "lw " << con.reg(dest) << ", 0(" << con.reg(dest) << ")";

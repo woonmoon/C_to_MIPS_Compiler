@@ -44,6 +44,8 @@ public:
         con.assign().addressReg=indexReg;
         con.recoverReg({constReg}, os);
         con.registerSet.untickReg(constReg);
+        con.registerSet.untickReg(indexReg);
+        con.registerSet.untickReg(dest);
     }
     int evaluate() const { return 0; }
     std::string getName() const { return ""; }
