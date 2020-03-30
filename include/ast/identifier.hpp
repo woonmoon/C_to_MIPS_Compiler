@@ -30,6 +30,7 @@ class Identifier: public Expression {
 
         void mipsGen(std::ostream& os, mipsCon& con, int dest=0) const {
           //std::cout << "in identifier" << std::endl;
+     //     std::cout<< "=======================TOP OF IDENTIFIER===============================" << std::endl;
           if(!con.iJustWantTheNameBro){
           if(con.funcDec().functionDef) { //new function definition, insert a label
             con.funcDec().functionDef=false;
@@ -78,6 +79,7 @@ class Identifier: public Expression {
           os << "lw " << con.reg(con.paramReg) << ", " << con.stackSize - con.varBinding().at(con.dummyDec.id).offset << "(" << con.reg(29) << ")" << std::endl;
         }
         }
+      //  std::cout<< "=======================END OF IDENTIFIER===============================" << std::endl;
         }
     int evaluate() const { return 0; }
     std::string getName() const { return identifierName; }

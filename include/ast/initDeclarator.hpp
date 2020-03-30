@@ -33,12 +33,15 @@ public:
     void pythonGen(std::ostream& os) const { }
 
     void mipsGen(std::ostream& os, mipsCon& con, int dest=0) const {
-      //std::cout << "IN INIT_DECLARATOR" << std::endl;
+   //   std::cout << "=======================TOP INIT_DECLARATOR=============================" << std::endl;
       if(con.varDec().variableDec&&(!con.isParam)) {
         //std::cout << "variable declaration!" << std::endl;
         int newDest=con.registerSet.freeRegister();
         con.flushReg({newDest}, os);
+     //   std::cout << "ABOVE" << std::endl;
         branches[0]->mipsGen(os, con, newDest);
+     //   std::cout << "BELOW" << std::endl;
+        if(!con.isGlobalFunc){
         if(isAssign){
           branches[1]->mipsGen(os, con, newDest);
         }
@@ -65,7 +68,8 @@ public:
         con.registerSet.untickReg(newDest);
         //std::cout << "array foo is stored at " << con.varBinding().at("foo").offset << " array size is " << con.varBinding().at("foo").arraySize[0] << std::endl;
       }
-      if(con.isParam) {
+      }
+      if(con.isParam&&!con.isGlobalFunc) {
         branches[0]->mipsGen(os, con, 2);
         con.writeToStack(2, con.varBinding().at(con.dummyDec.id).offset, os);
         int far_offset=con.stackSize-con.varBinding().at(con.dummyDec.id).offset;
@@ -73,6 +77,8 @@ public:
         con.stackSize-=far_offset;
       }
       //std::cout << "left initdeclarator" << std::endl;
+     // std::cout << "=======================BOTTOM INIT_DECLARATOR=============================" << std::endl;
+      con.isGlobalFunc = 0;
     }
     int evaluate() const { return 0; }
     std::string getName() const { return ""; }

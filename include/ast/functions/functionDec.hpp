@@ -26,10 +26,17 @@ public:
 
       void mipsGen(std::ostream& os, mipsCon& con, int dest=0) const {
          //std::cout << "***functionDec***: branch[0]" << std::endl;
+         if(con.funcDec().functionDef != 0){
+       //  std::cout << "=============================" << std::endl;
          branches[0]->mipsGen(os, con);
          if(!single){
             //std::cout << "***functionDec***: branch[1]" << std::endl;
             branches[1]->mipsGen(os, con);
+         }
+        // std::cout << "=============================" << std::endl;
+         }else{
+       //     std::cout << "In the else" <<  std::endl;
+            con.isGlobalFunc = 1;
          }
          //std::cout << "left functionDec" << std::endl
       }
