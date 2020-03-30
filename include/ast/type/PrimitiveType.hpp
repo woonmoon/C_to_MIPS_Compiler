@@ -42,6 +42,7 @@ public:
       con.dummyDec.size=4;
     }
   }
+  void look(mipsCon& con) const {}
 
 private:
   Specifier type;

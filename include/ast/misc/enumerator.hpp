@@ -35,6 +35,7 @@ public:
             os << std::endl;
         }
     }
+    void look(mipsCon& con) const {}
 protected:
     std::string id;
     ExpressionPtr exp;

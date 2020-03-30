@@ -26,6 +26,7 @@ class Constant: public Expression {
           os << std::endl;
         }
         std::string getName() const { return ""; }
+        void look(mipsCon& con) const {}
     private:
         int val;
 };

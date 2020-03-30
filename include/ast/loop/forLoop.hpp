@@ -41,6 +41,8 @@ public:
         con.exitScope(os);
     }
 
+    void look(mipsCon& con) const {}
+
 protected:
     NodePtr condExp1;
     NodePtr condExp2;

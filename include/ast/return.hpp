@@ -34,6 +34,8 @@ public:
             
         con.isReturn = 0;
     }
+
+    void look(mipsCon& con) const {}
 protected:
     NodePtr returnVal;
 };
@@ -56,6 +58,8 @@ public:
         os << "nop" << std::endl;
       
     }
+
+    void look(mipsCon& con) const {}
 protected:
     NodePtr BreakVal;
 };
@@ -78,6 +82,8 @@ public:
         os << "nop" << std::endl;
       
     }
+
+    void look(mipsCon& con) const {}
 protected:
     NodePtr ContinueVal;
 };

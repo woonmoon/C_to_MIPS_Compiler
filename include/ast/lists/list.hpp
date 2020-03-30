@@ -42,8 +42,10 @@ public:
   void addtoList(NodePtr n) {
     listOfExpressions.push_back(n); 
   }
+  void look(mipsCon& con) const {}
 protected:
   std::vector<NodePtr> listOfExpressions;
+  
 };
 
 #endif

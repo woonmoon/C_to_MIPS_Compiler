@@ -32,6 +32,7 @@ public:
     }
     int evaluate() const { return (exp->evaluate())+1; }
     std::string getName() const { return ""; }
+    void look(mipsCon& con) const {}
 protected:
     ExpressionPtr exp;
 };
@@ -67,6 +68,7 @@ public:
     }
     int evaluate() const { return (exp->evaluate())-1; }
     std::string getName() const { return ""; }
+    void look(mipsCon& con) const {}
 protected:
     ExpressionPtr exp;
 };
@@ -101,6 +103,7 @@ public:
     }
     int evaluate() const { return (exp->evaluate())-1; }
     std::string getName() const { return ""; }
+    void look(mipsCon& con) const {}
 protected:
     ExpressionPtr exp;
 };
@@ -135,6 +138,7 @@ public:
      }
     int evaluate() const { return (exp->evaluate())+1; }
     std::string getName() const { return ""; }
+    void look(mipsCon& con) const {}
 protected:
     ExpressionPtr exp;
 };

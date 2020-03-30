@@ -43,6 +43,8 @@ public:
     int evaluate() const { return exp1->evaluate()+exp2->evaluate(); }
     std::string getName() const { return ""; }
 
+    void look(mipsCon& con) const {}
+
 protected:
     ExpressionPtr exp1;
     ExpressionPtr exp2;
@@ -77,6 +79,7 @@ class unaryOp : public Expression{
         }
         int evaluate() const { return 0; }
         std::string getName() const { return ""; }
+        void look(mipsCon& con) const {}
     private:
         std::string op;
         ExpressionPtr expr;

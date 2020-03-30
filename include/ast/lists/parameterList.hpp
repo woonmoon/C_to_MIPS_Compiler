@@ -59,6 +59,7 @@ public:
             con.isConstantCall = 0;
             con.isParam = 0;
   }
+  void look(mipsCon& con) const {}
 
 };
 

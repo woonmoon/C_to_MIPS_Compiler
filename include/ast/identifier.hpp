@@ -83,6 +83,7 @@ class Identifier: public Expression {
         }
     int evaluate() const { return 0; }
     std::string getName() const { return identifierName; }
+    void look(mipsCon& con) const {}
     private:
         std::string identifierName;
 };

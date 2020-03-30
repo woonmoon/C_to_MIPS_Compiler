@@ -39,6 +39,7 @@ public:
   void addtoList(NodePtr n) {
     listOfExpressions.push_back(n); 
   }
+  void look(mipsCon& con) const {}
 };
 
 #endif

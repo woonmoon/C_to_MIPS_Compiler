@@ -147,8 +147,7 @@ CONDITIONAL_EXPRESSION : LOGICAL_OR_EXPRESSION { $$ = $1; }
                        ;
 
 ASSIGNMENT_EXPRESSION : CONDITIONAL_EXPRESSION { $$ = $1;}
-                      | UNARY_EXPRESSION ASSIGNMENT_OPERATOR ASSIGNMENT_EXPRESSION { 
-                        
+                      | UNARY_EXPRESSION ASSIGNMENT_OPERATOR ASSIGNMENT_EXPRESSION {
                         switch($2){
                             case T_ASSIGN: $$ = new assignOp($1, $3); break;
                             case T_PLUS_EQ: $$ = new plusAssignOp($1, $3); break;
