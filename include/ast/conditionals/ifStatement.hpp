@@ -19,6 +19,9 @@ public:
         con.addTab();
         con.indent(dst); /////////////////////
         executeBlock->print(dst, con, level);
+        dst << std::endl;
+        con.indent(dst);
+        dst << "pass" << std::endl;
         con.subTab();
     }
     void pythonGen(std::ostream& os) const { }
