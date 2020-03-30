@@ -40,6 +40,7 @@ public:
         //std::cout << "left function def" 
         //con.exitFunc(os);
     }
+    void look(mipsCon& con) const {}
 protected:
     ExpressionPtr Declarator;
     NodePtr scopeBlock;

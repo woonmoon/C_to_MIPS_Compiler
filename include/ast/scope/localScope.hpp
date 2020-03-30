@@ -46,6 +46,7 @@ public:
         }
         //std::cout << "left localscope" << std::endl;
     }
+    void look(mipsCon& con) const {}
 };
 
 #endif

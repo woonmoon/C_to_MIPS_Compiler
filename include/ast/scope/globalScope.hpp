@@ -33,6 +33,7 @@ public:
             con.exitScope(os);
         }
     }
+    void look(mipsCon& con) const {}
 };
 
 #endif

@@ -39,6 +39,7 @@ struct mipsCon{
         struct conditialStruct { bool isCond; bool conditionalPatty; } conditional;
         struct statementStruct { bool compound=true; std::string continueFlag; std::string breakFlag; int offset=0; } statement;
         struct enumStruct { int lastEl=-1; } enumerator;
+        struct switchStruct { std::map<std::string, int> labels; } switchy;
         std::map<std::string, varInfo> varBinding;
         int spOffset;
     };
@@ -56,7 +57,6 @@ struct mipsCon{
     bool isConstantCall; //we can remove
     bool isReturn;
     int paramReg;
-    
 
     std::map<std::string, varInfo>& varBinding() { return stack.back().varBinding; }
     stackFrame::funcDecStruct& funcDec() { return stack.back().funcDec; }
@@ -66,7 +66,7 @@ struct mipsCon{
     stackFrame::conditialStruct& conditional() { return stack.back().conditional; }
     stackFrame::statementStruct& statement() { return stack.back().statement; }
     stackFrame::enumStruct& enumerator() { return stack.back().enumerator; }
-
+    stackFrame::switchStruct& switchy() { return stack.back().switchy; }
 
     struct registers{
         std::vector<bool> set={ 1,1,0,0,1,1,1,1,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,0,0,1,1,1,1,1 };

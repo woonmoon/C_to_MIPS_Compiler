@@ -27,6 +27,7 @@ public:
             }
         }
     }
+    void look(mipsCon& con) const {}
 protected:
     std::string id;
     NodePtr notAnInt;

@@ -28,6 +28,7 @@ public:
     }
     int evaluate() const { return 0; }
     std::string getName() const { return ""; }
+    void look(mipsCon& con) const {}
 protected:
 };
 

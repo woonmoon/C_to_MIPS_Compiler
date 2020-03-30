@@ -32,6 +32,8 @@ public:
         //std::cout << "left array declarator" << std::endl;
     }
 
+    void look(mipsCon& con) const {}
+
 protected:
     NodePtr declarator;
     ExpressionPtr expression;

@@ -52,6 +52,8 @@ public:
         con.exitScope(os);
     }
 
+    void look(mipsCon& con) const {}
+
 protected:
     NodePtr condition;
     NodePtr loopBlock;

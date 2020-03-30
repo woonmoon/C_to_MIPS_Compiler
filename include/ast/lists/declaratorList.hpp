@@ -36,6 +36,7 @@ public:
       listOfExpressions[i]->mipsGen(os, con, reg);
     }
   }
+  void look(mipsCon& con) const {}
 };
 
 #endif
