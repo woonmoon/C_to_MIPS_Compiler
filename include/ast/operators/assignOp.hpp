@@ -34,6 +34,7 @@ public:
         }
         con.recoverReg({addrDest}, os);
         con.registerSet.untickReg(addrDest);
+      //  con.registerSet.untickAll();
     }
     int evaluate() const { return 0; }
     std::string getName() const { return ""; }

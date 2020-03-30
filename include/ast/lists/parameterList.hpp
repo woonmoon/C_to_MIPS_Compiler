@@ -56,7 +56,7 @@ public:
 
             listOfExpressions[i]->mipsGen(os, con, con.paramReg);
 
-            con.paramReg++;
+            con.paramReg++;   
 
          }
          con.isParam = 0;

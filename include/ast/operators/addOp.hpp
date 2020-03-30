@@ -18,20 +18,23 @@ public:
     void mipsGen(std::ostream& os, mipsCon& con, int dest=0) const {
         
         int addrDest = con.registerSet.freeRegister();
+        int addrDest1 =  con.registerSet.freeRegister();
         int oldDest = dest;
         if(con.isReturn){
-            dest = con.registerSet.freeRegister();
-        }
+            dest = addrDest1;
+        } 
+        
+        con.flushReg({addrDest, addrDest1}, os);
 
         branches[0]->mipsGen(os, con, dest);
-        con.flushReg({addrDest}, os);
+        
         branches[1]->mipsGen(os, con, addrDest);
 
         os << std::endl;
         os << "addu " << con.reg(oldDest) << ", " << con.reg(dest) << ", " << con.reg(addrDest);
         os<< std::endl;
 
-        con.recoverReg({addrDest}, os);
+        con.recoverReg({addrDest1,addrDest}, os);
     }
 
     int evaluate() const { return exp1->evaluate()+exp2->evaluate(); }
@@ -64,8 +67,9 @@ class unaryOp : public Expression{
             }
             else if(op == "-"){
                  branches[0]->mipsGen(os,con,addrDest);
-                 os << "not " << con.reg(addrDest) << ", " << con.reg(addrDest) << std::endl;
-                 os << "addiu " << con.reg(addrDest) << ", " << con.reg(addrDest) << ", 1" << std::endl;
+                 os << "sub " << con.reg(dest) << ", " << con.reg(0) << ", " << con.reg(addrDest) << std::endl;
+                //  os << "not " << con.reg(addrDest) << ", " << con.reg(addrDest) << std::endl;
+                //  os << "addiu " << con.reg(addrDest) << ", " << con.reg(addrDest) << ", 1" << std::endl;
             }
         }
         int evaluate() const { return 0; }

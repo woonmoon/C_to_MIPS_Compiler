@@ -72,6 +72,7 @@ struct mipsCon{
         std::vector<bool> set={ 1,1,0,0,1,1,1,1,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,0,0,1,1,1,1,1 };
         void tickReg(int i) { set[i]=1; }
         void untickReg(int i) { set[i]=0; }
+        void untickAll(){ set={ 1,1,0,0,1,1,1,1,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,0,0,1,1,1,1,1 }; };
         int freeRegister() {
             for(int i=0; i<32; i++) { if(set[i]==false) { tickReg(i); return i; } }
             return -1;
@@ -115,6 +116,7 @@ struct mipsCon{
     void recoverReg(const std::vector<int>& loadingReg, std::ostream& os) {
         //std::cout << "***recoverReg***" << std::endl;
         for(int i=0; i<loadingReg.size(); i++) {
+            registerSet.untickReg(loadingReg[i]); //THIS WAS ADDED //////////////////////////////////////////////////////////////////////////////////////
             os << "lw " << reg(loadingReg[i]) << ", 0(" << reg(29) << ")";
             os << std::endl;
             os << "addi " << reg(29) << ", " << reg(29) << ", 4";

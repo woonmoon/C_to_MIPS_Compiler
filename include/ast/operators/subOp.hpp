@@ -19,9 +19,6 @@ public:
         
         int addrDest = con.registerSet.freeRegister();
         int oldDest = dest;
-        if(con.isReturn){
-            dest = con.registerSet.freeRegister();
-        }
         
         branches[0]->mipsGen(os, con, dest);
         con.flushReg({addrDest}, os);
