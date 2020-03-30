@@ -14,7 +14,7 @@ public:
   }
 
   void printGlobals(std::ostream& os) {
-    for(int i = 0; i < globals.size(); i++){
+    for(unsigned int i = 0; i < globals.size(); i++){
       //os << std::endl;
       indent(os);
       os << "global ";

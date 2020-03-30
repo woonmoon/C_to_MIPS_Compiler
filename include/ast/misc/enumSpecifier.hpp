@@ -6,11 +6,14 @@ typedef const enumSpecifier* enumSpecifierPtr;
 
 class enumSpecifier: public Node{
 public:
+
     enumSpecifier(std::string _id, NodePtr _list): id(_id), notAnInt(_list) {}
+    
     enumSpecifier(NodePtr _list): notAnInt(_list) { id=""; }
-    ~enumSpecifier() { if(notAnInt!=NULL) { delete notAnInt; } }
+
     void print(std::ostream& dst, pycon& con, int level) const {}
     void pythonGen(std::ostream& os) const {}
+
     void mipsGen(std::ostream& os, mipsCon& con, int dest=0) const {
         if(notAnInt!=NULL) {
             if(con.stack.size()>1) {

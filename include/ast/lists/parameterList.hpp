@@ -18,12 +18,6 @@ public:
     listOfExpressions = lol->getlistOfExpressions(); 
   }
 
-  ~paramList() {
-    for(int i=0; i<listOfExpressions.size(); i++) {
-      delete listOfExpressions[i];
-    }
-  }
-
   void print(std::ostream& dst, pycon& con, int level) const {
      for(int i=0; i<listOfExpressions.size(); i++){
       
@@ -40,7 +34,7 @@ public:
     con.isParam = 1;
     con.firstTime = 1;
     con.extraCheck = 1;
-    for(int i=0; i<listOfExpressions.size(); i++) {
+    for(unsigned int i=0; i<listOfExpressions.size(); i++) {
       listOfExpressions[i]->mipsGen(os, con, dest);
       con.writeToStack(2, con.varBinding().at(con.dummyDec.id).offset, os); //THIS IS ADDED IN
       con.paramReg++;
@@ -48,7 +42,7 @@ public:
     }
      con.isParam = 0;
     }else if(con.inCall){
-         for(int i=0; i<listOfExpressions.size(); i++) {
+         for(unsigned int i=0; i<listOfExpressions.size(); i++) {
 
             con.isParam = 1;
             con.isIdentifierCall = 0;

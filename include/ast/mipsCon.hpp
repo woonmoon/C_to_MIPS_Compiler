@@ -104,7 +104,7 @@ struct mipsCon{
 
     void flushReg(const std::vector<int>& storingReg, std::ostream& os) {
         //std::cout << "***flushReg***" << std::endl;
-        for(int i=0; i<storingReg.size(); i++) {
+        for(unsigned int i=0; i<storingReg.size(); i++) {
             stackSize+=4;
             os << "addi " << reg(29) << ", " << reg(29) << ", -4";
             os << std::endl;
@@ -115,7 +115,7 @@ struct mipsCon{
 
     void recoverReg(const std::vector<int>& loadingReg, std::ostream& os) {
         //std::cout << "***recoverReg***" << std::endl;
-        for(int i=0; i<loadingReg.size(); i++) {
+        for(unsigned int i=0; i<loadingReg.size(); i++) {
             registerSet.untickReg(loadingReg[i]); //THIS WAS ADDED //////////////////////////////////////////////////////////////////////////////////////
             os << "lw " << reg(loadingReg[i]) << ", 0(" << reg(29) << ")";
             os << std::endl;
