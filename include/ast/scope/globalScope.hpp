@@ -17,7 +17,7 @@ public:
     }
 
     void print(std::ostream& dst, pycon& con, int level) const {
-        for(int i=0; i<sequence.size(); i++) {
+        for(unsigned int i=0; i<sequence.size(); i++) {
             dst << std::endl;
             sequence[i]->print(dst, con, level);
             con.zeroTab();
@@ -28,7 +28,7 @@ public:
 
     void mipsGen(std::ostream& os, mipsCon& con, int dest=0) const {
         con.stack.push_back({});
-        for(int i=0; i<sequence.size(); i++) {
+        for(unsigned int i=0; i<sequence.size(); i++) {
             sequence[i]->mipsGen(os, con, dest);
             con.exitScope(os);
         }

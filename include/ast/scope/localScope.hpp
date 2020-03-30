@@ -11,6 +11,7 @@ public:
     localScope(ListPtr inList) {
         sequence=inList->getlistOfExpressions();
     }
+
     localScope(ListPtr inList, ListPtr inList2) {
         sequence=inList->getlistOfExpressions();
         std::vector<NodePtr> sequenceTemp;
@@ -19,23 +20,26 @@ public:
     }
 
     void print(std::ostream& dst, pycon& con, int level) const {
-        for(int i=0; i<sequence.size(); i++) {
+        for(unsigned int i=0; i<sequence.size(); i++) {
             con.indent(dst);
             sequence[i]->print(dst, con, level);
             //dst << std::endl;
         }
     }
+
     void genPython(std::ostream& os) const { }
+
+
     void mipsGen(std::ostream& os, mipsCon& con, int dest=0) const {
         if(con.funcContent().functionPatty) {
             con.funcContent().functionPatty=false;
-            for(int i=0; i<sequence.size(); i++) {
+            for(unsigned int i=0; i<sequence.size(); i++) {
                 sequence[i]->mipsGen(os, con);
             }
         }else if(con.conditional().conditionalPatty) {
             con.conditional().conditionalPatty=false;
             //con.enterScope();
-            for(int i=0; i<sequence.size(); i++) {
+            for(unsigned int i=0; i<sequence.size(); i++) {
                 sequence[i]->mipsGen(os, con);
             }
             //con.exitScope(os);

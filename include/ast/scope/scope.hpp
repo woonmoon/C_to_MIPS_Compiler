@@ -6,11 +6,7 @@ typedef const Scope* ScopePtr;
 
 class Scope: public Node {
 public:
-    ~Scope() {
-        for(int i=0; i<sequence.size(); i++) {
-            delete sequence[i];
-        }
-    }
+
     Scope() { /*std::cout << "Scope made!" << std::endl;*/ }
     Scope(NodePtr inNode) {
         sequence.push_back(inNode);

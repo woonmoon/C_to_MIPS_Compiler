@@ -1,6 +1,4 @@
-int x[8];
-
-int f()
+unsigned f()
 {
     return 11;
 }
