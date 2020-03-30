@@ -28,8 +28,9 @@ public:
      for(int i=0; i<listOfExpressions.size(); i++){
       
       listOfExpressions[i]->print(dst, con, level);
+      con.indent(dst);
       if(i!=listOfExpressions.size()-1) {
-        dst << ", ";
+        //dst << ", ";
       }
      }
   }
