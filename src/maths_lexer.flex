@@ -91,6 +91,7 @@ break           { return T_BREAK; }
 [0][0-7]+                        { yylval.number=strtod(yytext, 0); return T_CONSTANT; }
 [0-9]+([.][0-9]*)?[fF]*               { yylval.number=strtod(yytext, 0); return T_CONSTANT; }
 [0][xX][0-9A-Fa-f]+              { yylval.number=strtod(yytext, 0); return T_CONSTANT; }
+['][a-zA-Z][']                 {  yylval.number=(int)yytext[1]; return T_CONSTANT; }
 
 [_]*[a-zA-Z0-9_]*     { yylval.string=new std::string(yytext); return T_IDENTIFIER; }
 
