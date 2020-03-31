@@ -261,8 +261,8 @@ DIRECT_DECLARATOR : T_IDENTIFIER  { $$ = new Identifier(*$1); }
                   | DIRECT_DECLARATOR T_LBRACKET T_RBRACKET { $$ = new functionDec($1); }
                   ;
 
-POINTER : T_STAR { $$ = new Pointer(NULL); }
-        | T_STAR POINTER { $$ = new Pointer($2); }
+POINTER : T_STAR {  }
+        | T_STAR POINTER {  }
         ;
 
 TYPE_QUALIFIER_LIST : TYPE_QUALIFIER {$$ = new List($1);}

@@ -29,7 +29,7 @@ class Identifier: public Expression {
 
 
         void mipsGen(std::ostream& os, mipsCon& con, int dest=0) const {
-          //std::cout << "in identifier" << std::endl;
+          //std::cout << "in identifier " << identifierName << std::endl;
      //     std::cout<< "=======================TOP OF IDENTIFIER===============================" << std::endl;
           if(!con.iJustWantTheNameBro){
           if(con.funcDec().functionDef) { //new function definition, insert a label

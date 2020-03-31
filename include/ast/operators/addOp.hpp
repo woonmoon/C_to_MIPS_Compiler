@@ -50,7 +50,7 @@ protected:
 
 class unaryOp : public Expression{
     public:
-        unaryOp(std::string opi, ExpressionPtr expri) { op=opi; branches.push_back(expri); }
+        unaryOp(std::string opi, ExpressionPtr expri): op(opi), expr(expri) { branches.push_back(expri); }
         ~unaryOp(){}
         void print(std::ostream& dst, pycon& con, int level) const {
             dst << op;
@@ -75,11 +75,11 @@ class unaryOp : public Expression{
                 //  os << "addiu " << con.reg(addrDest) << ", " << con.reg(addrDest) << ", 1" << std::endl;
             }
             else if(op == "*"){ //reference operator
-                std::cout << "hit a reference" << std::endl;
+                //std::cout << "hit a reference" << std::endl;
                 expr->offset(os, con, addrDest);
             }
             else if(op == "&"){ //dereference operator 
-                std::cout << "hit a dereference" << std::endl;
+                //std::cout << "hit a dereference expr is " << std::endl;
                 expr->mipsGen(os, con, addrDest);
                 os << "lw " << con.reg(addrDest) << ", 0(" << con.reg(addrDest) << ")";
                 os << std::endl;
@@ -89,7 +89,7 @@ class unaryOp : public Expression{
         std::string getName() const { return ""; }
         void look(mipsCon& con) const {}
         void offset(std::ostream& os, mipsCon& con, int dest=0) const {
-            //expr->offset(os, con, dest);
+            expr->offset(os, con, dest);
         }
     private:
         std::string op;
