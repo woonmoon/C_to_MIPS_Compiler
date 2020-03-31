@@ -27,6 +27,7 @@ class Constant: public Expression {
         }
         std::string getName() const { return ""; }
         void look(mipsCon& con) const {}
+        void offset(std::ostream& os, mipsCon& con, int dest=0) const {}
     private:
         int val;
 };

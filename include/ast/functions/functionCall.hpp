@@ -46,6 +46,7 @@ public:
     int evaluate() const { return 0; }
     std::string getName() const { return ""; }
     void look(mipsCon& con) const {}
+    void offset(std::ostream& os, mipsCon& con, int dest=0) const {}
 private:
     bool empty;
 

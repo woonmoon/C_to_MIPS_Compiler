@@ -33,6 +33,7 @@ public:
     int evaluate() const { return (exp->evaluate())+1; }
     std::string getName() const { return ""; }
     void look(mipsCon& con) const {}
+    void offset(std::ostream& os, mipsCon& con, int dest=0) const {}
 protected:
     ExpressionPtr exp;
 };
@@ -69,6 +70,7 @@ public:
     int evaluate() const { return (exp->evaluate())-1; }
     std::string getName() const { return ""; }
     void look(mipsCon& con) const {}
+    void offset(std::ostream& os, mipsCon& con, int dest=0) const {}
 protected:
     ExpressionPtr exp;
 };
@@ -104,6 +106,7 @@ public:
     int evaluate() const { return (exp->evaluate())-1; }
     std::string getName() const { return ""; }
     void look(mipsCon& con) const {}
+    void offset(std::ostream& os, mipsCon& con, int dest=0) const {}
 protected:
     ExpressionPtr exp;
 };
@@ -139,6 +142,7 @@ public:
     int evaluate() const { return (exp->evaluate())+1; }
     std::string getName() const { return ""; }
     void look(mipsCon& con) const {}
+    void offset(std::ostream& os, mipsCon& con, int dest=0) const {}
 protected:
     ExpressionPtr exp;
 };

@@ -44,6 +44,7 @@ public:
     std::string getName() const { return ""; }
 
     void look(mipsCon& con) const {}
+    void offset(std::ostream& os, mipsCon& con, int dest=0) const {}
 
 protected:
     ExpressionPtr exp1;
@@ -76,10 +77,17 @@ class unaryOp : public Expression{
                 //  os << "not " << con.reg(addrDest) << ", " << con.reg(addrDest) << std::endl;
                 //  os << "addiu " << con.reg(addrDest) << ", " << con.reg(addrDest) << ", 1" << std::endl;
             }
+            else if(op == "*"){ //reference operator
+
+            }
+            else if(op == "&"){ //dereference operator 
+
+            }
         }
         int evaluate() const { return 0; }
         std::string getName() const { return ""; }
         void look(mipsCon& con) const {}
+        void offset(std::ostream& os, mipsCon& con, int dest=0) const {}
     private:
         std::string op;
         ExpressionPtr expr;
