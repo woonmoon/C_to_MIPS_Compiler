@@ -16,4 +16,4 @@ The translator function is invoked using the flag `--translate`, with the source
 
     bin/c_compiler --translate [source-file.c] -o [dest-file.py]
     
-If you want to do further testing run: ./run.sh
+A script to run some tests: ./run.sh
