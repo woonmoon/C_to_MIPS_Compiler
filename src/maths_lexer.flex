@@ -73,6 +73,8 @@ return          { return T_RETURN; }
 int             { return T_INT; }
 void            { return T_VOID; }
 unsigned        {return T_INT;}
+float           {return T_INT;}
+double          {return T_INT;}
 typedef         { return T_TYPEDEF; }
 struct          { return T_STRUCT; }
 union           { return T_UNION; }
@@ -87,7 +89,7 @@ break           { return T_BREAK; }
 
 
 [0][0-7]+                        { yylval.number=strtod(yytext, 0); return T_CONSTANT; }
-[0-9]+([.][0-9]*)?               { yylval.number=strtod(yytext, 0); return T_CONSTANT; }
+[0-9]+([.][0-9]*)?[fF]*               { yylval.number=strtod(yytext, 0); return T_CONSTANT; }
 [0][xX][0-9A-Fa-f]+              { yylval.number=strtod(yytext, 0); return T_CONSTANT; }
 
 [_]*[a-zA-Z0-9_]*     { yylval.string=new std::string(yytext); return T_IDENTIFIER; }
