@@ -11,6 +11,7 @@
 #include "ast/misc/enumSpecifier.hpp"
 #include "ast/misc/switch.hpp"
 #include "ast/misc/switchCase.hpp"
+#include "ast/misc/switchDefault.hpp"
 #include "ast/lists/list.hpp"
 #include "ast/lists/enumList.hpp"
 #include "ast/lists/declaratorList.hpp"

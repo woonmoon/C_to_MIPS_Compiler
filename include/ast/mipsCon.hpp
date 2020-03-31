@@ -39,7 +39,7 @@ struct mipsCon{
         struct conditialStruct { bool isCond; bool conditionalPatty; } conditional;
         struct statementStruct { bool compound=true; std::string continueFlag; std::string breakFlag; int offset=0; } statement;
         struct enumStruct { int lastEl=-1; } enumerator;
-        struct switchStruct { std::map<std::string, int> labels; } switchy;
+        struct switchStruct { std::map<std::string, int> labels; std::string def; } switchy;
         std::map<std::string, varInfo> varBinding;
         int spOffset;
     };

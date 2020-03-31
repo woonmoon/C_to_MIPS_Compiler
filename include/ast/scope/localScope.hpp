@@ -46,7 +46,11 @@ public:
         }
         //std::cout << "left localscope" << std::endl;
     }
-    void look(mipsCon& con) const {}
+    void look(mipsCon& con) const {
+        for(int i=0; i<sequence.size(); i++) {
+            sequence[i]->look(con);
+        }
+    }
 };
 
 #endif

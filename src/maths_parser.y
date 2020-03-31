@@ -324,8 +324,8 @@ STATEMENT : LABELED_STATEMENT { $$ = $1;  }
           ;
 
 LABELED_STATEMENT : T_IDENTIFIER T_COLON STATEMENT {  }
-                  | T_CASE CONSTANT_EXPRESSION T_COLON STATEMENT { }
-                  | T_DEFAULT T_COLON STATEMENT
+                  | T_CASE CONSTANT_EXPRESSION T_COLON STATEMENT { $$ = new switchCase($2, $4); }
+                  | T_DEFAULT T_COLON STATEMENT { $$ = new switchDefault($3); }
                   ;
 
 COMPOUND_STATEMENT : T_LCURLY T_RCURLY { $$ = new localScope();}
