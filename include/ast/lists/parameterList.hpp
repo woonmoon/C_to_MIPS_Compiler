@@ -42,16 +42,23 @@ public:
     }
      con.isParam = 0;
     }else if(con.inCall){
+        int counter = 0;
          for(unsigned int i=0; i<listOfExpressions.size(); i++) {
 
             con.isParam = 1;
             con.isIdentifierCall = 0;
             con.isConstantCall = 0;   //these all get activated if they are it
 
+
             listOfExpressions[i]->mipsGen(os, con, con.paramReg);
 
-            con.paramReg++;   
+            int offsetter = (con.paramReg - 4)*4;
+            os << "addi " << con.reg(29) << ", " << con.reg(29) << ", -4" << std::endl; 
+            con.stackSize += 4;
+            os << "sw " << con.reg(con.paramReg) << ", 0(" << con.reg(29) << ")" << std::endl;
 
+            con.paramReg++;   
+            counter++;
          }
          con.isParam = 0;
    }
