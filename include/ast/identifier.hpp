@@ -86,11 +86,14 @@ class Identifier: public Expression {
     int evaluate() const { return 0; }
     std::string getName() const { return identifierName; }
     void look(mipsCon& con) const {}
-    void offset(std::ostream& os, mipsCon& con, int dest=0) const {
-      if(con.isGlobal(identifierName)) {
-        
+    void offset(std::ostream& os, mipsCon& con, int dest) const {
+      if(con.isGlobal(identifierName)) { 
+        os << "la " << con.reg(dest) << ", " << identifierName;
+        os << std::endl;
       }else if(con.inFrame(identifierName)) {
-
+        int id_offset=con.varBinding()[identifierName].offset;
+        os << "lw " << con.reg(dest) << ", " << con.stackSize-id_offset <<  "(" << con.reg(29) << ")";
+        os << std::endl;
       }
     }
     private:

@@ -47,10 +47,36 @@ public:
         con.registerSet.untickReg(indexReg);
         con.registerSet.untickReg(dest);
     }
+
     int evaluate() const { return 0; }
     std::string getName() const { return ""; }
     void look(mipsCon& con) const {}
-    void offset(std::ostream& os, mipsCon& con, int dest=0) const {}
+
+    void offset(std::ostream& os, mipsCon& con, int dest=0) const {
+        int constReg=con.registerSet.freeRegister();
+        con.flushReg({constReg}, os);
+        os << "li " << con.reg(constReg) << ", 4";
+        os << std::endl;
+        index->mipsGen(os, con, dest);
+        //std::cout << "obtained the index " << std::endl;
+        os << "mult " << con.reg(constReg) << ", " << con.reg(dest);
+        os << std::endl;
+        os << "mflo " << con.reg(dest);
+        os << std::endl;
+        if(con.inFrame(arrayName->getName())) {
+            os << "addi " << con.reg(dest) << ", " << con.reg(dest) << ", " << con.varBinding()[arrayName->getName()].offset;
+            os << std::endl;
+        }else if(con.isGlobal(arrayName->getName())){
+            os << "addi " << con.reg(dest) << ", " << con.reg(dest) << ", " << con.gloVar[arrayName->getName()].offset;
+            os << std::endl;
+        }
+        os << "li " << con.reg(constReg) << ", " << con.stackSize;
+        os << std::endl;
+        os << "sub " << con.reg(dest) << ", " << con.reg(constReg) << ", " << con.reg(dest);
+        os << std::endl;
+        os << "add " << con.reg(dest) << ", " << con.reg(dest) << ", " << con.reg(29);
+        os << std::endl;
+    }
 protected:
     ExpressionPtr arrayName;
     ExpressionPtr index;
