@@ -39,7 +39,7 @@ public:
             if(dest!=0){
                 os << "move " << con.reg(dest) << ", " << con.reg(2) << std::endl;
             }
-           
+            
 
            // con.stack.back().spOffset = oldTwentyNine;
     }
