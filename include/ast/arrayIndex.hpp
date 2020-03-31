@@ -76,6 +76,8 @@ public:
         os << std::endl;
         os << "add " << con.reg(dest) << ", " << con.reg(dest) << ", " << con.reg(29);
         os << std::endl;
+        con.recoverReg({constReg}, os);
+        con.registerSet.untickReg(constReg);
     }
 protected:
     ExpressionPtr arrayName;
