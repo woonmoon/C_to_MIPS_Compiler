@@ -1,7 +1,10 @@
 CPPFLAGS += -std=c++11 -W -Wall -g -Wno-unused-parameter
 CPPFLAGS += -I include
 
-all : bin/print_canonical bin/gen_mips
+all : bin/c_compiler
+
+bin/c_compiler : bin/print_canonical bin/gen_mips
+	chmod u+x bin/c_compiler run.sh mipsrun.sh
 
 src/maths_parser.tab.cpp src/maths_parser.tab.hpp : src/maths_parser.y
 	bison -v -d src/maths_parser.y -o src/maths_parser.tab.cpp
@@ -24,3 +27,4 @@ clean :
 	rm bin/gen_mips
 	rm src/*.tab.cpp
 	rm src/*.yy.cpp
+	rm -r tmp/
