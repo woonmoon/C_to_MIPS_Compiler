@@ -43,7 +43,9 @@ public:
      //   std::cout << "BELOW" << std::endl;
         if(!con.isGlobalFunc){
         if(isAssign){
+          con.assign().isAssign=true;
           branches[1]->mipsGen(os, con, newDest);
+          con.assign().isAssign=false;
         }
         con.writeToStack(newDest, con.varBinding().at(con.dummyDec.id).offset, os);
         con.recoverReg({newDest}, os);
