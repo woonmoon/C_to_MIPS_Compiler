@@ -51,7 +51,7 @@ public:
 
 
             listOfExpressions[i]->mipsGen(os, con, con.paramReg);
-
+            //the following 4 lines broke recursion lmaooooo but fixed external func calls
             int offsetter = (con.paramReg - 4)*4;
             os << "addi " << con.reg(29) << ", " << con.reg(29) << ", -4" << std::endl; 
             con.stackSize += 4;
