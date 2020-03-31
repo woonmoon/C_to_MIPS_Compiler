@@ -86,6 +86,13 @@ class Identifier: public Expression {
     int evaluate() const { return 0; }
     std::string getName() const { return identifierName; }
     void look(mipsCon& con) const {}
+    void offset(std::ostream& os, mipsCon& con, int dest=0) const {
+      if(con.isGlobal(identifierName)) {
+        
+      }else if(con.inFrame(identifierName)) {
+
+      }
+    }
     private:
         std::string identifierName;
 };

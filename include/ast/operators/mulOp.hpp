@@ -37,6 +37,7 @@ public:
     int evaluate() const { return exp1->evaluate()*exp2->evaluate(); }
     std::string getName() const { return ""; }
     void look(mipsCon& con) const {}
+    void offset(std::ostream& os, mipsCon& con, int dest=0) const {}
 protected:
     ExpressionPtr exp1;
     ExpressionPtr exp2;
