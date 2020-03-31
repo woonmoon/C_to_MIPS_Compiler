@@ -72,6 +72,7 @@ for             { return T_FOR; }
 return          { return T_RETURN; }
 int             { return T_INT; }
 void            { return T_VOID; }
+unsigned        {return T_INT;}
 typedef         { return T_TYPEDEF; }
 struct          { return T_STRUCT; }
 union           { return T_UNION; }
