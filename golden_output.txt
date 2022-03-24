@@ -1,0 +1,642 @@
+declare_global, Pass
+
+
+declare_local, Pass
+
+
+index_constant, Pass
+
+
+index_expression, Pass
+
+
+index_variable, Pass
+
+
+for_multiple, Pass
+
+
+for_one, Pass
+
+
+for_zero_v1, Pass
+
+
+for_zero_v2, Pass
+
+
+if_else_false, Pass
+
+
+if_else_true, Pass
+
+
+if_false, Pass
+
+
+if_true, Pass
+
+
+sequence, Pass
+
+
+while_multiple, Pass
+
+
+while_once, Pass
+
+
+while_zero, Pass
+
+
+test_ADD0, Pass
+
+
+test_ADD1, Pass
+
+
+test_CALL, Pass
+
+
+test_LOCAL, Pass
+
+
+test_RETURN, Pass
+
+
+add, Fail, Expected 0, got 1
+
+
+add_double, Fail, Expected 0, got 1
+
+
+add_mul, Fail, Expected 0, got 1
+
+
+mul, Fail, Expected 0, got 1
+
+
+mul_add, Fail, Expected 0, got 1
+
+
+mul_double, Fail, Expected 0, got 1
+
+
+pow, Fail, Expected 0, got 1
+
+
+call_constant_external, Pass
+
+
+call_constant_internal, Pass
+
+
+call_five_args_external, Fail, Expected 0, got 1
+
+
+call_five_args_internal, Fail, Expected 0, got 1
+
+
+call_identity_external, Pass
+
+
+call_identity_internal, Pass
+
+
+call_mutual_recursive, Pass
+
+
+call_recursive_internal, Fail, Expected 0, got 1
+
+
+call_two_args_external, Pass
+
+
+call_two_args_internal, Pass
+
+
+add, Pass
+
+
+bitwise_and, Pass
+
+
+bitwise_or, Pass
+
+
+bitwise_xor, Pass
+
+
+div, Pass
+
+
+equal, Pass
+
+
+less_than, Pass
+
+
+less_than_equal, Pass
+
+
+logical_and, Pass
+
+
+logical_or, Pass
+
+
+mul, Pass
+
+
+sub, Pass
+
+
+constant_initialiser, Pass
+
+
+dual_var, Pass
+
+
+expression_initialiser, Fail, Expected 0, got 1
+
+
+identity, Pass
+
+
+return_constant, Pass
+
+
+scoped_var, Pass
+
+
+single_var, Pass
+
+
+enum1, Pass
+
+
+enum2, Pass
+
+
+switch1, Pass
+
+
+switch2, Pass
+
+
+typedef1, Fail, Expected 0, got 255
+
+
+typedef2, Fail, Expected 0, got 255
+
+
+addressof, Pass
+
+
+arithmetic, Fail, Expected 0, got 1
+
+
+assign, Pass
+
+
+dereference, Fail, Expected 0, got 1
+
+
+index, Fail, Expected 0, got 1
+
+
+fibonacci, Fail, Expected 0, got 1
+
+
+multiply, Fail, Expected 0, got 139
+
+
+sqrt, Fail, Expected 0, got 139
+
+
+chliteral, Pass
+
+
+escaped, Fail, Expected 0, got 255
+
+
+literal, Fail, Expected 0, got 255
+
+
+puts, Fail, Expected 0, got 255
+
+
+search, Fail, Expected 0, got 255
+
+
+sizeof, Fail, Expected 0, got 255
+
+
+struct_inst, Fail, Expected 0, got 255
+
+
+struct_member_get, Fail, Expected 0, got 255
+
+
+struct_member_set, Fail, Expected 0, got 255
+
+
+struct_two_members, Fail, Expected 0, got 255
+
+
+sizeof_char_inst, Fail, Expected 0, got 255
+
+
+sizeof_char_type, Fail, Expected 0, got 139
+
+
+sizeof_int_inst, Fail, Expected 0, got 1
+
+
+sizeof_int_type, Fail, Expected 0, got 255
+
+
+unsigned, Pass
+
+
+Passes 55 out of 87
+declare_global, Pass
+
+
+declare_local, Pass
+
+
+index_constant, Pass
+
+
+index_expression, Pass
+
+
+index_variable, Pass
+
+
+for_multiple, Pass
+
+
+for_one, Pass
+
+
+for_zero_v1, Pass
+
+
+for_zero_v2, Pass
+
+
+if_else_false, Pass
+
+
+if_else_true, Pass
+
+
+if_false, Pass
+
+
+if_true, Pass
+
+
+sequence, Pass
+
+
+while_multiple, Pass
+
+
+while_once, Pass
+
+
+while_zero, Pass
+
+
+test_ADD0, Pass
+
+
+test_ADD1, Pass
+
+
+tmp/formative_compiler/test_CALL.s: Assembler messages:
+tmp/formative_compiler/test_CALL.s:14: Warning: no .cprestore pseudo-op used in PIC code
+test_CALL, Pass
+
+
+test_LOCAL, Pass
+
+
+test_RETURN, Pass
+
+
+add, Fail, Expected 0, got 1
+
+
+add_double, Fail, Expected 0, got 1
+
+
+add_mul, Fail, Expected 0, got 1
+
+
+mul, Fail, Expected 0, got 1
+
+
+mul_add, Fail, Expected 0, got 1
+
+
+mul_double, Fail, Expected 0, got 1
+
+
+pow, Fail, Expected 0, got 1
+
+
+tmp/formative_compiler/call_constant_external.s: Assembler messages:
+tmp/formative_compiler/call_constant_external.s:14: Warning: no .cprestore pseudo-op used in PIC code
+call_constant_external, Pass
+
+
+tmp/formative_compiler/call_constant_internal.s: Assembler messages:
+tmp/formative_compiler/call_constant_internal.s:20: Warning: no .cprestore pseudo-op used in PIC code
+call_constant_internal, Pass
+
+
+tmp/formative_compiler/call_five_args_external.s: Assembler messages:
+tmp/formative_compiler/call_five_args_external.s:29: Warning: no .cprestore pseudo-op used in PIC code
+call_five_args_external, Fail, Expected 0, got 1
+
+
+terminate called after throwing an instance of 'std::out_of_range'
+  what():  map::at
+bin/c_compiler: line 40: 13754 Done                    cat "$INFILE"
+     13755 Aborted                 (core dumped) | bin/gen_mips > "$OUTFILE"
+/usr/lib/gcc-cross/mips-linux-gnu/9/../../../../mips-linux-gnu/bin/ld: /tmp/ccYsvXnA.o: in function `main':
+call_five_args_internal_driver.c:(.text+0x1c): undefined reference to `f'
+/usr/lib/gcc-cross/mips-linux-gnu/9/../../../../mips-linux-gnu/bin/ld: call_five_args_internal_driver.c:(.text+0x24): undefined reference to `f'
+collect2: error: ld returned 1 exit status
+call_five_args_internal, Fail, Expected 0, got 1
+
+
+tmp/formative_compiler/call_identity_external.s: Assembler messages:
+tmp/formative_compiler/call_identity_external.s:17: Warning: no .cprestore pseudo-op used in PIC code
+call_identity_external, Pass
+
+
+tmp/formative_compiler/call_identity_internal.s: Assembler messages:
+tmp/formative_compiler/call_identity_internal.s:27: Warning: no .cprestore pseudo-op used in PIC code
+call_identity_internal, Pass
+
+
+tmp/formative_compiler/call_mutual_recursive.s: Assembler messages:
+tmp/formative_compiler/call_mutual_recursive.s:48: Warning: no .cprestore pseudo-op used in PIC code
+tmp/formative_compiler/call_mutual_recursive.s:61: Warning: no .cprestore pseudo-op used in PIC code
+call_mutual_recursive, Pass
+
+
+tmp/formative_compiler/call_recursive_internal.s: Assembler messages:
+tmp/formative_compiler/call_recursive_internal.s:41: Warning: no .cprestore pseudo-op used in PIC code
+call_recursive_internal, Fail, Expected 0, got 1
+
+
+tmp/formative_compiler/call_two_args_external.s: Assembler messages:
+tmp/formative_compiler/call_two_args_external.s:20: Warning: no .cprestore pseudo-op used in PIC code
+call_two_args_external, Pass
+
+
+tmp/formative_compiler/call_two_args_internal.s: Assembler messages:
+tmp/formative_compiler/call_two_args_internal.s:41: Warning: no .cprestore pseudo-op used in PIC code
+call_two_args_internal, Pass
+
+
+add, Pass
+
+
+bitwise_and, Pass
+
+
+bitwise_or, Pass
+
+
+terminate called after throwing an instance of 'std::out_of_range'
+  what():  map::at
+bin/c_compiler: line 40: 14105 Done                    cat "$INFILE"
+     14106 Aborted                 (core dumped) | bin/gen_mips > "$OUTFILE"
+/usr/lib/gcc-cross/mips-linux-gnu/9/../../../../mips-linux-gnu/bin/ld: /tmp/ccOeJ5h6.o: in function `main':
+bitwise_xor_driver.c:(.text+0x28): undefined reference to `f'
+/usr/lib/gcc-cross/mips-linux-gnu/9/../../../../mips-linux-gnu/bin/ld: bitwise_xor_driver.c:(.text+0x30): undefined reference to `f'
+collect2: error: ld returned 1 exit status
+bitwise_xor, Fail, Expected 0, got 1
+
+
+div, Pass
+
+
+equal, Pass
+
+
+less_than, Pass
+
+
+less_than_equal, Pass
+
+
+logical_and, Pass
+
+
+logical_or, Pass
+
+
+mul, Pass
+
+
+sub, Pass
+
+
+constant_initialiser, Pass
+
+
+dual_var, Pass
+
+
+expression_initialiser, Fail, Expected 0, got 1
+
+
+identity, Pass
+
+
+return_constant, Pass
+
+
+scoped_var, Pass
+
+
+single_var, Pass
+
+
+enum1, Pass
+
+
+enum2, Pass
+
+
+switch1, Pass
+
+
+g(0)==1
+g(1)==1
+g(2)==3
+g(3)==4
+g(0)==1
+g(1)==1
+g(2)==3
+g(3)==4
+switch2, Pass
+
+
+tmp/formative_compiler/typedef1.s: Assembler messages:
+tmp/formative_compiler/typedef1.s:1: Error: unrecognized opcode `parse Error:syntax error,unexpected T_IDENTIFIER,expecting T_COMMA or T_SEMICOLON'
+mips-linux-gnu-gcc: error: tmp/formative_compiler/typedef1.o: No such file or directory
+tmp/formative_compiler/typedef1: Invalid ELF image for this architecture
+typedef1, Fail, Expected 0, got 255
+
+
+tmp/formative_compiler/typedef2.s: Assembler messages:
+tmp/formative_compiler/typedef2.s:1: Error: unrecognized opcode `parse Error:syntax error,unexpected T_STAR,expecting T_COMMA or T_SEMICOLON'
+mips-linux-gnu-gcc: error: tmp/formative_compiler/typedef2.o: No such file or directory
+tmp/formative_compiler/typedef2: Invalid ELF image for this architecture
+typedef2, Fail, Expected 0, got 255
+
+
+addressof, Pass
+
+
+arithmetic, Fail, Expected 0, got 1
+
+
+assign, Pass
+
+
+dereference, Fail, Expected 0, got 1
+
+
+index, Fail, Expected 0, got 1
+
+
+tmp/formative_compiler/fibonacci.s: Assembler messages:
+tmp/formative_compiler/fibonacci.s:57: Warning: no .cprestore pseudo-op used in PIC code
+tmp/formative_compiler/fibonacci.s:70: Warning: no .cprestore pseudo-op used in PIC code
+fibonacci, Fail, Expected 0, got 1
+
+
+tmp/formative_compiler/multiply.s: Assembler messages:
+tmp/formative_compiler/multiply.s:39: Warning: no .cprestore pseudo-op used in PIC code
+qemu: uncaught target signal 11 (Segmentation fault) - core dumped
+./mipsrun.sh: line 22: 15112 Segmentation fault      (core dumped) qemu-mips ${working}/$base
+multiply, Fail, Expected 0, got 139
+
+
+qemu: uncaught target signal 11 (Segmentation fault) - core dumped
+./mipsrun.sh: line 22: 15153 Segmentation fault      (core dumped) qemu-mips ${working}/$base
+sqrt, Fail, Expected 0, got 139
+
+
+chliteral, Pass
+
+
+tmp/formative_compiler/escaped.s: Assembler messages:
+tmp/formative_compiler/escaped.s:1: Error: unrecognized opcode `parse Error:syntax error,unexpected T_ASSIGN,expecting T_COMMA or T_SEMICOLON'
+mips-linux-gnu-gcc: error: tmp/formative_compiler/escaped.o: No such file or directory
+tmp/formative_compiler/escaped: Invalid ELF image for this architecture
+escaped, Fail, Expected 0, got 255
+
+
+tmp/formative_compiler/literal.s: Assembler messages:
+tmp/formative_compiler/literal.s:1: Error: unrecognized opcode `parse Error:syntax error,unexpected T_ASSIGN,expecting T_COMMA or T_SEMICOLON'
+mips-linux-gnu-gcc: error: tmp/formative_compiler/literal.o: No such file or directory
+tmp/formative_compiler/literal: Invalid ELF image for this architecture
+literal, Fail, Expected 0, got 255
+
+
+tmp/formative_compiler/puts.s: Assembler messages:
+tmp/formative_compiler/puts.s:1: Error: unrecognized opcode `parse Error:syntax error,unexpected T_STAR,expecting T_COMMA or T_RBRACKET'
+mips-linux-gnu-gcc: error: tmp/formative_compiler/puts.o: No such file or directory
+tmp/formative_compiler/puts: Invalid ELF image for this architecture
+puts, Fail, Expected 0, got 255
+
+
+tmp/formative_compiler/search.s: Assembler messages:
+tmp/formative_compiler/search.s:1: Error: unrecognized opcode `parse Error:syntax error,unexpected T_STAR'
+mips-linux-gnu-gcc: error: tmp/formative_compiler/search.o: No such file or directory
+tmp/formative_compiler/search: Invalid ELF image for this architecture
+search, Fail, Expected 0, got 255
+
+
+tmp/formative_compiler/sizeof.s: Assembler messages:
+tmp/formative_compiler/sizeof.s:1: Error: unrecognized opcode `parse Error:syntax error,unexpected T_LCURLY,expecting T_STAR or T_LBRACKET or T_SEMICOLON or T_IDENTIFIER'
+mips-linux-gnu-gcc: error: tmp/formative_compiler/sizeof.o: No such file or directory
+tmp/formative_compiler/sizeof: Invalid ELF image for this architecture
+sizeof, Fail, Expected 0, got 255
+
+
+tmp/formative_compiler/struct_inst.s: Assembler messages:
+tmp/formative_compiler/struct_inst.s:1: Error: unrecognized opcode `parse Error:syntax error,unexpected T_LCURLY,expecting T_STAR or T_LBRACKET or T_SEMICOLON or T_IDENTIFIER'
+mips-linux-gnu-gcc: error: tmp/formative_compiler/struct_inst.o: No such file or directory
+tmp/formative_compiler/struct_inst: Invalid ELF image for this architecture
+struct_inst, Fail, Expected 0, got 255
+
+
+tmp/formative_compiler/struct_member_get.s: Assembler messages:
+tmp/formative_compiler/struct_member_get.s:1: Error: unrecognized opcode `parse Error:syntax error,unexpected T_LCURLY,expecting T_STAR or T_LBRACKET or T_SEMICOLON or T_IDENTIFIER'
+mips-linux-gnu-gcc: error: tmp/formative_compiler/struct_member_get.o: No such file or directory
+tmp/formative_compiler/struct_member_get: Invalid ELF image for this architecture
+struct_member_get, Fail, Expected 0, got 255
+
+
+tmp/formative_compiler/struct_member_set.s: Assembler messages:
+tmp/formative_compiler/struct_member_set.s:1: Error: unrecognized opcode `parse Error:syntax error,unexpected T_LCURLY,expecting T_STAR or T_LBRACKET or T_SEMICOLON or T_IDENTIFIER'
+mips-linux-gnu-gcc: error: tmp/formative_compiler/struct_member_set.o: No such file or directory
+tmp/formative_compiler/struct_member_set: Invalid ELF image for this architecture
+struct_member_set, Fail, Expected 0, got 255
+
+
+tmp/formative_compiler/struct_two_members.s: Assembler messages:
+tmp/formative_compiler/struct_two_members.s:1: Error: unrecognized opcode `parse Error:syntax error,unexpected T_LCURLY,expecting T_STAR or T_LBRACKET or T_SEMICOLON or T_IDENTIFIER'
+mips-linux-gnu-gcc: error: tmp/formative_compiler/struct_two_members.o: No such file or directory
+tmp/formative_compiler/struct_two_members: Invalid ELF image for this architecture
+struct_two_members, Fail, Expected 0, got 255
+
+
+tmp/formative_compiler/sizeof_char_inst.s: Assembler messages:
+tmp/formative_compiler/sizeof_char_inst.s:1: Error: unrecognized opcode `parse Error:syntax error,unexpected T_IDENTIFIER,expecting T_COMMA or T_SEMICOLON'
+mips-linux-gnu-gcc: error: tmp/formative_compiler/sizeof_char_inst.o: No such file or directory
+tmp/formative_compiler/sizeof_char_inst: Invalid ELF image for this architecture
+sizeof_char_inst, Fail, Expected 0, got 255
+
+
+terminate called after throwing an instance of 'std::out_of_range'
+  what():  map::at
+bin/c_compiler: line 40: 15528 Done                    cat "$INFILE"
+     15529 Aborted                 (core dumped) | bin/gen_mips > "$OUTFILE"
+qemu: uncaught target signal 11 (Segmentation fault) - core dumped
+./mipsrun.sh: line 22: 15538 Segmentation fault      (core dumped) qemu-mips ${working}/$base
+sizeof_char_type, Fail, Expected 0, got 139
+
+
+tmp/formative_compiler/sizeof_int_inst.s: Assembler messages:
+tmp/formative_compiler/sizeof_int_inst.s:17: Warning: no .cprestore pseudo-op used in PIC code
+/usr/lib/gcc-cross/mips-linux-gnu/9/../../../../mips-linux-gnu/bin/ld: tmp/formative_compiler/sizeof_int_inst.o: in function `f':
+(.text+0x38): undefined reference to `sizeof'
+/usr/lib/gcc-cross/mips-linux-gnu/9/../../../../mips-linux-gnu/bin/ld: (.text+0x3c): undefined reference to `sizeof'
+collect2: error: ld returned 1 exit status
+sizeof_int_inst, Fail, Expected 0, got 1
+
+
+tmp/formative_compiler/sizeof_int_type.s: Assembler messages:
+tmp/formative_compiler/sizeof_int_type.s:1: Error: unrecognized opcode `parse Error:syntax error,unexpected T_INT'
+mips-linux-gnu-gcc: error: tmp/formative_compiler/sizeof_int_type.o: No such file or directory
+tmp/formative_compiler/sizeof_int_type: Invalid ELF image for this architecture
+sizeof_int_type, Fail, Expected 0, got 255
+
+
+unsigned, Pass
+
+
+Passes 54 out of 87
