@@ -3,7 +3,7 @@ CPPFLAGS += -I include
 
 all : bin/c_compiler
 
-bin/c_compiler : bin/print_canonical bin/gen_mips
+bin/c_compiler : bin/gen_mips
 	chmod u+x bin/c_compiler run.sh mipsrun.sh
 
 src/maths_parser.tab.cpp src/maths_parser.tab.hpp : src/maths_parser.y
@@ -16,14 +16,9 @@ bin/gen_mips : src/gen_mips.o src/maths_parser.tab.o src/maths_lexer.yy.o src/ma
 	mkdir -p bin
 	g++ ${CPPFLAGS} -o bin/gen_mips $^
 
-bin/print_canonical : src/print_canonical.o src/maths_parser.tab.o src/maths_lexer.yy.o src/maths_parser.tab.o
-	mkdir -p bin
-	g++ $(CPPFLAGS) -o bin/print_canonical $^
-
 
 clean :
 	rm src/*.o
-	rm bin/print_canonical
 	rm bin/gen_mips
 	rm src/*.tab.cpp
 	rm src/*.yy.cpp

@@ -7,12 +7,7 @@ typedef const logOrOp* logOrOpPtr;
 class logOrOp: public Expression{
 public:
     logOrOp(ExpressionPtr left, ExpressionPtr right): exp1(left), exp2(right) { branches.push_back(left); branches.push_back(right); }
-    void print(std::ostream& dst, pycon& con, int level) const {
-        branches[0]->print(dst, con, level);
-        dst << " or ";
-        branches[1]->print(dst, con, level);
-    }
-    void pythonGen(std::ostream& os) const { }
+
     void mipsGen(std::ostream& os, mipsCon& con, int dest=0) const {
         std::string true_=con.makeALabel("true_or");
         std::string false_=con.makeALabel("false_or");
@@ -38,7 +33,6 @@ public:
     }
     int evaluate() const { return exp1->evaluate() || exp2->evaluate(); }
     std::string getName() const { return ""; }
-    void look(mipsCon& con) const {}
     void offset(std::ostream& os, mipsCon& con, int dest=0) const {}
 protected:
     ExpressionPtr exp1;

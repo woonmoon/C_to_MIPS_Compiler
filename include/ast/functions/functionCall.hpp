@@ -8,16 +8,6 @@ class functionCall: public Expression {
 public:
     functionCall(NodePtr funcName, ListPtr argList, bool emptyParams) { branches.push_back(funcName); branches.push_back(argList); empty = emptyParams;}
 
-    void pythonGen(std::ostream& os) const {}
-
-    void print(std::ostream& dst, pycon& con, int level) const { 
-        branches[0]->print(dst, con, level); 
-        dst << "("; 
-        branches[1]->print(dst, con, level); 
-        dst <<")";
-    }
-
-
     void mipsGen(std::ostream& os, mipsCon& con, int dest=0) const {
             
             con.iJustWantTheNameBro = 1;
@@ -45,7 +35,6 @@ public:
     }
     int evaluate() const { return 0; }
     std::string getName() const { return ""; }
-    void look(mipsCon& con) const {}
     void offset(std::ostream& os, mipsCon& con, int dest=0) const {}
 private:
     bool empty;

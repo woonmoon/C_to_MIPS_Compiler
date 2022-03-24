@@ -19,19 +19,6 @@ public:
       branches.push_back(name);
     }
 
-    void print(std::ostream& dst, pycon& con, int level) const{
-      branches[0]->print(dst, con, level);
-      dst << " = ";
-      if(isAssign){
-        con.setAssign();
-        branches[1]->print(dst, con, level);
-      }else{ dst << "0"; }
-      con.clearAssign();
-      dst << std::endl;
-    }
-
-    void pythonGen(std::ostream& os) const { }
-
     void mipsGen(std::ostream& os, mipsCon& con, int dest=0) const {
    //   std::cout << "=======================TOP INIT_DECLARATOR=============================" << std::endl;
       if(con.varDec().variableDec&&(!con.isParam)) {
@@ -84,7 +71,7 @@ public:
     }
     int evaluate() const { return 0; }
     std::string getName() const { return ""; }
-    void look(mipsCon& con) const {}
+
     void offset(std::ostream& os, mipsCon& con, int dest=0) const {}
 
 protected:

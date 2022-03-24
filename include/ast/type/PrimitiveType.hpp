@@ -17,20 +17,6 @@ public:
 
   ~PrimitiveType();
 
-  void print(std::ostream& dst, pycon& con, int level) const{
-  // switch(type) {    DO NOT NEED TO PRINT FOR PYTHON
-  //   case _int:
-  //     dst << "int lolm ";
-  //     break;
-  //   case _void:
-  //     dst << "void ";
-  //     break;
-  //   default:
-  //     dst << "unknown type ";
-  }
-  void pythonGen(std::ostream& os) const{
-      os<<"identifier"; 
-  }
 
   void mipsGen(std::ostream& os, mipsCon& con, int dest=0) const {
     if(con.funcDec().functionDef) {
@@ -42,7 +28,7 @@ public:
       con.dummyDec.size=4;
     }
   }
-  void look(mipsCon& con) const {}
+
 
 private:
   Specifier type;

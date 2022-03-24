@@ -7,11 +7,6 @@ typedef const divOp* divOpPtr;
 class divOp: public Expression {
 public:
     divOp(ExpressionPtr left, ExpressionPtr right): exp1(left), exp2(right) { branches.push_back(left); branches.push_back(right); }
-
-    void print(std::ostream& dst, pycon& con, int level) const { }
-
-    void pythonGen(std::ostream& os) const { }
-
     void mipsGen(std::ostream& os, mipsCon& con, int dest=0) const { 
 
         int addrDest1 = con.registerSet.freeRegister();
@@ -33,7 +28,6 @@ public:
     }
     int evaluate() const { return exp1->evaluate() / exp2->evaluate(); }
     std::string getName() const { return ""; }
-    void look(mipsCon& con) const {}
     void offset(std::ostream& os, mipsCon& con, int dest=0) const {}
 
 protected:

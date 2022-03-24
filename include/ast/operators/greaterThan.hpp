@@ -4,8 +4,6 @@
 class greaterThan: public Expression {
 public:
     greaterThan(ExpressionPtr left, ExpressionPtr right) { branches.push_back(left); branches.push_back(right); }
-    void print(std::ostream& dst, pycon& con, int level) const { }
-    void pythonGen(std::ostream& os) const { }
     void mipsGen(std::ostream& os, mipsCon& con, int dest=0) const { 
 
         int addrDest = con.registerSet.freeRegister();
@@ -23,7 +21,6 @@ public:
     }
     int evaluate() const { return 0; }
     std::string getName() const { return ""; }
-    void look(mipsCon& con) const {}
     void offset(std::ostream& os, mipsCon& con, int dest=0) const {}
 protected:
 };

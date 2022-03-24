@@ -1,0 +1,1694 @@
+declare_global, Pass
+
+
+declare_local, Pass
+
+
+index_constant, Pass
+
+
+bin/c_compiler: line 40: 16135 Done                    cat "$INFILE"
+     16136 Segmentation fault      (core dumped) | bin/gen_mips > "$OUTFILE"
+qemu: uncaught target signal 11 (Segmentation fault) - core dumped
+./mipsrun.sh: line 22: 16146 Segmentation fault      (core dumped) qemu-mips ${working}/$base
+index_expression, Fail, Expected 0, got 139
+
+
+bin/c_compiler: line 40: 16176 Done                    cat "$INFILE"
+     16177 Segmentation fault      (core dumped) | bin/gen_mips > "$OUTFILE"
+qemu: uncaught target signal 11 (Segmentation fault) - core dumped
+./mipsrun.sh: line 22: 16186 Segmentation fault      (core dumped) qemu-mips ${working}/$base
+index_variable, Fail, Expected 0, got 139
+
+
+bin/c_compiler: line 40: 16216 Done                    cat "$INFILE"
+     16217 Segmentation fault      (core dumped) | bin/gen_mips > "$OUTFILE"
+qemu: uncaught target signal 11 (Segmentation fault) - core dumped
+./mipsrun.sh: line 22: 16228 Segmentation fault      (core dumped) qemu-mips ${working}/$base
+for_multiple, Fail, Expected 0, got 139
+
+
+bin/c_compiler: line 40: 16258 Done                    cat "$INFILE"
+     16259 Segmentation fault      (core dumped) | bin/gen_mips > "$OUTFILE"
+qemu: uncaught target signal 11 (Segmentation fault) - core dumped
+./mipsrun.sh: line 22: 16268 Segmentation fault      (core dumped) qemu-mips ${working}/$base
+for_one, Fail, Expected 0, got 139
+
+
+bin/c_compiler: line 40: 16298 Done                    cat "$INFILE"
+     16299 Segmentation fault      (core dumped) | bin/gen_mips > "$OUTFILE"
+qemu: uncaught target signal 11 (Segmentation fault) - core dumped
+./mipsrun.sh: line 22: 16310 Segmentation fault      (core dumped) qemu-mips ${working}/$base
+for_zero_v1, Fail, Expected 0, got 139
+
+
+bin/c_compiler: line 40: 16340 Done                    cat "$INFILE"
+     16341 Segmentation fault      (core dumped) | bin/gen_mips > "$OUTFILE"
+qemu: uncaught target signal 11 (Segmentation fault) - core dumped
+./mipsrun.sh: line 22: 16350 Segmentation fault      (core dumped) qemu-mips ${working}/$base
+for_zero_v2, Fail, Expected 0, got 139
+
+
+if_else_false, Pass
+
+
+if_else_true, Pass
+
+
+if_false, Pass
+
+
+if_true, Pass
+
+
+sequence, Pass
+
+
+bin/c_compiler: line 40: 16555 Done                    cat "$INFILE"
+     16556 Segmentation fault      (core dumped) | bin/gen_mips > "$OUTFILE"
+qemu: uncaught target signal 11 (Segmentation fault) - core dumped
+./mipsrun.sh: line 22: 16565 Segmentation fault      (core dumped) qemu-mips ${working}/$base
+while_multiple, Fail, Expected 0, got 139
+
+
+bin/c_compiler: line 40: 16595 Done                    cat "$INFILE"
+     16596 Segmentation fault      (core dumped) | bin/gen_mips > "$OUTFILE"
+qemu: uncaught target signal 11 (Segmentation fault) - core dumped
+./mipsrun.sh: line 22: 16605 Segmentation fault      (core dumped) qemu-mips ${working}/$base
+while_once, Fail, Expected 0, got 139
+
+
+bin/c_compiler: line 40: 16635 Done                    cat "$INFILE"
+     16636 Segmentation fault      (core dumped) | bin/gen_mips > "$OUTFILE"
+qemu: uncaught target signal 11 (Segmentation fault) - core dumped
+./mipsrun.sh: line 22: 16645 Segmentation fault      (core dumped) qemu-mips ${working}/$base
+while_zero, Fail, Expected 0, got 139
+
+
+test_ADD0, Pass
+
+
+test_ADD1, Pass
+
+
+tmp/formative_compiler/test_CALL.s: Assembler messages:
+tmp/formative_compiler/test_CALL.s:14: Warning: no .cprestore pseudo-op used in PIC code
+test_CALL, Pass
+
+
+test_LOCAL, Pass
+
+
+test_RETURN, Pass
+
+
+add, Fail, Expected 0, got 1
+
+
+add_double, Fail, Expected 0, got 1
+
+
+add_mul, Fail, Expected 0, got 1
+
+
+mul, Fail, Expected 0, got 1
+
+
+mul_add, Fail, Expected 0, got 1
+
+
+mul_double, Fail, Expected 0, got 1
+
+
+bin/c_compiler: line 40: 17064 Done                    cat "$INFILE"
+     17065 Segmentation fault      (core dumped) | bin/gen_mips > "$OUTFILE"
+qemu: uncaught target signal 11 (Segmentation fault) - core dumped
+./mipsrun.sh: line 22: 17074 Segmentation fault      (core dumped) qemu-mips ${working}/$base
+pow, Fail, Expected 0, got 139
+
+
+tmp/formative_compiler/call_constant_external.s: Assembler messages:
+tmp/formative_compiler/call_constant_external.s:14: Warning: no .cprestore pseudo-op used in PIC code
+call_constant_external, Pass
+
+
+tmp/formative_compiler/call_constant_internal.s: Assembler messages:
+tmp/formative_compiler/call_constant_internal.s:20: Warning: no .cprestore pseudo-op used in PIC code
+call_constant_internal, Pass
+
+
+call_five_args_external, Fail, Expected 0, got 1
+
+
+terminate called after throwing an instance of 'std::out_of_range'
+  what():  map::at
+bin/c_compiler: line 40: 17209 Done                    cat "$INFILE"
+     17210 Aborted                 (core dumped) | bin/gen_mips > "$OUTFILE"
+/usr/lib/gcc-cross/mips-linux-gnu/9/../../../../mips-linux-gnu/bin/ld: /tmp/ccpaAl5O.o: in function `main':
+call_five_args_internal_driver.c:(.text+0x1c): undefined reference to `f'
+/usr/lib/gcc-cross/mips-linux-gnu/9/../../../../mips-linux-gnu/bin/ld: call_five_args_internal_driver.c:(.text+0x24): undefined reference to `f'
+collect2: error: ld returned 1 exit status
+call_five_args_internal, Fail, Expected 0, got 1
+
+
+call_identity_external, Fail, Expected 0, got 1
+
+
+call_identity_internal, Fail, Expected 0, got 1
+
+
+call_mutual_recursive, Fail, Expected 0, got 1
+
+
+call_recursive_internal, Fail, Expected 0, got 1
+
+
+call_two_args_external, Fail, Expected 0, got 1
+
+
+call_two_args_internal, Fail, Expected 0, got 1
+
+
+add, Pass
+
+
+bitwise_and, Pass
+
+
+bitwise_or, Pass
+
+
+bitwise_xor, Pass
+
+
+div, Pass
+
+
+equal, Pass
+
+
+less_than, Pass
+
+
+less_than_equal, Pass
+
+
+logical_and, Pass
+
+
+logical_or, Pass
+
+
+mul, Pass
+
+
+sub, Pass
+
+
+constant_initialiser, Pass
+
+
+dual_var, Pass
+
+
+expression_initialiser, Fail, Expected 0, got 1
+
+
+identity, Pass
+
+
+return_constant, Pass
+
+
+scoped_var, Pass
+
+
+single_var, Pass
+
+
+enum1, Pass
+
+
+enum2, Pass
+
+
+bin/c_compiler: line 40: 18194 Done                    cat "$INFILE"
+     18195 Segmentation fault      (core dumped) | bin/gen_mips > "$OUTFILE"
+qemu: uncaught target signal 11 (Segmentation fault) - core dumped
+./mipsrun.sh: line 22: 18204 Segmentation fault      (core dumped) qemu-mips ${working}/$base
+switch1, Fail, Expected 0, got 139
+
+
+g(0)==1
+g(1)==1
+g(2)==3
+g(3)==4
+bin/c_compiler: line 40: 18234 Done                    cat "$INFILE"
+     18235 Segmentation fault      (core dumped) | bin/gen_mips > "$OUTFILE"
+qemu: uncaught target signal 11 (Segmentation fault) - core dumped
+./mipsrun.sh: line 22: 18246 Segmentation fault      (core dumped) qemu-mips ${working}/$base
+switch2, Fail, Expected 0, got 139
+
+
+tmp/formative_compiler/typedef1.s: Assembler messages:
+tmp/formative_compiler/typedef1.s:1: Error: unrecognized opcode `parse Error:syntax error,unexpected T_IDENTIFIER,expecting T_COMMA or T_SEMICOLON'
+mips-linux-gnu-gcc: error: tmp/formative_compiler/typedef1.o: No such file or directory
+tmp/formative_compiler/typedef1: Invalid ELF image for this architecture
+typedef1, Fail, Expected 0, got 255
+
+
+tmp/formative_compiler/typedef2.s: Assembler messages:
+tmp/formative_compiler/typedef2.s:1: Error: unrecognized opcode `parse Error:syntax error,unexpected T_STAR,expecting T_COMMA or T_SEMICOLON'
+mips-linux-gnu-gcc: error: tmp/formative_compiler/typedef2.o: No such file or directory
+tmp/formative_compiler/typedef2: Invalid ELF image for this architecture
+typedef2, Fail, Expected 0, got 255
+
+
+bin/c_compiler: line 40: 18338 Done                    cat "$INFILE"
+     18339 Segmentation fault      (core dumped) | bin/gen_mips > "$OUTFILE"
+qemu: uncaught target signal 11 (Segmentation fault) - core dumped
+./mipsrun.sh: line 22: 18348 Segmentation fault      (core dumped) qemu-mips ${working}/$base
+addressof, Fail, Expected 0, got 139
+
+
+bin/c_compiler: line 40: 18380 Done                    cat "$INFILE"
+     18381 Segmentation fault      (core dumped) | bin/gen_mips > "$OUTFILE"
+qemu: uncaught target signal 11 (Segmentation fault) - core dumped
+./mipsrun.sh: line 22: 18390 Segmentation fault      (core dumped) qemu-mips ${working}/$base
+arithmetic, Fail, Expected 0, got 139
+
+
+bin/c_compiler: line 40: 18420 Done                    cat "$INFILE"
+     18421 Segmentation fault      (core dumped) | bin/gen_mips > "$OUTFILE"
+qemu: uncaught target signal 11 (Segmentation fault) - core dumped
+./mipsrun.sh: line 22: 18430 Segmentation fault      (core dumped) qemu-mips ${working}/$base
+assign, Fail, Expected 0, got 139
+
+
+bin/c_compiler: line 40: 18460 Done                    cat "$INFILE"
+     18461 Segmentation fault      (core dumped) | bin/gen_mips > "$OUTFILE"
+qemu: uncaught target signal 11 (Segmentation fault) - core dumped
+./mipsrun.sh: line 22: 18470 Segmentation fault      (core dumped) qemu-mips ${working}/$base
+dereference, Fail, Expected 0, got 139
+
+
+bin/c_compiler: line 40: 18500 Done                    cat "$INFILE"
+     18501 Segmentation fault      (core dumped) | bin/gen_mips > "$OUTFILE"
+qemu: uncaught target signal 11 (Segmentation fault) - core dumped
+./mipsrun.sh: line 22: 18510 Segmentation fault      (core dumped) qemu-mips ${working}/$base
+index, Fail, Expected 0, got 139
+
+
+fibonacci, Fail, Expected 0, got 1
+
+
+bin/c_compiler: line 40: 18575 Done                    cat "$INFILE"
+     18576 Segmentation fault      (core dumped) | bin/gen_mips > "$OUTFILE"
+multiply, Fail, Expected 0, got 1
+
+
+bin/c_compiler: line 40: 18611 Done                    cat "$INFILE"
+     18612 Segmentation fault      (core dumped) | bin/gen_mips > "$OUTFILE"
+qemu: uncaught target signal 11 (Segmentation fault) - core dumped
+./mipsrun.sh: line 22: 18621 Segmentation fault      (core dumped) qemu-mips ${working}/$base
+sqrt, Fail, Expected 0, got 139
+
+
+chliteral, Pass
+
+
+tmp/formative_compiler/escaped.s: Assembler messages:
+tmp/formative_compiler/escaped.s:1: Error: unrecognized opcode `parse Error:syntax error,unexpected T_ASSIGN,expecting T_COMMA or T_SEMICOLON'
+mips-linux-gnu-gcc: error: tmp/formative_compiler/escaped.o: No such file or directory
+tmp/formative_compiler/escaped: Invalid ELF image for this architecture
+escaped, Fail, Expected 0, got 255
+
+
+tmp/formative_compiler/literal.s: Assembler messages:
+tmp/formative_compiler/literal.s:1: Error: unrecognized opcode `parse Error:syntax error,unexpected T_ASSIGN,expecting T_COMMA or T_SEMICOLON'
+mips-linux-gnu-gcc: error: tmp/formative_compiler/literal.o: No such file or directory
+tmp/formative_compiler/literal: Invalid ELF image for this architecture
+literal, Fail, Expected 0, got 255
+
+
+tmp/formative_compiler/puts.s: Assembler messages:
+tmp/formative_compiler/puts.s:1: Error: unrecognized opcode `parse Error:syntax error,unexpected T_STAR,expecting T_COMMA or T_RBRACKET'
+mips-linux-gnu-gcc: error: tmp/formative_compiler/puts.o: No such file or directory
+tmp/formative_compiler/puts: Invalid ELF image for this architecture
+puts, Fail, Expected 0, got 255
+
+
+tmp/formative_compiler/search.s: Assembler messages:
+tmp/formative_compiler/search.s:1: Error: unrecognized opcode `parse Error:syntax error,unexpected T_STAR'
+mips-linux-gnu-gcc: error: tmp/formative_compiler/search.o: No such file or directory
+tmp/formative_compiler/search: Invalid ELF image for this architecture
+search, Fail, Expected 0, got 255
+
+
+tmp/formative_compiler/sizeof.s: Assembler messages:
+tmp/formative_compiler/sizeof.s:1: Error: unrecognized opcode `parse Error:syntax error,unexpected T_LCURLY,expecting T_STAR or T_LBRACKET or T_SEMICOLON or T_IDENTIFIER'
+mips-linux-gnu-gcc: error: tmp/formative_compiler/sizeof.o: No such file or directory
+tmp/formative_compiler/sizeof: Invalid ELF image for this architecture
+sizeof, Fail, Expected 0, got 255
+
+
+tmp/formative_compiler/struct_inst.s: Assembler messages:
+tmp/formative_compiler/struct_inst.s:1: Error: unrecognized opcode `parse Error:syntax error,unexpected T_LCURLY,expecting T_STAR or T_LBRACKET or T_SEMICOLON or T_IDENTIFIER'
+mips-linux-gnu-gcc: error: tmp/formative_compiler/struct_inst.o: No such file or directory
+tmp/formative_compiler/struct_inst: Invalid ELF image for this architecture
+struct_inst, Fail, Expected 0, got 255
+
+
+tmp/formative_compiler/struct_member_get.s: Assembler messages:
+tmp/formative_compiler/struct_member_get.s:1: Error: unrecognized opcode `parse Error:syntax error,unexpected T_LCURLY,expecting T_STAR or T_LBRACKET or T_SEMICOLON or T_IDENTIFIER'
+mips-linux-gnu-gcc: error: tmp/formative_compiler/struct_member_get.o: No such file or directory
+tmp/formative_compiler/struct_member_get: Invalid ELF image for this architecture
+struct_member_get, Fail, Expected 0, got 255
+
+
+tmp/formative_compiler/struct_member_set.s: Assembler messages:
+tmp/formative_compiler/struct_member_set.s:1: Error: unrecognized opcode `parse Error:syntax error,unexpected T_LCURLY,expecting T_STAR or T_LBRACKET or T_SEMICOLON or T_IDENTIFIER'
+mips-linux-gnu-gcc: error: tmp/formative_compiler/struct_member_set.o: No such file or directory
+tmp/formative_compiler/struct_member_set: Invalid ELF image for this architecture
+struct_member_set, Fail, Expected 0, got 255
+
+
+tmp/formative_compiler/struct_two_members.s: Assembler messages:
+tmp/formative_compiler/struct_two_members.s:1: Error: unrecognized opcode `parse Error:syntax error,unexpected T_LCURLY,expecting T_STAR or T_LBRACKET or T_SEMICOLON or T_IDENTIFIER'
+mips-linux-gnu-gcc: error: tmp/formative_compiler/struct_two_members.o: No such file or directory
+tmp/formative_compiler/struct_two_members: Invalid ELF image for this architecture
+struct_two_members, Fail, Expected 0, got 255
+
+
+tmp/formative_compiler/sizeof_char_inst.s: Assembler messages:
+tmp/formative_compiler/sizeof_char_inst.s:1: Error: unrecognized opcode `parse Error:syntax error,unexpected T_IDENTIFIER,expecting T_COMMA or T_SEMICOLON'
+mips-linux-gnu-gcc: error: tmp/formative_compiler/sizeof_char_inst.o: No such file or directory
+tmp/formative_compiler/sizeof_char_inst: Invalid ELF image for this architecture
+sizeof_char_inst, Fail, Expected 0, got 255
+
+
+tmp/formative_compiler/sizeof_char_type.s: Assembler messages:
+tmp/formative_compiler/sizeof_char_type.s:7: Error: operand 3 out of range `addi $29,$29,--1398425712'
+tmp/formative_compiler/sizeof_char_type.s:10: Error: operand 3 out of range `addiu $29,$29,-1398425704'
+mips-linux-gnu-gcc: error: tmp/formative_compiler/sizeof_char_type.o: No such file or directory
+tmp/formative_compiler/sizeof_char_type: Invalid ELF image for this architecture
+sizeof_char_type, Fail, Expected 0, got 255
+
+
+sizeof_int_inst, Fail, Expected 0, got 1
+
+
+tmp/formative_compiler/sizeof_int_type.s: Assembler messages:
+tmp/formative_compiler/sizeof_int_type.s:1: Error: unrecognized opcode `parse Error:syntax error,unexpected T_INT'
+mips-linux-gnu-gcc: error: tmp/formative_compiler/sizeof_int_type.o: No such file or directory
+tmp/formative_compiler/sizeof_int_type: Invalid ELF image for this architecture
+sizeof_int_type, Fail, Expected 0, got 255
+
+
+unsigned, Pass
+
+
+Passes 37 out of 87
+declare_global, Pass
+
+
+declare_local, Pass
+
+
+index_constant, Pass
+
+
+bin/c_compiler: line 40: 20634 Done                    cat "$INFILE"
+     20635 Segmentation fault      (core dumped) | bin/gen_mips > "$OUTFILE"
+qemu: uncaught target signal 11 (Segmentation fault) - core dumped
+./mipsrun.sh: line 22: 20644 Segmentation fault      (core dumped) qemu-mips ${working}/$base
+index_expression, Fail, Expected 0, got 139
+
+
+bin/c_compiler: line 40: 20674 Done                    cat "$INFILE"
+     20675 Segmentation fault      (core dumped) | bin/gen_mips > "$OUTFILE"
+qemu: uncaught target signal 11 (Segmentation fault) - core dumped
+./mipsrun.sh: line 22: 20684 Segmentation fault      (core dumped) qemu-mips ${working}/$base
+index_variable, Fail, Expected 0, got 139
+
+
+bin/c_compiler: line 40: 20714 Done                    cat "$INFILE"
+     20715 Segmentation fault      (core dumped) | bin/gen_mips > "$OUTFILE"
+qemu: uncaught target signal 11 (Segmentation fault) - core dumped
+./mipsrun.sh: line 22: 20724 Segmentation fault      (core dumped) qemu-mips ${working}/$base
+for_multiple, Fail, Expected 0, got 139
+
+
+bin/c_compiler: line 40: 20754 Done                    cat "$INFILE"
+     20755 Segmentation fault      (core dumped) | bin/gen_mips > "$OUTFILE"
+qemu: uncaught target signal 11 (Segmentation fault) - core dumped
+./mipsrun.sh: line 22: 20764 Segmentation fault      (core dumped) qemu-mips ${working}/$base
+for_one, Fail, Expected 0, got 139
+
+
+bin/c_compiler: line 40: 20794 Done                    cat "$INFILE"
+     20795 Segmentation fault      (core dumped) | bin/gen_mips > "$OUTFILE"
+qemu: uncaught target signal 11 (Segmentation fault) - core dumped
+./mipsrun.sh: line 22: 20804 Segmentation fault      (core dumped) qemu-mips ${working}/$base
+for_zero_v1, Fail, Expected 0, got 139
+
+
+bin/c_compiler: line 40: 20834 Done                    cat "$INFILE"
+     20835 Segmentation fault      (core dumped) | bin/gen_mips > "$OUTFILE"
+qemu: uncaught target signal 11 (Segmentation fault) - core dumped
+./mipsrun.sh: line 22: 20844 Segmentation fault      (core dumped) qemu-mips ${working}/$base
+for_zero_v2, Fail, Expected 0, got 139
+
+
+if_else_false, Pass
+
+
+if_else_true, Pass
+
+
+if_false, Pass
+
+
+if_true, Pass
+
+
+sequence, Pass
+
+
+bin/c_compiler: line 40: 21053 Done                    cat "$INFILE"
+     21054 Segmentation fault      (core dumped) | bin/gen_mips > "$OUTFILE"
+qemu: uncaught target signal 11 (Segmentation fault) - core dumped
+./mipsrun.sh: line 22: 21063 Segmentation fault      (core dumped) qemu-mips ${working}/$base
+while_multiple, Fail, Expected 0, got 139
+
+
+bin/c_compiler: line 40: 21093 Done                    cat "$INFILE"
+     21094 Segmentation fault      (core dumped) | bin/gen_mips > "$OUTFILE"
+qemu: uncaught target signal 11 (Segmentation fault) - core dumped
+./mipsrun.sh: line 22: 21103 Segmentation fault      (core dumped) qemu-mips ${working}/$base
+while_once, Fail, Expected 0, got 139
+
+
+bin/c_compiler: line 40: 21133 Done                    cat "$INFILE"
+     21134 Segmentation fault      (core dumped) | bin/gen_mips > "$OUTFILE"
+qemu: uncaught target signal 11 (Segmentation fault) - core dumped
+./mipsrun.sh: line 22: 21143 Segmentation fault      (core dumped) qemu-mips ${working}/$base
+while_zero, Fail, Expected 0, got 139
+
+
+test_ADD0, Pass
+
+
+test_ADD1, Pass
+
+
+tmp/formative_compiler/test_CALL.s: Assembler messages:
+tmp/formative_compiler/test_CALL.s:14: Warning: no .cprestore pseudo-op used in PIC code
+test_CALL, Pass
+
+
+test_LOCAL, Pass
+
+
+test_RETURN, Pass
+
+
+add, Fail, Expected 0, got 1
+
+
+add_double, Fail, Expected 0, got 1
+
+
+add_mul, Fail, Expected 0, got 1
+
+
+mul, Fail, Expected 0, got 1
+
+
+mul_add, Fail, Expected 0, got 1
+
+
+mul_double, Fail, Expected 0, got 1
+
+
+bin/c_compiler: line 40: 21562 Done                    cat "$INFILE"
+     21563 Segmentation fault      (core dumped) | bin/gen_mips > "$OUTFILE"
+qemu: uncaught target signal 11 (Segmentation fault) - core dumped
+./mipsrun.sh: line 22: 21572 Segmentation fault      (core dumped) qemu-mips ${working}/$base
+pow, Fail, Expected 0, got 139
+
+
+tmp/formative_compiler/call_constant_external.s: Assembler messages:
+tmp/formative_compiler/call_constant_external.s:14: Warning: no .cprestore pseudo-op used in PIC code
+call_constant_external, Pass
+
+
+tmp/formative_compiler/call_constant_internal.s: Assembler messages:
+tmp/formative_compiler/call_constant_internal.s:20: Warning: no .cprestore pseudo-op used in PIC code
+call_constant_internal, Pass
+
+
+call_five_args_external, Fail, Expected 0, got 1
+
+
+terminate called after throwing an instance of 'std::out_of_range'
+  what():  map::at
+bin/c_compiler: line 40: 21707 Done                    cat "$INFILE"
+     21708 Aborted                 (core dumped) | bin/gen_mips > "$OUTFILE"
+/usr/lib/gcc-cross/mips-linux-gnu/9/../../../../mips-linux-gnu/bin/ld: /tmp/ccfdzs9V.o: in function `main':
+call_five_args_internal_driver.c:(.text+0x1c): undefined reference to `f'
+/usr/lib/gcc-cross/mips-linux-gnu/9/../../../../mips-linux-gnu/bin/ld: call_five_args_internal_driver.c:(.text+0x24): undefined reference to `f'
+collect2: error: ld returned 1 exit status
+call_five_args_internal, Fail, Expected 0, got 1
+
+
+call_identity_external, Fail, Expected 0, got 1
+
+
+call_identity_internal, Fail, Expected 0, got 1
+
+
+call_mutual_recursive, Fail, Expected 0, got 1
+
+
+call_recursive_internal, Fail, Expected 0, got 1
+
+
+call_two_args_external, Fail, Expected 0, got 1
+
+
+call_two_args_internal, Fail, Expected 0, got 1
+
+
+add, Pass
+
+
+bitwise_and, Pass
+
+
+bitwise_or, Pass
+
+
+bitwise_xor, Pass
+
+
+div, Pass
+
+
+equal, Pass
+
+
+less_than, Pass
+
+
+less_than_equal, Pass
+
+
+logical_and, Pass
+
+
+logical_or, Pass
+
+
+mul, Pass
+
+
+sub, Pass
+
+
+constant_initialiser, Pass
+
+
+dual_var, Pass
+
+
+expression_initialiser, Fail, Expected 0, got 1
+
+
+identity, Pass
+
+
+return_constant, Pass
+
+
+scoped_var, Pass
+
+
+single_var, Pass
+
+
+bin/c_compiler: line 40: 22621 Done                    cat "$INFILE"
+     22622 Segmentation fault      (core dumped) | bin/gen_mips > "$OUTFILE"
+/usr/lib/gcc-cross/mips-linux-gnu/9/../../../../mips-linux-gnu/bin/ld: /tmp/cc5NFCP6.o: in function `main':
+enum1_driver.c:(.text+0x1c): undefined reference to `g'
+/usr/lib/gcc-cross/mips-linux-gnu/9/../../../../mips-linux-gnu/bin/ld: enum1_driver.c:(.text+0x24): undefined reference to `g'
+collect2: error: ld returned 1 exit status
+enum1, Fail, Expected 0, got 1
+
+
+bin/c_compiler: line 40: 22657 Done                    cat "$INFILE"
+     22658 Segmentation fault      (core dumped) | bin/gen_mips > "$OUTFILE"
+/usr/lib/gcc-cross/mips-linux-gnu/9/../../../../mips-linux-gnu/bin/ld: /tmp/ccdjQ2CY.o: in function `main':
+enum2_driver.c:(.text+0x1c): undefined reference to `g'
+/usr/lib/gcc-cross/mips-linux-gnu/9/../../../../mips-linux-gnu/bin/ld: enum2_driver.c:(.text+0x24): undefined reference to `g'
+collect2: error: ld returned 1 exit status
+enum2, Fail, Expected 0, got 1
+
+
+bin/c_compiler: line 40: 22695 Done                    cat "$INFILE"
+     22696 Segmentation fault      (core dumped) | bin/gen_mips > "$OUTFILE"
+qemu: uncaught target signal 11 (Segmentation fault) - core dumped
+./mipsrun.sh: line 22: 22705 Segmentation fault      (core dumped) qemu-mips ${working}/$base
+switch1, Fail, Expected 0, got 139
+
+
+g(0)==1
+g(1)==1
+g(2)==3
+g(3)==4
+bin/c_compiler: line 40: 22735 Done                    cat "$INFILE"
+     22736 Segmentation fault      (core dumped) | bin/gen_mips > "$OUTFILE"
+qemu: uncaught target signal 11 (Segmentation fault) - core dumped
+./mipsrun.sh: line 22: 22747 Segmentation fault      (core dumped) qemu-mips ${working}/$base
+switch2, Fail, Expected 0, got 139
+
+
+tmp/formative_compiler/typedef1.s: Assembler messages:
+tmp/formative_compiler/typedef1.s:1: Error: unrecognized opcode `parse Error:syntax error,unexpected T_IDENTIFIER,expecting T_COMMA or T_SEMICOLON'
+mips-linux-gnu-gcc: error: tmp/formative_compiler/typedef1.o: No such file or directory
+tmp/formative_compiler/typedef1: Invalid ELF image for this architecture
+typedef1, Fail, Expected 0, got 255
+
+
+tmp/formative_compiler/typedef2.s: Assembler messages:
+tmp/formative_compiler/typedef2.s:1: Error: unrecognized opcode `parse Error:syntax error,unexpected T_STAR,expecting T_COMMA or T_SEMICOLON'
+mips-linux-gnu-gcc: error: tmp/formative_compiler/typedef2.o: No such file or directory
+tmp/formative_compiler/typedef2: Invalid ELF image for this architecture
+typedef2, Fail, Expected 0, got 255
+
+
+bin/c_compiler: line 40: 22839 Done                    cat "$INFILE"
+     22840 Segmentation fault      (core dumped) | bin/gen_mips > "$OUTFILE"
+qemu: uncaught target signal 11 (Segmentation fault) - core dumped
+./mipsrun.sh: line 22: 22849 Segmentation fault      (core dumped) qemu-mips ${working}/$base
+addressof, Fail, Expected 0, got 139
+
+
+bin/c_compiler: line 40: 22879 Done                    cat "$INFILE"
+     22880 Segmentation fault      (core dumped) | bin/gen_mips > "$OUTFILE"
+qemu: uncaught target signal 11 (Segmentation fault) - core dumped
+./mipsrun.sh: line 22: 22889 Segmentation fault      (core dumped) qemu-mips ${working}/$base
+arithmetic, Fail, Expected 0, got 139
+
+
+bin/c_compiler: line 40: 22919 Done                    cat "$INFILE"
+     22920 Segmentation fault      (core dumped) | bin/gen_mips > "$OUTFILE"
+qemu: uncaught target signal 11 (Segmentation fault) - core dumped
+./mipsrun.sh: line 22: 22929 Segmentation fault      (core dumped) qemu-mips ${working}/$base
+assign, Fail, Expected 0, got 139
+
+
+bin/c_compiler: line 40: 22959 Done                    cat "$INFILE"
+     22960 Segmentation fault      (core dumped) | bin/gen_mips > "$OUTFILE"
+qemu: uncaught target signal 11 (Segmentation fault) - core dumped
+./mipsrun.sh: line 22: 22969 Segmentation fault      (core dumped) qemu-mips ${working}/$base
+dereference, Fail, Expected 0, got 139
+
+
+bin/c_compiler: line 40: 22999 Done                    cat "$INFILE"
+     23000 Segmentation fault      (core dumped) | bin/gen_mips > "$OUTFILE"
+qemu: uncaught target signal 11 (Segmentation fault) - core dumped
+./mipsrun.sh: line 22: 23009 Segmentation fault      (core dumped) qemu-mips ${working}/$base
+index, Fail, Expected 0, got 139
+
+
+fibonacci, Fail, Expected 0, got 1
+
+
+bin/c_compiler: line 40: 23074 Done                    cat "$INFILE"
+     23075 Segmentation fault      (core dumped) | bin/gen_mips > "$OUTFILE"
+multiply, Fail, Expected 0, got 1
+
+
+bin/c_compiler: line 40: 23110 Done                    cat "$INFILE"
+     23111 Segmentation fault      (core dumped) | bin/gen_mips > "$OUTFILE"
+qemu: uncaught target signal 11 (Segmentation fault) - core dumped
+./mipsrun.sh: line 22: 23122 Segmentation fault      (core dumped) qemu-mips ${working}/$base
+sqrt, Fail, Expected 0, got 139
+
+
+chliteral, Pass
+
+
+tmp/formative_compiler/escaped.s: Assembler messages:
+tmp/formative_compiler/escaped.s:1: Error: unrecognized opcode `parse Error:syntax error,unexpected T_ASSIGN,expecting T_COMMA or T_SEMICOLON'
+mips-linux-gnu-gcc: error: tmp/formative_compiler/escaped.o: No such file or directory
+tmp/formative_compiler/escaped: Invalid ELF image for this architecture
+escaped, Fail, Expected 0, got 255
+
+
+tmp/formative_compiler/literal.s: Assembler messages:
+tmp/formative_compiler/literal.s:1: Error: unrecognized opcode `parse Error:syntax error,unexpected T_ASSIGN,expecting T_COMMA or T_SEMICOLON'
+mips-linux-gnu-gcc: error: tmp/formative_compiler/literal.o: No such file or directory
+tmp/formative_compiler/literal: Invalid ELF image for this architecture
+literal, Fail, Expected 0, got 255
+
+
+tmp/formative_compiler/puts.s: Assembler messages:
+tmp/formative_compiler/puts.s:1: Error: unrecognized opcode `parse Error:syntax error,unexpected T_STAR,expecting T_COMMA or T_RBRACKET'
+mips-linux-gnu-gcc: error: tmp/formative_compiler/puts.o: No such file or directory
+tmp/formative_compiler/puts: Invalid ELF image for this architecture
+puts, Fail, Expected 0, got 255
+
+
+tmp/formative_compiler/search.s: Assembler messages:
+tmp/formative_compiler/search.s:1: Error: unrecognized opcode `parse Error:syntax error,unexpected T_STAR'
+mips-linux-gnu-gcc: error: tmp/formative_compiler/search.o: No such file or directory
+tmp/formative_compiler/search: Invalid ELF image for this architecture
+search, Fail, Expected 0, got 255
+
+
+tmp/formative_compiler/sizeof.s: Assembler messages:
+tmp/formative_compiler/sizeof.s:1: Error: unrecognized opcode `parse Error:syntax error,unexpected T_LCURLY,expecting T_STAR or T_LBRACKET or T_SEMICOLON or T_IDENTIFIER'
+mips-linux-gnu-gcc: error: tmp/formative_compiler/sizeof.o: No such file or directory
+tmp/formative_compiler/sizeof: Invalid ELF image for this architecture
+sizeof, Fail, Expected 0, got 255
+
+
+tmp/formative_compiler/struct_inst.s: Assembler messages:
+tmp/formative_compiler/struct_inst.s:1: Error: unrecognized opcode `parse Error:syntax error,unexpected T_LCURLY,expecting T_STAR or T_LBRACKET or T_SEMICOLON or T_IDENTIFIER'
+mips-linux-gnu-gcc: error: tmp/formative_compiler/struct_inst.o: No such file or directory
+tmp/formative_compiler/struct_inst: Invalid ELF image for this architecture
+struct_inst, Fail, Expected 0, got 255
+
+
+tmp/formative_compiler/struct_member_get.s: Assembler messages:
+tmp/formative_compiler/struct_member_get.s:1: Error: unrecognized opcode `parse Error:syntax error,unexpected T_LCURLY,expecting T_STAR or T_LBRACKET or T_SEMICOLON or T_IDENTIFIER'
+mips-linux-gnu-gcc: error: tmp/formative_compiler/struct_member_get.o: No such file or directory
+tmp/formative_compiler/struct_member_get: Invalid ELF image for this architecture
+struct_member_get, Fail, Expected 0, got 255
+
+
+tmp/formative_compiler/struct_member_set.s: Assembler messages:
+tmp/formative_compiler/struct_member_set.s:1: Error: unrecognized opcode `parse Error:syntax error,unexpected T_LCURLY,expecting T_STAR or T_LBRACKET or T_SEMICOLON or T_IDENTIFIER'
+mips-linux-gnu-gcc: error: tmp/formative_compiler/struct_member_set.o: No such file or directory
+tmp/formative_compiler/struct_member_set: Invalid ELF image for this architecture
+struct_member_set, Fail, Expected 0, got 255
+
+
+tmp/formative_compiler/struct_two_members.s: Assembler messages:
+tmp/formative_compiler/struct_two_members.s:1: Error: unrecognized opcode `parse Error:syntax error,unexpected T_LCURLY,expecting T_STAR or T_LBRACKET or T_SEMICOLON or T_IDENTIFIER'
+mips-linux-gnu-gcc: error: tmp/formative_compiler/struct_two_members.o: No such file or directory
+tmp/formative_compiler/struct_two_members: Invalid ELF image for this architecture
+struct_two_members, Fail, Expected 0, got 255
+
+
+tmp/formative_compiler/sizeof_char_inst.s: Assembler messages:
+tmp/formative_compiler/sizeof_char_inst.s:1: Error: unrecognized opcode `parse Error:syntax error,unexpected T_IDENTIFIER,expecting T_COMMA or T_SEMICOLON'
+mips-linux-gnu-gcc: error: tmp/formative_compiler/sizeof_char_inst.o: No such file or directory
+tmp/formative_compiler/sizeof_char_inst: Invalid ELF image for this architecture
+sizeof_char_inst, Fail, Expected 0, got 255
+
+
+tmp/formative_compiler/sizeof_char_type.s: Assembler messages:
+tmp/formative_compiler/sizeof_char_type.s:7: Error: operand 3 out of range `addi $29,$29,-55053776'
+tmp/formative_compiler/sizeof_char_type.s:10: Error: operand 3 out of range `addiu $29,$29,55053784'
+mips-linux-gnu-gcc: error: tmp/formative_compiler/sizeof_char_type.o: No such file or directory
+tmp/formative_compiler/sizeof_char_type: Invalid ELF image for this architecture
+sizeof_char_type, Fail, Expected 0, got 255
+
+
+sizeof_int_inst, Fail, Expected 0, got 1
+
+
+tmp/formative_compiler/sizeof_int_type.s: Assembler messages:
+tmp/formative_compiler/sizeof_int_type.s:1: Error: unrecognized opcode `parse Error:syntax error,unexpected T_INT'
+mips-linux-gnu-gcc: error: tmp/formative_compiler/sizeof_int_type.o: No such file or directory
+tmp/formative_compiler/sizeof_int_type: Invalid ELF image for this architecture
+sizeof_int_type, Fail, Expected 0, got 255
+
+
+unsigned, Pass
+
+
+Passes 35 out of 87
+declare_global, Pass
+
+
+declare_local, Pass
+
+
+index_constant, Pass
+
+
+bin/c_compiler: line 40: 25308 Done                    cat "$INFILE"
+     25309 Segmentation fault      (core dumped) | bin/gen_mips > "$OUTFILE"
+qemu: uncaught target signal 11 (Segmentation fault) - core dumped
+./mipsrun.sh: line 22: 25318 Segmentation fault      (core dumped) qemu-mips ${working}/$base
+index_expression, Fail, Expected 0, got 139
+
+
+bin/c_compiler: line 40: 25350 Done                    cat "$INFILE"
+     25351 Segmentation fault      (core dumped) | bin/gen_mips > "$OUTFILE"
+qemu: uncaught target signal 11 (Segmentation fault) - core dumped
+./mipsrun.sh: line 22: 25360 Segmentation fault      (core dumped) qemu-mips ${working}/$base
+index_variable, Fail, Expected 0, got 139
+
+
+bin/c_compiler: line 40: 25390 Done                    cat "$INFILE"
+     25391 Segmentation fault      (core dumped) | bin/gen_mips > "$OUTFILE"
+qemu: uncaught target signal 11 (Segmentation fault) - core dumped
+./mipsrun.sh: line 22: 25400 Segmentation fault      (core dumped) qemu-mips ${working}/$base
+for_multiple, Fail, Expected 0, got 139
+
+
+bin/c_compiler: line 40: 25432 Done                    cat "$INFILE"
+     25433 Segmentation fault      (core dumped) | bin/gen_mips > "$OUTFILE"
+qemu: uncaught target signal 11 (Segmentation fault) - core dumped
+./mipsrun.sh: line 22: 25442 Segmentation fault      (core dumped) qemu-mips ${working}/$base
+for_one, Fail, Expected 0, got 139
+
+
+bin/c_compiler: line 40: 25472 Done                    cat "$INFILE"
+     25473 Segmentation fault      (core dumped) | bin/gen_mips > "$OUTFILE"
+qemu: uncaught target signal 11 (Segmentation fault) - core dumped
+./mipsrun.sh: line 22: 25482 Segmentation fault      (core dumped) qemu-mips ${working}/$base
+for_zero_v1, Fail, Expected 0, got 139
+
+
+bin/c_compiler: line 40: 25512 Done                    cat "$INFILE"
+     25513 Segmentation fault      (core dumped) | bin/gen_mips > "$OUTFILE"
+qemu: uncaught target signal 11 (Segmentation fault) - core dumped
+./mipsrun.sh: line 22: 25522 Segmentation fault      (core dumped) qemu-mips ${working}/$base
+for_zero_v2, Fail, Expected 0, got 139
+
+
+qemu: uncaught target signal 11 (Segmentation fault) - core dumped
+./mipsrun.sh: line 22: 25561 Segmentation fault      (core dumped) qemu-mips ${working}/$base
+if_else_false, Fail, Expected 0, got 139
+
+
+qemu: uncaught target signal 11 (Segmentation fault) - core dumped
+./mipsrun.sh: line 22: 25600 Segmentation fault      (core dumped) qemu-mips ${working}/$base
+if_else_true, Fail, Expected 0, got 139
+
+
+if_false, Pass
+
+
+qemu: uncaught target signal 11 (Segmentation fault) - core dumped
+./mipsrun.sh: line 22: 25674 Segmentation fault      (core dumped) qemu-mips ${working}/$base
+if_true, Fail, Expected 0, got 139
+
+
+sequence, Pass
+
+
+bin/c_compiler: line 40: 25739 Done                    cat "$INFILE"
+     25740 Segmentation fault      (core dumped) | bin/gen_mips > "$OUTFILE"
+qemu: uncaught target signal 11 (Segmentation fault) - core dumped
+./mipsrun.sh: line 22: 25749 Segmentation fault      (core dumped) qemu-mips ${working}/$base
+while_multiple, Fail, Expected 0, got 139
+
+
+bin/c_compiler: line 40: 25779 Done                    cat "$INFILE"
+     25780 Segmentation fault      (core dumped) | bin/gen_mips > "$OUTFILE"
+qemu: uncaught target signal 11 (Segmentation fault) - core dumped
+./mipsrun.sh: line 22: 25791 Segmentation fault      (core dumped) qemu-mips ${working}/$base
+while_once, Fail, Expected 0, got 139
+
+
+bin/c_compiler: line 40: 25821 Done                    cat "$INFILE"
+     25822 Segmentation fault      (core dumped) | bin/gen_mips > "$OUTFILE"
+qemu: uncaught target signal 11 (Segmentation fault) - core dumped
+./mipsrun.sh: line 22: 25831 Segmentation fault      (core dumped) qemu-mips ${working}/$base
+while_zero, Fail, Expected 0, got 139
+
+
+test_ADD0, Pass
+
+
+test_ADD1, Pass
+
+
+tmp/formative_compiler/test_CALL.s: Assembler messages:
+tmp/formative_compiler/test_CALL.s:14: Warning: no .cprestore pseudo-op used in PIC code
+test_CALL, Pass
+
+
+test_LOCAL, Pass
+
+
+test_RETURN, Pass
+
+
+add, Fail, Expected 0, got 1
+
+
+add_double, Fail, Expected 0, got 1
+
+
+add_mul, Fail, Expected 0, got 1
+
+
+mul, Fail, Expected 0, got 1
+
+
+mul_add, Fail, Expected 0, got 1
+
+
+mul_double, Fail, Expected 0, got 1
+
+
+bin/c_compiler: line 40: 26248 Done                    cat "$INFILE"
+     26249 Segmentation fault      (core dumped) | bin/gen_mips > "$OUTFILE"
+qemu: uncaught target signal 11 (Segmentation fault) - core dumped
+./mipsrun.sh: line 22: 26258 Segmentation fault      (core dumped) qemu-mips ${working}/$base
+pow, Fail, Expected 0, got 139
+
+
+tmp/formative_compiler/call_constant_external.s: Assembler messages:
+tmp/formative_compiler/call_constant_external.s:14: Warning: no .cprestore pseudo-op used in PIC code
+call_constant_external, Pass
+
+
+tmp/formative_compiler/call_constant_internal.s: Assembler messages:
+tmp/formative_compiler/call_constant_internal.s:20: Warning: no .cprestore pseudo-op used in PIC code
+call_constant_internal, Pass
+
+
+call_five_args_external, Fail, Expected 0, got 1
+
+
+terminate called after throwing an instance of 'std::out_of_range'
+  what():  map::at
+bin/c_compiler: line 40: 26393 Done                    cat "$INFILE"
+     26394 Aborted                 (core dumped) | bin/gen_mips > "$OUTFILE"
+/usr/lib/gcc-cross/mips-linux-gnu/9/../../../../mips-linux-gnu/bin/ld: /tmp/ccALDbXi.o: in function `main':
+call_five_args_internal_driver.c:(.text+0x1c): undefined reference to `f'
+/usr/lib/gcc-cross/mips-linux-gnu/9/../../../../mips-linux-gnu/bin/ld: call_five_args_internal_driver.c:(.text+0x24): undefined reference to `f'
+collect2: error: ld returned 1 exit status
+call_five_args_internal, Fail, Expected 0, got 1
+
+
+call_identity_external, Fail, Expected 0, got 1
+
+
+call_identity_internal, Fail, Expected 0, got 1
+
+
+qemu: uncaught target signal 11 (Segmentation fault) - core dumped
+./mipsrun.sh: line 22: 26510 Segmentation fault      (core dumped) qemu-mips ${working}/$base
+call_mutual_recursive, Fail, Expected 0, got 139
+
+
+call_recursive_internal, Fail, Expected 0, got 1
+
+
+call_two_args_external, Fail, Expected 0, got 1
+
+
+call_two_args_internal, Fail, Expected 0, got 1
+
+
+add, Pass
+
+
+bitwise_and, Pass
+
+
+bitwise_or, Pass
+
+
+bitwise_xor, Pass
+
+
+div, Pass
+
+
+equal, Pass
+
+
+less_than, Pass
+
+
+less_than_equal, Pass
+
+
+logical_and, Pass
+
+
+logical_or, Pass
+
+
+mul, Pass
+
+
+sub, Pass
+
+
+constant_initialiser, Pass
+
+
+dual_var, Pass
+
+
+expression_initialiser, Fail, Expected 0, got 1
+
+
+identity, Pass
+
+
+return_constant, Pass
+
+
+scoped_var, Pass
+
+
+single_var, Pass
+
+
+bin/c_compiler: line 40: 27316 Done                    cat "$INFILE"
+     27317 Segmentation fault      (core dumped) | bin/gen_mips > "$OUTFILE"
+/usr/lib/gcc-cross/mips-linux-gnu/9/../../../../mips-linux-gnu/bin/ld: /tmp/ccwyyhB7.o: in function `main':
+enum1_driver.c:(.text+0x1c): undefined reference to `g'
+/usr/lib/gcc-cross/mips-linux-gnu/9/../../../../mips-linux-gnu/bin/ld: enum1_driver.c:(.text+0x24): undefined reference to `g'
+collect2: error: ld returned 1 exit status
+enum1, Fail, Expected 0, got 1
+
+
+bin/c_compiler: line 40: 27352 Done                    cat "$INFILE"
+     27353 Segmentation fault      (core dumped) | bin/gen_mips > "$OUTFILE"
+/usr/lib/gcc-cross/mips-linux-gnu/9/../../../../mips-linux-gnu/bin/ld: /tmp/ccYkzE1O.o: in function `main':
+enum2_driver.c:(.text+0x1c): undefined reference to `g'
+/usr/lib/gcc-cross/mips-linux-gnu/9/../../../../mips-linux-gnu/bin/ld: enum2_driver.c:(.text+0x24): undefined reference to `g'
+collect2: error: ld returned 1 exit status
+enum2, Fail, Expected 0, got 1
+
+
+bin/c_compiler: line 40: 27388 Done                    cat "$INFILE"
+     27389 Segmentation fault      (core dumped) | bin/gen_mips > "$OUTFILE"
+qemu: uncaught target signal 11 (Segmentation fault) - core dumped
+./mipsrun.sh: line 22: 27398 Segmentation fault      (core dumped) qemu-mips ${working}/$base
+switch1, Fail, Expected 0, got 139
+
+
+g(0)==1
+g(1)==1
+g(2)==3
+g(3)==4
+bin/c_compiler: line 40: 27428 Done                    cat "$INFILE"
+     27429 Segmentation fault      (core dumped) | bin/gen_mips > "$OUTFILE"
+qemu: uncaught target signal 11 (Segmentation fault) - core dumped
+./mipsrun.sh: line 22: 27438 Segmentation fault      (core dumped) qemu-mips ${working}/$base
+switch2, Fail, Expected 0, got 139
+
+
+tmp/formative_compiler/typedef1.s: Assembler messages:
+tmp/formative_compiler/typedef1.s:1: Error: unrecognized opcode `parse Error:syntax error,unexpected T_IDENTIFIER,expecting T_COMMA or T_SEMICOLON'
+mips-linux-gnu-gcc: error: tmp/formative_compiler/typedef1.o: No such file or directory
+tmp/formative_compiler/typedef1: Invalid ELF image for this architecture
+typedef1, Fail, Expected 0, got 255
+
+
+tmp/formative_compiler/typedef2.s: Assembler messages:
+tmp/formative_compiler/typedef2.s:1: Error: unrecognized opcode `parse Error:syntax error,unexpected T_STAR,expecting T_COMMA or T_SEMICOLON'
+mips-linux-gnu-gcc: error: tmp/formative_compiler/typedef2.o: No such file or directory
+tmp/formative_compiler/typedef2: Invalid ELF image for this architecture
+typedef2, Fail, Expected 0, got 255
+
+
+bin/c_compiler: line 40: 27530 Done                    cat "$INFILE"
+     27531 Segmentation fault      (core dumped) | bin/gen_mips > "$OUTFILE"
+qemu: uncaught target signal 11 (Segmentation fault) - core dumped
+./mipsrun.sh: line 22: 27540 Segmentation fault      (core dumped) qemu-mips ${working}/$base
+addressof, Fail, Expected 0, got 139
+
+
+bin/c_compiler: line 40: 27570 Done                    cat "$INFILE"
+     27571 Segmentation fault      (core dumped) | bin/gen_mips > "$OUTFILE"
+qemu: uncaught target signal 11 (Segmentation fault) - core dumped
+./mipsrun.sh: line 22: 27580 Segmentation fault      (core dumped) qemu-mips ${working}/$base
+arithmetic, Fail, Expected 0, got 139
+
+
+bin/c_compiler: line 40: 27612 Done                    cat "$INFILE"
+     27613 Segmentation fault      (core dumped) | bin/gen_mips > "$OUTFILE"
+qemu: uncaught target signal 11 (Segmentation fault) - core dumped
+./mipsrun.sh: line 22: 27622 Segmentation fault      (core dumped) qemu-mips ${working}/$base
+assign, Fail, Expected 0, got 139
+
+
+bin/c_compiler: line 40: 27652 Done                    cat "$INFILE"
+     27653 Segmentation fault      (core dumped) | bin/gen_mips > "$OUTFILE"
+qemu: uncaught target signal 11 (Segmentation fault) - core dumped
+./mipsrun.sh: line 22: 27664 Segmentation fault      (core dumped) qemu-mips ${working}/$base
+dereference, Fail, Expected 0, got 139
+
+
+bin/c_compiler: line 40: 27694 Done                    cat "$INFILE"
+     27695 Segmentation fault      (core dumped) | bin/gen_mips > "$OUTFILE"
+qemu: uncaught target signal 11 (Segmentation fault) - core dumped
+./mipsrun.sh: line 22: 27704 Segmentation fault      (core dumped) qemu-mips ${working}/$base
+index, Fail, Expected 0, got 139
+
+
+fibonacci, Fail, Expected 0, got 1
+
+
+bin/c_compiler: line 40: 27769 Done                    cat "$INFILE"
+     27770 Segmentation fault      (core dumped) | bin/gen_mips > "$OUTFILE"
+multiply, Fail, Expected 0, got 1
+
+
+bin/c_compiler: line 40: 27805 Done                    cat "$INFILE"
+     27806 Segmentation fault      (core dumped) | bin/gen_mips > "$OUTFILE"
+qemu: uncaught target signal 11 (Segmentation fault) - core dumped
+./mipsrun.sh: line 22: 27815 Segmentation fault      (core dumped) qemu-mips ${working}/$base
+sqrt, Fail, Expected 0, got 139
+
+
+chliteral, Pass
+
+
+tmp/formative_compiler/escaped.s: Assembler messages:
+tmp/formative_compiler/escaped.s:1: Error: unrecognized opcode `parse Error:syntax error,unexpected T_ASSIGN,expecting T_COMMA or T_SEMICOLON'
+mips-linux-gnu-gcc: error: tmp/formative_compiler/escaped.o: No such file or directory
+tmp/formative_compiler/escaped: Invalid ELF image for this architecture
+escaped, Fail, Expected 0, got 255
+
+
+tmp/formative_compiler/literal.s: Assembler messages:
+tmp/formative_compiler/literal.s:1: Error: unrecognized opcode `parse Error:syntax error,unexpected T_ASSIGN,expecting T_COMMA or T_SEMICOLON'
+mips-linux-gnu-gcc: error: tmp/formative_compiler/literal.o: No such file or directory
+tmp/formative_compiler/literal: Invalid ELF image for this architecture
+literal, Fail, Expected 0, got 255
+
+
+tmp/formative_compiler/puts.s: Assembler messages:
+tmp/formative_compiler/puts.s:1: Error: unrecognized opcode `parse Error:syntax error,unexpected T_STAR,expecting T_COMMA or T_RBRACKET'
+mips-linux-gnu-gcc: error: tmp/formative_compiler/puts.o: No such file or directory
+tmp/formative_compiler/puts: Invalid ELF image for this architecture
+puts, Fail, Expected 0, got 255
+
+
+tmp/formative_compiler/search.s: Assembler messages:
+tmp/formative_compiler/search.s:1: Error: unrecognized opcode `parse Error:syntax error,unexpected T_STAR'
+mips-linux-gnu-gcc: error: tmp/formative_compiler/search.o: No such file or directory
+tmp/formative_compiler/search: Invalid ELF image for this architecture
+search, Fail, Expected 0, got 255
+
+
+tmp/formative_compiler/sizeof.s: Assembler messages:
+tmp/formative_compiler/sizeof.s:1: Error: unrecognized opcode `parse Error:syntax error,unexpected T_LCURLY,expecting T_STAR or T_LBRACKET or T_SEMICOLON or T_IDENTIFIER'
+mips-linux-gnu-gcc: error: tmp/formative_compiler/sizeof.o: No such file or directory
+tmp/formative_compiler/sizeof: Invalid ELF image for this architecture
+sizeof, Fail, Expected 0, got 255
+
+
+tmp/formative_compiler/struct_inst.s: Assembler messages:
+tmp/formative_compiler/struct_inst.s:1: Error: unrecognized opcode `parse Error:syntax error,unexpected T_LCURLY,expecting T_STAR or T_LBRACKET or T_SEMICOLON or T_IDENTIFIER'
+mips-linux-gnu-gcc: error: tmp/formative_compiler/struct_inst.o: No such file or directory
+tmp/formative_compiler/struct_inst: Invalid ELF image for this architecture
+struct_inst, Fail, Expected 0, got 255
+
+
+tmp/formative_compiler/struct_member_get.s: Assembler messages:
+tmp/formative_compiler/struct_member_get.s:1: Error: unrecognized opcode `parse Error:syntax error,unexpected T_LCURLY,expecting T_STAR or T_LBRACKET or T_SEMICOLON or T_IDENTIFIER'
+mips-linux-gnu-gcc: error: tmp/formative_compiler/struct_member_get.o: No such file or directory
+tmp/formative_compiler/struct_member_get: Invalid ELF image for this architecture
+struct_member_get, Fail, Expected 0, got 255
+
+
+tmp/formative_compiler/struct_member_set.s: Assembler messages:
+tmp/formative_compiler/struct_member_set.s:1: Error: unrecognized opcode `parse Error:syntax error,unexpected T_LCURLY,expecting T_STAR or T_LBRACKET or T_SEMICOLON or T_IDENTIFIER'
+mips-linux-gnu-gcc: error: tmp/formative_compiler/struct_member_set.o: No such file or directory
+tmp/formative_compiler/struct_member_set: Invalid ELF image for this architecture
+struct_member_set, Fail, Expected 0, got 255
+
+
+tmp/formative_compiler/struct_two_members.s: Assembler messages:
+tmp/formative_compiler/struct_two_members.s:1: Error: unrecognized opcode `parse Error:syntax error,unexpected T_LCURLY,expecting T_STAR or T_LBRACKET or T_SEMICOLON or T_IDENTIFIER'
+mips-linux-gnu-gcc: error: tmp/formative_compiler/struct_two_members.o: No such file or directory
+tmp/formative_compiler/struct_two_members: Invalid ELF image for this architecture
+struct_two_members, Fail, Expected 0, got 255
+
+
+tmp/formative_compiler/sizeof_char_inst.s: Assembler messages:
+tmp/formative_compiler/sizeof_char_inst.s:1: Error: unrecognized opcode `parse Error:syntax error,unexpected T_IDENTIFIER,expecting T_COMMA or T_SEMICOLON'
+mips-linux-gnu-gcc: error: tmp/formative_compiler/sizeof_char_inst.o: No such file or directory
+tmp/formative_compiler/sizeof_char_inst: Invalid ELF image for this architecture
+sizeof_char_inst, Fail, Expected 0, got 255
+
+
+tmp/formative_compiler/sizeof_char_type.s: Assembler messages:
+tmp/formative_compiler/sizeof_char_type.s:7: Error: operand 3 out of range `addi $29,$29,-78817040'
+tmp/formative_compiler/sizeof_char_type.s:10: Error: operand 3 out of range `addiu $29,$29,78817048'
+mips-linux-gnu-gcc: error: tmp/formative_compiler/sizeof_char_type.o: No such file or directory
+tmp/formative_compiler/sizeof_char_type: Invalid ELF image for this architecture
+sizeof_char_type, Fail, Expected 0, got 255
+
+
+sizeof_int_inst, Fail, Expected 0, got 1
+
+
+tmp/formative_compiler/sizeof_int_type.s: Assembler messages:
+tmp/formative_compiler/sizeof_int_type.s:1: Error: unrecognized opcode `parse Error:syntax error,unexpected T_INT'
+mips-linux-gnu-gcc: error: tmp/formative_compiler/sizeof_int_type.o: No such file or directory
+tmp/formative_compiler/sizeof_int_type: Invalid ELF image for this architecture
+sizeof_int_type, Fail, Expected 0, got 255
+
+
+unsigned, Pass
+
+
+Passes 32 out of 87
+declare_global, Pass
+
+
+declare_local, Pass
+
+
+index_constant, Pass
+
+
+bin/c_compiler: line 40: 28581 Done                    cat "$INFILE"
+     28582 Segmentation fault      (core dumped) | bin/gen_mips > "$OUTFILE"
+qemu: uncaught target signal 11 (Segmentation fault) - core dumped
+./mipsrun.sh: line 22: 28591 Segmentation fault      (core dumped) qemu-mips ${working}/$base
+index_expression, Fail, Expected 0, got 139
+
+
+bin/c_compiler: line 40: 28621 Done                    cat "$INFILE"
+     28622 Segmentation fault      (core dumped) | bin/gen_mips > "$OUTFILE"
+qemu: uncaught target signal 11 (Segmentation fault) - core dumped
+./mipsrun.sh: line 22: 28631 Segmentation fault      (core dumped) qemu-mips ${working}/$base
+index_variable, Fail, Expected 0, got 139
+
+
+bin/c_compiler: line 40: 28661 Done                    cat "$INFILE"
+     28662 Segmentation fault      (core dumped) | bin/gen_mips > "$OUTFILE"
+qemu: uncaught target signal 11 (Segmentation fault) - core dumped
+./mipsrun.sh: line 22: 28671 Segmentation fault      (core dumped) qemu-mips ${working}/$base
+for_multiple, Fail, Expected 0, got 139
+
+
+bin/c_compiler: line 40: 28703 Done                    cat "$INFILE"
+     28704 Segmentation fault      (core dumped) | bin/gen_mips > "$OUTFILE"
+qemu: uncaught target signal 11 (Segmentation fault) - core dumped
+./mipsrun.sh: line 22: 28713 Segmentation fault      (core dumped) qemu-mips ${working}/$base
+for_one, Fail, Expected 0, got 139
+
+
+bin/c_compiler: line 40: 28743 Done                    cat "$INFILE"
+     28744 Segmentation fault      (core dumped) | bin/gen_mips > "$OUTFILE"
+qemu: uncaught target signal 11 (Segmentation fault) - core dumped
+./mipsrun.sh: line 22: 28755 Segmentation fault      (core dumped) qemu-mips ${working}/$base
+for_zero_v1, Fail, Expected 0, got 139
+
+
+bin/c_compiler: line 40: 28785 Done                    cat "$INFILE"
+     28786 Segmentation fault      (core dumped) | bin/gen_mips > "$OUTFILE"
+qemu: uncaught target signal 11 (Segmentation fault) - core dumped
+./mipsrun.sh: line 22: 28795 Segmentation fault      (core dumped) qemu-mips ${working}/$base
+for_zero_v2, Fail, Expected 0, got 139
+
+
+qemu: uncaught target signal 11 (Segmentation fault) - core dumped
+./mipsrun.sh: line 22: 28834 Segmentation fault      (core dumped) qemu-mips ${working}/$base
+if_else_false, Fail, Expected 0, got 139
+
+
+qemu: uncaught target signal 11 (Segmentation fault) - core dumped
+./mipsrun.sh: line 22: 28873 Segmentation fault      (core dumped) qemu-mips ${working}/$base
+if_else_true, Fail, Expected 0, got 139
+
+
+if_false, Pass
+
+
+if_true, Pass
+
+
+sequence, Pass
+
+
+bin/c_compiler: line 40: 29008 Done                    cat "$INFILE"
+     29009 Segmentation fault      (core dumped) | bin/gen_mips > "$OUTFILE"
+qemu: uncaught target signal 11 (Segmentation fault) - core dumped
+./mipsrun.sh: line 22: 29018 Segmentation fault      (core dumped) qemu-mips ${working}/$base
+while_multiple, Fail, Expected 0, got 139
+
+
+bin/c_compiler: line 40: 29048 Done                    cat "$INFILE"
+     29049 Segmentation fault      (core dumped) | bin/gen_mips > "$OUTFILE"
+qemu: uncaught target signal 11 (Segmentation fault) - core dumped
+./mipsrun.sh: line 22: 29058 Segmentation fault      (core dumped) qemu-mips ${working}/$base
+while_once, Fail, Expected 0, got 139
+
+
+bin/c_compiler: line 40: 29088 Done                    cat "$INFILE"
+     29089 Segmentation fault      (core dumped) | bin/gen_mips > "$OUTFILE"
+qemu: uncaught target signal 11 (Segmentation fault) - core dumped
+./mipsrun.sh: line 22: 29098 Segmentation fault      (core dumped) qemu-mips ${working}/$base
+while_zero, Fail, Expected 0, got 139
+
+
+test_ADD0, Pass
+
+
+test_ADD1, Pass
+
+
+tmp/formative_compiler/test_CALL.s: Assembler messages:
+tmp/formative_compiler/test_CALL.s:14: Warning: no .cprestore pseudo-op used in PIC code
+test_CALL, Pass
+
+
+test_LOCAL, Pass
+
+
+test_RETURN, Pass
+
+
+add, Fail, Expected 0, got 1
+
+
+add_double, Fail, Expected 0, got 1
+
+
+add_mul, Fail, Expected 0, got 1
+
+
+mul, Fail, Expected 0, got 1
+
+
+mul_add, Fail, Expected 0, got 1
+
+
+mul_double, Fail, Expected 0, got 1
+
+
+bin/c_compiler: line 40: 29517 Done                    cat "$INFILE"
+     29518 Segmentation fault      (core dumped) | bin/gen_mips > "$OUTFILE"
+qemu: uncaught target signal 11 (Segmentation fault) - core dumped
+./mipsrun.sh: line 22: 29527 Segmentation fault      (core dumped) qemu-mips ${working}/$base
+pow, Fail, Expected 0, got 139
+
+
+tmp/formative_compiler/call_constant_external.s: Assembler messages:
+tmp/formative_compiler/call_constant_external.s:14: Warning: no .cprestore pseudo-op used in PIC code
+call_constant_external, Pass
+
+
+tmp/formative_compiler/call_constant_internal.s: Assembler messages:
+tmp/formative_compiler/call_constant_internal.s:20: Warning: no .cprestore pseudo-op used in PIC code
+call_constant_internal, Pass
+
+
+call_five_args_external, Fail, Expected 0, got 1
+
+
+terminate called after throwing an instance of 'std::out_of_range'
+  what():  map::at
+bin/c_compiler: line 40: 29662 Done                    cat "$INFILE"
+     29663 Aborted                 (core dumped) | bin/gen_mips > "$OUTFILE"
+/usr/lib/gcc-cross/mips-linux-gnu/9/../../../../mips-linux-gnu/bin/ld: /tmp/ccqnug1u.o: in function `main':
+call_five_args_internal_driver.c:(.text+0x1c): undefined reference to `f'
+/usr/lib/gcc-cross/mips-linux-gnu/9/../../../../mips-linux-gnu/bin/ld: call_five_args_internal_driver.c:(.text+0x24): undefined reference to `f'
+collect2: error: ld returned 1 exit status
+call_five_args_internal, Fail, Expected 0, got 1
+
+
+call_identity_external, Fail, Expected 0, got 1
+
+
+call_identity_internal, Fail, Expected 0, got 1
+
+
+qemu: uncaught target signal 11 (Segmentation fault) - core dumped
+./mipsrun.sh: line 22: 29777 Segmentation fault      (core dumped) qemu-mips ${working}/$base
+call_mutual_recursive, Fail, Expected 0, got 139
+
+
+call_recursive_internal, Fail, Expected 0, got 1
+
+
+call_two_args_external, Fail, Expected 0, got 1
+
+
+call_two_args_internal, Fail, Expected 0, got 1
+
+
+add, Pass
+
+
+bitwise_and, Pass
+
+
+bitwise_or, Pass
+
+
+bitwise_xor, Pass
+
+
+div, Pass
+
+
+equal, Pass
+
+
+less_than, Pass
+
+
+less_than_equal, Pass
+
+
+logical_and, Pass
+
+
+logical_or, Pass
+
+
+mul, Pass
+
+
+sub, Pass
+
+
+constant_initialiser, Pass
+
+
+dual_var, Pass
+
+
+expression_initialiser, Fail, Expected 0, got 1
+
+
+identity, Pass
+
+
+return_constant, Pass
+
+
+scoped_var, Pass
+
+
+single_var, Pass
+
+
+bin/c_compiler: line 40: 30581 Done                    cat "$INFILE"
+     30582 Segmentation fault      (core dumped) | bin/gen_mips > "$OUTFILE"
+/usr/lib/gcc-cross/mips-linux-gnu/9/../../../../mips-linux-gnu/bin/ld: /tmp/ccnU1BKW.o: in function `main':
+enum1_driver.c:(.text+0x1c): undefined reference to `g'
+/usr/lib/gcc-cross/mips-linux-gnu/9/../../../../mips-linux-gnu/bin/ld: enum1_driver.c:(.text+0x24): undefined reference to `g'
+collect2: error: ld returned 1 exit status
+enum1, Fail, Expected 0, got 1
+
+
+bin/c_compiler: line 40: 30617 Done                    cat "$INFILE"
+     30618 Segmentation fault      (core dumped) | bin/gen_mips > "$OUTFILE"
+/usr/lib/gcc-cross/mips-linux-gnu/9/../../../../mips-linux-gnu/bin/ld: /tmp/ccmEfxuG.o: in function `main':
+enum2_driver.c:(.text+0x1c): undefined reference to `g'
+/usr/lib/gcc-cross/mips-linux-gnu/9/../../../../mips-linux-gnu/bin/ld: enum2_driver.c:(.text+0x24): undefined reference to `g'
+collect2: error: ld returned 1 exit status
+enum2, Fail, Expected 0, got 1
+
+
+bin/c_compiler: line 40: 30655 Done                    cat "$INFILE"
+     30656 Segmentation fault      (core dumped) | bin/gen_mips > "$OUTFILE"
+qemu: uncaught target signal 11 (Segmentation fault) - core dumped
+./mipsrun.sh: line 22: 30665 Segmentation fault      (core dumped) qemu-mips ${working}/$base
+switch1, Fail, Expected 0, got 139
+
+
+g(0)==1
+g(1)==1
+g(2)==3
+g(3)==4
+bin/c_compiler: line 40: 30695 Done                    cat "$INFILE"
+     30696 Segmentation fault      (core dumped) | bin/gen_mips > "$OUTFILE"
+qemu: uncaught target signal 11 (Segmentation fault) - core dumped
+./mipsrun.sh: line 22: 30705 Segmentation fault      (core dumped) qemu-mips ${working}/$base
+switch2, Fail, Expected 0, got 139
+
+
+tmp/formative_compiler/typedef1.s: Assembler messages:
+tmp/formative_compiler/typedef1.s:1: Error: unrecognized opcode `parse Error:syntax error,unexpected T_IDENTIFIER,expecting T_COMMA or T_SEMICOLON'
+mips-linux-gnu-gcc: error: tmp/formative_compiler/typedef1.o: No such file or directory
+tmp/formative_compiler/typedef1: Invalid ELF image for this architecture
+typedef1, Fail, Expected 0, got 255
+
+
+tmp/formative_compiler/typedef2.s: Assembler messages:
+tmp/formative_compiler/typedef2.s:1: Error: unrecognized opcode `parse Error:syntax error,unexpected T_STAR,expecting T_COMMA or T_SEMICOLON'
+mips-linux-gnu-gcc: error: tmp/formative_compiler/typedef2.o: No such file or directory
+tmp/formative_compiler/typedef2: Invalid ELF image for this architecture
+typedef2, Fail, Expected 0, got 255
+
+
+bin/c_compiler: line 40: 30799 Done                    cat "$INFILE"
+     30800 Segmentation fault      (core dumped) | bin/gen_mips > "$OUTFILE"
+qemu: uncaught target signal 11 (Segmentation fault) - core dumped
+./mipsrun.sh: line 22: 30809 Segmentation fault      (core dumped) qemu-mips ${working}/$base
+addressof, Fail, Expected 0, got 139
+
+
+bin/c_compiler: line 40: 30839 Done                    cat "$INFILE"
+     30840 Segmentation fault      (core dumped) | bin/gen_mips > "$OUTFILE"
+qemu: uncaught target signal 11 (Segmentation fault) - core dumped
+./mipsrun.sh: line 22: 30849 Segmentation fault      (core dumped) qemu-mips ${working}/$base
+arithmetic, Fail, Expected 0, got 139
+
+
+bin/c_compiler: line 40: 30879 Done                    cat "$INFILE"
+     30880 Segmentation fault      (core dumped) | bin/gen_mips > "$OUTFILE"
+qemu: uncaught target signal 11 (Segmentation fault) - core dumped
+./mipsrun.sh: line 22: 30889 Segmentation fault      (core dumped) qemu-mips ${working}/$base
+assign, Fail, Expected 0, got 139
+
+
+bin/c_compiler: line 40: 30919 Done                    cat "$INFILE"
+     30920 Segmentation fault      (core dumped) | bin/gen_mips > "$OUTFILE"
+qemu: uncaught target signal 11 (Segmentation fault) - core dumped
+./mipsrun.sh: line 22: 30929 Segmentation fault      (core dumped) qemu-mips ${working}/$base
+dereference, Fail, Expected 0, got 139
+
+
+bin/c_compiler: line 40: 30959 Done                    cat "$INFILE"
+     30960 Segmentation fault      (core dumped) | bin/gen_mips > "$OUTFILE"
+qemu: uncaught target signal 11 (Segmentation fault) - core dumped
+./mipsrun.sh: line 22: 30969 Segmentation fault      (core dumped) qemu-mips ${working}/$base
+index, Fail, Expected 0, got 139
+
+
+fibonacci, Fail, Expected 0, got 1
+
+
+bin/c_compiler: line 40: 31034 Done                    cat "$INFILE"
+     31035 Segmentation fault      (core dumped) | bin/gen_mips > "$OUTFILE"
+multiply, Fail, Expected 0, got 1
+
+
+bin/c_compiler: line 40: 31070 Done                    cat "$INFILE"
+     31071 Segmentation fault      (core dumped) | bin/gen_mips > "$OUTFILE"
+qemu: uncaught target signal 11 (Segmentation fault) - core dumped
+./mipsrun.sh: line 22: 31080 Segmentation fault      (core dumped) qemu-mips ${working}/$base
+sqrt, Fail, Expected 0, got 139
+
+
+chliteral, Pass
+
+
+tmp/formative_compiler/escaped.s: Assembler messages:
+tmp/formative_compiler/escaped.s:1: Error: unrecognized opcode `parse Error:syntax error,unexpected T_ASSIGN,expecting T_COMMA or T_SEMICOLON'
+mips-linux-gnu-gcc: error: tmp/formative_compiler/escaped.o: No such file or directory
+tmp/formative_compiler/escaped: Invalid ELF image for this architecture
+escaped, Fail, Expected 0, got 255
+
+
+tmp/formative_compiler/literal.s: Assembler messages:
+tmp/formative_compiler/literal.s:1: Error: unrecognized opcode `parse Error:syntax error,unexpected T_ASSIGN,expecting T_COMMA or T_SEMICOLON'
+mips-linux-gnu-gcc: error: tmp/formative_compiler/literal.o: No such file or directory
+tmp/formative_compiler/literal: Invalid ELF image for this architecture
+literal, Fail, Expected 0, got 255
+
+
+tmp/formative_compiler/puts.s: Assembler messages:
+tmp/formative_compiler/puts.s:1: Error: unrecognized opcode `parse Error:syntax error,unexpected T_STAR,expecting T_COMMA or T_RBRACKET'
+mips-linux-gnu-gcc: error: tmp/formative_compiler/puts.o: No such file or directory
+tmp/formative_compiler/puts: Invalid ELF image for this architecture
+puts, Fail, Expected 0, got 255
+
+
+tmp/formative_compiler/search.s: Assembler messages:
+tmp/formative_compiler/search.s:1: Error: unrecognized opcode `parse Error:syntax error,unexpected T_STAR'
+mips-linux-gnu-gcc: error: tmp/formative_compiler/search.o: No such file or directory
+tmp/formative_compiler/search: Invalid ELF image for this architecture
+search, Fail, Expected 0, got 255
+
+
+tmp/formative_compiler/sizeof.s: Assembler messages:
+tmp/formative_compiler/sizeof.s:1: Error: unrecognized opcode `parse Error:syntax error,unexpected T_LCURLY,expecting T_STAR or T_LBRACKET or T_SEMICOLON or T_IDENTIFIER'
+mips-linux-gnu-gcc: error: tmp/formative_compiler/sizeof.o: No such file or directory
+tmp/formative_compiler/sizeof: Invalid ELF image for this architecture
+sizeof, Fail, Expected 0, got 255
+
+
+tmp/formative_compiler/struct_inst.s: Assembler messages:
+tmp/formative_compiler/struct_inst.s:1: Error: unrecognized opcode `parse Error:syntax error,unexpected T_LCURLY,expecting T_STAR or T_LBRACKET or T_SEMICOLON or T_IDENTIFIER'
+mips-linux-gnu-gcc: error: tmp/formative_compiler/struct_inst.o: No such file or directory
+tmp/formative_compiler/struct_inst: Invalid ELF image for this architecture
+struct_inst, Fail, Expected 0, got 255
+
+
+tmp/formative_compiler/struct_member_get.s: Assembler messages:
+tmp/formative_compiler/struct_member_get.s:1: Error: unrecognized opcode `parse Error:syntax error,unexpected T_LCURLY,expecting T_STAR or T_LBRACKET or T_SEMICOLON or T_IDENTIFIER'
+mips-linux-gnu-gcc: error: tmp/formative_compiler/struct_member_get.o: No such file or directory
+tmp/formative_compiler/struct_member_get: Invalid ELF image for this architecture
+struct_member_get, Fail, Expected 0, got 255
+
+
+tmp/formative_compiler/struct_member_set.s: Assembler messages:
+tmp/formative_compiler/struct_member_set.s:1: Error: unrecognized opcode `parse Error:syntax error,unexpected T_LCURLY,expecting T_STAR or T_LBRACKET or T_SEMICOLON or T_IDENTIFIER'
+mips-linux-gnu-gcc: error: tmp/formative_compiler/struct_member_set.o: No such file or directory
+tmp/formative_compiler/struct_member_set: Invalid ELF image for this architecture
+struct_member_set, Fail, Expected 0, got 255
+
+
+tmp/formative_compiler/struct_two_members.s: Assembler messages:
+tmp/formative_compiler/struct_two_members.s:1: Error: unrecognized opcode `parse Error:syntax error,unexpected T_LCURLY,expecting T_STAR or T_LBRACKET or T_SEMICOLON or T_IDENTIFIER'
+mips-linux-gnu-gcc: error: tmp/formative_compiler/struct_two_members.o: No such file or directory
+tmp/formative_compiler/struct_two_members: Invalid ELF image for this architecture
+struct_two_members, Fail, Expected 0, got 255
+
+
+tmp/formative_compiler/sizeof_char_inst.s: Assembler messages:
+tmp/formative_compiler/sizeof_char_inst.s:1: Error: unrecognized opcode `parse Error:syntax error,unexpected T_IDENTIFIER,expecting T_COMMA or T_SEMICOLON'
+mips-linux-gnu-gcc: error: tmp/formative_compiler/sizeof_char_inst.o: No such file or directory
+tmp/formative_compiler/sizeof_char_inst: Invalid ELF image for this architecture
+sizeof_char_inst, Fail, Expected 0, got 255
+
+
+tmp/formative_compiler/sizeof_char_type.s: Assembler messages:
+tmp/formative_compiler/sizeof_char_type.s:7: Error: operand 3 out of range `addi $29,$29,--2042890816'
+tmp/formative_compiler/sizeof_char_type.s:10: Error: operand 3 out of range `addiu $29,$29,-2042890808'
+mips-linux-gnu-gcc: error: tmp/formative_compiler/sizeof_char_type.o: No such file or directory
+tmp/formative_compiler/sizeof_char_type: Invalid ELF image for this architecture
+sizeof_char_type, Fail, Expected 0, got 255
+
+
+sizeof_int_inst, Fail, Expected 0, got 1
+
+
+tmp/formative_compiler/sizeof_int_type.s: Assembler messages:
+tmp/formative_compiler/sizeof_int_type.s:1: Error: unrecognized opcode `parse Error:syntax error,unexpected T_INT'
+mips-linux-gnu-gcc: error: tmp/formative_compiler/sizeof_int_type.o: No such file or directory
+tmp/formative_compiler/sizeof_int_type: Invalid ELF image for this architecture
+sizeof_int_type, Fail, Expected 0, got 255
+
+
+unsigned, Pass
+
+
+Passes 33 out of 87

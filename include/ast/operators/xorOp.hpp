@@ -7,12 +7,7 @@ typedef const xorOp* xorOpPtr;
 class xorOp: public Expression {
 public:
     xorOp(ExpressionPtr left, ExpressionPtr right): exp1(left), exp2(right) { branches.push_back(left); branches.push_back(right); }
-    void print(std::ostream& dst, pycon& con, int level) const {
-        branches[0]->print(dst, con, level);
-        dst << " * ";
-        branches[1]->print(dst, con, level);
-    }
-    void pythonGen(std::ostream& os) const { }
+
     void mipsGen(std::ostream& os, mipsCon& con, int dest=0) const { 
 
         int addrDest1 = con.registerSet.freeRegister();
@@ -32,7 +27,6 @@ public:
     }
     int evaluate() const { return exp1->evaluate()^exp2->evaluate(); }
     std::string getName() const { return ""; }
-    void look(mipsCon& con) const {}
     void offset(std::ostream& os, mipsCon& con, int dest=0) const {}
 protected:
     ExpressionPtr exp1;

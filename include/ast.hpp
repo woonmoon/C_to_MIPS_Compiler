@@ -1,22 +1,14 @@
 #ifndef ast_hpp
 #define ast_hpp
 
-#include "ast/pYtHoNcOnTeXt.hpp"
 #include "ast/registers.hpp"
 #include "ast/mipsCon.hpp"
 #include "ast/node.hpp"
 #include "ast/identifier.hpp"
 #include "ast/expression.hpp"
-#include "ast/misc/enumerator.hpp"
-#include "ast/misc/enumSpecifier.hpp"
-#include "ast/misc/switch.hpp"
-#include "ast/misc/switchCase.hpp"
-#include "ast/misc/switchDefault.hpp"
 #include "ast/lists/list.hpp"
-#include "ast/lists/enumList.hpp"
 #include "ast/lists/declaratorList.hpp"
 #include "ast/lists/parameterList.hpp"
-#include "ast/lists/pointer.hpp"
 #include "ast/type/PrimitiveType.hpp"
 #include "ast/declaration.hpp"
 #include "ast/arrayDeclarator.hpp"
@@ -52,8 +44,6 @@
 #include "ast/operators/notEqualTo.hpp"
 #include "ast/operators/assignOp.hpp"
 #include "ast/operators/andOp.hpp"
-#include "ast/loop/while.hpp"
-#include "ast/loop/forLoop.hpp"
 #include "ast/return.hpp"
 
 extern const Node *parseAST();

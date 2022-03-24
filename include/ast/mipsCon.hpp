@@ -3,6 +3,7 @@
 #include <vector>
 #include <string>
 #include <map>
+#include <ostream>
 
 struct Instruction;
 typedef const Instruction* InstructionPtr;

@@ -18,10 +18,7 @@ public:
     std::vector<NodePtr> getSequence() {
         return sequence;
     }
-    void print(std::ostream& dst, pycon& con, int level) const=0;
-    void pythonGen(std::ostream& os) const { } 
     void mipsGen(std::ostream& os, mipsCon& con, int dest=0) const { }
-    void look(mipsCon& con) const {}
 protected:
     std::vector<NodePtr> sequence;
 };

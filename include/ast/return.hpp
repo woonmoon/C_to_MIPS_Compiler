@@ -9,14 +9,6 @@ typedef const Return* ReturnPtr;
 class Return : public Node {
 public:
     Return(NodePtr ret): returnVal(ret) {}
-    void pythonGen(std::ostream& os) const{}
-    void print(std::ostream& dst, pycon& con, int level) const{ 
-    
-         con.indent(dst); dst << "return ";
-         returnVal->print(dst, con, level); 
-
-    }
-
 
     void mipsGen(std::ostream& os, mipsCon& con, int dest=0) const{
 
@@ -35,7 +27,6 @@ public:
         con.isReturn = 0;
     }
 
-    void look(mipsCon& con) const {}
 protected:
     NodePtr returnVal;
 };
@@ -46,10 +37,6 @@ typedef const Break* BreakPtr;
 class Break : public Node {
 public:
     Break() {}
-    void pythonGen(std::ostream& os) const{}
-    void print(std::ostream& dst, pycon& con, int level) const{ }
-
-
     void mipsGen(std::ostream& os, mipsCon& con, int dest=0) const{
 
 		int offset = con.stackSize -  con.statement().offset;
@@ -59,7 +46,6 @@ public:
       
     }
 
-    void look(mipsCon& con) const {}
 protected:
     NodePtr BreakVal;
 };
@@ -70,9 +56,6 @@ typedef const Continue* ContinuePtr;
 class Continue : public Node {
 public:
     Continue() {}
-    void pythonGen(std::ostream& os) const{}
-    void print(std::ostream& dst, pycon& con, int level) const{ }
-
 
     void mipsGen(std::ostream& os, mipsCon& con, int dest=0) const{
 
@@ -83,7 +66,6 @@ public:
       
     }
 
-    void look(mipsCon& con) const {}
 protected:
     NodePtr ContinueVal;
 };

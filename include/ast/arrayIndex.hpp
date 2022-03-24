@@ -8,8 +8,6 @@ class arrayIndex: public Expression {
 public:
     arrayIndex(ExpressionPtr _name, ExpressionPtr _ind): arrayName(_name), index(_ind) { }
     ~arrayIndex() { if(arrayName!=NULL) { delete arrayName;} if(index!=NULL) { delete index; } }
-    void print(std::ostream& dst, pycon& con, int level) const{ }
-    void pythonGen(std::ostream& os) const { }
     void mipsGen(std::ostream& os, mipsCon& con, int dest=0) const {
         //std::cout << "ACCESSING ARRAY " << arrayName->getName() << std::endl;
         int indexReg=con.registerSet.freeRegister();
@@ -50,7 +48,6 @@ public:
 
     int evaluate() const { return 0; }
     std::string getName() const { return ""; }
-    void look(mipsCon& con) const {}
 
     void offset(std::ostream& os, mipsCon& con, int dest=0) const {
         int constReg=con.registerSet.freeRegister();

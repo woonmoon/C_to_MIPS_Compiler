@@ -19,16 +19,6 @@ public:
         sequence.insert(sequence.end(), sequenceTemp.begin(), sequenceTemp.end());
     }
 
-    void print(std::ostream& dst, pycon& con, int level) const {
-        for(unsigned int i=0; i<sequence.size(); i++) {
-            con.indent(dst);
-            sequence[i]->print(dst, con, level);
-            //dst << std::endl;
-        }
-    }
-
-    void genPython(std::ostream& os) const { }
-
 
     void mipsGen(std::ostream& os, mipsCon& con, int dest=0) const {
         if(con.funcContent().functionPatty) {
@@ -46,11 +36,7 @@ public:
         }
         //std::cout << "left localscope" << std::endl;
     }
-    void look(mipsCon& con) const {
-        for(int i=0; i<sequence.size(); i++) {
-            sequence[i]->look(con);
-        }
-    }
+
 };
 
 #endif

@@ -13,10 +13,6 @@ public:
         if(expression!=NULL) { delete expression; }
     }
 
-    void print(std::ostream& dst, pycon& con, int level) const{ }
-
-    void pythonGen(std::ostream& os) const { }
-
     void mipsGen(std::ostream& os, mipsCon& con, int dest=0) const {
         declarator->mipsGen(os, con);
         if(!con.funcDec().initialize) {
@@ -31,8 +27,6 @@ public:
         }
         //std::cout << "left array declarator" << std::endl;
     }
-
-    void look(mipsCon& con) const {}
 
 protected:
     NodePtr declarator;

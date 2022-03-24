@@ -18,16 +18,6 @@ public:
     listOfExpressions = lol->getlistOfExpressions(); 
   }
 
-  void print(std::ostream& dst, pycon& con, int level) const {
-     for(int i=0; i<listOfExpressions.size(); i++){
-      
-      listOfExpressions[i]->print(dst, con, level);
-      if(i!=listOfExpressions.size()-1) {
-        dst << ", ";
-      }
-     }
-  }
-
   void mipsGen(std::ostream& os, mipsCon& con, int dest=0) const {
     con.paramReg = 4;
     if(!con.inCall){
@@ -66,8 +56,6 @@ public:
             con.isConstantCall = 0;
             con.isParam = 0;
   }
-  void look(mipsCon& con) const {}
-
 };
 
 #endif

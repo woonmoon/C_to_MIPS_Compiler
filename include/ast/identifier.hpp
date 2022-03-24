@@ -15,17 +15,7 @@ class Identifier: public Expression {
     public:
         Identifier(std::string v) : identifierName(v) {};
 
-        void print(std::ostream& dst, pycon& con, int level) const{
-          
-          if(con.returnTab() == 0 && !con.notFunc()){ 
-            con.addGlobal(identifierName);
-          }
-          dst << identifierName;
-        }
         std::string getId() { return identifierName; }
-        void pythonGen(std::ostream &os) const{
-          os << identifierName;
-        }
 
 
         void mipsGen(std::ostream& os, mipsCon& con, int dest=0) const {
@@ -85,7 +75,7 @@ class Identifier: public Expression {
         }
     int evaluate() const { return 0; }
     std::string getName() const { return identifierName; }
-    void look(mipsCon& con) const {}
+
     void offset(std::ostream& os, mipsCon& con, int dest) const {
       if(con.isGlobal(identifierName)) { 
         os << "la " << con.reg(dest) << ", " << identifierName;

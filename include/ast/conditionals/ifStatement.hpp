@@ -9,22 +9,6 @@ public:
     ifStatement(NodePtr exp, NodePtr nod): condition(exp), executeBlock(nod) { }
     NodePtr getCondition() { return condition; }
     NodePtr getExecution() { return executeBlock; }
-    void print(std::ostream& dst, pycon& con, int level) const {
-        //con.indent(dst);
-        dst << "if (";
-        con.subTab();
-        condition->print(dst, con, level);
-        con.addTab();
-        dst<< "):";
-        con.addTab();
-        con.indent(dst); /////////////////////
-        executeBlock->print(dst, con, level);
-        dst << std::endl;
-        con.indent(dst);
-        dst << "pass" << std::endl;
-        con.subTab();
-    }
-    void pythonGen(std::ostream& os) const { }
     void mipsGen(std::ostream& os, mipsCon& con, int dest=0) const {
         int evalDest=con.registerSet.freeRegister();
         std::string falseCond=con.makeALabel("falsy");
@@ -39,7 +23,6 @@ public:
     }
     int evaluate() const { return 0; }
     std::string getName() const { return ""; }
-    void look(mipsCon& con) const {}
     void offset(std::ostream& os, mipsCon& con, int dest=0) const {}
 protected:
     NodePtr condition;

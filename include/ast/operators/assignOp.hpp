@@ -7,13 +7,6 @@ typedef const assignOp* assignOpPtr;
 class assignOp: public Expression {
 public:
     assignOp(ExpressionPtr left, ExpressionPtr right) { branches.push_back(left); branches.push_back(right); }
-    void print(std::ostream& dst, pycon& con, int level) const {
-        branches[0]->print(dst, con, level);
-        dst << " = ";
-        branches[1]->print(dst, con, level);
-    }
-    void pythonGen(std::ostream& os) const { }
-
 
     void mipsGen(std::ostream& os, mipsCon& con, int dest=0) const { 
         //std::cout << "i'M AN ASSIGNMENT OPERATOR" << std::endl;
@@ -37,7 +30,6 @@ public:
     }
     int evaluate() const { return 0; }
     std::string getName() const { return ""; }
-    void look(mipsCon& con) const {}
     void offset(std::ostream& os, mipsCon& con, int dest=0) const {}
 protected:
 };
@@ -48,10 +40,6 @@ typedef const plusAssignOp* plusAssignOpPtr;
 class plusAssignOp: public Expression {
 public:
     plusAssignOp(ExpressionPtr left, ExpressionPtr right) { branches.push_back(left); branches.push_back(right); }
-    void print(std::ostream& dst, pycon& con, int level) const { }
-    void pythonGen(std::ostream& os) const { }
-
-
     void mipsGen(std::ostream& os, mipsCon& con, int dest=0) const { 
 
         int addrDest1 = con.registerSet.freeRegister();
@@ -69,7 +57,6 @@ public:
     }
     int evaluate() const { return 0; }
     std::string getName() const { return ""; }
-    void look(mipsCon& con) const {}
     void offset(std::ostream& os, mipsCon& con, int dest=0) const {}
 protected:
 };
@@ -80,10 +67,6 @@ typedef const subAssignOp* subAssignOpPtr;
 class subAssignOp: public Expression {
 public:
     subAssignOp(ExpressionPtr left, ExpressionPtr right) { branches.push_back(left); branches.push_back(right); }
-    void print(std::ostream& dst, pycon& con, int level) const { }
-    void pythonGen(std::ostream& os) const { }
-
-
     void mipsGen(std::ostream& os, mipsCon& con, int dest=0) const { 
 
         int addrDest1 = con.registerSet.freeRegister();
@@ -101,7 +84,6 @@ public:
     }
     int evaluate() const { return 0; }
     std::string getName() const { return ""; }
-    void look(mipsCon& con) const {}
     void offset(std::ostream& os, mipsCon& con, int dest=0) const {}
 protected:
 };
@@ -112,10 +94,6 @@ typedef const multAssignOp* multAssignOpPtr;
 class multAssignOp: public Expression {
 public:
     multAssignOp(ExpressionPtr left, ExpressionPtr right) { branches.push_back(left); branches.push_back(right); }
-    void print(std::ostream& dst, pycon& con, int level) const { }
-    void pythonGen(std::ostream& os) const { }
-
-
     void mipsGen(std::ostream& os, mipsCon& con, int dest=0) const { 
 
         int addrDest1 = con.registerSet.freeRegister();
@@ -134,7 +112,6 @@ public:
     }
     int evaluate() const { return 0; }
     std::string getName() const { return ""; }
-    void look(mipsCon& con) const {}
     void offset(std::ostream& os, mipsCon& con, int dest=0) const {}
 protected:
 };
@@ -145,10 +122,6 @@ typedef const divAssignOp* divAssignOpPtr;
 class divAssignOp: public Expression {
 public:
     divAssignOp(ExpressionPtr left, ExpressionPtr right) { branches.push_back(left); branches.push_back(right); }
-    void print(std::ostream& dst, pycon& con, int level) const { }
-    void pythonGen(std::ostream& os) const { }
-
-
     void mipsGen(std::ostream& os, mipsCon& con, int dest=0) const { 
 
         int addrDest1 = con.registerSet.freeRegister();
@@ -167,7 +140,6 @@ public:
     }
     int evaluate() const { return 0; }
     std::string getName() const { return ""; }
-    void look(mipsCon& con) const {}
     void offset(std::ostream& os, mipsCon& con, int dest=0) const {}
 protected:
 };
@@ -178,10 +150,6 @@ typedef const modAssignOp* modAssignOpPtr;
 class modAssignOp: public Expression {
 public:
     modAssignOp(ExpressionPtr left, ExpressionPtr right) { branches.push_back(left); branches.push_back(right); }
-    void print(std::ostream& dst, pycon& con, int level) const { }
-    void pythonGen(std::ostream& os) const { }
-
-
     void mipsGen(std::ostream& os, mipsCon& con, int dest=0) const { 
 
         int addrDest1 = con.registerSet.freeRegister();
@@ -200,7 +168,6 @@ public:
     }
     int evaluate() const { return 0; }
     std::string getName() const { return ""; }
-    void look(mipsCon& con) const {}
     void offset(std::ostream& os, mipsCon& con, int dest=0) const {}
 protected:
 };
@@ -211,10 +178,6 @@ typedef const andAssignOp* andAssignOpPtr;
 class andAssignOp: public Expression {
 public:
     andAssignOp(ExpressionPtr left, ExpressionPtr right) { branches.push_back(left); branches.push_back(right); }
-    void print(std::ostream& dst, pycon& con, int level) const { }
-    void pythonGen(std::ostream& os) const { }
-
-
     void mipsGen(std::ostream& os, mipsCon& con, int dest=0) const { 
 
         int addrDest1 = con.registerSet.freeRegister();
@@ -232,7 +195,6 @@ public:
     }
     int evaluate() const { return 0; }
     std::string getName() const { return ""; }
-    void look(mipsCon& con) const {}
     void offset(std::ostream& os, mipsCon& con, int dest=0) const {}
 protected:
 };
@@ -243,10 +205,6 @@ typedef const orAssignOp* orAssignOpPtr;
 class orAssignOp: public Expression {
 public:
     orAssignOp(ExpressionPtr left, ExpressionPtr right) { branches.push_back(left); branches.push_back(right); }
-    void print(std::ostream& dst, pycon& con, int level) const { }
-    void pythonGen(std::ostream& os) const { }
-
-
     void mipsGen(std::ostream& os, mipsCon& con, int dest=0) const { 
 
         int addrDest1 = con.registerSet.freeRegister();
@@ -264,7 +222,6 @@ public:
     }
     int evaluate() const { return 0; }
     std::string getName() const { return ""; }
-    void look(mipsCon& con) const {}
     void offset(std::ostream& os, mipsCon& con, int dest=0) const {}
 protected:
 };
@@ -275,10 +232,6 @@ typedef const xorAssignOp* xorAssignOpPtr;
 class xorAssignOp: public Expression {
 public:
     xorAssignOp(ExpressionPtr left, ExpressionPtr right) { branches.push_back(left); branches.push_back(right); }
-    void print(std::ostream& dst, pycon& con, int level) const { }
-    void pythonGen(std::ostream& os) const { }
-
-
     void mipsGen(std::ostream& os, mipsCon& con, int dest=0) const { 
 
         int addrDest1 = con.registerSet.freeRegister();
@@ -296,7 +249,6 @@ public:
     }
     int evaluate() const { return 0; }
     std::string getName() const { return ""; }
-    void look(mipsCon& con) const {}
     void offset(std::ostream& os, mipsCon& con, int dest=0) const {}
 protected:
 };
@@ -307,10 +259,6 @@ typedef const leftShiftAssignOp* leftShiftAssignOpPtr;
 class leftShiftAssignOp: public Expression {
 public:
     leftShiftAssignOp(ExpressionPtr left, ExpressionPtr right) { branches.push_back(left); branches.push_back(right); }
-    void print(std::ostream& dst, pycon& con, int level) const { }
-    void pythonGen(std::ostream& os) const { }
-
-
     void mipsGen(std::ostream& os, mipsCon& con, int dest=0) const { 
 
         int addrDest1 = con.registerSet.freeRegister();
@@ -328,7 +276,6 @@ public:
     }
     int evaluate() const { return 0; }
     std::string getName() const { return ""; }
-    void look(mipsCon& con) const {}
     void offset(std::ostream& os, mipsCon& con, int dest=0) const {}
 protected:
 };
@@ -339,9 +286,6 @@ typedef const rightShiftAssignOp* rightShiftAssignOpPtr;
 class rightShiftAssignOp: public Expression {
 public:
     rightShiftAssignOp(ExpressionPtr left, ExpressionPtr right) { branches.push_back(left); branches.push_back(right); }
-    void print(std::ostream& dst, pycon& con, int level) const { }
-    void pythonGen(std::ostream& os) const { }
-
     void mipsGen(std::ostream& os, mipsCon& con, int dest=0) const { 
 
         int addrDest1 = con.registerSet.freeRegister();
@@ -359,7 +303,6 @@ public:
     }
     int evaluate() const { return 0; }
     std::string getName() const { return ""; }
-    void look(mipsCon& con) const {}
     void offset(std::ostream& os, mipsCon& con, int dest=0) const {}
 protected:
 };

@@ -7,8 +7,6 @@ typedef const postInc* postIncPtr;
 class postInc: public Expression {
 public:
     postInc(ExpressionPtr left): exp(left) { branches.push_back(left); }
-    void print(std::ostream& dst, pycon& con, int level) const { }
-    void pythonGen(std::ostream& os) const { }
 
 
     void mipsGen(std::ostream& os, mipsCon& con, int dest=0) const {
@@ -32,7 +30,6 @@ public:
     }
     int evaluate() const { return (exp->evaluate())+1; }
     std::string getName() const { return ""; }
-    void look(mipsCon& con) const {}
     void offset(std::ostream& os, mipsCon& con, int dest=0) const {}
 protected:
     ExpressionPtr exp;
@@ -44,8 +41,6 @@ typedef const postDec* postDecPtr;
 class postDec: public Expression {
 public:
     postDec(ExpressionPtr left): exp(left) { branches.push_back(left); }
-    void print(std::ostream& dst, pycon& con, int level) const { }
-    void pythonGen(std::ostream& os) const { }
 
 
     void mipsGen(std::ostream& os, mipsCon& con, int dest=0) const {
@@ -69,7 +64,7 @@ public:
     }
     int evaluate() const { return (exp->evaluate())-1; }
     std::string getName() const { return ""; }
-    void look(mipsCon& con) const {}
+
     void offset(std::ostream& os, mipsCon& con, int dest=0) const {}
 protected:
     ExpressionPtr exp;
@@ -81,8 +76,6 @@ typedef const preDec* preDecPtr;
 class preDec: public Expression {
 public:
     preDec(ExpressionPtr left): exp(left) { branches.push_back(left); }
-    void print(std::ostream& dst, pycon& con, int level) const { }
-    void pythonGen(std::ostream& os) const { }
 
 
     void mipsGen(std::ostream& os, mipsCon& con, int dest=0) const {
@@ -105,7 +98,6 @@ public:
     }
     int evaluate() const { return (exp->evaluate())-1; }
     std::string getName() const { return ""; }
-    void look(mipsCon& con) const {}
     void offset(std::ostream& os, mipsCon& con, int dest=0) const {}
 protected:
     ExpressionPtr exp;
@@ -117,8 +109,6 @@ typedef const preInc* preIncPtr;
 class preInc: public Expression {
 public:
     preInc(ExpressionPtr left): exp(left) { branches.push_back(left); }
-    void print(std::ostream& dst, pycon& con, int level) const { }
-    void pythonGen(std::ostream& os) const { }
 
 
     void mipsGen(std::ostream& os, mipsCon& con, int dest=0) const {
@@ -141,7 +131,6 @@ public:
      }
     int evaluate() const { return (exp->evaluate())+1; }
     std::string getName() const { return ""; }
-    void look(mipsCon& con) const {}
     void offset(std::ostream& os, mipsCon& con, int dest=0) const {}
 protected:
     ExpressionPtr exp;

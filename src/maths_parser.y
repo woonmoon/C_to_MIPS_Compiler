@@ -59,21 +59,39 @@
 %%
 
 
-PRIMARY_EXPRESSION : T_IDENTIFIER { $$ = new Identifier(*$1);}
+PRIMARY_EXPRESSION : T_IDENTIFIER { $$ = new Identifier(*$1); }
                    | T_CONSTANT { $$ = new Constant($1); }
                    | T_LBRACKET EXPRESSION T_RBRACKET { $$ = $2; }
                    ;
 
-POSTFIX_EXPRESSION : PRIMARY_EXPRESSION { $$ = $1;}
-                   | POSTFIX_EXPRESSION T_LSQUARE EXPRESSION T_RSQUARE { $$ = new arrayIndex($1, $3); }
-                   | POSTFIX_EXPRESSION T_LBRACKET T_RBRACKET { $$ = new functionCall($1, new List(), 1);}
-                   | POSTFIX_EXPRESSION T_LBRACKET ARGUMENT_EXPRESSION_LIST T_RBRACKET { $$ = new functionCall($1, $3, 0); }
-                   | POSTFIX_EXPRESSION T_PLUS_PLUS {$$ = new postInc($1); }
-                   | POSTFIX_EXPRESSION T_MINUS_MINUS {$$ = new postDec($1); }
+POSTFIX_EXPRESSION : PRIMARY_EXPRESSION { $$ = $1; }
+                   | POSTFIX_EXPRESSION T_LSQUARE EXPRESSION T_RSQUARE 
+                    { 
+                      // Array index in the form POSTFIX_EXPRESSION[EXPRESSION]
+                      // $$ = new arrayIndex($1, $3); 
+                    }
+                   | POSTFIX_EXPRESSION T_LBRACKET T_RBRACKET 
+                    { // Function call with no arguments f()
+                      $$ = new functionCall($1, new List(), 1);}
+                   | POSTFIX_EXPRESSION T_LBRACKET ARGUMENT_EXPRESSION_LIST T_RBRACKET 
+                    { 
+                      // Function call with argument f(foo, bar, baz)
+                      // $$ = new functionCall($1, $3, 0); 
+                    }
+                   | POSTFIX_EXPRESSION T_PLUS_PLUS 
+                    { // a++
+                      $$ = new postInc($1); }
+                   | POSTFIX_EXPRESSION T_MINUS_MINUS 
+                    { // a--
+                      $$ = new postDec($1); }
                    ;
 
-ARGUMENT_EXPRESSION_LIST : ASSIGNMENT_EXPRESSION {$$ = new paramList($1);}
-                         | ARGUMENT_EXPRESSION_LIST T_COMMA ASSIGNMENT_EXPRESSION {$$ = new paramList($1); ($$)->addtoList($3);}
+ARGUMENT_EXPRESSION_LIST : ASSIGNMENT_EXPRESSION 
+                            { // First element in parameter list in f(foo, bar, baz) refers to the (foo)
+                              $$ = new paramList($1); }
+                         | ARGUMENT_EXPRESSION_LIST T_COMMA ASSIGNMENT_EXPRESSION 
+                            { // Subsequent additions to parameter list (foo, bar) and (foo, bar, baz)
+                              $$ = new paramList($1); ($$)->addtoList($3);}
                          ;
 
 UNARY_EXPRESSION : POSTFIX_EXPRESSION { $$ = $1;}
@@ -197,8 +215,8 @@ INIT_DECLARATOR : DECLARATOR {$$ = new initDeclarator($1);  }
 STORAGE_CLASS_SPECIFIER : T_TYPEDEF { }
                         ;
 
-TYPE_SPECIFIER : T_VOID { $$ = new PrimitiveType(PrimitiveType::Specifier::_void); }
-               | T_INT {$$ = new PrimitiveType(PrimitiveType::Specifier::_int); }
+TYPE_SPECIFIER : T_VOID { }
+               | T_INT { $$ = new PrimitiveType(PrimitiveType::Specifier::_int); }
                | STRUCT_OR_UNION_SPECIFIER {  }
                | ENUM_SPECIFIER {  }
                ;
@@ -234,17 +252,17 @@ STRUCT_DECLARATOR : DECLARATOR { }
                   | DECLARATOR T_COLON CONSTANT_EXPRESSION {  }
                   ;
 
-ENUM_SPECIFIER : T_ENUM T_LCURLY ENUMERATOR_LIST T_RCURLY { $$ = new enumSpecifier("", $3); }
-               | T_ENUM T_IDENTIFIER T_LCURLY ENUMERATOR_LIST T_RCURLY { $$ = new enumSpecifier(*$2, $4); }
-               | T_ENUM T_IDENTIFIER { $$ = new enumSpecifier(*$2, NULL); }
+ENUM_SPECIFIER : T_ENUM T_LCURLY ENUMERATOR_LIST T_RCURLY { }
+               | T_ENUM T_IDENTIFIER T_LCURLY ENUMERATOR_LIST T_RCURLY { }
+               | T_ENUM T_IDENTIFIER { }
                ;
 
-ENUMERATOR_LIST : ENUMERATOR { $$ = new enumList($1); }
-                | ENUMERATOR_LIST T_COMMA ENUMERATOR { $$ = new enumList($1); ($$)->addtoList($3); }
+ENUMERATOR_LIST : ENUMERATOR { }
+                | ENUMERATOR_LIST T_COMMA ENUMERATOR { }
                 ;
 
-ENUMERATOR : T_IDENTIFIER { $$ = new Enumerator(*$1, NULL); }
-           | T_IDENTIFIER T_ASSIGN CONSTANT_EXPRESSION { $$ = new Enumerator(*$1, $3); }
+ENUMERATOR : T_IDENTIFIER { }
+           | T_IDENTIFIER T_ASSIGN CONSTANT_EXPRESSION { }
            ;
 
 TYPE_QUALIFIER : T_CONST {  }
@@ -253,9 +271,9 @@ TYPE_QUALIFIER : T_CONST {  }
 
 
 DIRECT_DECLARATOR : T_IDENTIFIER  { $$ = new Identifier(*$1); }
-                  | T_LBRACKET DECLARATOR T_RBRACKET { $$ = $2;  }
-                  | DIRECT_DECLARATOR T_LSQUARE CONSTANT_EXPRESSION T_RSQUARE { $$ = new arrayDeclarator($1, $3); }
-                  | DIRECT_DECLARATOR T_LSQUARE T_RSQUARE { $$ = new arrayDeclarator($1, NULL); }
+                  | T_LBRACKET DECLARATOR T_RBRACKET { $$ = $2; }
+                  | DIRECT_DECLARATOR T_LSQUARE CONSTANT_EXPRESSION T_RSQUARE { }
+                  | DIRECT_DECLARATOR T_LSQUARE T_RSQUARE { }
                   | DIRECT_DECLARATOR T_LBRACKET PARAMETER_TYPE_LIST T_RBRACKET { $$ = new functionDec($1, $3);  }
                   | DIRECT_DECLARATOR T_LBRACKET IDENTIFIER_LIST T_RBRACKET { $$ = new functionDec($1, $3); delete $3; }
                   | DIRECT_DECLARATOR T_LBRACKET T_RBRACKET { $$ = new functionDec($1); }
@@ -299,7 +317,7 @@ DIRECT_ABSTRACT_DECLARATOR : T_LBRACKET ABSTRACT_DECLARATOR T_RBRACKET {  }
                            | T_LSQUARE T_RSQUARE { }
                            | T_LSQUARE CONSTANT_EXPRESSION T_RSQUARE {  }
                            | DIRECT_ABSTRACT_DECLARATOR T_LSQUARE T_RSQUARE {  }
-                           | DIRECT_ABSTRACT_DECLARATOR T_LSQUARE CONSTANT_EXPRESSION T_RSQUARE {  }
+                           | DIRECT_ABSTRACT_DECLARATOR T_LSQUARE CONSTANT_EXPRESSION T_RSQUARE { }
                            | T_LBRACKET PARAMETER_TYPE_LIST T_RBRACKET {  }
                            | DIRECT_ABSTRACT_DECLARATOR T_LBRACKET T_RBRACKET {  }
                            | DIRECT_ABSTRACT_DECLARATOR T_LBRACKET PARAMETER_TYPE_LIST T_RBRACKET {  }
@@ -321,9 +339,9 @@ STATEMENT : LABELED_STATEMENT { $$ = $1;  }
           | JUMP_STATEMENT { $$ = $1;  }
           ;
 
-LABELED_STATEMENT : T_IDENTIFIER T_COLON STATEMENT {  }
-                  | T_CASE CONSTANT_EXPRESSION T_COLON STATEMENT { $$ = new switchCase($2, $4); }
-                  | T_DEFAULT T_COLON STATEMENT { $$ = new switchDefault($3); }
+LABELED_STATEMENT : T_IDENTIFIER T_COLON STATEMENT { }
+                  | T_CASE CONSTANT_EXPRESSION T_COLON STATEMENT { }
+                  | T_DEFAULT T_COLON STATEMENT { }
                   ;
 
 COMPOUND_STATEMENT : T_LCURLY T_RCURLY { $$ = new localScope();}
@@ -339,18 +357,21 @@ STATEMENT_LIST : STATEMENT { $$ = new List($1);  }
 EXPRESSION_STATEMENT : T_SEMICOLON {  }
                      | EXPRESSION T_SEMICOLON { }
                      ;
+
 SELECTION_STATEMENT : T_IF T_LBRACKET EXPRESSION T_RBRACKET STATEMENT { $$ = new ifStatement($3, $5);  }
                     | T_IF T_LBRACKET EXPRESSION T_RBRACKET STATEMENT T_ELSE STATEMENT { $$ = new ifElseStatement($3, $5, $7); }
-                    | T_SWITCH T_LBRACKET EXPRESSION T_RBRACKET STATEMENT { $$ = new switchStatement($3, $5); }
+                    | T_SWITCH T_LBRACKET EXPRESSION T_RBRACKET STATEMENT { }
                     ;
-ITERATION_STATEMENT : T_WHILE T_LBRACKET EXPRESSION T_RBRACKET STATEMENT { $$ = new whileLoop($3, $5); }
-                    | T_FOR T_LBRACKET EXPRESSION_STATEMENT EXPRESSION_STATEMENT T_RBRACKET STATEMENT { $$ = new forLoop($3, $4, NULL, $6); }
-                    | T_FOR T_LBRACKET EXPRESSION_STATEMENT EXPRESSION_STATEMENT EXPRESSION T_RBRACKET STATEMENT { $$ = new forLoop($3, $4, $5, $7); }
+
+ITERATION_STATEMENT : T_WHILE T_LBRACKET EXPRESSION T_RBRACKET STATEMENT { }
+                    | T_FOR T_LBRACKET EXPRESSION_STATEMENT EXPRESSION_STATEMENT T_RBRACKET STATEMENT { }
+                    | T_FOR T_LBRACKET EXPRESSION_STATEMENT EXPRESSION_STATEMENT EXPRESSION T_RBRACKET STATEMENT { }
                     ;
-JUMP_STATEMENT : T_RETURN T_SEMICOLON {  }
-               | T_RETURN EXPRESSION T_SEMICOLON { $$ = new Return($2);  }
-               | T_CONTINUE T_SEMICOLON { $$ = new Continue(); }
-               | T_BREAK T_SEMICOLON { $$ = new Break(); }
+
+JUMP_STATEMENT : T_RETURN T_SEMICOLON { }
+               | T_RETURN EXPRESSION T_SEMICOLON { $$ = new Return($2); }
+               | T_CONTINUE T_SEMICOLON { }
+               | T_BREAK T_SEMICOLON { }
                ;
 DECLARATION_SPECIFIERS : STORAGE_CLASS_SPECIFIER { }
                        | STORAGE_CLASS_SPECIFIER DECLARATION_SPECIFIERS {  }
@@ -360,7 +381,7 @@ DECLARATION_SPECIFIERS : STORAGE_CLASS_SPECIFIER { }
                        | TYPE_QUALIFIER DECLARATION_SPECIFIERS  {  }
                        ;
 
-DECLARATOR : POINTER DIRECT_DECLARATOR { $$ = new pointDeclarator($1, $2); }
+DECLARATOR : POINTER DIRECT_DECLARATOR { }
            | DIRECT_DECLARATOR { $$ = $1; }
            ;
 
@@ -382,12 +403,13 @@ EXTERNAL_DECLARATION : FUNCTION_DEFINITION { $$ = $1;  }
                      | DECLARATION {$$ = $1; }
                      ;
 
-TRANSLATION_UNIT : EXTERNAL_DECLARATION { $$ = new List($1);  }
+TRANSLATION_UNIT : EXTERNAL_DECLARATION { $$ = new List($1); }
                  | TRANSLATION_UNIT EXTERNAL_DECLARATION { $$ = new List($1); ($$)->addtoList($2);}
                  ;
 
-ROOT : TRANSLATION_UNIT { g_root = new globalScope($1);}
+ROOT : TRANSLATION_UNIT { g_root = new globalScope($1); }
 %%
+
 const Node *g_root; // Definition of variable (to match declaration earlier)
 const Node *parseAST()
 {
