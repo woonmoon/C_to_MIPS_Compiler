@@ -41,7 +41,7 @@ class Identifier: public Expression {
             int id_offset=con.varBinding().at(identifierName).offset;
             os << "lw " << con.reg(dest) << ", " << con.stackSize-id_offset <<  "(" << con.reg(29) << ")";
             os << std::endl;
-          }else if(con.isParam){
+          }else if(con.isVarDeclarationParameter){
             if(con.paramReg<8){
               con.dummyDec.id=identifierName;
               os << "addi " << con.reg(29) << ", " << con.reg(29) << ", -" << con.dummyDec.size;
@@ -67,7 +67,7 @@ class Identifier: public Expression {
         if(con.iJustWantTheNameBro){
         con.dummyDec.id=identifierName;
         con.isIdentifierCall = 1;
-        if(con.isParam){
+        if(con.isVarDeclarationParameter){
           os << "lw " << con.reg(con.paramReg) << ", " << con.stackSize - con.varBinding().at(con.dummyDec.id).offset << "(" << con.reg(29) << ")" << std::endl;
         }
         }

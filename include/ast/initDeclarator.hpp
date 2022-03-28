@@ -21,7 +21,7 @@ public:
 
     void mipsGen(std::ostream& os, mipsCon& con, int dest=0) const {
    //   std::cout << "=======================TOP INIT_DECLARATOR=============================" << std::endl;
-      if(con.isVarDeclaration&&(!con.isParam)) {
+      if(con.isDeclaringVariable&&(!con.isVarDeclarationParameter)) {
         //std::cout << "variable declaration!" << std::endl;
         int newDest=con.registerSet.freeRegister();
         con.flushReg({newDest}, os);
@@ -58,7 +58,7 @@ public:
         //std::cout << "array foo is stored at " << con.varBinding().at("foo").offset << " array size is " << con.varBinding().at("foo").arraySize[0] << std::endl;
       }
       }
-      if(con.isParam&&!con.isGlobalFunc) {
+      if(con.isVarDeclarationParameter&&!con.isGlobalFunc) {
         branches[0]->mipsGen(os, con, 2);
         con.writeToStack(2, con.varBinding().at(con.dummyDec.id).offset, os);
         int far_offset=con.stackSize-con.varBinding().at(con.dummyDec.id).offset;

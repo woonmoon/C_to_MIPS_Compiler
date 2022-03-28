@@ -26,6 +26,8 @@ struct mipsCon{
 
     bool isVarDeclaration = false;
     bool isExecutingConditional = false;
+    bool isDeclaringVariable = false;
+    bool isVarDeclarationParameter = false;
     struct stackFrame{
         int spOffset;
         struct funcDecStruct {
@@ -41,7 +43,7 @@ struct mipsCon{
         struct assignStruct { 
             bool isAssign;
             bool toArray;
-            int addressReg; 
+            int addressReg=0; 
         } assign;
         struct statementStruct { 
             std::string continueFlag; 

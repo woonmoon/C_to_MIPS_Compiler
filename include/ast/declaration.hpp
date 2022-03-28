@@ -28,10 +28,11 @@ public:
       //int reg=con.registerSet.freeRegister();
       if(!con.funcDec().functionDef) {
         if(con.firstTime&&con.extraCheck){
+          // std::cout << "THE DUMBEST SHIT EVER" << std::endl;
           con.enterNewFunc(os);
           con.extraCheck = 0;
         }
-        con.isVarDeclaration=true;
+        con.isDeclaringVariable=true;
         con.dummyDec={};
       }
       //std::cout << "MADE IT PAST THE CHECKING" << std::endl;
@@ -54,7 +55,7 @@ public:
       //     std::cout << "register " << i << " is free." << std::endl;
       //   }
       // }
-      con.isVarDeclaration=false;
+      con.isDeclaringVariable=false;
     }
     int evaluate() const { return 0; }
     std::string getName() const { return ""; }

@@ -23,7 +23,7 @@ public:
       //std::cout << "***primitiveType***: functionDef" << std::endl;
       con.funcBinding[con.funcDec().funcID].returnSize=4;
       //con.funcDec().functionDef=false; //for function declarations
-    }else if(con.isVarDeclaration) {
+    }else if(con.isDeclaringVariable) {
       //std::cout << "***primitiveType***: variableDec" << std::endl;
       con.dummyDec.size=4;
     }
