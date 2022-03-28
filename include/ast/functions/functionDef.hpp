@@ -20,7 +20,7 @@ public:
         }
         con.firstTime = 0;
         //con.funcDec().functionDef=false; probably should do this in declarator
-        con.funcContent().functionPatty=true;
+        con.funcDec().functionPatty=true;
         //std::cout << "***functionDef***: entering scopeBlock" << std::endl;
         scopeBlock->mipsGen(os, con);
         //std::cout << "left function def" 

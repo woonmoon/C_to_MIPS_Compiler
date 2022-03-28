@@ -5,14 +5,6 @@
 #include <map>
 #include <ostream>
 
-struct Instruction;
-typedef const Instruction* InstructionPtr;
-struct stackFrame;
-typedef const stackFrame* stackFramePtr;
-struct registerSet;
-typedef const registerSet* registerSetPtr;
-
-
 struct mipsCon{
 
     struct varInfo{
@@ -32,17 +24,31 @@ struct mipsCon{
         std::vector<int> arraySize;
     }dummyDec;
 
+    bool isVarDeclaration = false;
+    bool isExecutingConditional = false;
     struct stackFrame{
-        struct funcDecStruct { bool functionDef; bool initialize; std::string funcID; } funcDec;
-        struct funcContentStruct { bool functionPatty; std::string funcID; } funcContent; //get it? because it's the MEAT of the function??
-        struct varDecStruct { bool variableDec; std::string varID; int destReg; } varDec; 
-        struct assignStruct { bool isAssign; std::string assID; bool toArray; int addressReg; } assign;
-        struct conditialStruct { bool isCond; bool conditionalPatty; } conditional;
-        struct statementStruct { bool compound=true; std::string continueFlag; std::string breakFlag; int offset=0; } statement;
-        struct enumStruct { int lastEl=-1; } enumerator;
-        struct switchStruct { std::map<std::string, int> labels; std::string def; } switchy;
-        std::map<std::string, varInfo> varBinding;
         int spOffset;
+        struct funcDecStruct {
+            bool functionDef; 
+            bool functionPatty; 
+            bool initialize; 
+            std::string funcID;
+        } funcDec;
+        struct varDecStruct { 
+            bool variableDec;
+            std::string varID; 
+        } varDec; 
+        struct assignStruct { 
+            bool isAssign;
+            bool toArray;
+            int addressReg; 
+        } assign;
+        struct statementStruct { 
+            std::string continueFlag; 
+            std::string breakFlag; 
+            int offset=0; 
+        } statement;
+        std::map<std::string, varInfo> varBinding;
     };
 
     std::vector<stackFrame> stack;
@@ -62,13 +68,9 @@ struct mipsCon{
 
     std::map<std::string, varInfo>& varBinding() { return stack.back().varBinding; }
     stackFrame::funcDecStruct& funcDec() { return stack.back().funcDec; }
-    stackFrame::funcContentStruct& funcContent() { return stack.back().funcContent; }
     stackFrame::varDecStruct& varDec() { return stack.back().varDec; }
     stackFrame::assignStruct& assign() { return stack.back().assign; }
-    stackFrame::conditialStruct& conditional() { return stack.back().conditional; }
     stackFrame::statementStruct& statement() { return stack.back().statement; }
-    stackFrame::enumStruct& enumerator() { return stack.back().enumerator; }
-    stackFrame::switchStruct& switchy() { return stack.back().switchy; }
 
     struct registers{
         std::vector<bool> set={ 1,1,0,0,1,1,1,1,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,0,0,1,1,1,1,1 };
@@ -153,7 +155,7 @@ struct mipsCon{
 
     void enterNewFunc(std::ostream& os) {
         stackSize+=stack.back().spOffset;
-        stackFrame newFrame={0}; //spOffset of newFrame=0
+        stackFrame newFrame={0};
         stack.push_back(newFrame);
         flushReg({31, 30}, os); //SP and RA
     } //exclusively for new functions

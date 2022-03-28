@@ -15,9 +15,9 @@ public:
         condition->mipsGen(os, con, evalDest);
         os << "beq " << con.reg(evalDest) << ", " << con.reg(0) << ", " << falseCond;
         os << std::endl;
-        con.conditional().conditionalPatty=true;
+        con.isExecutingConditional=true;
         executeBlock->mipsGen(os, con);
-        con.conditional().conditionalPatty=false;
+        con.isExecutingConditional=false;
         os << falseCond << ":";
         os << std::endl;
     }

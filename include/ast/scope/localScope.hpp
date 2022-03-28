@@ -21,16 +21,16 @@ public:
 
 
     void mipsGen(std::ostream& os, mipsCon& con, int dest=0) const {
-        if(con.funcContent().functionPatty) {
-            con.funcContent().functionPatty=false;
+        if(con.funcDec().functionPatty) {
+            con.funcDec().functionPatty=false;
             for(unsigned int i=0; i<sequence.size(); i++) {
-                sequence[i]->mipsGen(os, con);
+                if (sequence[i]!=NULL) sequence[i]->mipsGen(os, con);
             }
-        }else if(con.conditional().conditionalPatty) {
-            con.conditional().conditionalPatty=false;
+        }else if(con.isExecutingConditional) {
+            con.isExecutingConditional=false;
             //con.enterScope();
             for(unsigned int i=0; i<sequence.size(); i++) {
-                sequence[i]->mipsGen(os, con);
+                if (sequence[i]!=NULL) sequence[i]->mipsGen(os, con);
             }
             //con.exitScope(os);
         }

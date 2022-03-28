@@ -31,7 +31,7 @@ public:
           con.enterNewFunc(os);
           con.extraCheck = 0;
         }
-        con.varDec().variableDec=true;
+        con.isVarDeclaration=true;
         con.dummyDec={};
       }
       //std::cout << "MADE IT PAST THE CHECKING" << std::endl;
@@ -54,7 +54,7 @@ public:
       //     std::cout << "register " << i << " is free." << std::endl;
       //   }
       // }
-      con.varDec().variableDec=false;
+      con.isVarDeclaration=false;
     }
     int evaluate() const { return 0; }
     std::string getName() const { return ""; }

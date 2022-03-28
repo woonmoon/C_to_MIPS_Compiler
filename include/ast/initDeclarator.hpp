@@ -21,7 +21,7 @@ public:
 
     void mipsGen(std::ostream& os, mipsCon& con, int dest=0) const {
    //   std::cout << "=======================TOP INIT_DECLARATOR=============================" << std::endl;
-      if(con.varDec().variableDec&&(!con.isParam)) {
+      if(con.isVarDeclaration&&(!con.isParam)) {
         //std::cout << "variable declaration!" << std::endl;
         int newDest=con.registerSet.freeRegister();
         con.flushReg({newDest}, os);
